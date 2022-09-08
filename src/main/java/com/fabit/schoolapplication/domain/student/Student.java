@@ -4,7 +4,6 @@ import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import java.time.LocalDate;
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
 @Getter
 public class Student {
@@ -38,11 +37,11 @@ public class Student {
   /**
    * Создание ученика младше 14 лет.
    *
-   * @param id               the id
-   * @param name             the name
-   * @param snils            the snils
-   * @param birthCertificate the birth certificate
-   * @param birthday         the birthday
+   * @param id               id ученика
+   * @param name             имя
+   * @param snils            СНИЛС
+   * @param birthCertificate свидетельство о рождении
+   * @param birthday         день рожденияя
    * @return the student
    */
   public static Student create(long id, String name, Snils snils, BirthCertificate birthCertificate,
@@ -53,12 +52,12 @@ public class Student {
   /**
    * Создание ученика возрастом минимум 14 лет.
    *
-   * @param id       the id
-   * @param name     the name
-   * @param snils    the snils
-   * @param passport the passport
-   * @param birthday the birthday
-   * @return the student
+   * @param id       id
+   * @param name     имя
+   * @param snils    СНИЛС
+   * @param passport паспорт
+   * @param birthday день рождения
+   * @return студент
    */
   public static Student create(long id, String name, Snils snils, Passport passport,
                                LocalDate birthday) {
@@ -68,7 +67,7 @@ public class Student {
   /**
    * замена СНИЛСа.
    *
-   * @param snils the snils
+   * @param snils СНИЛС
    */
   public void changeSnils(Snils snils) {
     this.snils = snils;
@@ -77,7 +76,7 @@ public class Student {
   /**
    * Замена свидетельства о рождении.
    *
-   * @param birthCertificate the birth certificate
+   * @param birthCertificate день рождения
    */
   public void changeBirthCertificate(BirthCertificate birthCertificate) {
     this.birthCertificate = birthCertificate;
@@ -86,7 +85,7 @@ public class Student {
   /**
    * Добавление паспорта.
    *
-   * @param passport the passport
+   * @param passport паспорт
    */
   public void addPassport(Passport passport) {
     this.passport = passport;
