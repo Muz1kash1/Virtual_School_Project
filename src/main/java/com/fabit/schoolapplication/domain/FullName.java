@@ -7,5 +7,10 @@ import lombok.Value;
 @Getter
 @AllArgsConstructor
 @Value
-public record FullName(String name, String surname, String patronymic) {
+public class FullName {
+
+  String name;
+  String surname;
+  String patronymic;
+
 }

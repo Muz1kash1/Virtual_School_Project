@@ -7,5 +7,8 @@ import lombok.Value;
 @Getter
 @AllArgsConstructor
 @Value
-public record Snils(String numberView) {
+public class Snils {
+
+  String numberView;
+
 }

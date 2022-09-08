@@ -7,5 +7,9 @@ import lombok.Value;
 @Getter
 @AllArgsConstructor
 @Value
-public record Passport(String serial, String number) {
+public class Passport {
+
+  String serial;
+  String number;
+
 }
