@@ -1,5 +1,8 @@
 image: maven:3.8.6-openjdk-18-slim
 
+variables:
+  MAVEN_SETTINGS: ".mvn/settings.xml"
+
 cache:
   paths:
     - ./.mvn
