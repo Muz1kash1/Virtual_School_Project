@@ -35,4 +35,12 @@ public class EducationProgress {
     educationProgress.whenCreated = LocalDateTime.now();
     return educationProgress;
   }
+
+  /**
+   * Изменение отметки
+   * @param mark новая отметка об успеваемости
+   */
+  public void changeMark(Mark mark) {
+    this.mark = mark;
+  }
 }
