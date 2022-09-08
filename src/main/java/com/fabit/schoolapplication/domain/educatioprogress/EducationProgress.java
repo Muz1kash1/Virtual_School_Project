@@ -16,6 +16,8 @@ public class EducationProgress {
   private EducationProgress() {}
 
   /**
+   * Статическая фабрика объекта кспеваемости
+   *
    * @param id id отметки
    * @param studentId id ученика
    * @param teacherId id учителя

@@ -20,9 +20,10 @@ public class Mark {
 
   /**
    * Валидация строки-значения отметки
+   *
    * @param mark строка-значение отметки
    */
-  public void validate(String mark) {
+  private void validate(String mark) {
     Matcher matcherMark = patternMark.matcher(mark);
     if (!matcherMark.find()) {
       throw new IllegalArgumentException("Неверный формат отметки");
