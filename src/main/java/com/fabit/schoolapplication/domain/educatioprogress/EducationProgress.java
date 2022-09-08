@@ -6,19 +6,19 @@ import java.time.LocalDateTime;
 
 @Getter
 public class EducationProgress {
-  private Long id;
-  private Long studentId;
-  private Long teacherId;
-  private Long lessonId;
+  private long educationProgressId;
+  private long studentId;
+  private long teacherId;
+  private long lessonId;
   private LocalDateTime whenCreated;
   private Mark mark;
 
   private EducationProgress() {}
 
   /**
-   * Статическая фабрика объекта кспеваемости
+   * Статическая фабрика объекта успеваемости
    *
-   * @param id id отметки
+   * @param educationProgressId id отметки
    * @param studentId id ученика
    * @param teacherId id учителя
    * @param lessonId id урока за который выставлена отметка
@@ -26,9 +26,9 @@ public class EducationProgress {
    * @return объект отметки об успеваемости
    */
   public static EducationProgress create(
-      Long id, Long studentId, Long teacherId, Long lessonId, Mark mark) {
+      long educationProgressId, long studentId, long teacherId, long lessonId, Mark mark) {
     EducationProgress educationProgress = new EducationProgress();
-    educationProgress.id = id;
+    educationProgress.educationProgressId = educationProgressId;
     educationProgress.studentId = studentId;
     educationProgress.teacherId = teacherId;
     educationProgress.lessonId = lessonId;

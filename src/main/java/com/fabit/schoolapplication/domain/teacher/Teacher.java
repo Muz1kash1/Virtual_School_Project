@@ -12,7 +12,7 @@ import lombok.Getter;
  */
 @Getter
 public class Teacher {
-  private long id;
+  private long teacherId;
   /** стаж работы учителя */
   private int standingYears;
   /** Ф.И.О учителя */
@@ -36,7 +36,7 @@ public class Teacher {
   public static Teacher create(
       Long id, FullName fullName, Passport passport, Snils snils, int standingYears) {
     Teacher teacher = new Teacher();
-    teacher.id = id;
+    teacher.teacherId = id;
     teacher.fullName = fullName;
     teacher.passport = passport;
     teacher.snils = snils;
