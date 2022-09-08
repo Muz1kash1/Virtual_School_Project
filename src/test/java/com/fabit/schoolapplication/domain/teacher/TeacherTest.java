@@ -21,7 +21,7 @@ class TeacherTest {
             new Passport("1999", "89292"),
             new Snils("123-343-2231-32"),
             10);
-    assertEquals(1L, teacher.getId());
+    assertEquals(1L, teacher.getTeacherId());
   }
 
   @Test

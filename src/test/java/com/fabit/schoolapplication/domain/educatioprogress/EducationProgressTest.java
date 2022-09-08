@@ -12,7 +12,7 @@ class EducationProgressTest {
   @DisplayName("Можжно создать валидный объект отметки об успеваемости")
   void create_5_shouldPass() {
     EducationProgress educationProgress = EducationProgress.create(1L, 1L, 1L, 1L, new Mark("5"));
-    assertEquals(1L, educationProgress.getId());
+    assertEquals(1L, educationProgress.getEducationProgressId());
   }
 
   @Test
