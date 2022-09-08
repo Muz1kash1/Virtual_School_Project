@@ -3,9 +3,6 @@ services:
   rabbitmq:
     container_name: "rabbitmq"
     image: rabbitmq:3-management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=rabbit
-      - RABBITMQ_DEFAULT_PASS=rabbit
     ports:
       # AMQP protocol port
       - '5672:5672'
@@ -13,3 +10,10 @@ services:
       - '15672:15672'
     volumes:
       - ../rabbitmq/data/:/var/lib/rabbitmq/
+    networks:
+      - virtual-school_dev_net
+
+networks:
+  virtual-school_dev_net:
+    driver: bridge
+
