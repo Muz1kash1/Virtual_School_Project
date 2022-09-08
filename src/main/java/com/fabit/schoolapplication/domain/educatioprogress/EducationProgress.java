@@ -16,7 +16,6 @@ public class EducationProgress {
   private EducationProgress() {}
 
   /**
-   *
    * @param id id отметки
    * @param studentId id ученика
    * @param teacherId id учителя
@@ -38,6 +37,7 @@ public class EducationProgress {
 
   /**
    * Изменение отметки
+   *
    * @param mark новая отметка об успеваемости
    */
   public void changeMark(Mark mark) {
