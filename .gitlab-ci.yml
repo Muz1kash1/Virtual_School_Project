@@ -1,5 +1,8 @@
 image: maven:3.8.6-openjdk-18-slim
 
+variables:
+  MAVEN_SETTINGS: ".mvn/settings.xml"
+
 cache:
   paths:
     - ./.mvn
@@ -16,7 +19,7 @@ build:
     - master
     - merge_requests
   script:
-    - "mvn clean compile"
+    - "mvn --settings $MAVEN_SETTINGS clean compile"
   allow_failure: false
 
 test:
@@ -25,7 +28,7 @@ test:
     - master
     - merge_requests
   script:
-    - "mvn test"
+    - "mvn --settings $MAVEN_SETTINGS test -P !checkstyle"
   allow_failure: false
 
 package:
@@ -34,7 +37,7 @@ package:
     - master
     - merge_requests
   script:
-    - "mvn package -DskipTests"
+    - "mvn package --settings $MAVEN_SETTINGS -DskipTests -P !checkstyle"
   artifacts:
     paths:
       - "target/*.jar"
