@@ -29,7 +29,7 @@ public enum Discipline {
   TECHNOLOGY("Труд");
 
   /**
-   * Текстовое представление предмета
+   * Текстовое представление предмета.
    */
   private final String textView;
 
