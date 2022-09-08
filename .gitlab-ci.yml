@@ -1,0 +1,34 @@
+variables:
+  MAVEN_SETTINGS: ".mvn/settings.xml"
+
+cache:
+  paths:
+    - ./.mvn
+  key: "$CI_BUILD_REF_NAME"
+
+stages:
+  - build
+  - test
+  - package
+
+build:
+  stage: build
+  script:
+    - "mvn --settings $MAVEN_SETTINGS clean compile"
+  allow_failure: false
+
+test:
+  stage: test
+  script:
+    - "mvn --settings $MAVEN_SETTINGS test -P !checkstyle"
+  allow_failure: false
+
+package:
+  stage: package
+  script:
+    - "mvn package --settings $MAVEN_SETTINGS -DskipTests -P !checkstyle"
+  artifacts:
+    paths:
+      - "target/*.jar"
+    expire_in: 2 week
+  allow_failure: false
