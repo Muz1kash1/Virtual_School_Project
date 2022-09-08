@@ -2,12 +2,10 @@ package com.fabit.schoolapplication.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Value;
 
 @Getter
 @AllArgsConstructor
-public class Passport {
-
-  private final String serial;
-  private final String number;
-
+@Value
+public record Passport(String serial, String number) {
 }

@@ -2,11 +2,10 @@ package com.fabit.schoolapplication.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Value;
 
 @Getter
 @AllArgsConstructor
-public class Snils {
-
-  private final String numberView;
-
+@Value
+public record Snils(String numberView) {
 }

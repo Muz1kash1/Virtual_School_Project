@@ -2,13 +2,10 @@ package com.fabit.schoolapplication.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Value;
 
 @Getter
 @AllArgsConstructor
-public class FullName {
-
-  private final String name;
-  private final String surname;
-  private final String patronymic;
-
+@Value
+public record FullName(String name, String surname, String patronymic) {
 }
