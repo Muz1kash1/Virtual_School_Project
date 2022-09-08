@@ -1,3 +1,5 @@
+image: maven:3.8.6-openjdk-18-slim
+
 variables:
   MAVEN_SETTINGS: ".mvn/settings.xml"
 
@@ -14,6 +16,7 @@ stages:
 build:
   stage: build
   only:
+    - master
     - merge_requests
   script:
     - "mvn --settings $MAVEN_SETTINGS clean compile"
@@ -22,6 +25,7 @@ build:
 test:
   stage: test
   only:
+    - master
     - merge_requests
   script:
     - "mvn --settings $MAVEN_SETTINGS test -P !checkstyle"
@@ -30,6 +34,7 @@ test:
 package:
   stage: package
   only:
+    - master
     - merge_requests
   script:
     - "mvn package --settings $MAVEN_SETTINGS -DskipTests -P !checkstyle"
