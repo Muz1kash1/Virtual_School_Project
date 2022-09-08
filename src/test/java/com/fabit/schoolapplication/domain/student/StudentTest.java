@@ -33,7 +33,7 @@ class StudentTest {
   }
 
   @Test
-  @DisplayName("Создается объект ученика младше 14 лет c паспортом")
+  @DisplayName("Создается объект ученика младше 14 лет c паспортом должен выкинуть ошибку")
   void createStudent12YearsWithPassportShouldThrowIllegalArgumentException() {
     assertThrows(IllegalArgumentException.class,
         () -> Student.create(1, "Петя Губкин", new Snils("123-343-2231-32"),
@@ -41,7 +41,7 @@ class StudentTest {
   }
 
   @Test
-  @DisplayName("Изменяем снилс")
+  @DisplayName("Изменяем снилс у ученика")
   void changeSnils() {
     Student student =
         Student.create(1, "Петя Губкин", new Snils("123-343-2231-32"), new Passport("МК", "89292"),
@@ -51,7 +51,7 @@ class StudentTest {
   }
 
   @Test
-  @DisplayName("Изменяем сведетельство о рождении")
+  @DisplayName("Изменяем сведетельство о рождении у ученика")
   void changeBirthCertificate() {
     Student student = Student.create(1, "Петя Губкин", new Snils("123-343-2231-32"),
         BirthCertificate.create("МК", "89292"), LocalDate.of(2007, 9, 15));
@@ -61,7 +61,7 @@ class StudentTest {
   }
 
   @Test
-  @DisplayName("Добавляем пасспорт")
+  @DisplayName("Добавляем пасспорт ученику старе 15 лет")
   void addPassport() {
     Student student =
         Student.create(1, "Петя Губкин", new Snils("123-343-2231-32"), new Passport("MK", "11111"),
