@@ -25,6 +25,7 @@ public class Teacher {
   private Teacher() {}
 
   /**
+   * Статическая фабрика по созданию объектов учителя
    * @param id id учителя
    * @param fullName Ф.И.О
    * @param passport Паспорт
