@@ -9,7 +9,7 @@ services:
       # HTTP management UI
       - '15672:15672'
     volumes:
-      - ../rabbitmq/data/:/var/lib/rabbitmq/
+      - ./rabbitmq/data/:/var/lib/rabbitmq/
     networks:
       - virtual-school_dev_net
 
