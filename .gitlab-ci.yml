@@ -13,18 +13,24 @@ stages:
 
 build:
   stage: build
+  only:
+    - merge_requests
   script:
     - "mvn --settings $MAVEN_SETTINGS clean compile"
   allow_failure: false
 
 test:
   stage: test
+  only:
+    - merge_requests
   script:
     - "mvn --settings $MAVEN_SETTINGS test -P !checkstyle"
   allow_failure: false
 
 package:
   stage: package
+  only:
+    - merge_requests
   script:
     - "mvn package --settings $MAVEN_SETTINGS -DskipTests -P !checkstyle"
   artifacts:
