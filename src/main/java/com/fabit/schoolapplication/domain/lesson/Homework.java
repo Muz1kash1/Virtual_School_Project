@@ -1,29 +1,20 @@
 package com.fabit.schoolapplication.domain.lesson;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.awt.image.SampleModel;
 import java.io.File;
 import java.util.HashMap;
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Homework {
-    private final HashMap<Long,File> responseFromStudents;
-    private String homeworkText;
+    private Long studentId;
+    private File completedHomework;
+    private String homeworkTask;
 
-    public Homework() {
-        responseFromStudents = new HashMap<>();
-    }
-
-
-    /**
-     * Добавить выполненную домашнюю работу
-     * @param studentId айди студента
-     * @param file файл с выполненной домашкой
-     */
-    public void setResponseFromStudent(Long studentId,File file) {
-        responseFromStudents.put(studentId,file);
-    }
-
-    public void setHomeworkText(String homeworkText){
-        this.homeworkText = homeworkText;
-    }
 }

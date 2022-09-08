@@ -14,21 +14,22 @@ public class LessonTest {
 
     @BeforeAll
     static void initializeAll(){
-
+        lesson.getHomeworkList().add(new Homework(1l,null,null));
         lesson.setHomeworkText("Тест");
         lesson.uploadCompletedHomework(1l,file);
     }
 
     @Test
-    @DisplayName("Присвоение домашке текста задания работает корректно")
-    void setHomeworkTextTest(){
-        Assertions.assertEquals("Тест",lesson.getHomeworkForLesson().getHomeworkText());
+    @DisplayName("Загрузка домашнего задания работает корректно")
+    void uploadHomeworkTest(){
+        Assertions.assertEquals(file,lesson.getHomeworkList().get(0).getCompletedHomework());
     }
 
     @Test
-    @DisplayName("Загрузка домашнего задания работает корректно")
-    void uploadHomeworkTest(){
-        Assertions.assertEquals(file,lesson.getHomeworkForLesson().getResponseFromStudents().get(1l));
+    @DisplayName("Присвоение домашке текста задания работает корректно")
+    void setHomeworkTextTest(){
+        Assertions.assertEquals("Тест",lesson.getHomeworkTask());
+        Assertions.assertEquals("Тест",lesson.getHomeworkList().get(0).getHomeworkTask());
     }
 
 
