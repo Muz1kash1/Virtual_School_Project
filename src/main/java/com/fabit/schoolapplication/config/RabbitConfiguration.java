@@ -11,13 +11,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfiguration {
 
+  /**
+   * Connection factory.
+   *
+   * @return ConnectionFactory
+   */
   @Bean
   public ConnectionFactory connectionFactory() {
-    CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
+    CachingConnectionFactory connectionFactory =
+        new CachingConnectionFactory("localhost");
     connectionFactory.setUsername("rabbit");
     connectionFactory.setPassword("rabbit");
     return connectionFactory;
   }
+
 
   @Bean
   public AmqpAdmin amqpAdmin() {

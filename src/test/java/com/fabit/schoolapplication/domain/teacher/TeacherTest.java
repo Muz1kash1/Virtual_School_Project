@@ -1,13 +1,13 @@
 package com.fabit.schoolapplication.domain.teacher;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TeacherTest {
 
@@ -21,7 +21,7 @@ class TeacherTest {
             new Passport("1999", "89292"),
             new Snils("123-343-2231-32"),
             10);
-    assertEquals(1L, teacher.getId());
+    assertEquals(1L, teacher.getTeacherId());
   }
 
   @Test
