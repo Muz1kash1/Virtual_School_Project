@@ -1,18 +1,22 @@
 package com.fabit.schoolapplication.domain;
 
 import lombok.Getter;
-import lombok.Value;
 
 @Getter
-@Value
-public class ScheduleId {
-  long value;
+public final class ScheduleId {
 
-  private ScheduleId(long value) {
-    this.value = value;
+  private Long scheduleId;
+
+  private ScheduleId() {
   }
 
-  public static ScheduleId of(long value) {
-    return new ScheduleId(value);
+  public static ScheduleId of(Long scheduleId) {
+    ScheduleId scheduleId1 = new ScheduleId();
+    scheduleId1.setScheduleId(scheduleId);
+    return scheduleId1;
+  }
+
+  private void setScheduleId(Long scheduleId) {
+    this.scheduleId = scheduleId;
   }
 }
