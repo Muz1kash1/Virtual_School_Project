@@ -29,7 +29,7 @@ public class EducationProgress {
    * @param mark значение отметки
    * @return объект отметки об успеваемости
    */
-  public static EducationProgress create(
+  public static EducationProgress of(
           EducationProgressId educationProgressId, StudentId studentId, TeacherId teacherId, LessonId lessonId, Mark mark) {
     EducationProgress educationProgress = new EducationProgress();
     educationProgress.educationProgressId = educationProgressId;

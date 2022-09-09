@@ -1,19 +1,22 @@
 package com.fabit.schoolapplication.domain.educatioprogress;
 
 import lombok.Getter;
-import lombok.Value;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Агрегат отметки об успеваемости
+ *
+ * @author SmirnovMA
+ */
 @Getter
 public final class Mark {
   public static Pattern patternMark =
       java.util.regex.Pattern.compile("^(^[2-5]{1}/[2-5]{1}$|^([2-5]{1})$|^НН/УВ$|^НН$)$");
   private String value;
 
-  private Mark() {
-  }
+  private Mark() {}
 
   public static Mark of(String value) {
     Mark mark = new Mark();
@@ -21,18 +24,9 @@ public final class Mark {
     return mark;
   }
 
-  /**
-   * Валидация строки-значения отметки
-   *
-   * @param mark строка-значение отметки
-   */
-  private boolean validate(String mark) {
-    Matcher matcherMark = patternMark.matcher(mark);
-    return matcherMark.find();
-  }
-
   private void setValue(String value) {
-    if (validate(value)) {
+    Matcher matcherMark = patternMark.matcher(value);
+    if (matcherMark.find()) {
       this.value = value;
     } else {
       throw new IllegalArgumentException("Неверный формат отметки");
