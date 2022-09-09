@@ -17,9 +17,9 @@ class TeacherTest {
     Teacher teacher =
         Teacher.create(
             1L,
-            new FullName("Иван", "Иванов", "Иванович"),
-            new Passport("1999", "89292"),
-            new Snils("123-343-2231-32"),
+            FullName.of("Иван", "Иванов", "Иванович"),
+            Passport.of("1999", "89292"),
+            Snils.of("123-343-2231-32"),
             10);
     assertEquals(1L, teacher.getTeacherId());
   }
@@ -34,9 +34,9 @@ class TeacherTest {
               Teacher teacher =
                   Teacher.create(
                       1L,
-                      new FullName("Иван", "Иванов", "Иванович"),
-                      new Passport("1999", "89292"),
-                      new Snils("123-343-2231-32"),
+                      FullName.of("Иван", "Иванов", "Иванович"),
+                      Passport.of("1999", "89292"),
+                      Snils.of("123-343-2231-32"),
                       71);
             });
   }
@@ -47,9 +47,9 @@ class TeacherTest {
     Teacher teacher =
         Teacher.create(
             1L,
-            new FullName("Иван", "Иванов", "Иванович"),
-            new Passport("1999", "89292"),
-            new Snils("123-343-2231-32"),
+            FullName.of("Иван", "Иванов", "Иванович"),
+            Passport.of("1999", "89292"),
+            Snils.of("123-343-2231-32"),
             10);
     Throwable thrown =
         assertThrows(
@@ -65,9 +65,9 @@ class TeacherTest {
     Teacher teacher =
         Teacher.create(
             1L,
-            new FullName("Иван", "Иванов", "Иванович"),
-            new Passport("1999", "89292"),
-            new Snils("123-343-2231-32"),
+            FullName.of("Иван", "Иванов", "Иванович"),
+            Passport.of("1999", "89292"),
+            Snils.of("123-343-2231-32"),
             10);
     Throwable thrown =
         assertThrows(
@@ -83,9 +83,9 @@ class TeacherTest {
     Teacher teacher =
         Teacher.create(
             1L,
-            new FullName("Иван", "Иванов", "Иванович"),
-            new Passport("1999", "89292"),
-            new Snils("123-343-2231-32"),
+            FullName.of("Иван", "Иванов", "Иванович"),
+            Passport.of("1999", "89292"),
+            Snils.of("123-343-2231-32"),
             10);
     teacher.changeStandingYears(11);
     assertEquals(11, teacher.getStandingYears());

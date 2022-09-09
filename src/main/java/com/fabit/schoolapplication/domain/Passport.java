@@ -1,10 +1,21 @@
 package com.fabit.schoolapplication.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Value;
 
-@AllArgsConstructor
+@Getter
+@Value
 public class Passport {
 
   String serial;
   String number;
+
+  private Passport(String serial, String number) {
+    this.serial = serial;
+    this.number = number;
+  }
+
+  public static Passport of(String serial, String number) {
+    return new Passport(serial, number);
+  }
 }
