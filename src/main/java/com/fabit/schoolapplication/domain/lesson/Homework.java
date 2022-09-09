@@ -1,20 +1,22 @@
 package com.fabit.schoolapplication.domain.lesson;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.awt.image.SampleModel;
 import java.io.File;
-import java.util.HashMap;
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Homework {
-    private Long studentId;
-    private File completedHomework;
-    private String homeworkTask;
+import lombok.Value;
 
+@Value
+public final class Homework {
+  private final Long studentId;
+  private final File completedHomework;
+  private final String homeworkTask;
+
+  private Homework(Long studentId, File completedHomework, String homeworkTask) {
+    this.studentId = studentId;
+    this.completedHomework = completedHomework;
+    this.homeworkTask = homeworkTask;
+  }
+
+  public static Homework createHomework(
+      Long studentId, File completedHomework, String homeworkTask) {
+    return new Homework(studentId, completedHomework, homeworkTask);
+  }
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Discipline {
-
   RUSSIAN_LANGUAGE("Русский язык"),
   LITERATURE("Литература"),
   RUSSIAN_LANGUAGE_AND_LITERATURE("Русский язык и литература"),
@@ -28,9 +27,6 @@ public enum Discipline {
   DRAWING("Рисование"),
   TECHNOLOGY("Труд");
 
-  /**
-   * Текстовое представление предмета
-   */
+  /** Текстовое представление предмета */
   private final String textView;
-
 }
