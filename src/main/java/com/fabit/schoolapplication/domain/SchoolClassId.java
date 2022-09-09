@@ -6,13 +6,13 @@ import lombok.Value;
 @Getter
 @Value
 public class SchoolClassId {
-  long schoolClassId;
+  long value;
 
-  private SchoolClassId(long schoolClassId) {
-    this.schoolClassId = schoolClassId;
+  private SchoolClassId(long value) {
+    this.value = value;
   }
 
-  public static SchoolClassId of(long schoolClassId) {
-    return new SchoolClassId(schoolClassId);
+  public static SchoolClassId of(long value) {
+    return new SchoolClassId(value);
   }
 }

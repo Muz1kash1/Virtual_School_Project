@@ -6,13 +6,13 @@ import lombok.Value;
 @Getter
 @Value
 public class ScheduleId {
-  long scheduleId;
+  long value;
 
-  private ScheduleId(long scheduleId) {
-    this.scheduleId = scheduleId;
+  private ScheduleId(long value) {
+    this.value = value;
   }
 
-  public static ScheduleId of(long scheduleId) {
-    return new ScheduleId(scheduleId);
+  public static ScheduleId of(long value) {
+    return new ScheduleId(value);
   }
 }
