@@ -7,15 +7,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Getter
-@Value
-public class Mark {
+public final class Mark {
   public static Pattern patternMark =
       java.util.regex.Pattern.compile("^(^[2-5]{1}/[2-5]{1}$|^([2-5]{1})$|^НН/УВ$|^НН$)$");
-  String value;
+  private String value;
 
-  public Mark(String value) {
-    validate(value);
-    this.value = value;
+  private Mark() {
+  }
+
+  public static Mark of(String value) {
+    Mark mark = new Mark();
+    mark.setValue(value);
+    return mark;
   }
 
   /**
@@ -23,9 +26,15 @@ public class Mark {
    *
    * @param mark строка-значение отметки
    */
-  private void validate(String mark) {
+  private boolean validate(String mark) {
     Matcher matcherMark = patternMark.matcher(mark);
-    if (!matcherMark.find()) {
+    return matcherMark.find();
+  }
+
+  private void setValue(String value) {
+    if (validate(value)) {
+      this.value = value;
+    } else {
       throw new IllegalArgumentException("Неверный формат отметки");
     }
   }

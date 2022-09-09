@@ -3,6 +3,7 @@ package com.fabit.schoolapplication.domain.teacher;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.TeacherId;
 import lombok.Getter;
 
 /**
@@ -12,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 public class Teacher {
-  private long teacherId;
+  private TeacherId teacherId;
   /** стаж работы учителя */
   private int standingYears;
   /** Ф.И.О учителя */
@@ -26,17 +27,18 @@ public class Teacher {
 
   /**
    * Статическая фабрика по созданию объектов учителя
-   * @param id id учителя
+   *
+   * @param teacherId id учителя
    * @param fullName Ф.И.О
    * @param passport Паспорт
    * @param snils СНИЛС
    * @param standingYears стаж работы
    * @return объект учителя
    */
-  public static Teacher create(
-      Long id, FullName fullName, Passport passport, Snils snils, int standingYears) {
+  public static Teacher of(
+     TeacherId teacherId, FullName fullName, Passport passport, Snils snils, int standingYears) {
     Teacher teacher = new Teacher();
-    teacher.teacherId = id;
+    teacher.teacherId = teacherId;
     teacher.fullName = fullName;
     teacher.passport = passport;
     teacher.snils = snils;
@@ -44,25 +46,11 @@ public class Teacher {
     return teacher;
   }
   /**
-   * Изменить стаж работы учителя Стаж не должен быть меньше уже имеющегося Не должен превышать 70
-   * лет так как пенсионный возраст не позволяет такого
+   * Изменить стаж работы учителя
    *
    * @param value колличество полных лет стажа работы
    */
   public void changeStandingYears(int value) throws IllegalArgumentException {
-    validateStandingYears(value);
     this.standingYears = value;
-  }
-
-  /**
-   * Валидация стажа работы
-   *
-   * @param value стаж работы в годах
-   */
-  private void validateStandingYears(int value) {
-    if (!(value > this.standingYears && value < 70)) {
-      throw new IllegalArgumentException(
-          "Невалидный стаж работы: стаж не должен быть меньше имеющегося стажа и больше 70 лет");
-    }
   }
 }
