@@ -1,9 +1,7 @@
 package com.fabit.schoolapplication.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
-import net.sf.saxon.trans.SymbolicName.F;
 
 @Getter
 @Value
