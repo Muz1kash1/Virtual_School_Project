@@ -1,37 +1,53 @@
 package com.fabit.schoolapplication.domain.educatioprogress;
 
+import com.fabit.schoolapplication.domain.EducationProgressId;
+import com.fabit.schoolapplication.domain.MarkId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
- * Агрегат отметки об успеваемости
+ * Сущность Оценка хранит в себе ссылку на отметку об успеваемости которой эта оценка принадлежит
+ * Если нужно создать двойную оценку то в момент создания объекта EducationProgress создаются два
+ * объекта Mark с полем EducationProgressId равному id объекта EducationProgress
  *
  * @author SmirnovMA
  */
 @Getter
 @EqualsAndHashCode
 public final class Mark {
-  public static Pattern patternMark =
-      java.util.regex.Pattern.compile("^(^[2-5]{1}/[2-5]{1}$|^([2-5]{1})$|^НН/УВ$|^НН$)$");
-  private String value;
+  private MarkId markId;
+
+  private EducationProgressId educationProgressId;
+  private int value;
 
   private Mark() {}
 
-  public static Mark of(String value) {
+  /**
+   * Статическая фабрика по созданию объектов Mark
+   *
+   * @param markId id оценки
+   * @param educationProgressId id отметки об успеваемости которой принадлежит эта оценка
+   * @param value значение оценки
+   * @return объект Mark
+   */
+  public static Mark of(MarkId markId, EducationProgressId educationProgressId, int value) {
     Mark mark = new Mark();
+    mark.markId = markId;
+    mark.educationProgressId = educationProgressId;
     mark.setValue(value);
     return mark;
   }
 
-  private void setValue(String value) {
-    Matcher matcherMark = patternMark.matcher(value);
-    if (matcherMark.find()) {
+  /**
+   * Оценка представленная в виде значения от 2 до 5 баллов
+   *
+   * @param value значение оценки
+   */
+  private void setValue(int value) {
+    if (value >= 2 && value <= 5) {
       this.value = value;
     } else {
-      throw new IllegalArgumentException("Неверный формат отметки");
+      throw new IllegalArgumentException("Неверный формат оценки");
     }
   }
 }
