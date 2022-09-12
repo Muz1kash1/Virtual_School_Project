@@ -1,11 +1,17 @@
-server:
-  port: 8080
-
 spring:
-  jpa:
-    show-sql: true
   datasource:
     username: postgres
-    password: postgres
     url: jdbc:postgresql://localhost:5432/postgres
-
+    driverClassName: org.postgresql.Driver
+    password: 1945qwert
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+    show-sql: 'true'
+  sql:
+    init:
+      platform: postgres
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
