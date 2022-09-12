@@ -6,7 +6,7 @@ CREATE TABLE student
     name              VARCHAR(255),
     passport          VARCHAR(32),
     snils             VARCHAR(32),
-    primary key (id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE teacher
