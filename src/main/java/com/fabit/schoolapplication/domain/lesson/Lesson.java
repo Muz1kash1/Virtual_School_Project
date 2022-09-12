@@ -22,7 +22,7 @@ public class Lesson {
   public static final transient List<LessonEvent> domainEvents = new ArrayList<>();
 
   protected LessonEvent registerEvent(LessonEvent event) {
-    Assert.notNull(event,"Доменный ивент не должен быть нуль");
+    Assert.notNull(event, "Доменный ивент не должен быть нуль");
     domainEvents.add(event);
     return event;
   }
@@ -38,7 +38,7 @@ public class Lesson {
   }
 
   /**
-   * Метод задания текста домашнего задания для всех прикрепленных к этому уровку студентов
+   * Метод задания текста домашнего задания для всех прикрепленных к этому уроку студентов
    *
    * @param homeworkTask - текст домашнего задания
    */

@@ -35,11 +35,12 @@ public class LessonEntity {
   private String homeworkTask;
 
   @AfterDomainEventPublication
-  protected void clearDomainEvents(){
+  protected void clearDomainEvents() {
     Lesson.domainEvents.clear();
   }
+
   @DomainEvents
-  protected Collection<Object> domainEvents(){
+  protected Collection<Object> domainEvents() {
     return Collections.unmodifiableList(Lesson.domainEvents);
   }
 
