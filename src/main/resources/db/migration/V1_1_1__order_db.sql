@@ -17,7 +17,9 @@ CREATE TABLE teacher
 
 CREATE TABLE school_class
 (
-    id BIGSERIAL NOT NULL ,
+    id BIGSERIAL NOT NULL,
+    parallel SMALLINT,
+    litera VARCHAR(1),
     PRIMARY KEY (id)
 );
 
