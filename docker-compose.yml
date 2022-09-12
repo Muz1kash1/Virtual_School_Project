@@ -15,12 +15,12 @@ services:
   postgres:
     image: 'postgres:13'
     ports:
-      - 5434:5432
+      - 5433:5432
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_HOST_AUTH_METHOD=trust'
       - 'POSTGRES_DB=postgres'
-      - 'POSTGRES_PASSWORD=1945qwert'
+      - 'POSTGRES_PASSWORD=postgres'
 networks:
   virtual-school_dev_net:
     driver: bridge
