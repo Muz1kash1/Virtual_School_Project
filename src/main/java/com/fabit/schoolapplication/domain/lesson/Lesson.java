@@ -6,19 +6,20 @@ import lombok.Getter;
 
 @Getter
 public class Lesson {
+
   private final TeacherId teacherId;
 
   private final Discipline discipline;
 
   private String homeworkTask;
 
-  private Lesson(TeacherId teacherId,Discipline discipline) {
+  private Lesson(TeacherId teacherId, Discipline discipline) {
     this.teacherId = teacherId;
     this.discipline = discipline;
   }
 
-  public static Lesson of(TeacherId teacherId, Discipline discipline){
-    return new Lesson(teacherId,discipline);
+  public static Lesson of(TeacherId teacherId, Discipline discipline) {
+    return new Lesson(teacherId, discipline);
   }
 
   /**
