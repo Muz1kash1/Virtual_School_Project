@@ -1,76 +1,49 @@
 package com.fabit.schoolapplication.domain.educatioprogress;
 
+import com.fabit.schoolapplication.domain.EducationProgressId;
+import com.fabit.schoolapplication.domain.MarkId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
- * Агрегат отметки об успеваемости
+ * Сущность Оценка хранит в себе ссылку на отметку об успеваемости которой эта оценка принадлежит
+ * Если нужно создать двойную оценку то в момент создания объекта EducationProgress создаются два
+ * объекта Mark с полем EducationProgressId равному id объекта EducationProgress
  *
  * @author SmirnovMA
  */
 @Getter
 @EqualsAndHashCode
 public final class Mark {
-  public static Pattern patternMark =
-      java.util.regex.Pattern.compile("^(^[2-5]{1}/[2-5]{1}$|^([2-5]{1})$)$");
-  private int firstValue;
+  private MarkId markId;
 
-  private int secondValue;
+  private EducationProgressId educationProgressId;
+  private int value;
 
   private Mark() {}
 
-  public static Mark parse(String value) {
+  /**
+   * Статическая фабрика по созданию объектов Mark
+   * @param markId              id оценки
+   * @param educationProgressId id отметки об успеваемости которой принадлежит эта оценка
+   * @param value               значение оценки
+   * @return                    объект Mark
+   */
+  public static Mark of(MarkId markId, EducationProgressId educationProgressId, int value) {
     Mark mark = new Mark();
-    mark.setString(value);
+    mark.markId = markId;
+    mark.educationProgressId = educationProgressId;
+    mark.setValue(value);
     return mark;
   }
 
-  public static Mark of(int firstValue) {
-    Mark mark = new Mark();
-    mark.setFirstValue(firstValue);
-    return mark;
-  }
-
-  public static Mark of(int firstValue, int secondValue) {
-    Mark mark = new Mark();
-    mark.setFirstValue(firstValue);
-    mark.setSecondValue(secondValue);
-    return mark;
-  }
-
-  private void setString(String value) {
-    Matcher matcherMark = patternMark.matcher(value);
-    if (matcherMark.find()) {
-      String[] arr = value.split("/");
-      this.firstValue = Integer.parseInt(arr[0]);
-      if (arr.length > 1) {
-        this.secondValue = Integer.parseInt(arr[1]);
-      }
-    } else {
-      throw new IllegalArgumentException("Неверный формат отметки");
-    }
-  }
-
-  public String getValue() {
-    if (secondValue != 0) {
-      return String.format("%d/%d", firstValue, secondValue);
-    } else {
-      return String.valueOf(firstValue);
-    }
-  }
-
-  private void setFirstValue(int firstValue) {
-    if (firstValue >= 2 && firstValue <= 5) {
-      this.firstValue = firstValue;
-    }
-  }
-
-  private void setSecondValue(int secondValue) {
-    if (secondValue >= 2 && secondValue <= 5) {
-      this.secondValue = secondValue;
+  /**
+   * Оценка представленная в виде значения от 2 до 5 баллов
+   * @param value значение оценки
+   */
+  private void setValue(int value) {
+    if (value >= 2 && value <= 5) {
+      this.value = value;
     }
   }
 }
