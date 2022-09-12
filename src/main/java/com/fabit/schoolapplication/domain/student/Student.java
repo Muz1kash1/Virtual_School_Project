@@ -3,9 +3,13 @@ package com.fabit.schoolapplication.domain.student;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.StudentId;
+import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
 
 @Getter
 @Slf4j
@@ -16,6 +20,13 @@ public class Student {
   private BirthCertificate birthCertificate;
   private Passport passport;
   private LocalDate birthday;
+  public static final transient List<StudentCreatedEvent> domainEvents = new ArrayList();
+
+  protected StudentCreatedEvent registerEvent(StudentCreatedEvent event) {
+    Assert.notNull(event, "Domain event must not be null");
+    this.domainEvents.add(event);
+    return event;
+  }
 
   private Student(StudentId studentId, String name, Snils snils, BirthCertificate birthCertificate,
                   LocalDate birthday) {
@@ -24,6 +35,7 @@ public class Student {
     this.snils = snils;
     this.birthCertificate = birthCertificate;
     this.birthday = birthday;
+    registerEvent(new StudentCreatedEvent(this));
   }
 
   private Student(StudentId studentId, String name, Snils snils, Passport passport,
@@ -33,6 +45,7 @@ public class Student {
     this.snils = snils;
     if (LocalDate.now().getYear() - birthday.getYear() >= 14) {
       this.passport = passport;
+      registerEvent(new StudentCreatedEvent(this));
     } else {
       throw new IllegalArgumentException();
     }
