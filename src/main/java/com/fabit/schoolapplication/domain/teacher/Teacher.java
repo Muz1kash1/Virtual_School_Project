@@ -3,7 +3,6 @@ package com.fabit.schoolapplication.domain.teacher;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
-import com.fabit.schoolapplication.domain.TeacherId;
 import lombok.Getter;
 
 /**

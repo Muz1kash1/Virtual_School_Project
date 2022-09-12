@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.persistent.entity;
+package com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import javax.persistence.Column;

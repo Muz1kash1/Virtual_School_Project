@@ -1,7 +1,5 @@
 package com.fabit.schoolapplication.domain.educatioprogress;
 
-import com.fabit.schoolapplication.domain.EducationProgressId;
-import com.fabit.schoolapplication.domain.MarkId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain;
+package com.fabit.schoolapplication.domain.schedule.aggregate;
 
 import lombok.Getter;
 

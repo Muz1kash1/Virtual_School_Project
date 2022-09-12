@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain;
+package com.fabit.schoolapplication.domain.teacher;
 
 import lombok.Getter;
 import lombok.Value;

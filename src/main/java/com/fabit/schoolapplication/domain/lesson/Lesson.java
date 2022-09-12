@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.domain.lesson;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.TeacherId;
+import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import lombok.Getter;
 
 @Getter

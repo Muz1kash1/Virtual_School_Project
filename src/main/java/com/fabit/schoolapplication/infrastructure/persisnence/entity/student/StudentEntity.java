@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.persisnence.entity;
+package com.fabit.schoolapplication.infrastructure.persisnence.entity.student;
 
 import com.fabit.schoolapplication.domain.student.Student;
 import java.time.LocalDate;

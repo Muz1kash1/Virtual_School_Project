@@ -2,7 +2,6 @@ package com.fabit.schoolapplication.domain.student;
 
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
-import com.fabit.schoolapplication.domain.StudentId;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentEvent;

@@ -1,7 +1,6 @@
 package com.fabit.schoolapplication.domain.schoolclass;
 
-import com.fabit.schoolapplication.domain.SchoolClassId;
-import com.fabit.schoolapplication.domain.StudentId;
+import com.fabit.schoolapplication.domain.student.StudentId;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
