@@ -1,7 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkcompletionresult;
 
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.HomeworkCompletionResult;
-import com.fabit.schoolapplication.persisnence.entity.StudentEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.LessonEntity;
 import java.util.Collection;
 import java.util.Collections;

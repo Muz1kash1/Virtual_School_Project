@@ -2,11 +2,11 @@ package com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson;
 
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.lesson.Lesson;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
