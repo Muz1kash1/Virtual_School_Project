@@ -1,6 +1,6 @@
 CREATE TABLE lesson
 (id BIGINT NOT NULL ,
- teacher_id BIGSERIAL NOT NULL,
+ teacher_id BIGINT NOT NULL,
  discipline VARCHAR(255),
  homework_task VARCHAR(255),
  PRIMARY KEY (id),
@@ -11,9 +11,9 @@ CREATE TABLE lesson
 CREATE TABLE homework_completion_result
 (
     id BIGINT NOT NULL ,
-    teacher_id BIGSERIAL NOT NULL ,
-    student_id BIGSERIAL NOT NULL ,
-    lesson_id BIGSERIAL NOT NULL ,
+    teacher_id BIGINT NOT NULL ,
+    student_id BIGINT NOT NULL ,
+    lesson_id BIGINT NOT NULL ,
     task_completion_result VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (teacher_id) REFERENCES teacher(id),
