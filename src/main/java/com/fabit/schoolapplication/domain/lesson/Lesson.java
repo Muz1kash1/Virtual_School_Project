@@ -1,20 +1,31 @@
 package com.fabit.schoolapplication.domain.lesson;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.fabit.schoolapplication.domain.TeacherId;
+import com.fabit.schoolapplication.domain.educatioprogress.Mark;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fabit.schoolapplication.domain.StudentId;
 import lombok.Getter;
 
 @Getter
 public class Lesson {
-  /** Мапа формата айди студента - домашняя работа */
-  private final List<Homework> homeworkList;
+  private final TeacherId teacherId;
 
-  String homeworkTask;
+  private String homeworkTask;
 
-  public Lesson() {
-    this.homeworkList = new ArrayList<>();
+  /**
+   * отображение множества учеников на гиппермножество оценок
+   */
+  private final Map<StudentId,Mark> marks;
+
+  private Lesson(TeacherId teacherId) {
+    this.marks = new HashMap<>();
+    this.teacherId = teacherId;
+  }
+
+  public static Lesson of(TeacherId teacherId){
+    return new Lesson(teacherId);
   }
 
   /**
@@ -24,27 +35,13 @@ public class Lesson {
    */
   public void setHomeworkText(String homeworkTask) {
     this.homeworkTask = homeworkTask;
-    for (Homework homework : homeworkList) {
-      homeworkList.set(
-          homeworkList.indexOf(homework),
-          Homework.createHomework(
-              homework.getStudentId(), homework.getCompletedHomework(), homeworkTask));
-      //      homework.setHomeworkTask(homeworkTask);
-    }
   }
 
   /**
-   * Метод загрузки выполненной домашки файлом
-   *
-   * @param studentId - Айдишник студента который загружает выполненную домашнюю работу
-   * @param file - файл с выполненной домашней работой
+   * Метод выставления оценки за урок
+   * @param mark оценка за урок
    */
-  public void uploadCompletedHomework(Long studentId, File file) {
-    for (Homework homework : homeworkList) {
-      if (Objects.equals(homework.getStudentId(), studentId)) {
-        homeworkList.set(
-            homeworkList.indexOf(homework), Homework.createHomework(studentId, file, homeworkTask));
-      }
-    }
+  public void setMarkForLesson(StudentId studentId,Mark mark) {
+    marks.put(studentId,mark);
   }
 }
