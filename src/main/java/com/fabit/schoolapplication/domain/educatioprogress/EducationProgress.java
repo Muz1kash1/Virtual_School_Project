@@ -1,9 +1,8 @@
 package com.fabit.schoolapplication.domain.educatioprogress;
 
-import com.fabit.schoolapplication.domain.EducationProgressId;
-import com.fabit.schoolapplication.domain.LessonId;
-import com.fabit.schoolapplication.domain.StudentId;
-import com.fabit.schoolapplication.domain.TeacherId;
+import com.fabit.schoolapplication.domain.lesson.LessonId;
+import com.fabit.schoolapplication.domain.student.StudentId;
+import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

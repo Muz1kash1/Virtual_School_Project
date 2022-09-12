@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.domain.homeworkcompletionresult;
 
-import com.fabit.schoolapplication.domain.LessonId;
-import com.fabit.schoolapplication.domain.StudentId;
-import com.fabit.schoolapplication.domain.TeacherId;
+import com.fabit.schoolapplication.domain.lesson.LessonId;
+import com.fabit.schoolapplication.domain.student.StudentId;
+import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
