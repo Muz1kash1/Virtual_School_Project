@@ -3,7 +3,9 @@ package com.fabit.schoolapplication.domain.student;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.StudentId;
+import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
+import com.fabit.schoolapplication.domain.student.event.StudentEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +22,9 @@ public class Student {
   private BirthCertificate birthCertificate;
   private Passport passport;
   private LocalDate birthday;
-  public static final transient List<StudentCreatedEvent> domainEvents = new ArrayList();
+  public static final transient List<StudentEvent> domainEvents = new ArrayList();
 
-  protected StudentCreatedEvent registerEvent(StudentCreatedEvent event) {
+  protected StudentEvent registerEvent(StudentEvent event) {
     Assert.notNull(event, "Domain event must not be null");
     this.domainEvents.add(event);
     return event;
@@ -88,6 +90,7 @@ public class Student {
    */
   public void changeSnils(Snils snils) {
     this.snils = snils;
+    registerEvent(new StudentChangedInfoEvent(this));
     log.info("СНИЛС изменен");
   }
 
@@ -98,6 +101,7 @@ public class Student {
    */
   public void changeBirthCertificate(BirthCertificate birthCertificate) {
     this.birthCertificate = birthCertificate;
+    registerEvent(new StudentChangedInfoEvent(this));
     log.info("Свидетельство о рождении успешно изменено");
   }
 
@@ -108,6 +112,7 @@ public class Student {
    */
   public void addPassport(Passport passport) {
     this.passport = passport;
+    registerEvent(new StudentChangedInfoEvent(this));
     log.info("Паспорт успешно добавлен");
   }
 }
