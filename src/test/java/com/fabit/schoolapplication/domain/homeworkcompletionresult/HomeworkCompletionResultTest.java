@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.domain.homeworkcompletionresult;
 
+import com.fabit.schoolapplication.domain.LessonId;
 import com.fabit.schoolapplication.domain.StudentId;
 import com.fabit.schoolapplication.domain.TeacherId;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +14,7 @@ public class HomeworkCompletionResultTest {
   @BeforeAll
   static void initialize() {
     homeworkCompletionResult = HomeworkCompletionResult.of(TeacherId.of(1),
-        StudentId.of(1));
+        StudentId.of(1), LessonId.of(1));
     homeworkCompletionResult.uploadTaskCompletionResult("Test");
   }
 
