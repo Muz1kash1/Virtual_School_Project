@@ -1,12 +1,12 @@
-package com.fabit.schoolapplication.persisnence.entity.lesson;
+package com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkcompletionresult;
 
-import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.lesson.Lesson;
+import com.fabit.schoolapplication.domain.homeworkcompletionresult.HomeworkCompletionResult;
+import com.fabit.schoolapplication.persisnence.entity.StudentEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.LessonEntity;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,12 +16,12 @@ import lombok.Setter;
 import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.data.domain.DomainEvents;
 
-@Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "lesson")
-public class LessonEntity {
+@Entity
+@Table(name = "homework_completion_result")
+public class HomeworkCompletionResultEntity {
 
   @Id
   @Column(name = "id", nullable = false)
@@ -30,18 +30,22 @@ public class LessonEntity {
   @OneToOne
   private TeacherEntity teacherId;
 
-  private Discipline discipline;
+  @OneToOne
+  private StudentEntity student;
 
-  private String homeworkTask;
+  @OneToOne
+  private LessonEntity lesson;
+
+  private String taskCompletionResult;
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
-    Lesson.domainEvents.clear();
+    HomeworkCompletionResult.domainEvents.clear();
   }
 
   @DomainEvents
   protected Collection<Object> domainEvents() {
-    return Collections.unmodifiableList(Lesson.domainEvents);
+    return Collections.unmodifiableList(HomeworkCompletionResult.domainEvents);
   }
 
 
