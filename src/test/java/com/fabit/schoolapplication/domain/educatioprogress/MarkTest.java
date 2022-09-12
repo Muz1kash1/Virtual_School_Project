@@ -68,6 +68,4 @@ class MarkTest {
     Mark mark = Mark.of("НН/УВ");
     assertEquals("НН/УВ", mark.getValue());
   }
-
-
 }
