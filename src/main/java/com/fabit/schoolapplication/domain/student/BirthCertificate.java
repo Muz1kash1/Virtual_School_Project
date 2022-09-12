@@ -14,7 +14,7 @@ public class BirthCertificate {
     this.number = number;
   }
 
-  public static BirthCertificate create(String serial, String number) {
+  public static BirthCertificate of(String serial, String number) {
     return new BirthCertificate(serial, number);
   }
 }
