@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.domain.lesson;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.TeacherId;
 import com.fabit.schoolapplication.domain.lesson.event.HomeworkTaskSetEvent;
 import com.fabit.schoolapplication.domain.lesson.event.LessonCreatedEvent;
 import com.fabit.schoolapplication.domain.lesson.event.LessonEvent;
+import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;

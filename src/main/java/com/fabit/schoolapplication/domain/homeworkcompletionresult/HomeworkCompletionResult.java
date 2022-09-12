@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.domain.homeworkcompletionresult;
 
-import com.fabit.schoolapplication.domain.LessonId;
-import com.fabit.schoolapplication.domain.StudentId;
-import com.fabit.schoolapplication.domain.TeacherId;
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.event.HomeworkCompletionCreatedEvent;
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.event.HomeworkCompletionEvent;
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.event.HomeworkCompletionUpdatedEvent;
+import com.fabit.schoolapplication.domain.lesson.LessonId;
 import com.fabit.schoolapplication.domain.lesson.event.LessonEvent;
+import com.fabit.schoolapplication.domain.student.StudentId;
+import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
