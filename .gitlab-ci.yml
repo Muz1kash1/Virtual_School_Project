@@ -28,7 +28,7 @@ test:
     - master
     - merge_requests
   script:
-    - "mvn --settings $MAVEN_SETTINGS test -Dcheckstyle.skip"
+    - "mvn -Dspring.profiles.active=ci --settings $MAVEN_SETTINGS clean test -Dcheckstyle.skip"
   allow_failure: false
 
 package:
@@ -37,7 +37,7 @@ package:
     - master
     - merge_requests
   script:
-    - "mvn package --settings $MAVEN_SETTINGS -DskipTests -Dcheckstyle.skip"
+    - "mvn -Dspring.profiles.active=ci package --settings $MAVEN_SETTINGS -DskipTests -Dcheckstyle.skip"
   artifacts:
     paths:
       - "target/*.jar"
