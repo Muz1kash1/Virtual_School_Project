@@ -20,11 +20,10 @@ class MarkTest {
   @Test
   @DisplayName("Нельзя создать невалидную отметку 0")
   public void createMark_0_shouldThrowIllegalArgumentException() {
-    Throwable thrown =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              Mark mark = Mark.of(MarkId.of(1L), EducationProgressId.of(1L), 0);
-            });
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          Mark mark = Mark.of(MarkId.of(1L), EducationProgressId.of(1L), 0);
+        });
   }
 }
