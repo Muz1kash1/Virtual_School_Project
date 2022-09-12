@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.persisnence.repository;
+package com.fabit.schoolapplication.infrastructure.persisnence.repository;
 
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.LessonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
