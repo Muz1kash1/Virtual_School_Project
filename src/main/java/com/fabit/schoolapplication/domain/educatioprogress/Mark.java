@@ -24,10 +24,11 @@ public final class Mark {
 
   /**
    * Статическая фабрика по созданию объектов Mark
-   * @param markId              id оценки
+   *
+   * @param markId id оценки
    * @param educationProgressId id отметки об успеваемости которой принадлежит эта оценка
-   * @param value               значение оценки
-   * @return                    объект Mark
+   * @param value значение оценки
+   * @return объект Mark
    */
   public static Mark of(MarkId markId, EducationProgressId educationProgressId, int value) {
     Mark mark = new Mark();
@@ -39,6 +40,7 @@ public final class Mark {
 
   /**
    * Оценка представленная в виде значения от 2 до 5 баллов
+   *
    * @param value значение оценки
    */
   private void setValue(int value) {
