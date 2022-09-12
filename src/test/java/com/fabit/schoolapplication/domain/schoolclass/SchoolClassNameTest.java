@@ -20,7 +20,7 @@ public class SchoolClassNameTest {
   @DisplayName("Создание параллели с неверным форматом должно выбрасывать exception")
   void createParallelWithWrongFormatTest() {
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> SchoolClassName.of(115, "LDAS124"), "Неверный формат параллели");
+        () -> SchoolClassName.of(-115, "LDAS124"), "Неверный формат параллели");
     Assertions.assertThrows(IllegalArgumentException.class,
         () -> SchoolClassName.of(1, "Ъ"), "Неверный формат параллели");
     Assertions.assertThrows(IllegalArgumentException.class,
