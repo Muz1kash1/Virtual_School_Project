@@ -44,6 +44,8 @@ public final class Mark {
   private void setValue(int value) {
     if (value >= 2 && value <= 5) {
       this.value = value;
+    } else {
+      throw new IllegalArgumentException("Неверный формат оценки");
     }
   }
 }
