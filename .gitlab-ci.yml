@@ -24,6 +24,12 @@ build:
 
 test:
   stage: test
+  services:
+    - name: postgres:14.5
+      alias: postgres
+  variables:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
   only:
     - master
     - merge_requests
