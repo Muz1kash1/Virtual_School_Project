@@ -1,5 +1,7 @@
 package com.fabit.schoolapplication.domain.schoolclass;
 
+import com.fabit.schoolapplication.domain.SchoolClassId;
+import com.fabit.schoolapplication.domain.StudentId;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.Assertions;
@@ -12,50 +14,53 @@ public class SchoolClassTest {
   @DisplayName("Создание школьного класса должно создавать корретный школьный класс")
   void createSchoolClassTest() {
     SchoolClass schoolClass
-        = SchoolClass.create(10L, Parallel.create(11, "Б"), Set.of(1L, 5L));
-    Assertions.assertEquals(10L, schoolClass.getId());
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(1L));
+        = SchoolClass.of(SchoolClassId.of(5L), SchoolClassName.of(11, "Б"));
+    schoolClass.addStudent(StudentId.of(1L));
+    Assertions.assertEquals(5L, schoolClass.getSchoolClassId().getValue());
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(1L)));
   }
 
   @Test
   @DisplayName("Добавление/удаление ученика в класс должно добавлять/удалять ученика")
   void addAndRemoveStudentTest() {
-    Set<Long> studentIds = new HashSet<>();
-    studentIds.add(55L);
-    studentIds.add(105L);
+    Set<StudentId> studentIds = new HashSet<>();
+    studentIds.add(StudentId.of(55L));
+    studentIds.add(StudentId.of(105L));
 
     SchoolClass schoolClass
-        = SchoolClass.create(10L, Parallel.create(11, "Б"), studentIds);
-    schoolClass.addStudent(99L);
+        = SchoolClass.of(SchoolClassId.of(10L), SchoolClassName.of(11, "Б"), studentIds);
+    schoolClass.addStudent(StudentId.of(99L));
 
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(55L));
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(105L));
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(55L)));
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(105L)));
 
-    schoolClass.removeStudent(55L);
+    schoolClass.removeStudent(StudentId.of(55L));
 
-    Assertions.assertFalse(schoolClass.getStudentIds().contains(55L));
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(105L));
+    Assertions.assertFalse(schoolClass.getStudents().contains(StudentId.of(55L)));
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(105L)));
   }
 
   @Test
   @DisplayName("Добавление/удаление нескольких учеников в класс должно добавлять/удалять учеников")
   void addAndRemoveMultipleStudentsTest() {
     SchoolClass schoolClass
-        = SchoolClass.create(10L, Parallel.create(11, "Б"));
+        = SchoolClass.of(SchoolClassId.of(10L), SchoolClassName.of(11, "Б"));
 
-    schoolClass.addStudent(1001L, 1002L, 1003L);
+    schoolClass.addStudent(
+        StudentId.of(1001L), StudentId.of(1002L), StudentId.of(1003L)
+    );
 
-    Assertions.assertEquals(3, schoolClass.getStudentIds().size());
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(1001L));
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(1002L));
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(1003L));
+    Assertions.assertEquals(3, schoolClass.getStudents().size());
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(1001L)));
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(1002L)));
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(1003L)));
 
-    schoolClass.removeStudent(1001L, 1002L);
+    schoolClass.removeStudent(StudentId.of(1001L), StudentId.of(1002L));
 
-    Assertions.assertEquals(1, schoolClass.getStudentIds().size());
-    Assertions.assertTrue(schoolClass.getStudentIds().contains(1003L));
-    Assertions.assertFalse(schoolClass.getStudentIds().contains(1001L));
-    Assertions.assertFalse(schoolClass.getStudentIds().contains(1002L));
+    Assertions.assertEquals(1, schoolClass.getStudents().size());
+    Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(1003L)));
+    Assertions.assertFalse(schoolClass.getStudents().contains(StudentId.of(1001L)));
+    Assertions.assertFalse(schoolClass.getStudents().contains(StudentId.of(1002L)));
   }
 
 
