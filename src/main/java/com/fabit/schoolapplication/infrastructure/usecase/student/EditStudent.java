@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * Сервис редактирования студента
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -18,6 +21,11 @@ public class EditStudent {
   final StudentRepository studentRepository;
   final StudentMapperService studentMapperService;
 
+  /**
+   * Добавление паспорта.
+   *
+   * @param studentDto the student dto
+   */
   public void addPassport(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.addPassport(studentMapperService.mapToPassport(studentDto.getPassport()));
@@ -25,6 +33,11 @@ public class EditStudent {
     studentRepository.save(studentEntity);
   }
 
+  /**
+   * Изменение свидетельства о рождении.
+   *
+   * @param studentDto student dto
+   */
   public void changeBirthCertificate(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.changeBirthCertificate(
@@ -33,6 +46,11 @@ public class EditStudent {
     studentRepository.save(studentEntity);
   }
 
+  /**
+   * Изменение СНИЛСа
+   *
+   * @param studentDto student dto
+   */
   public void changeSnils(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.changeSnils(studentMapperService.mapToSnils(studentDto.getSnils()));
