@@ -29,7 +29,8 @@ public class EditStudent {
   public void addPassport(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.addPassport(studentMapperService.mapToPassport(studentDto.getPassport()));
-    StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
+    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils());
+    studentEntity.setPassport(studentDto.getPassport());
     studentRepository.save(studentEntity);
   }
 
@@ -38,12 +39,14 @@ public class EditStudent {
    *
    * @param studentDto student dto
    */
-  public void changeBirthCertificate(StudentDto studentDto) {
+  public StudentEntity changeBirthCertificate(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.changeBirthCertificate(
         studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate()));
-    StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
+    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils());
+    studentEntity.setBirthCertificate(studentDto.getBirthCertificate());
     studentRepository.save(studentEntity);
+    return studentEntity;
   }
 
   /**
@@ -51,11 +54,13 @@ public class EditStudent {
    *
    * @param studentDto student dto
    */
-  public void changeSnils(StudentDto studentDto) {
+  public StudentEntity changeSnils(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.changeSnils(studentMapperService.mapToSnils(studentDto.getSnils()));
-    StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
+    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils());
+    studentEntity.setSnils(studentDto.getSnils());
     studentRepository.save(studentEntity);
+    return studentEntity;
   }
 
   // TO DO перенести в отдельный класс и добавить логику

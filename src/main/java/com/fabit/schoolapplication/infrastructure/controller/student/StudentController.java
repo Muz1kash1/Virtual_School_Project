@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
 import com.fabit.schoolapplication.infrastructure.usecase.student.EditStudent;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +17,49 @@ public class StudentController {
   final CreateStudent createStudent;
   final EditStudent editStudent;
 
+  /**
+   * Добавить студента
+   *
+   * @param student студент
+   * @return response entity
+   */
   @PostMapping("/addStudent")
-  public ResponseEntity<String> addStudent(@RequestBody StudentDto student) {
+  public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentDto student) {
     log.info("trying to create: " + student.toString());
-    createStudent.createStudent(student);
-    return ResponseEntity.ok().body("Студент создан");
+    return ResponseEntity.ok().body(createStudent.createStudent(student));
   }
 
+  /**
+   * Изменить свидетельство о рождении
+   *
+   * @param student student
+   * @return response entity
+   */
   @PostMapping("/changeBirthCertificate")
-  public ResponseEntity<String> changeBirthCertificateStudent(@RequestBody StudentDto student) {
+  public ResponseEntity<StudentEntity> changeBirthCertificateStudent(
+      @RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    editStudent.changeBirthCertificate(student);
-    return ResponseEntity.ok().body("Свидетельство о рождении изменено");
-  }
-  @PostMapping("/changeSnils")
-  public ResponseEntity<String> changeSnilsStudent(@RequestBody StudentDto student) {
-    log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    editStudent.changeSnils(student);
-    return ResponseEntity.ok().body("СНИЛС изменен");
+    return ResponseEntity.ok().body(editStudent.changeBirthCertificate(student));
   }
 
+  /**
+   * Изменить СНИЛС у студента
+   *
+   * @param student the student
+   * @return the response entity
+   */
+  @PostMapping("/changeSnils")
+  public ResponseEntity<StudentEntity> changeSnilsStudent(@RequestBody StudentDto student) {
+    log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
+    return ResponseEntity.ok().body(editStudent.changeSnils(student));
+  }
+
+  /**
+   * Добавить паспорт студенту
+   *
+   * @param student student
+   * @return response entity
+   */
   @PostMapping("/addPassport")
   public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());

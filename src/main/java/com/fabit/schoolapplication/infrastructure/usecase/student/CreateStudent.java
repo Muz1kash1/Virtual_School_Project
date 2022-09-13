@@ -26,10 +26,13 @@ public class CreateStudent {
    *
    * @param studentDto student dto
    */
-  public void createStudent(StudentDto studentDto) {
+  public StudentEntity createStudent(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
-    studentRepository.save(studentEntity);
+    if (studentRepository.findBySnils(studentDto.getSnils()) == null) {
+      studentRepository.save(studentEntity);
+    }
+    return studentEntity;
   }
 
   // TO DO перенести в отдельный класс и добавить логику

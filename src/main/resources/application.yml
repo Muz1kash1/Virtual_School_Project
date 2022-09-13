@@ -4,6 +4,8 @@ server:
 spring:
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
   datasource:
     username: postgres
     password: postgres

@@ -9,6 +9,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 public class StudentDto implements Serializable {
+  private Long id;
   private String name;
   private String snils;
   private String birthCertificate;

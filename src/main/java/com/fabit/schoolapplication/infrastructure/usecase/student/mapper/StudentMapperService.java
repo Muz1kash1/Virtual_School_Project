@@ -20,8 +20,8 @@ public class StudentMapperService {
       studentEntity.setPassport(
           student.getPassport().getNumber() + " " + student.getPassport().getSerial());
     }
-    studentEntity.setBirthCertificate(student.getBirthCertificate().getNumber() + " " +
-        student.getBirthCertificate().getSerial());
+    studentEntity.setBirthCertificate(student.getBirthCertificate().getSerial() + " " +
+        student.getBirthCertificate().getNumber());
     return studentEntity;
   }
 
