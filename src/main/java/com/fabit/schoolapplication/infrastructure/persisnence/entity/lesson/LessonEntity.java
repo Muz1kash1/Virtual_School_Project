@@ -3,6 +3,7 @@ package com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.lesson.Lesson;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
+import com.sun.istack.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -25,9 +26,11 @@ public class LessonEntity {
 
   @Id
   @Column(name = "id", nullable = false)
+  @NotNull
   private Long id;
 
   @OneToOne
+  @NotNull
   private TeacherEntity teacherId;
 
   private Discipline discipline;
