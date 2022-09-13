@@ -24,6 +24,4 @@ class MarkTest {
           Mark mark = Mark.of(MarkId.of(1L), EducationProgressId.of(1L), 0);
         });
   }
-
-
 }
