@@ -1,7 +1,9 @@
 package com.fabit.schoolapplication.domain.student.event;
 
 import com.fabit.schoolapplication.domain.student.Student;
+import lombok.Getter;
 
+@Getter
 public class StudentCreatedEvent implements StudentEvent{
   private final Student student;
 

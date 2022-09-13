@@ -17,4 +17,9 @@ public class BirthCertificate {
   public static BirthCertificate of(String serial, String number) {
     return new BirthCertificate(serial, number);
   }
+
+  @Override
+  public String toString() {
+    return number + " " + serial;
+  }
 }
