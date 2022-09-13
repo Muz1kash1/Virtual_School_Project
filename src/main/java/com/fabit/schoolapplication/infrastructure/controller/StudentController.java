@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.controller;
 
-import com.fabit.schoolapplication.infrastructure.UseCase.student.CreateStudent;
+import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

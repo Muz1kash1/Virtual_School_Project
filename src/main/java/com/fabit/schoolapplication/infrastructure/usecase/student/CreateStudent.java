@@ -1,8 +1,8 @@
-package com.fabit.schoolapplication.infrastructure.UseCase.student;
+package com.fabit.schoolapplication.infrastructure.usecase.student;
 
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
-import com.fabit.schoolapplication.infrastructure.UseCase.student.mapper.StudentMapperServiceImpl;
+import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.infrastructure.controller.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;

@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.UseCase.student.mapper;
+package com.fabit.schoolapplication.infrastructure.usecase.student.mapper;
 
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
