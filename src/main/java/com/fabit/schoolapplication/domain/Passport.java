@@ -18,4 +18,9 @@ public class Passport {
   public static Passport of(String serial, String number) {
     return new Passport(serial, number);
   }
+
+  @Override
+  public String toString() {
+    return serial + " " + number;
+  }
 }

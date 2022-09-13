@@ -17,4 +17,8 @@ public class Snils {
     return new Snils(numberView);
   }
 
+  @Override
+  public String toString() {
+    return numberView;
+  }
 }

@@ -9,11 +9,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
 @Getter
 @Slf4j
+@NoArgsConstructor
 public class Student {
   private StudentId studentId;
   private String name;
