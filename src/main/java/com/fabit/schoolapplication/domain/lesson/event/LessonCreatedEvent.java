@@ -10,4 +10,8 @@ public class LessonCreatedEvent implements LessonEvent {
     this.lesson = lesson;
   }
 
+  @Override
+  public Object getContent() {
+    return this.lesson;
+  }
 }

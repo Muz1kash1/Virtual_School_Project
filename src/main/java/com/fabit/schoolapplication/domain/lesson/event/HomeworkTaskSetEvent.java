@@ -9,4 +9,9 @@ public class HomeworkTaskSetEvent implements LessonEvent {
   public HomeworkTaskSetEvent(Lesson lesson) {
     this.lesson = lesson;
   }
+
+  @Override
+  public Object getContent() {
+    return this.lesson;
+  }
 }

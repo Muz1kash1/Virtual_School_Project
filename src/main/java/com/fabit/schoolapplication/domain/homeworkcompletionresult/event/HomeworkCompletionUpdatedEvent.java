@@ -9,4 +9,9 @@ public class HomeworkCompletionUpdatedEvent implements HomeworkCompletionEvent {
   public HomeworkCompletionUpdatedEvent(HomeworkCompletionResult homeworkCompletionResult) {
     this.homeworkCompletionResult = homeworkCompletionResult;
   }
+
+  @Override
+  public Object getContent() {
+    return this.homeworkCompletionResult;
+  }
 }
