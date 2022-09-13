@@ -26,7 +26,7 @@ public class CreateStudent {
    *
    * @param studentDto student dto
    */
-  public StudentEntity createStudent(StudentDto studentDto) {
+  public StudentEntity execute(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
     if (studentRepository.findBySnils(studentDto.getSnils()) == null) {
