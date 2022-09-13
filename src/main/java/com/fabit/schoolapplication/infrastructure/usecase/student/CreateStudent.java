@@ -23,7 +23,7 @@ public class CreateStudent {
     StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
     studentRepository.save(studentEntity);
   }
-// TO DO перенести в отдельный класс
+// TO DO перенести в отдельный класс и добавить логику
   @EventListener
   public void studentCreatedEvent(StudentCreatedEvent event) {
     log.info("StudentCreatedEvent...");

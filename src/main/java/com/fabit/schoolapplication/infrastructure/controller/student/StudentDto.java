@@ -8,7 +8,6 @@ import lombok.ToString;
 
 @Data
 @AllArgsConstructor
-@ToString
 public class StudentDto implements Serializable {
   private String name;
   private String snils;

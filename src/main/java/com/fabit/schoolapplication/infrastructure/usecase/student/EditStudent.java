@@ -33,10 +33,17 @@ public class EditStudent {
     studentRepository.save(studentEntity);
   }
 
-  // TO DO перенести в отдельный класс
+  public void changeSnils(StudentDto studentDto) {
+    Student student = studentMapperService.mapToStudent(studentDto);
+    student.changeSnils(studentMapperService.mapToSnils(studentDto.getSnils()));
+    StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
+    studentRepository.save(studentEntity);
+  }
+
+  // TO DO перенести в отдельный класс и добавить логику
   @EventListener
   public void StudentChangedInfoEvent(StudentChangedInfoEvent event) {
-    log.info("StudentCreatedEvent...");
-    log.info("Студент с именем " + event + "был успешно изменен");
+    log.info("StudentChangedInfoEvent...");
+    log.info("Студент с именем " + event.getStudent().getName() + " был успешно изменен");
   }
 }

@@ -29,6 +29,12 @@ public class StudentController {
     editStudent.changeBirthCertificate(student);
     return ResponseEntity.ok().body("Свидетельство о рождении изменено");
   }
+  @PostMapping("/changeSnils")
+  public ResponseEntity<String> changeSnilsStudent(@RequestBody StudentDto student) {
+    log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
+    editStudent.changeBirthCertificate(student);
+    return ResponseEntity.ok().body("СНИЛС изменен");
+  }
 
   @PostMapping("/addPassport")
   public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {

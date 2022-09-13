@@ -15,6 +15,7 @@ public class StudentMapperService {
     StudentEntity studentEntity = new StudentEntity();
     studentEntity.setName(student.getName());
     studentEntity.setBirthday(student.getBirthday());
+    studentEntity.setSnils(map(student.getSnils()));
     if (student.getPassport() != null) {
       studentEntity.setPassport(
           student.getPassport().getNumber() + "" + student.getPassport().getSerial());
