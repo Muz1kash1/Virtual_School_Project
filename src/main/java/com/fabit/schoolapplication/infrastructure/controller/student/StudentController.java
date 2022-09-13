@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +39,7 @@ public class StudentController {
    * @param student student
    * @return response entity
    */
-  @PostMapping("/changeBirthCertificate")
+  @PutMapping("/changeBirthCertificate")
   public ResponseEntity<StudentEntity> changeBirthCertificateStudent(
       @RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
@@ -51,7 +52,7 @@ public class StudentController {
    * @param student the student
    * @return the response entity
    */
-  @PostMapping("/changeSnils")
+  @PutMapping("/changeSnils")
   public ResponseEntity<StudentEntity> changeSnilsStudent(@RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
     return ResponseEntity.status(HttpStatus.CREATED).body(editStudent.changeSnils(student));
@@ -63,7 +64,7 @@ public class StudentController {
    * @param student student
    * @return response entity
    */
-  @PostMapping("/addPassport")
+  @PutMapping("/addPassport")
   public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());
     editStudent.addPassport(student);
