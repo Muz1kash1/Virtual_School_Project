@@ -15,7 +15,7 @@ public class StudentMapperService {
     StudentEntity studentEntity = new StudentEntity();
     studentEntity.setName(student.getName());
     studentEntity.setBirthday(student.getBirthday());
-    studentEntity.setSnils(map(student.getSnils()));
+    studentEntity.setSnils(student.getSnils().toString());
     if (student.getPassport() != null) {
       studentEntity.setPassport(
           student.getPassport().getNumber() + " " + student.getPassport().getSerial());
@@ -32,18 +32,6 @@ public class StudentMapperService {
             mapToBirthCertificate(studentDto.getBirthCertificate()), studentDto.getBirthday());
 
     return student;
-  }
-
-  public String map(BirthCertificate value) {
-    return value.toString();
-  }
-
-  public String map(Passport value) {
-    return value.toString();
-  }
-
-  public String map(Snils value) {
-    return value.toString();
   }
 
   public Snils mapToSnils(String value) {

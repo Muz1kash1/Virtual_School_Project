@@ -34,7 +34,7 @@ class StudentControllerTest {
   @Test
   void addStudent() throws Exception {
     mockMvc.perform(post("/addStudent").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk())
+            .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isCreated())
         .andExpect(jsonPath("$.name", is("Karl"))).andExpect(jsonPath("$.snils", is("777777")))
         .andExpect(jsonPath("$.birthCertificate", is("99999 111")))
         .andExpect(jsonPath("$.birthday", is("2022-09-12")));
