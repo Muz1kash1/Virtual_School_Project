@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.controller;
+package com.fabit.schoolapplication.infrastructure.controller.student;
 
 import java.io.Serializable;
 import java.time.LocalDate;

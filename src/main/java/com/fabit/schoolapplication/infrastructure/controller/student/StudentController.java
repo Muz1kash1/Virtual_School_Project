@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.controller;
+package com.fabit.schoolapplication.infrastructure.controller.student;
 
 import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
 import lombok.RequiredArgsConstructor;
