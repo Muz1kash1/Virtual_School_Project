@@ -2,7 +2,7 @@ package com.fabit.schoolapplication.infrastructure.usecase.student;
 
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
-import com.fabit.schoolapplication.infrastructure.controller.student.StudentDto;
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
@@ -29,7 +29,7 @@ public class CreateStudent {
   public StudentEntity execute(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
-    if (studentRepository.findBySnils(studentDto.getSnils()) == null) {
+    if (studentRepository.findBySnils(studentDto.getSnils().toString()) == null) {
       studentRepository.save(studentEntity);
     }
     return studentEntity;

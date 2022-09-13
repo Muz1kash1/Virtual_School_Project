@@ -5,7 +5,10 @@ import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.controller.student.StudentDto;
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.BirthCertificateDto;
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.PassportDto;
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.SnilsDto;
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import org.springframework.stereotype.Service;
 
@@ -34,17 +37,15 @@ public class StudentMapperService {
     return student;
   }
 
-  public Snils mapToSnils(String value) {
-    return Snils.of(value.trim());
+  public Snils mapToSnils(SnilsDto value) {
+    return Snils.of(value.getNumberView());
   }
 
-  public BirthCertificate mapToBirthCertificate(String value) {
-    String[] strings = value.trim().split(" ");
-    return BirthCertificate.of(strings[0], strings[1]);
+  public BirthCertificate mapToBirthCertificate(BirthCertificateDto value) {
+    return BirthCertificate.of(value.getSerial(), value.getNumber());
   }
 
-  public Passport mapToPassport(String value) {
-    String[] strings = value.trim().split(" ");
-    return Passport.of(strings[0], strings[1]);
+  public Passport mapToPassport(PassportDto value) {
+    return Passport.of(value.getSerial(), value.getNumber());
   }
 }

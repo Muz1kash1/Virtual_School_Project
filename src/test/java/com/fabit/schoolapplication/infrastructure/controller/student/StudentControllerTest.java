@@ -24,9 +24,9 @@ class StudentControllerTest {
   private static String json = """
       {
       "name":"Karl",
-      "snils":"777777",
-      "birthCertificate":"99999 111",
-      "passport":"1234567 222",
+      "snils":{"numberView":"777777"},
+      "birthCertificate":{"serial":"99998", "number":"111"},
+      "passport":{"serial":"222", "number":" 1234567"},
       "birthday":"2022-09-12"
       }
       """;
@@ -36,7 +36,7 @@ class StudentControllerTest {
     mockMvc.perform(post("/student/addStudent").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isCreated())
         .andExpect(jsonPath("$.name", is("Karl"))).andExpect(jsonPath("$.snils", is("777777")))
-        .andExpect(jsonPath("$.birthCertificate", is("99999 111")))
+        .andExpect(jsonPath("$.birthCertificate", is("99998 111")))
         .andExpect(jsonPath("$.birthday", is("2022-09-12")));
   }
 }
