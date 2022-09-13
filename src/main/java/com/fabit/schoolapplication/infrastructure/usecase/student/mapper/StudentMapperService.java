@@ -7,11 +7,11 @@ import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.controller.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Service;
 
-@Mapper(componentModel = "spring")
-public interface StudentMapperService {
-  default StudentEntity mapToStudentEntity(Student student) {
+@Service
+public class StudentMapperService {
+  public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
     studentEntity.setName(student.getName());
     studentEntity.setBirthday(student.getBirthday());
@@ -24,7 +24,7 @@ public interface StudentMapperService {
     return studentEntity;
   }
 
-  default Student mapToStudent(StudentDto studentDto) {
+  public Student mapToStudent(StudentDto studentDto) {
 
     Student student =
         Student.of(StudentId.of(1), studentDto.getName(), mapToSnils(studentDto.getSnils()),
@@ -33,28 +33,28 @@ public interface StudentMapperService {
     return student;
   }
 
-  default String map(BirthCertificate value) {
+  public String map(BirthCertificate value) {
     return value.toString();
   }
 
-  default String map(Passport value) {
+  public String map(Passport value) {
     return value.toString();
   }
 
-  default String map(Snils value) {
+  public String map(Snils value) {
     return value.toString();
   }
 
-  default Snils mapToSnils(String value) {
+  public Snils mapToSnils(String value) {
     return Snils.of(value.trim());
   }
 
-  default BirthCertificate mapToBirthCertificate(String value) {
+  public BirthCertificate mapToBirthCertificate(String value) {
     String[] strings = value.trim().split(" ");
     return BirthCertificate.of(strings[0], strings[1]);
   }
 
-  default Passport mapToPassport(String value) {
+  public Passport mapToPassport(String value) {
     String[] strings = value.trim().split(" ");
     return Passport.of(strings[0], strings[1]);
   }

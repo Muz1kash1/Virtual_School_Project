@@ -2,7 +2,7 @@ package com.fabit.schoolapplication.infrastructure.usecase.student;
 
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
-import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperServiceImpl;
+import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
 import com.fabit.schoolapplication.infrastructure.controller.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CreateStudent {
   final StudentRepository studentRepository;
-  final StudentMapperServiceImpl studentMapperService;
+  final StudentMapperService studentMapperService;
 
   public void createStudent(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
