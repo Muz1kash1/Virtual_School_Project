@@ -5,6 +5,7 @@ import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
 import com.fabit.schoolapplication.infrastructure.usecase.student.EditStudent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class StudentController {
   @PostMapping("/addStudent")
   public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentDto student) {
     log.info("trying to create: " + student.toString());
-    return ResponseEntity.ok().body(createStudent.createStudent(student));
+    return ResponseEntity.status(HttpStatus.CREATED).body(createStudent.createStudent(student));
   }
 
   /**
@@ -39,7 +40,7 @@ public class StudentController {
   public ResponseEntity<StudentEntity> changeBirthCertificateStudent(
       @RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    return ResponseEntity.ok().body(editStudent.changeBirthCertificate(student));
+    return ResponseEntity.status(HttpStatus.CREATED).body(editStudent.changeBirthCertificate(student));
   }
 
   /**
@@ -51,7 +52,7 @@ public class StudentController {
   @PostMapping("/changeSnils")
   public ResponseEntity<StudentEntity> changeSnilsStudent(@RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    return ResponseEntity.ok().body(editStudent.changeSnils(student));
+    return ResponseEntity.status(HttpStatus.CREATED).body(editStudent.changeSnils(student));
   }
 
   /**
@@ -64,6 +65,6 @@ public class StudentController {
   public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());
     editStudent.addPassport(student);
-    return ResponseEntity.ok().body("Паспорт добвлен");
+    return ResponseEntity.status(HttpStatus.CREATED).body("Паспорт добвлен");
   }
 }
