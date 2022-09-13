@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * Агрегат отметки об успеваемости
  *
@@ -21,6 +23,7 @@ public class EducationProgress {
   private LessonId lessonId;
   private LocalDateTime whenCreated;
 
+  private List<Mark> marks;
   private EducationProgress() {}
 
   /**
@@ -36,12 +39,14 @@ public class EducationProgress {
       EducationProgressId educationProgressId,
       StudentId studentId,
       TeacherId teacherId,
-      LessonId lessonId) {
+      LessonId lessonId,
+      List<Mark> marks) {
     EducationProgress educationProgress = new EducationProgress();
     educationProgress.educationProgressId = educationProgressId;
     educationProgress.studentId = studentId;
     educationProgress.teacherId = teacherId;
     educationProgress.lessonId = lessonId;
+    educationProgress.marks = marks;
     educationProgress.whenCreated = LocalDateTime.now();
     return educationProgress;
   }
