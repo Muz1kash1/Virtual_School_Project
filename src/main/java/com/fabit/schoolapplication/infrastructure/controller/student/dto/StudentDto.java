@@ -1,18 +1,17 @@
-package com.fabit.schoolapplication.infrastructure.controller.student;
+package com.fabit.schoolapplication.infrastructure.controller.student.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 public class StudentDto implements Serializable {
   private Long id;
   private String name;
-  private String snils;
-  private String birthCertificate;
-  private String passport;
+  private SnilsDto snils;
+  private BirthCertificateDto birthCertificate;
+  private PassportDto passport;
   private LocalDate birthday;
 }

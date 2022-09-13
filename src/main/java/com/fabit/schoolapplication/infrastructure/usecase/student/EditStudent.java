@@ -2,7 +2,7 @@ package com.fabit.schoolapplication.infrastructure.usecase.student;
 
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
-import com.fabit.schoolapplication.infrastructure.controller.student.StudentDto;
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
@@ -29,8 +29,9 @@ public class EditStudent {
   public void addPassport(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.addPassport(studentMapperService.mapToPassport(studentDto.getPassport()));
-    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils());
-    studentEntity.setPassport(studentDto.getPassport());
+    StudentEntity studentEntity =
+        studentRepository.findBySnils(studentDto.getSnils().getNumberView());
+    studentEntity.setPassport(studentDto.getPassport().toString());
     studentRepository.save(studentEntity);
   }
 
@@ -43,8 +44,8 @@ public class EditStudent {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.changeBirthCertificate(
         studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate()));
-    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils());
-    studentEntity.setBirthCertificate(studentDto.getBirthCertificate());
+    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils().toString());
+    studentEntity.setBirthCertificate(studentDto.getBirthCertificate().toString());
     studentRepository.save(studentEntity);
     return studentEntity;
   }
@@ -57,8 +58,8 @@ public class EditStudent {
   public StudentEntity changeSnils(StudentDto studentDto) {
     Student student = studentMapperService.mapToStudent(studentDto);
     student.changeSnils(studentMapperService.mapToSnils(studentDto.getSnils()));
-    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils());
-    studentEntity.setSnils(studentDto.getSnils());
+    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils().toString());
+    studentEntity.setSnils(studentDto.getSnils().toString());
     studentRepository.save(studentEntity);
     return studentEntity;
   }

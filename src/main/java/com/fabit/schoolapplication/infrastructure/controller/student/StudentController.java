@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
 import com.fabit.schoolapplication.infrastructure.usecase.student.EditStudent;
