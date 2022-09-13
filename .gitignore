@@ -34,3 +34,5 @@ build/
 
 ### RabbitMQ ###
 rabbitmq/
+### Postgres ###
+postgres/
