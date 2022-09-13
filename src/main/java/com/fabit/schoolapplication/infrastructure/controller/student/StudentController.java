@@ -32,7 +32,7 @@ public class StudentController {
   @PostMapping("/changeSnils")
   public ResponseEntity<String> changeSnilsStudent(@RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    editStudent.changeBirthCertificate(student);
+    editStudent.changeSnils(student);
     return ResponseEntity.ok().body("СНИЛС изменен");
   }
 
