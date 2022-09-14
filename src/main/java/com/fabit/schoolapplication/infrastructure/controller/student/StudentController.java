@@ -48,8 +48,7 @@ public class StudentController {
   public ResponseEntity<StudentEntity> changeBirthCertificateStudent(
       @RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    return ResponseEntity.status(HttpStatus.CREATED)
-        .body(editStudent.changeBirthCertificate(student));
+    return ResponseEntity.ok().body(editStudent.changeBirthCertificate(student));
   }
 
   /**
@@ -61,7 +60,7 @@ public class StudentController {
   @PutMapping("/changeSnils")
   public ResponseEntity<StudentEntity> changeSnilsStudent(@RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    return ResponseEntity.status(HttpStatus.CREATED).body(editStudent.changeSnils(student));
+    return ResponseEntity.ok().body(editStudent.changeSnils(student));
   }
 
   /**
@@ -74,13 +73,13 @@ public class StudentController {
   public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());
     editStudent.addPassport(student);
-    return ResponseEntity.status(HttpStatus.CREATED).body("Паспорт добвлен");
+    return ResponseEntity.ok().body("Паспорт добвлен");
   }
 
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<String> deleteStudent(@PathVariable long id) {
     log.info("trying to delete student with id: " + id);
     deleteStudent.deleteStudent(id);
-    return ResponseEntity.status(HttpStatus.CREATED).body("Ученик исключен из школы");
+    return ResponseEntity.ok().body("Ученик исключен из школы");
   }
 }
