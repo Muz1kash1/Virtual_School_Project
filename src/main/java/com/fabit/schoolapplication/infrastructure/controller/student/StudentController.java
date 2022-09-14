@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,10 +77,10 @@ public class StudentController {
     return ResponseEntity.status(HttpStatus.CREATED).body("Паспорт добвлен");
   }
 
-  @DeleteMapping("/delete")
-  public ResponseEntity<String> deleteStudent(@RequestBody StudentDto student) {
-    log.info("trying to add Passport: " + student.getPassport());
-    editStudent.addPassport(student);
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<String> deleteStudent(@PathVariable long id) {
+    log.info("trying to delete student with id: " + id);
+    deleteStudent.deleteStudent(id);
     return ResponseEntity.status(HttpStatus.CREATED).body("Ученик исключен из школы");
   }
 }

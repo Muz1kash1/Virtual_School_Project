@@ -8,7 +8,7 @@ import lombok.Value;
 public class StudentId {
   long value;
 
-  private StudentId(long value) {
+  public StudentId(long value) {
     this.value = value;
   }
 
