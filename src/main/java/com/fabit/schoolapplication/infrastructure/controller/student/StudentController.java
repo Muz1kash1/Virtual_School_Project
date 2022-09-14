@@ -79,7 +79,7 @@ public class StudentController {
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<String> deleteStudent(@PathVariable long id) {
     log.info("trying to delete student with id: " + id);
-    deleteStudent.deleteStudent(id);
+    deleteStudent.execute(id);
     return ResponseEntity.ok().body("Ученик исключен из школы");
   }
 }

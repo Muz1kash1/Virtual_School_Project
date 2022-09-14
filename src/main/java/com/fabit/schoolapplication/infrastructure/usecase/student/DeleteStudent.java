@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class DeleteStudent {
   final StudentRepository studentRepository;
 
-  public void deleteStudent(long id) {
+  public void execute(long id) {
     studentRepository.deleteById(id);
   }
 }
