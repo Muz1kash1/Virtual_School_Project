@@ -23,12 +23,11 @@ public class Student {
   private BirthCertificate birthCertificate;
   private Passport passport;
   private LocalDate birthday;
-  public static final transient List<StudentEvent> domainEvents = new ArrayList();
+  public static final List<StudentEvent> domainEvents = new ArrayList<>();
 
-  protected StudentEvent registerEvent(StudentEvent event) {
+  protected void registerEvent(StudentEvent event) {
     Assert.notNull(event, "Domain event must not be null");
     this.domainEvents.add(event);
-    return event;
   }
 
   private Student(StudentId studentId, String name, Snils snils, BirthCertificate birthCertificate,
