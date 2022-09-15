@@ -45,7 +45,7 @@ public class Student {
     this.studentId = studentId;
     this.name = name;
     this.snils = snils;
-    if (LocalDate.now().getYear() - birthday.getYear() >= 14) {
+    if (passport.isValidAge(birthday)) {
       this.passport = passport;
       registerEvent(new StudentCreatedEvent(this));
     } else {

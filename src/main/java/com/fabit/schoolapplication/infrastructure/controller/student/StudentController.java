@@ -70,10 +70,9 @@ public class StudentController {
    * @return response entity
    */
   @PutMapping("/addPassport")
-  public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {
+  public ResponseEntity<StudentEntity> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());
-    editStudent.addPassport(student);
-    return ResponseEntity.ok().body("Паспорт добвлен");
+    return ResponseEntity.ok().body(editStudent.addPassport(student));
   }
 
   @DeleteMapping("/delete/{id}")

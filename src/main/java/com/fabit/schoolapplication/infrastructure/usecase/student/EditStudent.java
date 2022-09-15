@@ -28,12 +28,17 @@ public class EditStudent {
    *
    * @param studentDto the student dto
    */
-  public void addPassport(StudentDto studentDto) {
+  public StudentEntity addPassport(StudentDto studentDto) {
     Passport passport = studentMapperService.mapToPassport(studentDto.getPassport());
-    StudentEntity studentEntity =
-        studentRepository.findBySnils(studentDto.getSnils().getNumberView());
-    studentEntity.setPassport(passport.toString());
-    studentRepository.save(studentEntity);
+    if (passport.isValidAge(studentDto.getBirthday())) {
+      StudentEntity studentEntity =
+          studentRepository.findBySnils(studentDto.getSnils().getNumberView());
+      studentEntity.setPassport(passport.toString());
+      studentRepository.save(studentEntity);
+      return studentEntity;
+    } else {
+      throw new IllegalArgumentException("Не валидный возраст");
+    }
   }
 
   /**
@@ -44,7 +49,8 @@ public class EditStudent {
   public StudentEntity changeBirthCertificate(StudentDto studentDto) {
     BirthCertificate birthCertificate =
         studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate());
-    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils().toString());
+    StudentEntity studentEntity =
+        studentRepository.findBySnils(studentDto.getSnils().getNumberView());
     studentEntity.setBirthCertificate(birthCertificate.toString());
     studentRepository.save(studentEntity);
     return studentEntity;
@@ -57,7 +63,8 @@ public class EditStudent {
    */
   public StudentEntity changeSnils(StudentDto studentDto) {
     Snils snils = studentMapperService.mapToSnils(studentDto.getSnils());
-    StudentEntity studentEntity = studentRepository.findBySnils(studentDto.getSnils().toString());
+    StudentEntity studentEntity =
+        studentRepository.findByBirthCertificate(studentDto.getBirthCertificate().toString());
     studentEntity.setSnils(snils.getNumberView());
     studentRepository.save(studentEntity);
     return studentEntity;

@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.domain;
 
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Value;
 
@@ -17,6 +18,13 @@ public class Passport {
 
   public static Passport of(String serial, String number) {
     return new Passport(serial, number);
+  }
+
+  public boolean isValidAge(LocalDate birthday) {
+    if (LocalDate.now().getYear() - birthday.getYear() >= 14) {
+      return true;
+    }
+    return false;
   }
 
   @Override

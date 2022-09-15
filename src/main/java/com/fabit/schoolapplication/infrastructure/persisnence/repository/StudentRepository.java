@@ -9,4 +9,6 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
   StudentEntity findBySnils(String Snils);
 
   void deleteBySnils(String s);
+
+  StudentEntity findByBirthCertificate(String toString);
 }
