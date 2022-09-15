@@ -8,6 +8,7 @@ import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolC
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentInClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,13 +35,16 @@ public class RemoveStudentFromSchoolClassTest {
 
   @BeforeEach
   public void init() {
-    studentInClassRepository.deleteAll();
-    schoolClassRepository.deleteAll();
-    studentRepository.deleteAll();
-
     for (int i = 0; i < 10; i++) {
       studentRepository.save(new StudentEntity());
     }
+  }
+
+  @AfterEach
+  public void after() {
+    studentInClassRepository.deleteAll();
+    schoolClassRepository.deleteAll();
+    studentRepository.deleteAll();
   }
 
   @Test
@@ -58,5 +62,4 @@ public class RemoveStudentFromSchoolClassTest {
 
     Assertions.assertEquals(0, studentInClassRepository.findAll().size());
   }
-
 }
