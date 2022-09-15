@@ -142,7 +142,7 @@ class StudentControllerTest {
     List<StudentEntity> studentEntity = studentRepository.findAll();
     Assertions.assertEquals(1, studentEntity.size());
     mockMvc.perform(delete("/student/delete/{id}", studentEntity.get(0).getId())
-            .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+            .contentType(MediaType.APPLICATION_PROBLEM_JSON).accept(MediaType.APPLICATION_PROBLEM_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", is("Ученик исключен из школы")));
     Assertions.assertEquals(0, studentRepository.findAll().size());
