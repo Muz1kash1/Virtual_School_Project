@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,8 @@ public class EducationProgress {
   private LessonId lessonId;
   private LocalDateTime whenCreated;
 
-  private List<Mark> marks;
+  private List<Mark> marks = new ArrayList<>(2);
+
   private EducationProgress() {}
 
   /**
