@@ -50,13 +50,14 @@ public class HomeworkMapperService {
   public HomeworkCompletionResultEntity mapToHomeworkCompletionResultEntity(
       HomeworkCompletionResult homeworkCompletionResult) {
     HomeworkCompletionResultEntity homeworkCompletionResultEntity = new HomeworkCompletionResultEntity();
+    homeworkCompletionResultEntity.setId(1L);
     homeworkCompletionResultEntity.setTaskCompletionResult(
         homeworkCompletionResult.getTaskCompletionResult());
     homeworkCompletionResultEntity.setLesson(
         lessonRepository.getReferenceById(homeworkCompletionResult.getLessonId().getValue()));
     homeworkCompletionResultEntity.setStudent(
         studentRepository.getReferenceById(homeworkCompletionResult.getStudentId().getValue()));
-    homeworkCompletionResultEntity.setTeacherId(
+    homeworkCompletionResultEntity.setTeacher(
         teacherRepository.getReferenceById(homeworkCompletionResult.getTeacherId().getValue()));
 
     return homeworkCompletionResultEntity;

@@ -3,6 +3,7 @@ package com.fabit.schoolapplication.domain.lesson.event;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.lesson.Lesson;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
+import java.time.LocalDate;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

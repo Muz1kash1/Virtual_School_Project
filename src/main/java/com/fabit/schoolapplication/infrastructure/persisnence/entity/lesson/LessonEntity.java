@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -28,16 +30,18 @@ public class LessonEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
   @NotNull
+  @Column(name = "id")
   private Long id;
 
-  @OneToOne
+  @ManyToOne
   @NotNull
-  private TeacherEntity teacherId;
+  private TeacherEntity teacher;
 
+  @Column(name = "discipline")
+  @NotNull
   private Discipline discipline;
-
+  @Column(name = "homework_task")
   private String homeworkTask;
 
   @AfterDomainEventPublication

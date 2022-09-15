@@ -5,6 +5,7 @@ import com.fabit.schoolapplication.domain.lesson.event.HomeworkTaskSetEvent;
 import com.fabit.schoolapplication.domain.lesson.event.LessonCreatedEvent;
 import com.fabit.schoolapplication.domain.lesson.event.LessonEvent;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -13,10 +14,8 @@ import org.springframework.util.Assert;
 @Getter
 public class Lesson {
 
-  private final TeacherId teacherId;
-
-  private final Discipline discipline;
-
+  private TeacherId teacherId;
+  private Discipline discipline;
   private String homeworkTask;
 
   public static final transient List<LessonEvent> domainEvents = new ArrayList<>();
@@ -47,4 +46,19 @@ public class Lesson {
     registerEvent(new HomeworkTaskSetEvent(this));
   }
 
+  /**
+   * метод изменения назначенной на урок дисциплины
+   * @param discipline дисциплина на которую переназначен урок
+   */
+  public void changeDiscipline(Discipline discipline){
+    this.discipline = discipline;
+  }
+
+  /**
+   * метод изменения назначенного на урок учителя
+   * @param teacherId айди учителя на которого переназначается урок
+   */
+  public void changeTeacher(TeacherId teacherId){
+    this.teacherId = teacherId;
+  }
 }

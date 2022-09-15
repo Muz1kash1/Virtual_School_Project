@@ -2,6 +2,7 @@ package com.fabit.schoolapplication.domain.lesson;
 
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
+import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

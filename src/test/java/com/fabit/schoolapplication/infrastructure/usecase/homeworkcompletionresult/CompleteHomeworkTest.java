@@ -16,6 +16,7 @@ import com.fabit.schoolapplication.infrastructure.persisnence.repository.Teacher
 import com.fabit.schoolapplication.infrastructure.usecase.homeworkcompletionresult.mapper.HomeworkMapperService;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,14 +29,15 @@ public class CompleteHomeworkTest {
   HomeworkMapperService homeworkMapperService;
   @Autowired
   CompleteHomework completeHomework;
-  @MockBean
+  @Autowired
   HomeworkCompletionResultRepository repository;
+  @DisplayName("тест обновления загруженного дз")
   @Test
   void uploadCompletedHomework(){
     HomeworkCompletionResultDto dto = new HomeworkCompletionResultDto(1l,1l,"test",1l);
     completeHomework.uploadCompletedHomework(dto);
-    Assertions.assertNotNull(repository.findAll());
-    Assertions.assertNotNull(repository.getReferenceById(1l));
+    Assertions.assertNotNull(repository.findAll().get(0));
+//    Assertions.assertNotNull(repository.getReferenceById(1l));
 //    Assertions.assertEquals(homeworkMapperService.mapToHomeworkCompletionResultEntity(homeworkMapperService.mapToHomeworkCompletionResult(dto)).getTaskCompletionResult(),repository.getReferenceById(1l).getTaskCompletionResult());
   }
 
