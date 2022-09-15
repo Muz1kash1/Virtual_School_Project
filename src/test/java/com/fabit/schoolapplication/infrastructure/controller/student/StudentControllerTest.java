@@ -37,8 +37,8 @@ class StudentControllerTest {
   public void addStudent() throws Exception {
     String json = """
         {
-        "name":"Karl",
-        "snils":{"numberView":"777777"},
+        "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
+                      "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":" 1234567"},
         "birthday":"2022-09-12"
@@ -46,7 +46,7 @@ class StudentControllerTest {
         """;
     mockMvc.perform(post("/student/addStudent").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isCreated())
-        .andExpect(jsonPath("$.name", is("Karl"))).andExpect(jsonPath("$.snils", is("777777")))
+        .andExpect(jsonPath("$.name", is("Иванов Иван Иванович"))).andExpect(jsonPath("$.snils", is("777777")))
         .andExpect(jsonPath("$.birthCertificate", is("99998 111")))
         .andExpect(jsonPath("$.birthday", is("2022-09-12")));
   }
@@ -61,8 +61,8 @@ class StudentControllerTest {
   void changeBirthCertificateStudent() throws Exception {
     String json = """
         {
-        "name":"Karl",
-        "snils":{"numberView":"777777"},
+        "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
+                           "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"111", "number":"111111"},
         "passport":{"serial":"222", "number":" 1234567"},
         "birthday":"2022-09-12"
@@ -70,7 +70,7 @@ class StudentControllerTest {
         """;
     mockMvc.perform(put("/student/changeBirthCertificate").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk())
-        .andExpect(jsonPath("$.name", is("Karl"))).andExpect(jsonPath("$.snils", is("777777")))
+        .andExpect(jsonPath("$.name", is("Иванов Иван Иванович"))).andExpect(jsonPath("$.snils", is("777777")))
         .andExpect(jsonPath("$.birthCertificate", is("111 111111")))
         .andExpect(jsonPath("$.birthday", is("2022-09-12")));
   }
@@ -80,8 +80,8 @@ class StudentControllerTest {
   void changeSnilsStudent() throws Exception {
     String json = """
         {
-        "name":"Karl",
-        "snils":{"numberView":"333333"},
+        "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
+                              "snils":{"numberView":"333333"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":" 1234567"},
         "birthday":"2022-09-12"
@@ -89,7 +89,7 @@ class StudentControllerTest {
         """;
     mockMvc.perform(put("/student/changeSnils").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk())
-        .andExpect(jsonPath("$.name", is("Karl"))).andExpect(jsonPath("$.snils", is("333333")));
+        .andExpect(jsonPath("$.name", is("Иванов Иван Иванович"))).andExpect(jsonPath("$.snils", is("333333")));
   }
 
   @Test
@@ -97,8 +97,8 @@ class StudentControllerTest {
   void addPassportStudent15Years() throws Exception {
     String json = """
         {
-        "name":"Karl",
-        "snils":{"numberView":"777777"},
+        "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
+                              "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":"1234567"},
         "birthday":"2007-09-12"
@@ -106,7 +106,7 @@ class StudentControllerTest {
         """;
     mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk())
-        .andExpect(jsonPath("$.name", is("Karl"))).andExpect(jsonPath("$.snils", is("777777")))
+        .andExpect(jsonPath("$.name", is("Иванов Иван Иванович"))).andExpect(jsonPath("$.snils", is("777777")))
         .andExpect(jsonPath("$.passport", is("222 1234567")));
   }
 
@@ -115,8 +115,8 @@ class StudentControllerTest {
   void addPassportStudent10Years() {
     String json = """
         {
-        "name":"Karl",
-        "snils":{"numberView":"777777"},
+        "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
+                                "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":"1234567"},
         "birthday":"2012-09-12"

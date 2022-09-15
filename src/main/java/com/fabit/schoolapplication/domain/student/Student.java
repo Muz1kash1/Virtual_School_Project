@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.domain.student;
 
+import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
@@ -18,7 +19,7 @@ import org.springframework.util.Assert;
 @NoArgsConstructor
 public class Student {
   private StudentId studentId;
-  private String name;
+  private FullName name;
   private Snils snils;
   private BirthCertificate birthCertificate;
   private Passport passport;
@@ -30,7 +31,7 @@ public class Student {
     this.domainEvents.add(event);
   }
 
-  private Student(StudentId studentId, String name, Snils snils, BirthCertificate birthCertificate,
+  private Student(StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate,
                   LocalDate birthday) {
     this.studentId = studentId;
     this.name = name;
@@ -40,7 +41,7 @@ public class Student {
     registerEvent(new StudentCreatedEvent(this));
   }
 
-  private Student(StudentId studentId, String name, Snils snils, Passport passport,
+  private Student(StudentId studentId, FullName name, Snils snils, Passport passport,
                   LocalDate birthday) {
     this.studentId = studentId;
     this.name = name;
@@ -63,7 +64,7 @@ public class Student {
    * @param birthday         день рожденияя ученика
    * @return the student
    */
-  public static Student of(StudentId studentId, String name, Snils snils,
+  public static Student of(StudentId studentId, FullName name, Snils snils,
                            BirthCertificate birthCertificate, LocalDate birthday) {
     return new Student(studentId, name, snils, birthCertificate, birthday);
   }
@@ -78,7 +79,7 @@ public class Student {
    * @param birthday  день рождения
    * @return студент
    */
-  public static Student of(StudentId studentId, String name, Snils snils, Passport passport,
+  public static Student of(StudentId studentId, FullName name, Snils snils, Passport passport,
                            LocalDate birthday) {
     return new Student(studentId, name, snils, passport, birthday);
   }
@@ -115,4 +116,6 @@ public class Student {
     registerEvent(new StudentChangedInfoEvent(this));
     log.info("Паспорт успешно добавлен");
   }
+
+
 }
