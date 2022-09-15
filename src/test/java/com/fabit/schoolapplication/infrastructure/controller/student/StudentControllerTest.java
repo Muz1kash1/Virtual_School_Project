@@ -111,7 +111,7 @@ class StudentControllerTest {
   }
 
   @Test
-  @DisplayName("Добавление паспорта студенту старше 14 лет, должен выбросить ошибку")
+  @DisplayName("Добавление паспорта студенту 10 лет, должен выбросить ошибку")
   void addPassportStudent10Years() {
     String json = """
         {
