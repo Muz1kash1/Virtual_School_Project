@@ -1,5 +1,11 @@
 package com.fabit.schoolapplication.infrastructure.listener;
 
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.student.StudentId;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentInClassRepository;
+import com.fabit.schoolapplication.infrastructure.usecase.schoolclass.GetSchoolClassByStudentIdIn;
+import com.fabit.schoolapplication.infrastructure.usecase.schoolclass.RemoveStudentFromSchoolClass;
 import com.fabit.schoolapplication.infrastructure.usecase.student.event.StudentDeletedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +18,19 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @RequiredArgsConstructor
 public class StudentDeletedEventListener {
 
+  private final RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+  private final GetSchoolClassByStudentIdIn getSchoolClassByStudentIdIn;
+
   @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
   public void handleStudentDeletedEvent(StudentDeletedEvent event) {
     log.info("Студент под номером " + event.getStudentId() + " был отчислен из школы");
-    // TO DO Саня допиши удаление его из списка класса
+
+    StudentId studentId = StudentId.of(event.getStudentId());
+    SchoolClassEntity schoolClassEntity = getSchoolClassByStudentIdIn.execute(studentId);
+
+    removeStudentFromSchoolClass.execute(SchoolClassId.of(schoolClassEntity.getId()), studentId);
+
+    log.info("Студент под номером " + event.getStudentId()
+        + " автоматически отчислен из класса" + schoolClassEntity);
   }
 }
