@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain.student.value_object;
+package com.fabit.schoolapplication.domain.schedule.value_object;
 
 import com.fabit.schoolapplication.domain.schedule.enums.DayOfWeek;
 import com.fabit.schoolapplication.domain.schedule.enums.TrainingShift;

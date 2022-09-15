@@ -62,5 +62,4 @@ public class RemoveStudentFromSchoolClassTest {
 
     Assertions.assertEquals(0, studentInClassRepository.findAll().size());
   }
-
 }
