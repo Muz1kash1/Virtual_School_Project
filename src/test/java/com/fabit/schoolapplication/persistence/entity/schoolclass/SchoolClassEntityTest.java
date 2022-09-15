@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure;
+package com.fabit.schoolapplication.persistence.entity.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
@@ -16,20 +16,10 @@ public class SchoolClassEntityTest {
     SchoolClass schoolClass
         = SchoolClass.of(SchoolClassId.of(125), SchoolClassName.of(10, "Б"));
     SchoolClassEntity schoolClassEntity
-        = SchoolClassEntity.of(schoolClass, schoolClass.getSchoolClassId().getValue());
+        = SchoolClassEntity.of(schoolClass);
 
-    Assertions.assertEquals(125L, schoolClassEntity.getId());
     Assertions.assertEquals(10, schoolClassEntity.getParallel());
     Assertions.assertEquals("Б", schoolClassEntity.getLitera());
-  }
-
-  @Test
-  @DisplayName("Создание SchoolClassEntity с отрицательным ID должно выбрасывать exception")
-  void negativeIdTest() {
-    Assertions.assertThrows(IllegalArgumentException.class, () -> SchoolClassEntity.of(
-        SchoolClass.of(SchoolClassId.of(15), SchoolClassName.of(11, "А")),
-        -15L),
-        "Id должен быть больше 0");
   }
 
 }

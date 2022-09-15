@@ -4,6 +4,7 @@ import com.fabit.schoolapplication.domain.student.Student;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class StudentEntity {
   private Long id;
   private String name;
   private String snils;
+  @Column(name = "birth_certificate")
   private String birthCertificate;
   private String passport;
   private LocalDate birthday;
