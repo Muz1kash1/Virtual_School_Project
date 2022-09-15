@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain.schedule.value_object;
+package com.fabit.schoolapplication.domain.student.value_object;
 
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
