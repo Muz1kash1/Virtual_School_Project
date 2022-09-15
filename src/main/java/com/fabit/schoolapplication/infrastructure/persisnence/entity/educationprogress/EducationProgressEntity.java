@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,5 +26,5 @@ public class EducationProgressEntity {
   private LocalDateTime whenCreated;
 
   @OneToMany(mappedBy = "educationProgress")
-  private List<MarkEntity> marks;
+  private List<MarkEntity> marks = new ArrayList<>(2);
 }
