@@ -30,16 +30,13 @@ public class LessonEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @NotNull
   @Column(name = "id")
   private Long id;
 
   @ManyToOne
-  @NotNull
   private TeacherEntity teacher;
 
   @Column(name = "discipline")
-  @NotNull
   private Discipline discipline;
   @Column(name = "homework_task")
   private String homeworkTask;

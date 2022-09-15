@@ -1,5 +1,5 @@
 CREATE TABLE lesson
-(id BIGINT  ,
+(id BIGSERIAL  ,
  teacher_id BIGINT,
  discipline VARCHAR(255),
  homework_task VARCHAR(255),
@@ -10,7 +10,7 @@ CREATE TABLE lesson
 
 CREATE TABLE homework_completion_result
 (
-    id BIGINT,
+    id BIGSERIAL,
     teacher_id BIGINT,
     student_id BIGINT,
     lesson_id BIGINT,

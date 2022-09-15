@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -35,15 +36,15 @@ public class HomeworkCompletionResultEntity {
   private Long id;
 
   @ManyToOne
-  @NotNull
+  @JoinColumn(name = "teacher_id")
   private TeacherEntity teacher;
 
   @ManyToOne
-  @NotNull
+  @JoinColumn(name = "student_id")
   private StudentEntity student;
 
   @ManyToOne
-  @NotNull
+  @JoinColumn(name = "lesson_id")
   private LessonEntity lesson;
 
   @Column(name = "task_completion_result")
