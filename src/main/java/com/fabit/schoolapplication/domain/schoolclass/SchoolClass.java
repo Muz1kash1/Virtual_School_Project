@@ -6,9 +6,7 @@ import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassEvent;
 import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassRemovedStudentEvent;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -18,7 +16,7 @@ public class SchoolClass {
 
   private final SchoolClassId schoolClassId;
   private final SchoolClassName schoolClassName;
-  private final Set<StudentId> students;
+  private final List<StudentId> students;
 
   // -------
   // ** Ивенты
@@ -32,7 +30,7 @@ public class SchoolClass {
   // -------
   // ** Приватные конструкторы
 
-  private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName, Set<StudentId> students) {
+  private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName, List<StudentId> students) {
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = students;
@@ -42,7 +40,7 @@ public class SchoolClass {
   private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName) {
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
-    this.students = new HashSet<>();
+    this.students = new ArrayList<>();
     registerEvent(new SchoolClassCreatedEvent(this));
   }
 
@@ -69,13 +67,23 @@ public class SchoolClass {
    * @return SchoolClass
    */
   public static SchoolClass of(
-      SchoolClassId id, SchoolClassName schoolClassName, Set<StudentId> students) {
+      SchoolClassId id, SchoolClassName schoolClassName, List<StudentId> students) {
 
     return new SchoolClass(id, schoolClassName, students);
   }
 
   // -------
   // ** Добавление и удаление учеников в класс
+
+  /**
+   * Роспуск школьного класса и отчисление из него всех учеников. Отчисление происходит через
+   * внутренние методы для корректного выброса ивентов
+   */
+  public void disband() {
+    for (StudentId student : students) {
+      removeStudent(student);
+    }
+  }
 
   /**
    * Добавление ученика в класс

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SchoolClassRepository extends JpaRepository<SchoolClassEntity, Long> {
+  SchoolClassEntity findByParallelAndLitera(int parallel, String litera);
 }
