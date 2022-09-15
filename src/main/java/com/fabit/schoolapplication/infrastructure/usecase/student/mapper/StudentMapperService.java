@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 public class StudentMapperService {
   public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
-    studentEntity.setName(student.getName().getName() + " " + student.getName().getSurname() + " " +
-        student.getName().getPatronymic());
+    studentEntity.setName(student.getFullName().getName() + " " + student.getFullName().getSurname() + " " +
+        student.getFullName().getPatronymic());
     studentEntity.setBirthday(student.getBirthday());
     studentEntity.setSnils(student.getSnils().getNumberView());
     if (student.getPassport() != null) {

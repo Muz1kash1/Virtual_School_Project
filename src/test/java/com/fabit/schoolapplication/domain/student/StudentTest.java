@@ -18,7 +18,7 @@ class StudentTest {
     Student student = Student.of(StudentId.of(1), FullName.of("Петя", "Губкин", "Васильевич"),
         Snils.of("123-343-2231-32"), BirthCertificate.of("МК", "55555"), LocalDate.of(2010, 9, 15));
     assertEquals(1l, student.getStudentId().getValue());
-    assertEquals("Васильевич", student.getName().getPatronymic());
+    assertEquals("Васильевич", student.getFullName().getPatronymic());
     assertEquals("123-343-2231-32", student.getSnils().getNumberView());
   }
 
@@ -28,7 +28,7 @@ class StudentTest {
     Student student = Student.of(StudentId.of(1), FullName.of("Петя", "Губкин", "Васильевич"),
         Snils.of("123-343-2231-32"), Passport.of("МК", "88888"), LocalDate.of(2007, 9, 15));
     assertEquals(1l, student.getStudentId().getValue());
-    assertEquals("Васильевич", student.getName().getPatronymic());
+    assertEquals("Васильевич", student.getFullName().getPatronymic());
     assertEquals("123-343-2231-32", student.getSnils().getNumberView());
   }
 

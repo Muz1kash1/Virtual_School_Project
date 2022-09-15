@@ -19,7 +19,7 @@ import org.springframework.util.Assert;
 @NoArgsConstructor
 public class Student {
   private StudentId studentId;
-  private FullName name;
+  private FullName fullName;
   private Snils snils;
   private BirthCertificate birthCertificate;
   private Passport passport;
@@ -34,7 +34,7 @@ public class Student {
   private Student(StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate,
                   LocalDate birthday) {
     this.studentId = studentId;
-    this.name = name;
+    this.fullName = name;
     this.snils = snils;
     this.birthCertificate = birthCertificate;
     this.birthday = birthday;
@@ -44,7 +44,7 @@ public class Student {
   private Student(StudentId studentId, FullName name, Snils snils, Passport passport,
                   LocalDate birthday) {
     this.studentId = studentId;
-    this.name = name;
+    this.fullName = name;
     this.snils = snils;
     if (passport.isValidAge(birthday)) {
       this.passport = passport;
@@ -116,6 +116,4 @@ public class Student {
     registerEvent(new StudentChangedInfoEvent(this));
     log.info("Паспорт успешно добавлен");
   }
-
-
 }

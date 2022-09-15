@@ -74,6 +74,6 @@ public class EditStudent {
   @EventListener
   public void StudentChangedInfoEvent(StudentChangedInfoEvent event) {
     log.info("StudentChangedInfoEvent...");
-    log.info("Студент с именем " + event.getStudent().getName() + " был успешно изменен");
+    log.info("Студент с именем " + event.getStudent().getFullName() + " был успешно изменен");
   }
 }

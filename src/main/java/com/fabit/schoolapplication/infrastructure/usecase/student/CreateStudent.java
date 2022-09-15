@@ -39,6 +39,6 @@ public class CreateStudent {
   @EventListener
   public void studentCreatedEvent(StudentCreatedEvent event) {
     log.info("StudentCreatedEvent...");
-    log.info("Студент с именем " + event.getStudent().getName().getName() + " был успешно создан");
+    log.info("Студент с именем " + event.getStudent().getFullName().getName() + " был успешно создан");
   }
 }
