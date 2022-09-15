@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
+  StudentEntity findBySnils(String Snils);
+
+  void deleteBySnils(String s);
 }

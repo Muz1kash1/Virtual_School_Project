@@ -1,0 +1,249 @@
+openapi: 3.0.1
+info:
+  title: Сервис студента
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: приложение для создания и редактирования личных данных студента
+paths:
+  /student/changeSnils:
+    put:
+      tags:
+        - student
+      operationId: changeSnilsStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /student/changeBirthCertificate:
+    put:
+      tags:
+        - student
+      operationId: changeBirthCertificateStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /student/addPassport:
+    put:
+      tags:
+        - student
+      operationId: addPassportStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /student/addStudent:
+    post:
+      tags:
+        - student
+      operationId: addStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /student/delete/{id}:
+    delete:
+      tags:
+        - student-controller
+      operationId: deleteStudent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    BadRequest:
+      description: Неверные входные данные
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    InternalServerError:
+      description: Ошибка сервера.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    NotFound:
+      description: Заказ не найден
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Conflict:
+      description: Ошибка изменения состояния.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    BirthCertificateDto:
+      type: object
+      properties:
+        serial:
+          type: string
+          example: 1234
+        number:
+          type: string
+          example: 567890
+    PassportDto:
+      type: object
+      properties:
+        serial:
+          type: string
+          example: 1234
+        number:
+          type: string
+          example: 567890
+    SnilsDto:
+      type: object
+      properties:
+        numberView:
+          type: string
+          example: 1234567890
+    StudentDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Ivan
+        snils:
+          $ref: '#/components/schemas/SnilsDto'
+        birthCertificate:
+          $ref: '#/components/schemas/BirthCertificateDto'
+        passport:
+          $ref: '#/components/schemas/PassportDto'
+        birthday:
+          type: string
+          format: date
+    StudentEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Ivan
+        snils:
+          type: string
+          example: 1234567890
+        birthCertificate:
+          type: string
+        passport:
+          type: string
+          example: 1234
+        birthday:
+          type: string
+          format: date
+          example: 567890
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: |
+            A relative URI reference that uniquely identifies the problem type.
+          default: 'about:blank'
+          example: '/problem/internal-server-error'
+        title:
+          type: string
+          description: |
+            title of the problem
+          example: Internal server error
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status of the problem.
+          minimum: 100
+          maximum: 599
+          example: 404
+        detail:
+          type: string
+          description: |
+            Detail of the problem
+          example: Save data error
