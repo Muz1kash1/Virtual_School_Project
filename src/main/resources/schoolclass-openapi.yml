@@ -1,0 +1,181 @@
+openapi: 3.0.1
+info:
+  title: OpenApi для агрегата SchoolClass
+  version: v1.r1
+servers:
+  - url: http://localhost:8080
+    description: Сервер приложения Virtual-School
+paths:
+  /school-class:
+    get:
+      description: Получение списка всех школьных классов
+      summary: Получение списка всех школьных классов
+      tags:
+        - SchoolClassController
+      operationId: getAllSchoolClasses
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SchoolClassEntity'
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SchoolClassEntity'
+    post:
+      description: Создание нового класса
+      summary: Создание нового школьного класса
+      tags:
+        - SchoolClassController
+      operationId: createSchoolClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchoolClassDTO'
+        required: true
+      responses:
+        "201":
+          description: CREATED
+    delete:
+      description: Удаление существующего класса
+      summary: Удаление существующего школьного класса
+      tags:
+        - SchoolClassController
+      operationId: deleteSchoolClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmptySchoolClassDTO'
+      responses:
+        "200":
+          description: OK
+  /school-class/{id}:
+    get:
+      description: Получить школьный класс по идентификатору
+      summary: Получение класса по идентификатору
+      tags:
+        - SchoolClassController
+      operationId: getSchoolClassById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolClassEntity'
+    post:
+      description: Добавление ученика в школьный класс
+      summary: Добавление ученика в школьный класс
+      tags:
+        - SchoolClassController
+      operationId: addStudentToClass
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: studentId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: object
+    delete:
+      description: Удаление ученика из школьного класса
+      summary: Удаление ученика из школьного класса
+      tags:
+        - SchoolClassController
+      operationId: removeStudentFromClass
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Id'
+        - name: studentId
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/StudentId'
+      responses:
+        "200":
+          description: OK
+######################
+components:
+  schemas:
+    SchoolClassDTO:
+      type: object
+      description: ДТО школьного класса
+      properties:
+        schoolClassId:
+          $ref: '#/components/schemas/Id'
+        parallel:
+          $ref: '#/components/schemas/Parallel'
+        litera:
+          $ref: '#/components/schemas/Litera'
+        studentIds:
+          description: Список объектов идентификаторов студента
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentId'
+    EmptySchoolClassDTO:
+      type: object
+      description: ДТО школьного класса без учеников
+      properties:
+        schoolClassId:
+          $ref: '#/components/schemas/Id'
+        parallel:
+          $ref: '#/components/schemas/Parallel'
+        litera:
+          $ref: '#/components/schemas/Litera'
+    SchoolClassEntity:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+        parallel:
+          $ref: '#/components/schemas/Parallel'
+        litera:
+          $ref: '#/components/schemas/Litera'
+    StudentId:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+          example: 7
+    Id:
+      description: Идентификатор школьного класса
+      type: integer
+      format: int64
+      example: 15
+    Parallel:
+      description: Параллель (1-11)
+      type: integer
+      format: int32
+      example: 10
+    Litera:
+      description: Литера класса (А-Я за исключением "Ъ" и "Ь")
+      type: string
+      example: "Б"

@@ -99,28 +99,28 @@ public class SchoolClassController {
   /**
    * Добавление ученика в школьный класс.
    *
-   * @param schoolClassId - идентификатор школьного класса
+   * @param id - идентификатор школьного класса
    * @param studentId     - идентификатор ученика
    * @return ResponseEntity
    */
-  @PostMapping(value = "/school-class/{schoolClassId}")
+  @PostMapping(value = "/school-class/{id}")
   public ResponseEntity<?> addStudentToClass(
-      @PathVariable Long schoolClassId, @RequestParam Long studentId) {
-    addStudentToSchoolClass.execute(SchoolClassId.of(schoolClassId), StudentId.of(studentId));
+      @PathVariable Long id, @RequestParam Long studentId) {
+    addStudentToSchoolClass.execute(SchoolClassId.of(id), StudentId.of(studentId));
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
   /**
    * Удаление ученика из указанного класса.
    *
-   * @param schoolClassId - идентификатор школьного класса
+   * @param id - идентификатор школьного класса
    * @param studentId     - идентификатор ученика
    * @return ResponseEntity
    */
-  @DeleteMapping("/school-class/{schoolClassId}")
+  @DeleteMapping("/school-class/{id}")
   public ResponseEntity<?> removeStudentFromClass(
-      @PathVariable Long schoolClassId, @RequestParam Long studentId) {
-    removeStudentFromSchoolClass.execute(SchoolClassId.of(schoolClassId), StudentId.of(studentId));
+      @PathVariable Long id, @RequestParam Long studentId) {
+    removeStudentFromSchoolClass.execute(SchoolClassId.of(id), StudentId.of(studentId));
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
