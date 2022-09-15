@@ -1,0 +1,14 @@
+package com.fabit.schoolapplication.infrastructure.usecase.student.event;
+
+import lombok.Getter;
+import org.springframework.context.ApplicationEvent;
+
+@Getter
+public class StudentDeletedEvent extends ApplicationEvent {
+  private Long studentId;
+
+  public StudentDeletedEvent(Object source, Long studentId) {
+    super(source);
+    this.studentId = studentId;
+  }
+}

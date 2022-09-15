@@ -3,6 +3,7 @@ package com.fabit.schoolapplication.domain.schedule.value_object;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.student.value_object.LessonForSchedule;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

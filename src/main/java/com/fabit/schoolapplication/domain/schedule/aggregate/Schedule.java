@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.domain.schedule.aggregate;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.domain.schedule.value_object.SchoolDay;
+import com.fabit.schoolapplication.domain.student.value_object.SchoolDay;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

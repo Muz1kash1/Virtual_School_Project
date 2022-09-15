@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
+import com.fabit.schoolapplication.infrastructure.controller.student.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
@@ -70,10 +71,9 @@ public class StudentController {
    * @return response entity
    */
   @PutMapping("/addPassport")
-  public ResponseEntity<String> addPassportStudent(@RequestBody StudentDto student) {
+  public ResponseEntity<StudentEntity> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());
-    editStudent.addPassport(student);
-    return ResponseEntity.ok().body("Паспорт добвлен");
+    return ResponseEntity.ok().body(editStudent.addPassport(student));
   }
 
   @DeleteMapping("/delete/{id}")
