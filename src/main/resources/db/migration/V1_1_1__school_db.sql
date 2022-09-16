@@ -2,7 +2,7 @@ CREATE TABLE student
 (
     id                BIGSERIAL NOT NULL ,
     birth_certificate VARCHAR(32),
-    birthday          DATE,
+    birthday          VARCHAR(32),
     name              VARCHAR(255),
     passport          VARCHAR(32),
     snils             VARCHAR(32),

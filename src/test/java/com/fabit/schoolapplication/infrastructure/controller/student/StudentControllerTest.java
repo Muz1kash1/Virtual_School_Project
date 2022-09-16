@@ -33,7 +33,7 @@ class StudentControllerTest {
   private StudentRepository studentRepository;
 
   @BeforeEach
-  @DisplayName("Добавлени студента перед каждым тестом и проверка на правильность данных")
+  @DisplayName("Добавление студента перед каждым тестом и проверка на правильность данных")
   public void addStudent() throws Exception {
     String json = """
         {
@@ -41,16 +41,16 @@ class StudentControllerTest {
         "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":" 1234567"},
-        "birthday":"2022-09-12"
-        }
+        "birthday":"15.09.2007"
+         }
         """;
-    mockMvc.perform(post("/student/addStudent").contentType(MediaType.APPLICATION_JSON)
+    mockMvc.perform(post("/student").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
         .andExpect(jsonPath("$.snils", is("777777")))
         .andExpect(jsonPath("$.birthCertificate", is("99998 111")))
-        .andExpect(jsonPath("$.birthday", is("2022-09-12")));
+        .andExpect(jsonPath("$.birthday", is("15.09.2007")));
   }
 
   @AfterEach
@@ -67,7 +67,7 @@ class StudentControllerTest {
         "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"111", "number":"111111"},
         "passport":{"serial":"222", "number":" 1234567"},
-        "birthday":"2022-09-12"
+        "birthday":"15.09.2007"
         }
         """;
     mockMvc.perform(put("/student/changeBirthCertificate").contentType(MediaType.APPLICATION_JSON)
@@ -76,7 +76,7 @@ class StudentControllerTest {
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
         .andExpect(jsonPath("$.snils", is("777777")))
         .andExpect(jsonPath("$.birthCertificate", is("111 111111")))
-        .andExpect(jsonPath("$.birthday", is("2022-09-12")));
+        .andExpect(jsonPath("$.birthday", is("15.09.2007")));
   }
 
   @Test
@@ -88,7 +88,7 @@ class StudentControllerTest {
         "snils":{"numberView":"333333"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":" 1234567"},
-        "birthday":"2022-09-12"
+        "birthday":"15.09.2007"
         }
         """;
     mockMvc.perform(put("/student/changeSnils").contentType(MediaType.APPLICATION_JSON)
@@ -107,7 +107,7 @@ class StudentControllerTest {
         "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":"1234567"},
-        "birthday":"2007-09-12"
+        "birthday":"15.09.2007"
         }
         """;
     mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
@@ -127,7 +127,7 @@ class StudentControllerTest {
         "snils":{"numberView":"777777"},
         "birthCertificate":{"serial":"99998", "number":"111"},
         "passport":{"serial":"222", "number":"1234567"},
-        "birthday":"2012-09-12"
+        "birthday":"15.09.2010"
         }
         """;
     assertThrows(NestedServletException.class, () -> mockMvc.perform(
@@ -135,13 +135,12 @@ class StudentControllerTest {
             .accept(MediaType.APPLICATION_JSON).content(json)));
   }
 
-
   @Test
   @DisplayName("Удаление студента, должен удалить единственную запись в бд")
   void deleteStudent() throws Exception {
     List<StudentEntity> studentEntity = studentRepository.findAll();
     Assertions.assertEquals(1, studentEntity.size());
-    mockMvc.perform(delete("/student/delete/{id}", studentEntity.get(0).getId())
+    mockMvc.perform(delete("/student/{id}", studentEntity.get(0).getId())
             .contentType(MediaType.APPLICATION_PROBLEM_JSON).accept(MediaType.APPLICATION_PROBLEM_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", is("Ученик исключен из школы")));

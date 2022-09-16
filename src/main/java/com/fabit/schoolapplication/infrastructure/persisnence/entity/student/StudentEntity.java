@@ -28,7 +28,7 @@ public class StudentEntity {
   @Column(name = "birth_certificate")
   private String birthCertificate;
   private String passport;
-  private LocalDate birthday;
+  private String birthday;
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
