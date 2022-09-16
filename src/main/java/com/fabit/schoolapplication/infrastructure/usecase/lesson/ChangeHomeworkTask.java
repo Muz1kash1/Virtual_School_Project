@@ -16,6 +16,11 @@ public class ChangeHomeworkTask {
   private final LessonRepository lessonRepository;
   private final LessonMapperService lessonMapperService;
 
+  /**
+   * метод меняющий домашнее задание
+   * @param lessonId айди урока где оно меняется
+   * @param task новое дзд
+   */
   @Transactional
   public void execute(LessonId lessonId, String task) {
     Lesson lesson = lessonMapperService.mapEntityToLesson(

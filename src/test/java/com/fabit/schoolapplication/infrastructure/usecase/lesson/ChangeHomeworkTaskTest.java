@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class ChangeHomeworkTaskTest {
+
   @Autowired
   TeacherRepository teacherRepository;
 
@@ -35,20 +36,20 @@ public class ChangeHomeworkTaskTest {
     lessonRepository.deleteAll();
     teacherRepository.deleteAll();
   }
+
   @Test
   @DisplayName("Задание задания работает корректно")
-  void changeHomeworkTaskTest(){
+  void changeHomeworkTaskTest() {
     TeacherEntity teacher = new TeacherEntity();
-    teacher.setId(1l);
+    teacher.setId(1L);
     teacher.setFullName("test");
     teacherRepository.save(teacher);
     createLesson.execute(TeacherId.of(teacherRepository.findAll().get(0).getId()),
         Discipline.COMPUTING);
 
-
-
-    changeHomeworkTask.execute(LessonId.of(lessonRepository.findAll().get(0).getId()),"test homework");
-    Assertions.assertEquals("test homework",lessonRepository.findAll().get(0).getHomeworkTask());
+    changeHomeworkTask.execute(LessonId.of(lessonRepository.findAll().get(0).getId()),
+        "test homework");
+    Assertions.assertEquals("test homework", lessonRepository.findAll().get(0).getHomeworkTask());
 
   }
 }

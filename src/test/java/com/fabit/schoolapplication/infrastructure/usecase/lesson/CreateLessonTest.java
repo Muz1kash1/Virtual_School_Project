@@ -49,7 +49,7 @@ public class CreateLessonTest {
   @Test
   void createLessonTest() {
     TeacherEntity teacher = new TeacherEntity();
-    teacher.setId(1l);
+    teacher.setId(1L);
     teacher.setFullName("test");
     teacherRepository.save(teacher);
     createLesson.execute(TeacherId.of(teacherRepository.findAll().get(0).getId()),
@@ -57,8 +57,9 @@ public class CreateLessonTest {
 
     Assertions.assertEquals(1, lessonRepository.findAll().size());
     Assertions.assertNotNull(lessonRepository.findAll().get(0));
-    Assertions.assertEquals(lessonRepository.findAll().get(0).getDiscipline(),Discipline.COMPUTING);
-    Assertions.assertEquals("test",lessonRepository.findAll().get(0).getTeacher().getFullName());
+    Assertions.assertEquals(lessonRepository.findAll().get(0).getDiscipline(),
+        Discipline.COMPUTING);
+    Assertions.assertEquals("test", lessonRepository.findAll().get(0).getTeacher().getFullName());
 
 
   }

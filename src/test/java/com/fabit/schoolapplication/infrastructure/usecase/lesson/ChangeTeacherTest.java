@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class ChangeTeacherTest {
+
   @Autowired
   TeacherRepository teacherRepository;
 
@@ -37,23 +38,26 @@ public class ChangeTeacherTest {
     lessonRepository.deleteAll();
     teacherRepository.deleteAll();
   }
+
   @Test
   @DisplayName("Замена учителя работает корректно")
-  void changeTeacherTest(){
+  void changeTeacherTest() {
     TeacherEntity teacher = new TeacherEntity();
-    teacher.setId(1l);
+    teacher.setId(1L);
     teacher.setFullName("test");
     teacherRepository.save(teacher);
     createLesson.execute(TeacherId.of(teacherRepository.findAll().get(0).getId()),
         Discipline.COMPUTING);
 
     TeacherEntity teacher1 = new TeacherEntity();
-    teacher.setId(2l);
+    teacher.setId(2L);
     teacher.setFullName("not test");
     teacherRepository.save(teacher1);
 
-    changeTeacher.execute(LessonId.of(lessonRepository.findAll().get(0).getId()),TeacherId.of(teacherRepository.findAll().get(1).getId()));
-    Assertions.assertEquals(lessonRepository.findAll().get(0).getTeacher().getId(),teacherRepository.findAll().get(1).getId());
+    changeTeacher.execute(LessonId.of(lessonRepository.findAll().get(0).getId()),
+        TeacherId.of(teacherRepository.findAll().get(1).getId()));
+    Assertions.assertEquals(lessonRepository.findAll().get(0).getTeacher().getId(),
+        teacherRepository.findAll().get(1).getId());
 
   }
 

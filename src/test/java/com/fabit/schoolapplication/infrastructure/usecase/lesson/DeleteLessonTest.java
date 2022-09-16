@@ -41,7 +41,7 @@ public class DeleteLessonTest {
   @DisplayName("Удаление урока работает корректно")
   void deleteLessonTest() {
     TeacherEntity teacher = new TeacherEntity();
-    teacher.setId(1l);
+    teacher.setId(1L);
     teacher.setFullName("test");
     teacherRepository.save(teacher);
     createLesson.execute(TeacherId.of(teacherRepository.findAll().get(0).getId()),
