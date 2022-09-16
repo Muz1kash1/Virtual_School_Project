@@ -5,6 +5,7 @@ import com.fabit.schoolapplication.domain.lesson.Lesson;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LessonRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.lesson.mapper.LessonMapperService;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class CreateLesson {
    * @param teacherId айди учителя
    * @param discipline дисциплина урока
    */
+  @Transactional
   public void execute(TeacherId teacherId, Discipline discipline){
     Lesson lesson = Lesson.of(teacherId,discipline);
     lessonRepository.save(lessonMapperService.mapLessonToEntity(lesson));

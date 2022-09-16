@@ -2,6 +2,7 @@ package com.fabit.schoolapplication.infrastructure.usecase.lesson;
 
 import com.fabit.schoolapplication.domain.lesson.LessonId;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LessonRepository;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 @RequiredArgsConstructor

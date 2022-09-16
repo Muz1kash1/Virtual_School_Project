@@ -4,14 +4,17 @@ import com.fabit.schoolapplication.domain.lesson.Lesson;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.LessonEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class LessonMapperService {
 
-  TeacherRepository teacherRepository;
+  private final TeacherRepository teacherRepository;
+
+  public LessonMapperService(TeacherRepository teacherRepository) {
+    this.teacherRepository = teacherRepository;
+  }
 
 
   public LessonEntity mapLessonToEntity(Lesson lesson) {
