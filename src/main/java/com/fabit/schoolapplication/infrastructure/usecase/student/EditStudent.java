@@ -3,14 +3,14 @@ package com.fabit.schoolapplication.infrastructure.usecase.student;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
-import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,7 +30,8 @@ public class EditStudent {
    */
   public StudentEntity addPassport(StudentDto studentDto) {
     Passport passport = studentMapperService.mapToPassport(studentDto.getPassport());
-    if (passport.isValidAge(studentDto.getBirthday())) {
+    if (passport.isValidAge(
+        LocalDate.parse(studentDto.getBirthday(), DateTimeFormatter.ofPattern("dd.MM.yyyy")))) {
       StudentEntity studentEntity =
           studentRepository.findBySnils(studentDto.getSnils().getNumberView());
       studentEntity.setPassport(passport.toString());
@@ -68,12 +69,5 @@ public class EditStudent {
     studentEntity.setSnils(snils.getNumberView());
     studentRepository.save(studentEntity);
     return studentEntity;
-  }
-
-  // TO DO перенести в отдельный класс и добавить логику
-  @EventListener
-  public void StudentChangedInfoEvent(StudentChangedInfoEvent event) {
-    log.info("StudentChangedInfoEvent...");
-    log.info("Студент с именем " + event.getStudent().getFullName() + " был успешно изменен");
   }
 }

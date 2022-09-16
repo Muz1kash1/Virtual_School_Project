@@ -12,39 +12,41 @@ import com.fabit.schoolapplication.infrastructure.controller.student.dto.Passpor
 import com.fabit.schoolapplication.infrastructure.controller.student.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentMapperService {
   public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
-    studentEntity.setName(student.getFullName().getName() + " " + student.getFullName().getSurname() + " " +
-        student.getFullName().getPatronymic());
-    studentEntity.setBirthday(student.getBirthday());
+    studentEntity.setName(student.getFullName().toString());
+    studentEntity.setBirthday(mapToBirthdayDate(student.getBirthday()));
     studentEntity.setSnils(student.getSnils().getNumberView());
     if (student.getPassport() != null) {
-      studentEntity.setPassport(
-          student.getPassport().getNumber() + " " + student.getPassport().getSerial());
+      studentEntity.setPassport(student.getPassport().toString());
     }
-    studentEntity.setBirthCertificate(student.getBirthCertificate().getSerial() + " " +
-        student.getBirthCertificate().getNumber());
+    studentEntity.setBirthCertificate(student.getBirthCertificate().toString());
     return studentEntity;
   }
 
   public Student mapToStudent(StudentDto studentDto) {
-
-    Student student = Student.of(StudentId.of(1), mapFullName(studentDto.getName()),
+    Student student = Student.of(StudentId.of(1), mapToFullName(studentDto.getName()),
         mapToSnils(studentDto.getSnils()), mapToBirthCertificate(studentDto.getBirthCertificate()),
         studentDto.getBirthday());
 
     return student;
   }
 
+  public String mapToBirthdayDate(LocalDate date) {
+    return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+  }
+
   public Snils mapToSnils(SnilsDto value) {
     return Snils.of(value.getNumberView());
   }
 
-  public FullName mapFullName(FullNameDto value) {
+  public FullName mapToFullName(FullNameDto value) {
     return FullName.of(value.getName(), value.getSurname(), value.getPatronymic());
   }
 

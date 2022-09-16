@@ -1,18 +1,11 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
-import com.fabit.schoolapplication.infrastructure.controller.student.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import com.fabit.schoolapplication.infrastructure.usecase.student.CreateStudent;
-import com.fabit.schoolapplication.infrastructure.usecase.student.DeleteStudent;
 import com.fabit.schoolapplication.infrastructure.usecase.student.EditStudent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,22 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/student")
-public class StudentController {
-  final CreateStudent createStudent;
+public class EditStudentEndpoint {
   final EditStudent editStudent;
-  final DeleteStudent deleteStudent;
-
-  /**
-   * Добавить студента
-   *
-   * @param student студент
-   * @return response entity
-   */
-  @PostMapping("/addStudent")
-  public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentDto student) {
-    log.info("trying to create: " + student.toString());
-    return ResponseEntity.status(HttpStatus.CREATED).body(createStudent.execute(student));
-  }
 
   /**
    * Изменить свидетельство о рождении
@@ -74,12 +53,5 @@ public class StudentController {
   public ResponseEntity<StudentEntity> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add Passport: " + student.getPassport());
     return ResponseEntity.ok().body(editStudent.addPassport(student));
-  }
-
-  @DeleteMapping("/delete/{id}")
-  public ResponseEntity<String> deleteStudent(@PathVariable long id) {
-    log.info("trying to delete student with id: " + id);
-    deleteStudent.execute(id);
-    return ResponseEntity.ok().body("Ученик исключен из школы");
   }
 }

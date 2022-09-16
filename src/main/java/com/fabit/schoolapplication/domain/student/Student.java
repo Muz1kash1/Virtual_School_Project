@@ -5,8 +5,9 @@ import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
-import com.fabit.schoolapplication.domain.student.event.StudentEvent;
+import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -24,29 +25,30 @@ public class Student {
   private BirthCertificate birthCertificate;
   private Passport passport;
   private LocalDate birthday;
-  public static final List<StudentEvent> domainEvents = new ArrayList<>();
+  public static final List<StudentDomainEvent> domainEvents = new ArrayList<>();
 
-  protected void registerEvent(StudentEvent event) {
+  protected void registerEvent(StudentDomainEvent event) {
     Assert.notNull(event, "Domain event must not be null");
     this.domainEvents.add(event);
   }
 
-  private Student(StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate,
-                  LocalDate birthday) {
+  private Student(StudentId studentId, FullName name, Snils snils,
+                  BirthCertificate birthCertificate, String birthday) {
     this.studentId = studentId;
     this.fullName = name;
     this.snils = snils;
     this.birthCertificate = birthCertificate;
-    this.birthday = birthday;
+    this.birthday = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     registerEvent(new StudentCreatedEvent(this));
   }
 
   private Student(StudentId studentId, FullName name, Snils snils, Passport passport,
-                  LocalDate birthday) {
+                  String birthday) {
     this.studentId = studentId;
     this.fullName = name;
     this.snils = snils;
-    if (passport.isValidAge(birthday)) {
+    this.birthday = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    if (passport.isValidAge(this.birthday)) {
       this.passport = passport;
       registerEvent(new StudentCreatedEvent(this));
     } else {
@@ -65,7 +67,7 @@ public class Student {
    * @return the student
    */
   public static Student of(StudentId studentId, FullName name, Snils snils,
-                           BirthCertificate birthCertificate, LocalDate birthday) {
+                           BirthCertificate birthCertificate, String birthday) {
     return new Student(studentId, name, snils, birthCertificate, birthday);
   }
 
@@ -80,7 +82,7 @@ public class Student {
    * @return студент
    */
   public static Student of(StudentId studentId, FullName name, Snils snils, Passport passport,
-                           LocalDate birthday) {
+                           String birthday) {
     return new Student(studentId, name, snils, passport, birthday);
   }
 
