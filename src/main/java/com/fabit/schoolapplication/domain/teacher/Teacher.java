@@ -36,8 +36,6 @@ public class Teacher {
   /** статус учителя (можно ли его поставить на занятия или нет) */
   private boolean isActive;
 
-  //  private boolean isDeleted;
-
   private Teacher() {}
 
   private Teacher(
@@ -54,7 +52,6 @@ public class Teacher {
     this.snils = snils;
     this.isActive = isActive;
     registerEvent(new TeacherCreatedEvent(this.getTeacherId()));
-    //    log.info("Учитель с id: " + teacherId.getValue() + " создан");
   }
 
   /**
@@ -90,13 +87,6 @@ public class Teacher {
       domainEvents.clear();
       this.isActive = false;
       registerEvent(new TeacherDeactivatedEvent(from, to, teacherId));
-      //      log.info(
-      //          "Учитель с id: "
-      //              + teacherId.getValue()
-      //              + " отсутствует с "
-      //              + from.toString()
-      //              + " по "
-      //              + to.toString());
     } else {
       throw new IllegalStateException(
           " Ошибка изменения статуса учителя, проверьте текущий статус учителя,"
@@ -109,15 +99,10 @@ public class Teacher {
     if (!(this.isActive)) {
       this.isActive = true;
       domainEvents.clear();
-      //      log.info("Учитель с id: " + teacherId.getValue() + " снова активен");
       registerEvent(new TeacherActivatedEvent(this.teacherId));
     } else {
       throw new IllegalStateException(
           "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
     }
   }
-
-  //  public void delete() {
-  //    this.isDeleted = true;
-  //  }
 }
