@@ -20,4 +20,9 @@ public class FullName {
   public static FullName of(String name, String surname, String patronymic) {
     return new FullName(name, surname, patronymic);
   }
+
+  @Override
+  public String toString() {
+    return name + " " + surname + " " + patronymic;
+  }
 }

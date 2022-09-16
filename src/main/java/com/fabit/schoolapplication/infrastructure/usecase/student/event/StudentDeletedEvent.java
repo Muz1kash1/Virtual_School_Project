@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 public class StudentDeletedEvent extends ApplicationEvent {
-  private Long studentId;
+  private final Long studentId;
 
   public StudentDeletedEvent(Object source, Long studentId) {
     super(source);

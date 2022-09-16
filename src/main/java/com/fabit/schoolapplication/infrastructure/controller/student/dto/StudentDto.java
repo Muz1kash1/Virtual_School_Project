@@ -13,5 +13,5 @@ public class StudentDto implements Serializable {
   private SnilsDto snils;
   private BirthCertificateDto birthCertificate;
   private PassportDto passport;
-  private LocalDate birthday;
+  private String birthday;
 }
