@@ -35,7 +35,7 @@ public class TeacherController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createTeacher.execute(teacherDto));
   }
 
-  @PutMapping("standing-years/")
+  @PutMapping("/standing-years")
   public ResponseEntity<TeacherEntity> changeStandingYears(@RequestBody StandingYearsDto standingYearsDto) {
     return ResponseEntity.status(HttpStatus.ACCEPTED)
         .body(editTeacher.changeStandingYears(standingYearsDto));
@@ -51,7 +51,7 @@ public class TeacherController {
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(editTeacher.deactivate(deactivateDto));
   }
 
-  @GetMapping("{teacherId}")
+  @GetMapping("/{teacherId}")
   public ResponseEntity<TeacherEntity> getTeacher(@PathVariable long teacherId) {
     return ResponseEntity.ok().body(getTeacher.byId(teacherId));
   }
@@ -61,7 +61,7 @@ public class TeacherController {
     return ResponseEntity.ok().body(getTeacher.all());
   }
 
-  @DeleteMapping("{teacherId}")
+  @DeleteMapping("/{teacherId}")
   public ResponseEntity<?> deleteTeacher(@PathVariable long teacherId) {
     deleteTeacher.execute(teacherId);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
