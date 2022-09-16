@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.usecase.student;
 
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.student.event.StudentDeletedEvent;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
