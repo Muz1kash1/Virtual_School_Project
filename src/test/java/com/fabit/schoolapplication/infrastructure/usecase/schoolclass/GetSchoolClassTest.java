@@ -34,7 +34,7 @@ public class GetSchoolClassTest {
 
   @Test
   @DisplayName("Поиск школьных классов по пустой БД должен выбрасывать соответствующий exception")
-  void getSchoolClassAll() {
+  void getSchoolClassAllEmptyTest() {
     when(schoolClassRepository.findAll())
         .thenReturn(List.of());
     Assertions.assertThrows(
@@ -45,7 +45,7 @@ public class GetSchoolClassTest {
 
   @Test
   @DisplayName("Поиск школьных классов по несуществующему id должен выбрасывать exception")
-  void getSchoolClassById() {
+  void getSchoolClassByIdEmptyTest() {
     when(schoolClassRepository.findById(any()))
         .thenReturn(Optional.empty());
     Assertions.assertThrows(

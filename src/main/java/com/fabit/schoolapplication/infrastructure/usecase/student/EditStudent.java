@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.usecase.student;
 
+import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;

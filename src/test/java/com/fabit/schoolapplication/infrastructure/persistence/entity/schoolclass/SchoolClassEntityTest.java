@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.persistence.entity.schoolclass;
+package com.fabit.schoolapplication.infrastructure.persistence.entity.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;

@@ -3,7 +3,6 @@ package com.fabit.schoolapplication.infrastructure.listener;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentInClassRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.schoolclass.GetSchoolClassByStudentIdIn;
 import com.fabit.schoolapplication.infrastructure.usecase.schoolclass.RemoveStudentFromSchoolClass;
 import com.fabit.schoolapplication.infrastructure.usecase.student.event.StudentDeletedEvent;
