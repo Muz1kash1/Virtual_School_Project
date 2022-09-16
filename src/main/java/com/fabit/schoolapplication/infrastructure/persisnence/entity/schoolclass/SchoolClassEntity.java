@@ -13,7 +13,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.data.domain.DomainEvents;
 
@@ -22,7 +21,6 @@ import org.springframework.data.domain.DomainEvents;
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 // --
 @Entity
 @Table(name = "school_class")
@@ -81,4 +79,8 @@ public class SchoolClassEntity {
         schoolClass.getSchoolClassName().getLitera());
   }
 
+  @Override
+  public String toString() {
+    return parallel + "" + litera;
+  }
 }
