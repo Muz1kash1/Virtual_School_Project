@@ -11,6 +11,7 @@ import com.fabit.schoolapplication.infrastructure.controller.teacher.dto.Teacher
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.teacher.mapper.TeacherServiceMapper;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +35,7 @@ public class CreateTeacherTest {
     TeacherDto teacherDto = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
-        new PassportDto("1234", "5678"),
+        new PassportDto("1234", "5678", LocalDate.of(1980, 9, 15)),
         new SnilsDto("1234567890"),
         true
     );
