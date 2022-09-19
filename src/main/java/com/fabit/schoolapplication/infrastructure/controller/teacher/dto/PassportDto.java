@@ -13,7 +13,7 @@ public class PassportDto {
   String number;
   LocalDate birthday;
 
-  public String getSerialAndNumber() {
-    return serial + " " + number+" "+birthday;
+  public String toString() {
+    return serial + " " + number + " " + birthday;
   }
 }

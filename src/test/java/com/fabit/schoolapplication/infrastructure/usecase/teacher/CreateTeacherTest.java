@@ -48,7 +48,7 @@ public class CreateTeacherTest {
     TeacherEntity teacherCreated = createTeacher.execute(teacherDto);
 
     Assertions.assertEquals(
-        teacherDto.getPassport().getSerialAndNumber(), teacherCreated.getPassport());
+        teacherDto.getPassport().toString(), teacherCreated.getPassport());
     Assertions.assertEquals(teacherDto.getStandingYears(), teacherCreated.getStandingYears());
     Assertions.assertEquals(teacherDto.getSnils().getNumberView(), teacherCreated.getSnils());
     Assertions.assertTrue(teacherCreated.isActive());

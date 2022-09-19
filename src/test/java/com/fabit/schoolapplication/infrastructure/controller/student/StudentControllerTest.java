@@ -43,8 +43,9 @@ class StudentControllerTest {
         "passport":{"serial":"222", "number":"1234567","birthday":"2007-09-15"}
          }
         """;
-    mockMvc.perform(post("/student").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(json))
+    mockMvc.perform(
+            post("/student").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+                .content(json))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
         .andExpect(jsonPath("$.snils", is("777777")))
@@ -133,10 +134,9 @@ class StudentControllerTest {
   void deleteStudent() throws Exception {
     List<StudentEntity> studentEntity = studentRepository.findAll();
     Assertions.assertEquals(1, studentEntity.size());
-    mockMvc.perform(delete("/student/{id}", studentEntity.get(0).getId())
-            .contentType(MediaType.APPLICATION_PROBLEM_JSON).accept(MediaType.APPLICATION_PROBLEM_JSON))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$", is("Ученик исключен из школы")));
+    mockMvc.perform(delete("/student/{id}", studentEntity.get(0).getId()).contentType(
+            MediaType.APPLICATION_PROBLEM_JSON).accept(MediaType.APPLICATION_PROBLEM_JSON))
+        .andExpect(status().isOk()).andExpect(jsonPath("$", is("Ученик исключен из школы")));
     Assertions.assertEquals(0, studentRepository.findAll().size());
   }
 }
