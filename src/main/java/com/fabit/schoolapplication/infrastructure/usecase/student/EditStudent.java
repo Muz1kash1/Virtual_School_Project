@@ -1,6 +1,5 @@
 package com.fabit.schoolapplication.infrastructure.usecase.student;
 
-import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
 import com.fabit.schoolapplication.domain.Passport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
@@ -8,8 +7,6 @@ import com.fabit.schoolapplication.infrastructure.controller.student.dto.Student
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.student.mapper.StudentMapperService;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,8 +28,7 @@ public class EditStudent {
    */
   public StudentEntity addPassport(StudentDto studentDto) {
     Passport passport = studentMapperService.mapToPassport(studentDto.getPassport());
-    if (passport.isValidAge(
-        LocalDate.parse(studentDto.getBirthday(), DateTimeFormatter.ofPattern("dd.MM.yyyy")))) {
+    if (passport.isValidAge(studentDto.getBirthCertificate().getBirthday())) {
       StudentEntity studentEntity =
           studentRepository.findBySnils(studentDto.getSnils().getNumberView());
       studentEntity.setPassport(passport.toString());

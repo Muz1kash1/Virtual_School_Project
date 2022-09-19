@@ -6,8 +6,6 @@ import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -19,12 +17,11 @@ import org.springframework.util.Assert;
 @Slf4j
 @NoArgsConstructor
 public class Student {
-  private StudentId studentId;
+  private StudentId id;
   private FullName fullName;
   private Snils snils;
   private BirthCertificate birthCertificate;
   private Passport passport;
-  private LocalDate birthday;
   public static final List<StudentDomainEvent> domainEvents = new ArrayList<>();
 
   protected void registerEvent(StudentDomainEvent event) {
@@ -33,22 +30,19 @@ public class Student {
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,
-                  BirthCertificate birthCertificate, String birthday) {
-    this.studentId = studentId;
+                  BirthCertificate birthCertificate) {
+    this.id = studentId;
     this.fullName = name;
     this.snils = snils;
     this.birthCertificate = birthCertificate;
-    this.birthday = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     registerEvent(new StudentCreatedEvent(this));
   }
 
-  private Student(StudentId studentId, FullName name, Snils snils, Passport passport,
-                  String birthday) {
-    this.studentId = studentId;
+  private Student(StudentId studentId, FullName name, Snils snils, Passport passport) {
+    this.id = studentId;
     this.fullName = name;
     this.snils = snils;
-    this.birthday = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-    if (passport.isValidAge(this.birthday)) {
+    if (passport.isValidAge(passport.getBirthday())) {
       this.passport = passport;
       registerEvent(new StudentCreatedEvent(this));
     } else {
@@ -63,12 +57,11 @@ public class Student {
    * @param name             имя
    * @param snils            СНИЛС
    * @param birthCertificate свидетельство о рождении
-   * @param birthday         день рожденияя ученика
    * @return the student
    */
   public static Student of(StudentId studentId, FullName name, Snils snils,
-                           BirthCertificate birthCertificate, String birthday) {
-    return new Student(studentId, name, snils, birthCertificate, birthday);
+                           BirthCertificate birthCertificate) {
+    return new Student(studentId, name, snils, birthCertificate);
   }
 
   /**
@@ -78,12 +71,10 @@ public class Student {
    * @param name      имя
    * @param snils     СНИЛС
    * @param passport  паспорт
-   * @param birthday  день рождения
    * @return студент
    */
-  public static Student of(StudentId studentId, FullName name, Snils snils, Passport passport,
-                           String birthday) {
-    return new Student(studentId, name, snils, passport, birthday);
+  public static Student of(StudentId studentId, FullName name, Snils snils, Passport passport) {
+    return new Student(studentId, name, snils, passport);
   }
 
   /**

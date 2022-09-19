@@ -10,6 +10,7 @@ import com.fabit.schoolapplication.infrastructure.controller.teacher.dto.Passpor
 import com.fabit.schoolapplication.infrastructure.controller.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.controller.teacher.dto.TeacherDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +26,7 @@ public class TeacherServiceMapper {
   }
 
   private Passport mapDtoToDomain(PassportDto passportDto) {
-    return Passport.of(passportDto.getSerial(), passportDto.getNumber());
+    return Passport.of(passportDto.getSerial(), passportDto.getNumber(), passportDto.getBirthday());
   }
 
   private FullName mapDtoToDomain(FullNameDto fullNameDto) {
@@ -69,7 +70,8 @@ public class TeacherServiceMapper {
 
   public Passport mapEntityPassportToDomain(String passport) {
     String[] arr = passport.split(" ");
-    return Passport.of(arr[0], arr[1]);
+    LocalDate birthday = LocalDate.parse(arr[2]);
+    return Passport.of(arr[0], arr[1], birthday);
   }
 
   public Snils mapEntitySnilsToDomain(String snils) {

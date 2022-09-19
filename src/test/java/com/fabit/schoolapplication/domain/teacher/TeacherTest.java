@@ -20,7 +20,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222"),
+            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -35,7 +35,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222"),
+            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -54,7 +54,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222"),
+            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -72,7 +72,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222"),
+            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -88,7 +88,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222"),
+            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
