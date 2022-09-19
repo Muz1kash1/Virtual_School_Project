@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,7 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.util.NestedServletException;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -116,8 +115,8 @@ class StudentControllerTest {
   }
 
   @Test
-  @DisplayName("Добавление паспорта студенту 10 лет, должен выбросить ошибку")
-  void addPassportStudent10Years() {
+  @DisplayName("Добавление паспорта студенту 10 лет, должен выбросить ошибку IllegalArgument")
+  void addPassportStudent10Years() throws Exception {
     String json = """
         {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
@@ -126,9 +125,12 @@ class StudentControllerTest {
         "passport":{"serial":"222", "number":"1234567","birthday":"2012-09-15"}
          }
         """;
-    assertThrows(NestedServletException.class, () -> mockMvc.perform(
-        put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(json)));
+    mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content(json))
+        .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.title", is("Illegal Argument Exception")));
   }
 
   @Test
