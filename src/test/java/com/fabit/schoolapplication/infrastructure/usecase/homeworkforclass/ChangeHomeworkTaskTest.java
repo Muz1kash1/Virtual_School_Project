@@ -1,12 +1,13 @@
-package com.fabit.schoolapplication.infrastructure.usecase.lesson;
+package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.lesson.LessonId;
+import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.LessonRepository;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
-import com.fabit.schoolapplication.infrastructure.usecase.lesson.mapper.LessonMapperService;
+import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.mapper.HomeworkForClassMapper;
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -21,35 +22,35 @@ public class ChangeHomeworkTaskTest {
   TeacherRepository teacherRepository;
 
   @Autowired
-  CreateLesson createLesson;
+  CreateHomeworkForClass createHomeworkForClass;
 
   @Autowired
-  LessonRepository lessonRepository;
+  HomeworkForClassRepository homeworkForClassRepository;
   @Autowired
   ChangeHomeworkTask changeHomeworkTask;
 
   @Autowired
-  LessonMapperService lessonMapperService;
+  HomeworkForClassMapper homeworkForClassMapper;
 
   @AfterEach
   void clean() {
-    lessonRepository.deleteAll();
+    homeworkForClassRepository.deleteAll();
     teacherRepository.deleteAll();
   }
 
   @Test
   @DisplayName("Задание задания работает корректно")
-  void changeHomeworkTaskTest() {
+  void changeHomeworkForClassTest() {
     TeacherEntity teacher = new TeacherEntity();
     teacher.setId(1L);
     teacher.setFullName("test");
     teacherRepository.save(teacher);
-    createLesson.execute(TeacherId.of(teacherRepository.findAll().get(0).getId()),
-        Discipline.COMPUTING);
+    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000,2,2));
 
-    changeHomeworkTask.execute(LessonId.of(lessonRepository.findAll().get(0).getId()),
+    changeHomeworkTask.execute(LessonId.of(homeworkForClassRepository.findAll().get(0).getId()),
         "test homework");
-    Assertions.assertEquals("test homework", lessonRepository.findAll().get(0).getHomeworkTask());
+    Assertions.assertEquals("test homework",
+        homeworkForClassRepository.findAll().get(0).getHomeworkTask());
 
   }
 }

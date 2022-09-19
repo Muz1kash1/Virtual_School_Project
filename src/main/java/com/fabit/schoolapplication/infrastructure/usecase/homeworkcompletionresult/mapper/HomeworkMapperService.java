@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkcompletionresult.mapper;
 
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.HomeworkCompletionResult;
-import com.fabit.schoolapplication.domain.lesson.LessonId;
+import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.controller.homeworkcompletionresult.dto.HomeworkCompletionResultDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkcompletionresult.HomeworkCompletionResultEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.LessonRepository;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class HomeworkMapperService {
 
   @Autowired
-  LessonRepository lessonRepository;
+  HomeworkForClassRepository homeworkForClassRepository;
   @Autowired
   TeacherRepository teacherRepository;
   @Autowired
@@ -54,7 +54,7 @@ public class HomeworkMapperService {
     homeworkCompletionResultEntity.setTaskCompletionResult(
         homeworkCompletionResult.getTaskCompletionResult());
     homeworkCompletionResultEntity.setLesson(
-        lessonRepository.getReferenceById(homeworkCompletionResult.getLessonId().getValue()));
+        homeworkForClassRepository.getReferenceById(homeworkCompletionResult.getLessonId().getValue()));
     homeworkCompletionResultEntity.setStudent(
         studentRepository.getReferenceById(homeworkCompletionResult.getStudentId().getValue()));
     homeworkCompletionResultEntity.setTeacher(

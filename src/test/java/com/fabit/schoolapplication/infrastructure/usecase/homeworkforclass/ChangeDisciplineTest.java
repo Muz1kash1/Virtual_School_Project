@@ -1,12 +1,13 @@
-package com.fabit.schoolapplication.infrastructure.usecase.lesson;
+package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.lesson.LessonId;
+import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.LessonRepository;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
-import com.fabit.schoolapplication.infrastructure.usecase.lesson.mapper.LessonMapperService;
+import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.mapper.HomeworkForClassMapper;
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -21,19 +22,19 @@ public class ChangeDisciplineTest {
   TeacherRepository teacherRepository;
 
   @Autowired
-  CreateLesson createLesson;
+  CreateHomeworkForClass createHomeworkForClass;
 
   @Autowired
-  LessonRepository lessonRepository;
+  HomeworkForClassRepository homeworkForClassRepository;
   @Autowired
   ChangeDiscipline changeDiscipline;
 
   @Autowired
-  LessonMapperService lessonMapperService;
+  HomeworkForClassMapper homeworkForClassMapper;
 
   @AfterEach
   void clean() {
-    lessonRepository.deleteAll();
+    homeworkForClassRepository.deleteAll();
     teacherRepository.deleteAll();
   }
 
@@ -44,15 +45,13 @@ public class ChangeDisciplineTest {
     teacher.setId(1L);
     teacher.setFullName("test");
     teacherRepository.save(teacher);
-    createLesson.execute(TeacherId.of(teacherRepository.findAll().get(0).getId()),
-        Discipline.COMPUTING);
+    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000,2,2));
 
     Assertions.assertEquals(Discipline.COMPUTING,
-        lessonRepository.findAll().get(0).getDiscipline());
-    changeDiscipline.execute(LessonId.of(lessonRepository.findAll().get(0).getId()),
+        homeworkForClassRepository.findAll().get(0).getDiscipline());
+    changeDiscipline.execute(LessonId.of(homeworkForClassRepository.findAll().get(0).getId()),
         Discipline.BIOLOGY);
-    Assertions.assertEquals(Discipline.BIOLOGY, lessonRepository.findAll().get(0).getDiscipline());
-
+    Assertions.assertEquals(Discipline.BIOLOGY, homeworkForClassRepository.findAll().get(0).getDiscipline());
   }
 
 }

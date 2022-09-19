@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.domain.homeworkcompletionresult.event;
 
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.HomeworkCompletionResult;
-import com.fabit.schoolapplication.domain.lesson.LessonId;
+import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import org.junit.jupiter.api.Assertions;

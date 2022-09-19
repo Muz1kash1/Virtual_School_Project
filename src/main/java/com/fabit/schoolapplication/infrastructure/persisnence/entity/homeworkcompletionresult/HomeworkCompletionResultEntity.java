@@ -3,8 +3,7 @@ package com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkco
 import com.fabit.schoolapplication.domain.homeworkcompletionresult.HomeworkCompletionResult;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.LessonEntity;
-import com.sun.istack.NotNull;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.HomeworkForClassEntity;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -13,9 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,7 +42,7 @@ public class HomeworkCompletionResultEntity {
 
   @ManyToOne
   @JoinColumn(name = "lesson_id")
-  private LessonEntity lesson;
+  private HomeworkForClassEntity lesson;
 
   @Column(name = "task_completion_result")
   private String taskCompletionResult;

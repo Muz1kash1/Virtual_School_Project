@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain.lesson;
+package com.fabit.schoolapplication.domain.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
@@ -8,22 +8,23 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LessonTest {
+public class HomeworkForClassTest {
 
   static TeacherId teacherId = TeacherId.of(1);
-  static Lesson lesson = Lesson.of(teacherId, Discipline.ALGEBRA);
+  static HomeworkForClass homeworkForClass = HomeworkForClass.of(Discipline.ALGEBRA, LocalDate.of(2000,2,2));
 
 
   @BeforeAll
   static void initializeAll() {
-    lesson.setHomeworkText("Тест");
+    homeworkForClass.setHomeworkText("Тест");
   }
 
 
   @Test
   @DisplayName("Присвоение домашке текста задания работает корректно")
   void setHomeworkTextTest() {
-    Assertions.assertEquals("Тест", lesson.getHomeworkTask());
-    Assertions.assertEquals(Discipline.ALGEBRA,lesson.getDiscipline());
+    Assertions.assertEquals("Тест", homeworkForClass.getTask());
+    Assertions.assertEquals(Discipline.ALGEBRA, homeworkForClass.getDiscipline());
+    Assertions.assertEquals( LocalDate.of(2000,2,2),homeworkForClass.getDate());
   }
 }

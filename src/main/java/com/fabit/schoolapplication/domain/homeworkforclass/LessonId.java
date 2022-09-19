@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain.lesson;
+package com.fabit.schoolapplication.domain.homeworkforclass;
 
 import lombok.Getter;
 import lombok.Value;

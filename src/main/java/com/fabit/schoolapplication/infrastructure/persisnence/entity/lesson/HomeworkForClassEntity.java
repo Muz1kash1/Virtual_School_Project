@@ -1,9 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.lesson.Lesson;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.sun.istack.NotNull;
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -11,9 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,30 +21,28 @@ import org.springframework.data.domain.DomainEvents;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "lesson")
-public class LessonEntity {
+@Table(name = "homework_for_class")
+public class HomeworkForClassEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
-
-  @ManyToOne
-  private TeacherEntity teacher;
-
   @Column(name = "discipline")
   private Discipline discipline;
   @Column(name = "homework_task")
   private String homeworkTask;
+  @Column(name = "date")
+  private LocalDate date;
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
-    Lesson.domainEvents.clear();
+    HomeworkForClass.domainEvents.clear();
   }
 
   @DomainEvents
   protected Collection<Object> domainEvents() {
-    return Collections.unmodifiableList(Lesson.domainEvents);
+    return Collections.unmodifiableList(HomeworkForClass.domainEvents);
   }
 
 

@@ -13,7 +13,7 @@ services:
     networks:
       - virtual-school_dev_net
   postgres:
-    image: 'postgres:14.4-alpine'
+    image: 'postgres:13'
     ports:
       - "5433:5432"
     environment:

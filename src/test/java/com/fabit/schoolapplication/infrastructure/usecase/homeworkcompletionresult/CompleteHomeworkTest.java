@@ -1,35 +1,22 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkcompletionresult;
 
-import static org.mockito.Mockito.when;
-
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
-import com.fabit.schoolapplication.domain.Snils;
-import com.fabit.schoolapplication.domain.homeworkcompletionresult.HomeworkCompletionResult;
-import com.fabit.schoolapplication.domain.lesson.Lesson;
-import com.fabit.schoolapplication.domain.teacher.Teacher;
-import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.controller.homeworkcompletionresult.dto.HomeworkCompletionResultDto;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.LessonEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkCompletionResultRepository;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.LessonRepository;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.homeworkcompletionresult.mapper.HomeworkMapperService;
-import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.util.Assert;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -43,7 +30,7 @@ public class CompleteHomeworkTest {
   HomeworkCompletionResultRepository homeworkRepository;
 
   @Autowired
-  LessonRepository lessonRepository;
+  HomeworkForClassRepository homeworkForClassRepository;
   @Autowired
   TeacherRepository teacherRepository;
 
@@ -54,7 +41,7 @@ public class CompleteHomeworkTest {
   @AfterEach
   void cleanall() {
     homeworkRepository.deleteAll();
-    lessonRepository.deleteAll();
+    homeworkForClassRepository.deleteAll();
     studentRepository.deleteAll();
     teacherRepository.deleteAll();
   }
@@ -70,17 +57,16 @@ public class CompleteHomeworkTest {
     teacher.setFullName("test");
     teacherRepository.save(teacher);
 
-    LessonEntity lesson = new LessonEntity();
+    HomeworkForClassEntity lesson = new HomeworkForClassEntity();
     lesson.setHomeworkTask("test");
-    lesson.setTeacher(teacher);
     lesson.setDiscipline(Discipline.COMPUTING);
-    lessonRepository.save(lesson);
+    homeworkForClassRepository.save(lesson);
 
 
 
     HomeworkCompletionResultDto dto = new HomeworkCompletionResultDto(
         teacherRepository.findAll().get(0).getId(), studentRepository.findAll().get(0).getId(),
-        "test", lessonRepository.findAll().get(0).getId());
+        "test", homeworkForClassRepository.findAll().get(0).getId());
     completeHomework.uploadCompletedHomework(dto);
     Assertions.assertNotNull(homeworkRepository.findAll().get(0));
     Assertions.assertEquals(homeworkMapperService.mapToHomeworkCompletionResultEntity(

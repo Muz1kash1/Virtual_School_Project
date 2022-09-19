@@ -1,0 +1,58 @@
+package com.fabit.schoolapplication.domain.homeworkforclass;
+
+import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassTaskSetEvent;
+import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassCreatedEvent;
+import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Getter;
+import org.springframework.util.Assert;
+
+@Getter
+public class HomeworkForClass {
+
+  private Discipline discipline;
+  private String task;
+
+  private final LocalDate date;
+
+  public static final transient List<HomeworkForClassEvent> domainEvents = new ArrayList<>();
+
+  protected HomeworkForClassEvent registerEvent(HomeworkForClassEvent event) {
+    Assert.notNull(event, "Доменный ивент не должен быть нуль");
+    domainEvents.add(event);
+    return event;
+  }
+
+  private HomeworkForClass(Discipline discipline, LocalDate date) {
+    this.discipline = discipline;
+    this.date = date;
+    registerEvent(new HomeworkForClassCreatedEvent(this));
+  }
+
+  public static HomeworkForClass of(Discipline discipline, LocalDate date) {
+    return new HomeworkForClass(discipline, date);
+  }
+
+  /**
+   * Метод задания текста домашнего задания для всех прикрепленных к этому уроку студентов
+   *
+   * @param homeworkTask - текст домашнего задания
+   */
+  public void setHomeworkText(String homeworkTask) {
+    this.task = homeworkTask;
+    registerEvent(new HomeworkForClassTaskSetEvent(this));
+  }
+
+  /**
+   * метод изменения назначенной на урок дисциплины
+   *
+   * @param discipline дисциплина на которую переназначен урок
+   */
+  public void changeDiscipline(Discipline discipline) {
+    this.discipline = discipline;
+  }
+}
+
