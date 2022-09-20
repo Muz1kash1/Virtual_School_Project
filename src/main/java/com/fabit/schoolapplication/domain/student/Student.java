@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication.domain.student;
 
 import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
-import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -21,12 +21,12 @@ public class Student {
   private FullName fullName;
   private Snils snils;
   private BirthCertificate birthCertificate;
-  private Passport passport;
+  private RussianPassport passport;
   public static final List<StudentDomainEvent> domainEvents = new ArrayList<>();
 
   protected void registerEvent(StudentDomainEvent event) {
     Assert.notNull(event, "Domain event must not be null");
-    this.domainEvents.add(event);
+    domainEvents.add(event);
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,
@@ -38,16 +38,12 @@ public class Student {
     registerEvent(new StudentCreatedEvent(this));
   }
 
-  private Student(StudentId studentId, FullName name, Snils snils, Passport passport) {
+  private Student(StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
     this.id = studentId;
     this.fullName = name;
     this.snils = snils;
-    if (passport.isValidAge(passport.getBirthday())) {
-      this.passport = passport;
-      registerEvent(new StudentCreatedEvent(this));
-    } else {
-      throw new IllegalArgumentException();
-    }
+    this.passport = passport;
+    registerEvent(new StudentCreatedEvent(this));
   }
 
   /**
@@ -73,7 +69,7 @@ public class Student {
    * @param passport  паспорт
    * @return студент
    */
-  public static Student of(StudentId studentId, FullName name, Snils snils, Passport passport) {
+  public static Student of(StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
     return new Student(studentId, name, snils, passport);
   }
 
@@ -104,7 +100,7 @@ public class Student {
    *
    * @param passport паспорт
    */
-  public void addPassport(Passport passport) {
+  public void addPassport(RussianPassport passport) {
     this.passport = passport;
     registerEvent(new StudentChangedInfoEvent(this));
     log.info("Паспорт успешно добавлен");

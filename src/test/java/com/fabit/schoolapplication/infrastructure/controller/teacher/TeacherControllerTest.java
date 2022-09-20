@@ -41,7 +41,8 @@ class TeacherControllerTest {
           },
           "passport": {
               "serial": 2008,
-              "number": 200931
+              "number": 200931,
+              "birthday": "1980-09-15"
           },
           "snils": {
               "numberView": "127-328-591-72"

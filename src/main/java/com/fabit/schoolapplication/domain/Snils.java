@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.domain;
 
+import java.util.regex.Pattern;
 import lombok.Getter;
 import lombok.Value;
 
@@ -14,7 +15,18 @@ public class Snils {
   }
 
   public static Snils of(String numberView) {
-    return new Snils(numberView);
+    if (isValidNumberView(numberView)) {
+      return new Snils(numberView);
+    } else {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  private static boolean isValidNumberView(String numberView) {
+    if (!Pattern.matches("^\\d{3}-\\d{3}-\\d{3}-\\d{2}$", numberView)) {
+      return false;
+    }
+    return true;
   }
 
   @Override

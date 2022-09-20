@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.domain.teacher;
 
 import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
-import com.fabit.schoolapplication.domain.teacher.event.TeacherActivatedEvent;
-import com.fabit.schoolapplication.domain.teacher.event.TeacherCreatedEvent;
-import com.fabit.schoolapplication.domain.teacher.event.TeacherDeactivatedEvent;
-import com.fabit.schoolapplication.domain.teacher.event.TeacherEvent;
+import com.fabit.schoolapplication.domain.teacher.event.TeacherDomainEvent;
+import com.fabit.schoolapplication.domain.teacher.event.TeacherActivatedDomainEvent;
+import com.fabit.schoolapplication.domain.teacher.event.TeacherCreatedDomainEvent;
+import com.fabit.schoolapplication.domain.teacher.event.TeacherDeactivatedDomainEvent;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
@@ -23,17 +23,12 @@ import java.util.List;
 @Getter
 @Slf4j
 public class Teacher {
-  public static final List<TeacherEvent> domainEvents = new ArrayList<>();
+  public static final List<TeacherDomainEvent> domainEvents = new ArrayList<>();
   private TeacherId teacherId;
-  /** стаж работы учителя */
   private int standingYears;
-  /** Ф.И.О учителя */
   private FullName fullName;
-  /** паспорт */
-  private Passport passport;
-  /** снилс */
+  private RussianPassport passport;
   private Snils snils;
-  /** статус учителя (можно ли его поставить на занятия или нет) */
   private boolean isActive;
 
   private Teacher() {}
@@ -41,7 +36,7 @@ public class Teacher {
   private Teacher(
       TeacherId teacherId,
       FullName fullName,
-      Passport passport,
+      RussianPassport passport,
       Snils snils,
       int standingYears,
       boolean isActive) {
@@ -51,7 +46,7 @@ public class Teacher {
     this.passport = passport;
     this.snils = snils;
     this.isActive = isActive;
-    registerEvent(new TeacherCreatedEvent(this.getTeacherId()));
+    registerEvent(new TeacherCreatedDomainEvent(getTeacherId()));
   }
 
   /**
@@ -67,7 +62,7 @@ public class Teacher {
   public static Teacher of(
       TeacherId teacherId,
       FullName fullName,
-      Passport passport,
+      RussianPassport passport,
       Snils snils,
       int standingYears,
       boolean active) {
@@ -76,30 +71,28 @@ public class Teacher {
     return teacher;
   }
 
-  protected void registerEvent(TeacherEvent event) {
+  protected void registerEvent(TeacherDomainEvent event) {
     Assert.notNull(event, "Доменное событие не должно быть null");
-    this.domainEvents.add(event);
+    domainEvents.add(event);
   }
 
   /** Изменить статус учителя на неактивный */
   public void deactivate(LocalDate from, LocalDate to) {
-    if (this.isActive && from.isBefore(to)) {
+    if (isActive && from.isBefore(to)) {
       domainEvents.clear();
-      this.isActive = false;
-      registerEvent(new TeacherDeactivatedEvent(from, to, teacherId));
+      isActive = false;
+      registerEvent(new TeacherDeactivatedDomainEvent(from, to, teacherId));
     } else {
-      throw new IllegalStateException(
-          " Ошибка изменения статуса учителя, проверьте текущий статус учителя,"
-              + "если он уже активный то не следует его снова активировать."
-              + "Проверьте корректность введенных дат: первая дата должна быть раньше по времени чем вторая");
+      throw new IllegalStateException("Учитель уже деактивирован.");
     }
   }
+
   /** Изменить статус учителя на активный */
   public void activate() {
-    if (!(this.isActive)) {
-      this.isActive = true;
+    if (!(isActive)) {
+      isActive = true;
       domainEvents.clear();
-      registerEvent(new TeacherActivatedEvent(this.teacherId));
+      registerEvent(new TeacherActivatedDomainEvent(teacherId));
     } else {
       throw new IllegalStateException(
           "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
