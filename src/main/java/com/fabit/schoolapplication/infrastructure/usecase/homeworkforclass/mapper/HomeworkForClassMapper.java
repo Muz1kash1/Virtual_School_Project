@@ -16,7 +16,8 @@ public class HomeworkForClassMapper {
   SchoolClassRepository schoolClassRepository;
 
   /**
-   * метод получения сущности бд из модели домена Дз для класса
+   * Метод получения сущности бд из модели домена Дз для класса.
+   *
    * @param homeworkForClass дз для класса
    * @return сущность бд
    */
@@ -24,14 +25,15 @@ public class HomeworkForClassMapper {
     HomeworkForClassEntity homeworkForClassEntity = new HomeworkForClassEntity();
     homeworkForClassEntity.setDiscipline(homeworkForClass.getDiscipline());
     homeworkForClassEntity.setHomeworkTask(homeworkForClass.getTask());
-    homeworkForClassEntity.setId(1L);
+    homeworkForClassEntity.setId(homeworkForClass.getId().getValue());
     homeworkForClassEntity.setDate(homeworkForClass.getDate());
     homeworkForClassEntity.setSchoolClassId(homeworkForClass.getSchoolClassId().getValue());
     return homeworkForClassEntity;
   }
 
   /**
-   * метод получения доменной модели дз из сущности бд
+   * Метод получения доменной модели дз из сущности бд.
+   *
    * @param homeworkForClassEntity сущность бд
    * @return доменная модель дз
    */
@@ -46,24 +48,31 @@ public class HomeworkForClassMapper {
   }
 
   /**
-   * метод получения сущности доменной модели дз из дто
+   * Метод получения сущности доменной модели дз из дто.
+   *
    * @param homeworkForClassDto дто
    * @return сущность доменной модели
    */
   public HomeworkForClass mapDtoToHomeworkForClass(HomeworkForClassDto homeworkForClassDto) {
-    return HomeworkForClass.of(homeworkForClassDto.getDiscipline(),
-        homeworkForClassDto.getDate(), SchoolClassId.of(homeworkForClassDto.getSchoolClassId()),
+    return HomeworkForClass.of(
+        homeworkForClassDto.getDiscipline(),
+        homeworkForClassDto.getDate(),
+        SchoolClassId.of(homeworkForClassDto.getSchoolClassId()),
         HomeworkForClassId.of(homeworkForClassDto.getId())
     );
   }
 
   /**
-   * метод получения дто из доменной модели дз
+   * Метод получения дто из доменной модели дз.
+   *
    * @param homework доменная модель дз
    * @return дто
    */
-  public HomeworkForClassDto mapHomeworkForClassToDto(HomeworkForClass homework){
-    return new HomeworkForClassDto(homework.getId().getValue(),homework.getDiscipline(),
-        homework.getTask(),homework.getSchoolClassId().getValue(),homework.getDate());
+  public HomeworkForClassDto mapHomeworkForClassToDto(HomeworkForClass homework) {
+    return new HomeworkForClassDto(homework.getId().getValue(),
+        homework.getDiscipline(),
+        homework.getTask(),
+        homework.getSchoolClassId().getValue(),
+        homework.getDate());
   }
 }

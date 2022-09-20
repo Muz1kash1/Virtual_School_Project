@@ -13,7 +13,7 @@ services:
     networks:
       - virtual-school_dev_net
   postgres:
-    image: 'postgres:13'
+    image: 'postgres:14.4-alpine'
     ports:
       - "5433:5432"
     environment:
@@ -24,7 +24,7 @@ services:
     volumes:
       - ./postgres/data/:/var/lib/postgresql/data
   postgres-test:
-    image: 'postgres:14.5'
+    image: 'postgres:14.4-alpine'
     ports:
       - "5434:5432"
     environment:

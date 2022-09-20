@@ -18,17 +18,19 @@ public class ChangeDiscipline {
   private final HomeworkForClassMapper homeworkForClassMapper;
 
   /**
-   * метод замены дисциплины в задании
+   * Метод замены дисциплины в задании.
    *
-   * @param homeworkForClassId  айди задания
-   * @param discipline дисциплина на замену
+   * @param homeworkForClassId айди задания
+   * @param discipline         дисциплина на замену
    */
   @Transactional
   public void execute(HomeworkForClassId homeworkForClassId, Discipline discipline) {
-    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToHomeworkForClass(
+    HomeworkForClass homeworkForClass
+        = homeworkForClassMapper.mapEntityToHomeworkForClass(
         homeworkForClassRepository.getReferenceById(homeworkForClassId.getValue()));
     homeworkForClass.changeDiscipline(discipline);
-    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
+    HomeworkForClassEntity homeworkForClassEntity
+        = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
     homeworkForClassEntity.setId(homeworkForClassId.getValue());
     homeworkForClassRepository.save(homeworkForClassEntity);
   }

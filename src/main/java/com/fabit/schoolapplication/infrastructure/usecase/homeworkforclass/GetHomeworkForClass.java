@@ -17,15 +17,15 @@ public class GetHomeworkForClass {
   private final HomeworkForClassMapper homeworkForClassMapper;
 
   /**
-   * метод возвращающий дз класса по айди
+   * Метод возвращающий дз класса по айди.
    *
    * @param homeworkForClassId айди
    * @return дз по этому айди
    */
   public HomeworkForClassDto execute(long homeworkForClassId) {
     HomeworkForClassEntity homeworkForClassEntity = homeworkForClassRepository.findById(homeworkForClassId).get();
-    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToHomeworkForClass(
-        homeworkForClassEntity);
+    HomeworkForClass homeworkForClass
+        = homeworkForClassMapper.mapEntityToHomeworkForClass(homeworkForClassEntity);
 
     return homeworkForClassMapper.mapHomeworkForClassToDto(homeworkForClass);
   }

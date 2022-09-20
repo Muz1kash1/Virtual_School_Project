@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 @Getter
 public class HomeworkForClass {
+
   private HomeworkForClassId id;
   private Discipline discipline;
   private String task;
@@ -35,7 +36,8 @@ public class HomeworkForClass {
     registerEvent(new HomeworkForClassCreatedEvent(this));
   }
 
-  public static HomeworkForClass of(Discipline discipline, LocalDate date, SchoolClassId schoolClassId,
+  public static HomeworkForClass of(Discipline discipline, LocalDate date,
+      SchoolClassId schoolClassId,
       HomeworkForClassId id) {
     HomeworkForClass homeworkForClass = new HomeworkForClass(discipline, date);
     homeworkForClass.schoolClassId = schoolClassId;
@@ -44,7 +46,7 @@ public class HomeworkForClass {
   }
 
   /**
-   * Метод задания текста домашнего задания для всех прикрепленных к этому уроку студентов
+   * Метод задания текста домашнего задания для всех прикрепленных к этому уроку студентов.
    *
    * @param homeworkTask - текст домашнего задания
    */
@@ -54,7 +56,7 @@ public class HomeworkForClass {
   }
 
   /**
-   * метод изменения назначенной на урок дисциплины
+   * Метод изменения назначенной на урок дисциплины.
    *
    * @param discipline дисциплина на которую переназначен урок
    */

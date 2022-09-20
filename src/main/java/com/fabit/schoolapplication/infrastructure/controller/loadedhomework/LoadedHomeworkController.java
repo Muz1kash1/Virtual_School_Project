@@ -1,9 +1,8 @@
-package com.fabit.schoolapplication.infrastructure.controller.homework;
+package com.fabit.schoolapplication.infrastructure.controller.loadedhomework;
 
-import com.fabit.schoolapplication.infrastructure.controller.homework.dto.HomeworkDto;
+import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.usecase.homework.CompleteHomework;
-import com.fabit.schoolapplication.infrastructure.usecase.homework.GetHomework;
-import java.net.URI;
+import com.fabit.schoolapplication.infrastructure.usecase.homework.GetLoadedHomework;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,43 +10,42 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-public class HomeworkController {
+public class LoadedHomeworkController {
 
   final CompleteHomework completeHomework;
-  final GetHomework getHomework;
-
+  final GetLoadedHomework getLoadedHomework;
 
   /**
-   * загружает выполненное дз
+   * Загружает выполненное дз.
    *
-   * @param homeworkDto дто с выполненным тз
+   * @param loadedHomeworkDto дто с выполненным дз
    * @return строка подтверждающая что все ок
    */
   @PostMapping(value = "/homework", produces = "application/json")
   public ResponseEntity<String> sendCompletedHomework(
-      @RequestBody HomeworkDto homeworkDto) {
+      @RequestBody LoadedHomeworkDto loadedHomeworkDto) {
     log.info("пытаемся загрузить выполненную домашку");
-    completeHomework.uploadCompletedHomework(homeworkDto);
+    completeHomework.uploadCompletedHomework(loadedHomeworkDto);
     return ResponseEntity.status(HttpStatus.CREATED).body("Домашняя работа загружена");
   }
 
   /**
-   * возвращает выполненное дз
+   * Возвращает выполненное дз.
+   *
    * @param id id выполненного дз
    * @return выполненное дз
    */
 
   @GetMapping(value = "/homework/{id}", produces = "application/json")
-  public ResponseEntity<HomeworkDto> getCompletedHomework(
+  public ResponseEntity<LoadedHomeworkDto> getCompletedHomework(
       @PathVariable long id) {
-    return ResponseEntity.ok().body(getHomework.execute(id));
+    return ResponseEntity.ok().body(getLoadedHomework.execute(id));
   }
 
 }

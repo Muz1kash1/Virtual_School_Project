@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomeworkForClassDto {
+
   @JsonProperty("id")
   private Long id;
   @JsonProperty("discipline")

@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.controller.homework.dto;
+package com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 
 @AllArgsConstructor
-public final class HomeworkDto implements Serializable {
+public final class LoadedHomeworkDto implements Serializable {
 
   @JsonProperty("homeworkId")
   private Long homeworkId;

@@ -1,10 +1,10 @@
 ALTER TABLE lesson RENAME TO homework_for_class;
-ALTER TABLE homework_completion_result RENAME TO homework;
+ALTER TABLE homework_completion_result RENAME TO loaded_homework;
 ALTER TABLE homework_for_class ADD school_class_entity_id BIGINT;
 ALTER TABLE homework_for_class ADD date DATE;
 ALTER TABLE homework_for_class DROP COLUMN teacher_id;
-ALTER TABLE homework RENAME COLUMN lesson_id TO homework_for_class_id;
-ALTER TABLE homework DROP CONSTRAINT homework_completion_result_teacher_id_fkey;
-ALTER TABLE homework DROP CONSTRAINT homework_completion_result_student_id_fkey;
-ALTER TABLE homework DROP CONSTRAINT homework_completion_result_lesson_id_fkey;
-ALTER TABLE homework DROP COLUMN teacher_id;
+ALTER TABLE loaded_homework RENAME COLUMN lesson_id TO homework_for_class_id;
+ALTER TABLE loaded_homework DROP CONSTRAINT homework_completion_result_teacher_id_fkey;
+ALTER TABLE loaded_homework DROP CONSTRAINT homework_completion_result_student_id_fkey;
+ALTER TABLE loaded_homework DROP CONSTRAINT homework_completion_result_lesson_id_fkey;
+ALTER TABLE loaded_homework DROP COLUMN teacher_id;

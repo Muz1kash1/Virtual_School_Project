@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homework;
 
-import com.fabit.schoolapplication.domain.homework.Homework;
-import com.fabit.schoolapplication.domain.homework.event.HomeworkCreatedEvent;
-import com.fabit.schoolapplication.infrastructure.controller.homework.dto.HomeworkDto;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.homework.HomeworkEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkRepository;
-import com.fabit.schoolapplication.infrastructure.usecase.homework.mapper.HomeworkMapperService;
+import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
+import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedLoadedHomeworkCreatedEvent;
+import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
+import com.fabit.schoolapplication.infrastructure.usecase.homework.mapper.LoadedHomeworkMapperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -16,32 +16,34 @@ import org.springframework.stereotype.Service;
 public class CompleteHomework {
 
   @Autowired
-  HomeworkRepository repository;
+  LoadedHomeworkRepository repository;
   @Autowired
-  HomeworkMapperService homeworkMapperService;
+  LoadedHomeworkMapperService loadedHomeworkMapperService;
 
   /**
-   * метод загрузки выполненного дз из дто
+   * Метод загрузки выполненного дз из дто.
+   *
    * @param dto дто
    */
-  public void uploadCompletedHomework(HomeworkDto dto) {
-    Homework homework = homeworkMapperService.mapDtoToHomework(
-        dto);
-    HomeworkEntity homeworkEntity = homeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
-        homework);
-    repository.save(homeworkEntity);
+  public void uploadCompletedHomework(LoadedHomeworkDto dto) {
+    LoadedHomework loadedHomework = loadedHomeworkMapperService.mapDtoToHomework(dto);
+    LoadedHomeworkEntity loadedHomeworkEntity = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
+        loadedHomework);
+    repository.save(loadedHomeworkEntity);
   }
 
   /**
-   * улавливает доменные события создания выполненного дз
+   * Улавливает доменные события создания выполненного дз.
+   *
    * @param event доменное событие
    */
   @EventListener
-  public void homeworkCompletionCreatedEvent(HomeworkCreatedEvent event) {
-    Homework result = (Homework) event.getContent();
+  public void homeworkCompletionCreatedEvent(LoadedLoadedHomeworkCreatedEvent event) {
+    LoadedHomework result = (LoadedHomework) event.getContent();
     log.info("HomeworkCompletionCreatedEvent...");
     log.info(
         "Выполнение студентом " + result.getStudentId()
-            + " задания " + result.getHomeworkForClassId() + " закончено, результат: " + result.getTaskCompletionResult());
+            + " задания " + result.getHomeworkForClassId() + " закончено, результат: "
+            + result.getTaskCompletionResult());
   }
 }

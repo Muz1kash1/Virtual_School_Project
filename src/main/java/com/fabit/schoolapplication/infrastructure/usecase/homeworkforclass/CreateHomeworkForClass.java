@@ -22,26 +22,32 @@ public class CreateHomeworkForClass {
 
 
   /**
-   * метод создающий дз для класса
-   * @param discipline дисциплина
-   * @param date дата сдачи
+   * Метод создающий дз для класса
+   *
+   * @param discipline    дисциплина
+   * @param date          дата сдачи
    * @param schoolClassId класс
    */
-  @Transactional
   public void execute(Discipline discipline, LocalDate date, SchoolClassId schoolClassId) {
-    HomeworkForClass homeworkForClass = HomeworkForClass.of(discipline, date, schoolClassId,
+    HomeworkForClass homeworkForClass = HomeworkForClass.of(
+        discipline,
+        date,
+        schoolClassId,
         HomeworkForClassId.of(1L));
-    homeworkForClassRepository.save(homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass));
+    homeworkForClassRepository.save(
+        homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass));
   }
 
   /**
-   * метод создающий дз для класса из дто
+   * Метод создающий дз для класса из дто.
+   *
    * @param homeworkForClassDto дто
    */
-  @Transactional
-  public void execute(HomeworkForClassDto homeworkForClassDto){
-    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapDtoToHomeworkForClass(homeworkForClassDto);
-    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
+  public void execute(HomeworkForClassDto homeworkForClassDto) {
+    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapDtoToHomeworkForClass(
+        homeworkForClassDto);
+    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(
+        homeworkForClass);
     homeworkForClassRepository.save(homeworkForClassEntity);
   }
 }

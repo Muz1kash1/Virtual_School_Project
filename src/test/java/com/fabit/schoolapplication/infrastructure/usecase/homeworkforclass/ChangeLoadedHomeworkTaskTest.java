@@ -1,8 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.educatioprogress.LessonId;
-import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
@@ -19,43 +17,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class DeleteHomeworkForClassTest {
+public class ChangeLoadedHomeworkTaskTest {
 
-  @Autowired
-  HomeworkForClassRepository homeworkForClassRepository;
   @Autowired
   CreateHomeworkForClass createHomeworkForClass;
 
   @Autowired
-  HomeworkForClassMapper homeworkForClassMapper;
+  HomeworkForClassRepository homeworkForClassRepository;
+  @Autowired
+  ChangeHomeworkTask changeHomeworkTask;
 
   @Autowired
-  DeleteHomeworkForClass deleteHomeworkForClass;
+  HomeworkForClassMapper homeworkForClassMapper;
 
   @BeforeEach
-  void cleanAll(){
+  void cleanBefore() {
     homeworkForClassRepository.deleteAll();
   }
 
   @AfterEach
-  void clean() {
+  void cleanAfter() {
     homeworkForClassRepository.deleteAll();
   }
 
   @Test
-  @DisplayName("Удаление урока работает корректно")
-  void deleteHomeworkForClassTest() {
-
+  @DisplayName("Задание задания работает корректно")
+  void changeHomeworkForClassTest() {
 
     createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
         SchoolClassId.of(1L));
 
-    Assertions.assertEquals(1, homeworkForClassRepository.findAll().size());
+    changeHomeworkTask.execute(
+        HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()),
+        "test homework");
+    Assertions.assertEquals("test homework",
+        homeworkForClassRepository.findAll().get(0).getHomeworkTask());
 
-    deleteHomeworkForClass.execute(
-        HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()));
-
-    Assertions.assertEquals(0, homeworkForClassRepository.findAll().size());
   }
-
 }

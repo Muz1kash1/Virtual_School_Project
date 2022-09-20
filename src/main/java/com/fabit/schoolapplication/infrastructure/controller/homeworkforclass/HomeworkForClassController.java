@@ -20,14 +20,24 @@ public class HomeworkForClassController {
   final CreateHomeworkForClass createHomeworkForClass;
   final GetHomeworkForClass getHomeworkForClass;
 
-  @PostMapping(value = "/HomeworkForClass", produces = "application/json")
+  /**
+   * Метод создающий ДЗ для класса на дисциплину на дату.
+   * @param homeworkForClassDto дто содержащее данные урока
+   * @return строка с подтверждением успешного создания
+   */
+  @PostMapping(value = "/homework-for-class", produces = "application/json")
   public ResponseEntity<String> addHomeworkForClass(
       @RequestBody HomeworkForClassDto homeworkForClassDto) {
     createHomeworkForClass.execute(homeworkForClassDto);
     return ResponseEntity.status(HttpStatus.CREATED).body("Домашнее задание задано");
   }
 
-  @GetMapping(value = "/HomeworkForClass/{id}", produces = "application/json")
+  /**
+   * Метод возвращающий ДЗ по его id.
+   * @param id идентификатор домашнего задания
+   * @return домашнее задание с данным id
+   */
+  @GetMapping(value = "/homework-for-class/{id}", produces = "application/json")
   public ResponseEntity<HomeworkForClassDto> getHomeworkForClass(@PathVariable long id) {
     return ResponseEntity.ok().body(getHomeworkForClass.execute(id));
   }

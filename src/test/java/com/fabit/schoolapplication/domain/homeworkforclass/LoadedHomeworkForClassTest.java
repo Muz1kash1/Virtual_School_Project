@@ -9,10 +9,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class HomeworkForClassTest {
+public class LoadedHomeworkForClassTest {
 
-  static HomeworkForClass homeworkForClass = HomeworkForClass.of(Discipline.ALGEBRA, LocalDate.of(2000,2,2),
-      SchoolClassId.of(1L),HomeworkForClassId.of(1L));
+  static HomeworkForClass homeworkForClass = HomeworkForClass.of(Discipline.ALGEBRA,
+      LocalDate.of(2000, 2, 2),
+      SchoolClassId.of(1L), HomeworkForClassId.of(1L));
 
 
   @BeforeAll

@@ -17,16 +17,18 @@ public class ChangeHomeworkTask {
   private final HomeworkForClassMapper homeworkForClassMapper;
 
   /**
-   * метод меняющий домашнее задание
+   * Метод меняющий домашнее задание.
+   *
    * @param homeworkForClassId айди дз где оно меняется
-   * @param task новое задание
+   * @param task               новое задание
    */
   @Transactional
   public void execute(HomeworkForClassId homeworkForClassId, String task) {
     HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToHomeworkForClass(
         homeworkForClassRepository.getReferenceById(homeworkForClassId.getValue()));
     homeworkForClass.setHomeworkText(task);
-    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
+    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(
+        homeworkForClass);
     homeworkForClassEntity.setId(homeworkForClassId.getValue());
     homeworkForClassRepository.save(homeworkForClassEntity);
   }

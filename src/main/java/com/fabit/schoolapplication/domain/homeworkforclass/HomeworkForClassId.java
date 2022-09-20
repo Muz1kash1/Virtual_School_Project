@@ -6,6 +6,7 @@ import lombok.Value;
 @Getter
 @Value
 public class HomeworkForClassId {
+
   long value;
 
   private HomeworkForClassId(long value) {

@@ -30,14 +30,13 @@ public class ChangeDisciplineTest {
 
   @Autowired
   HomeworkForClassMapper homeworkForClassMapper;
-
   @BeforeEach
-  void cleanAll(){
+  void cleanBefore() {
     homeworkForClassRepository.deleteAll();
   }
 
   @AfterEach
-  void clean() {
+  void cleanAfter() {
     homeworkForClassRepository.deleteAll();
   }
 
@@ -45,13 +44,16 @@ public class ChangeDisciplineTest {
   @DisplayName("Замена предмета работает корректно")
   void changeDisciplineTest() {
 
-    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000,2,2), SchoolClassId.of(1L));
+    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
+        SchoolClassId.of(1L));
 
     Assertions.assertEquals(Discipline.COMPUTING,
         homeworkForClassRepository.findAll().get(0).getDiscipline());
-    changeDiscipline.execute(HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()),
+    changeDiscipline.execute(
+        HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()),
         Discipline.BIOLOGY);
-    Assertions.assertEquals(Discipline.BIOLOGY, homeworkForClassRepository.findAll().get(0).getDiscipline());
+    Assertions.assertEquals(Discipline.BIOLOGY,
+        homeworkForClassRepository.findAll().get(0).getDiscipline());
   }
 
 }
