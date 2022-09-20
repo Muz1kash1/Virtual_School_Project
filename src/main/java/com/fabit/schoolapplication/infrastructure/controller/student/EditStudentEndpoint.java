@@ -51,7 +51,7 @@ public class EditStudentEndpoint {
    */
   @PutMapping("/addPassport")
   public ResponseEntity<StudentEntity> addPassportStudent(@RequestBody StudentDto student) {
-    log.info("trying to add Passport: " + student.getPassport());
+    log.info("trying to add RussianPassport: " + student.getPassport());
     return ResponseEntity.ok().body(editStudent.addPassport(student));
   }
 }

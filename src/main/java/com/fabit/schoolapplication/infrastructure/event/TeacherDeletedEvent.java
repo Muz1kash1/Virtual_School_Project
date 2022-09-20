@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.usecase.teacher.event;
+package com.fabit.schoolapplication.infrastructure.event;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;

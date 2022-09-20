@@ -1,6 +1,7 @@
 package com.fabit.schoolapplication.domain.student;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 import lombok.Getter;
 import lombok.Value;
 
@@ -18,7 +19,23 @@ public class BirthCertificate {
   }
 
   public static BirthCertificate of(String serial, String number, LocalDate birthday) {
-    return new BirthCertificate(serial, number, birthday);
+    if (isBirthCertificate(serial, number,birthday)) {
+      return new BirthCertificate(serial, number, birthday);
+    } else {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  private static boolean isBirthCertificate(String serial, String number, LocalDate birthday) {
+    if (!Pattern.matches("^[0-9]{6}$", number) || !Pattern.matches("^[0-9]{4}$", serial) ||
+        !isValidAge(birthday)) {
+      return false;
+    }
+    return true;
+  }
+
+  private static boolean isValidAge(LocalDate birthday) {
+    return (LocalDate.now().getYear() - birthday.getYear() >= 5);
   }
 
   @Override

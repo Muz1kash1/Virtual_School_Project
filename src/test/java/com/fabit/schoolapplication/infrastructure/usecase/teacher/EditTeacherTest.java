@@ -37,8 +37,8 @@ public class EditTeacherTest {
     TeacherDto teacherToCreate = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
-        new PassportDto("1234", "5678", LocalDate.of(1980, 9, 15)),
-        new SnilsDto("1234567890"),
+        new PassportDto("1234", "567845", LocalDate.of(1980, 9, 15)),
+        new SnilsDto("123-456-789-00"),
         true
     );
     temporaryTeacher = createTeacher.execute(teacherToCreate);

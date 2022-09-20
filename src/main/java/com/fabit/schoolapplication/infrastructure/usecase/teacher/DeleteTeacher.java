@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.usecase.teacher;
 
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
-import com.fabit.schoolapplication.infrastructure.usecase.teacher.event.TeacherDeletedEvent;
+import com.fabit.schoolapplication.infrastructure.event.TeacherDeletedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

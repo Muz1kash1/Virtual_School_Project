@@ -36,15 +36,15 @@ public class GetTeacherTest {
     TeacherDto teacherToCreate1 = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
-        new PassportDto("1234", "5678", LocalDate.of(1980, 9, 15)),
-        new SnilsDto("1234567890"),
+        new PassportDto("1234", "567845", LocalDate.of(1980, 9, 15)),
+        new SnilsDto("123-456-789-00"),
         true
     );
     TeacherDto teacherToCreate2 = new TeacherDto(
         18,
         new FullNameDto("SName", "SSurname", "SPatronymic"),
-        new PassportDto("4231", "1523",LocalDate.of(1980, 9, 15)),
-        new SnilsDto("24607823"),
+        new PassportDto("4231", "152345", LocalDate.of(1980, 9, 15)),
+        new SnilsDto("246-078-233-00"),
         false
     );
     temporaryTeacher1 = createTeacher.execute(teacherToCreate1);
@@ -63,7 +63,7 @@ public class GetTeacherTest {
     Assertions.assertEquals(2, teachers.size());
     Assertions.assertTrue(temporaryTeacher1.isActive());
     Assertions.assertFalse(temporaryTeacher2.isActive());
-    Assertions.assertEquals("1234567890", temporaryTeacher1.getSnils());
+    Assertions.assertEquals("123-456-789-00", temporaryTeacher1.getSnils());
   }
 
   @Test
@@ -72,5 +72,4 @@ public class GetTeacherTest {
     TeacherEntity resultedTeacher = getTeacher.byId(temporaryTeacher1.getId());
     Assertions.assertEquals(temporaryTeacher1, resultedTeacher);
   }
-
 }

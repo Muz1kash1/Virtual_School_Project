@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.persistence.entity.teacher;
 
 import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
@@ -21,8 +21,8 @@ public class TeacherEntityTest {
     Teacher teacherDomain = Teacher.of(
         TeacherId.of(1L),
         FullName.of("Name", "Surname", "Patronymic"),
-        Passport.of("123", "456", LocalDate.of(1980, 9, 15)),
-        Snils.of("987654321"),
+        RussianPassport.of("1234", "456789", LocalDate.of(1980, 9, 15)),
+        Snils.of("987-654-321-11"),
         10, true);
 
     TeacherServiceMapper teacherMapper = new TeacherServiceMapper();
