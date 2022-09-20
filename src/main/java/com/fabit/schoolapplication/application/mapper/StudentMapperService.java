@@ -12,10 +12,14 @@ import com.fabit.schoolapplication.infrastructure.controller.virtual_school.stud
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class StudentMapperService {
+  final StudentRepository studentRepository;
 
   public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
@@ -29,7 +33,7 @@ public class StudentMapperService {
   }
 
   public Student mapToStudent(StudentDto studentDto) {
-    return Student.of(StudentId.of(1), mapToFullName(studentDto.getName()),
+    return Student.of(StudentId.of(studentRepository.getNextId()), mapToFullName(studentDto.getName()),
         mapToSnils(studentDto.getSnils()), mapToBirthCertificate(studentDto.getBirthCertificate()));
   }
 

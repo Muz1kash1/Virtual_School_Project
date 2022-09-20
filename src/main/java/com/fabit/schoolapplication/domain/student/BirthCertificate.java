@@ -19,14 +19,14 @@ public class BirthCertificate {
   }
 
   public static BirthCertificate of(String serial, String number, LocalDate birthday) {
-    if (isBirthCertificate(serial, number,birthday)) {
+    if (isValidBirthCertificate(serial, number,birthday)) {
       return new BirthCertificate(serial, number, birthday);
     } else {
       throw new IllegalArgumentException();
     }
   }
 
-  private static boolean isBirthCertificate(String serial, String number, LocalDate birthday) {
+  private static boolean isValidBirthCertificate(String serial, String number, LocalDate birthday) {
     if (!Pattern.matches("^[0-9]{6}$", number) || !Pattern.matches("^[0-9]{4}$", serial) ||
         !isValidAge(birthday)) {
       return false;
