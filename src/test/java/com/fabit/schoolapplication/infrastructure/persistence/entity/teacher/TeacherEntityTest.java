@@ -6,7 +6,7 @@ import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.fabit.schoolapplication.infrastructure.usecase.teacher.mapper.TeacherServiceMapper;
+import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

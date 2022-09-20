@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.domain.schoolclass;
 
-import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassAddedStudentEvent;
-import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassCreatedEvent;
-import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassEvent;
-import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassRemovedStudentEvent;
+import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassDomainEvent;
+import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassAddedStudentDomainEvent;
+import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassCreatedDomainEvent;
+import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassRemovedStudentDomainEvent;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,9 @@ public class SchoolClass {
   // -------
   // ** Ивенты
 
-  public static final List<SchoolClassEvent> domainEvents = new ArrayList<>();
+  public static final List<SchoolClassDomainEvent> domainEvents = new ArrayList<>();
 
-  void registerEvent(SchoolClassEvent event) {
+  void registerEvent(SchoolClassDomainEvent event) {
     domainEvents.add(event);
   }
 
@@ -34,14 +34,14 @@ public class SchoolClass {
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = students;
-    registerEvent(new SchoolClassCreatedEvent(this));
+    registerEvent(new SchoolClassCreatedDomainEvent(this));
   }
 
   private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName) {
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = new ArrayList<>();
-    registerEvent(new SchoolClassCreatedEvent(this));
+    registerEvent(new SchoolClassCreatedDomainEvent(this));
   }
 
   // -------
@@ -92,7 +92,7 @@ public class SchoolClass {
    */
   public void addStudent(StudentId student) {
     students.add(student);
-    registerEvent(new SchoolClassAddedStudentEvent(student));
+    registerEvent(new SchoolClassAddedStudentDomainEvent(student));
   }
 
   /**
@@ -103,7 +103,7 @@ public class SchoolClass {
   public void addStudent(StudentId... students) {
     for (StudentId student : students) {
       this.students.add(student);
-      registerEvent(new SchoolClassAddedStudentEvent(student));
+      registerEvent(new SchoolClassAddedStudentDomainEvent(student));
     }
   }
 
@@ -114,7 +114,7 @@ public class SchoolClass {
    */
   public void removeStudent(StudentId student) {
     students.remove(student);
-    registerEvent(new SchoolClassRemovedStudentEvent(student));
+    registerEvent(new SchoolClassRemovedStudentDomainEvent(student));
   }
 
   /**
@@ -125,7 +125,7 @@ public class SchoolClass {
   public void removeStudent(StudentId... students) {
     for (StudentId student : students) {
       this.students.remove(student);
-      registerEvent(new SchoolClassRemovedStudentEvent(student));
+      registerEvent(new SchoolClassRemovedStudentDomainEvent(student));
     }
   }
 
