@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,11 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.util.NestedServletException;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithMockUser
 class StudentControllerTest {
   @Autowired
   private MockMvc mockMvc;
@@ -39,18 +40,17 @@ class StudentControllerTest {
         {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
         "snils":{"numberView":"777777"},
-        "birthCertificate":{"serial":"99998", "number":"111"},
-        "passport":{"serial":"222", "number":" 1234567"},
-        "birthday":"15.09.2007"
+        "birthCertificate":{"serial":"99998", "number":"111","birthday":"2007-09-15"},
+        "passport":{"serial":"222", "number":"1234567","birthday":"2007-09-15"}
          }
         """;
-    mockMvc.perform(post("/student").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(json))
+    mockMvc.perform(
+            post("/student").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+                .content(json))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
         .andExpect(jsonPath("$.snils", is("777777")))
-        .andExpect(jsonPath("$.birthCertificate", is("99998 111")))
-        .andExpect(jsonPath("$.birthday", is("15.09.2007")));
+        .andExpect(jsonPath("$.birthCertificate", is("99998 111")));
   }
 
   @AfterEach
@@ -64,10 +64,9 @@ class StudentControllerTest {
     String json = """
         {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
-        "snils":{"numberView":"777777"},
-        "birthCertificate":{"serial":"111", "number":"111111"},
-        "passport":{"serial":"222", "number":" 1234567"},
-        "birthday":"15.09.2007"
+        "snils":{"numberView":"777777","birthday":"2007-09-15"},
+        "birthCertificate":{"serial":"111", "number":"111111","birthday":"2007-09-15"},
+        "passport":{"serial":"222", "number":"1234567","birthday":"2007-09-15"}
         }
         """;
     mockMvc.perform(put("/student/changeBirthCertificate").contentType(MediaType.APPLICATION_JSON)
@@ -75,8 +74,7 @@ class StudentControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
         .andExpect(jsonPath("$.snils", is("777777")))
-        .andExpect(jsonPath("$.birthCertificate", is("111 111111")))
-        .andExpect(jsonPath("$.birthday", is("15.09.2007")));
+        .andExpect(jsonPath("$.birthCertificate", is("111 111111")));
   }
 
   @Test
@@ -84,11 +82,10 @@ class StudentControllerTest {
   void changeSnilsStudent() throws Exception {
     String json = """
         {
-        "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
-        "snils":{"numberView":"333333"},
-        "birthCertificate":{"serial":"99998", "number":"111"},
-        "passport":{"serial":"222", "number":" 1234567"},
-        "birthday":"15.09.2007"
+          "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
+          "snils":{"numberView":"333333"},
+          "birthCertificate":{"serial":"99998", "number":"111","birthday":"2007-09-15"},
+          "passport":{"serial":"222", "number":"1234567","birthday":"2007-09-15"}
         }
         """;
     mockMvc.perform(put("/student/changeSnils").contentType(MediaType.APPLICATION_JSON)
@@ -105,34 +102,35 @@ class StudentControllerTest {
         {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
         "snils":{"numberView":"777777"},
-        "birthCertificate":{"serial":"99998", "number":"111"},
-        "passport":{"serial":"222", "number":"1234567"},
-        "birthday":"15.09.2007"
-        }
+        "birthCertificate":{"serial":"99998", "number":"111","birthday":"2007-09-15"},
+        "passport":{"serial":"222", "number":"1234567","birthday":"2007-09-15"}
+         }
         """;
     mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
         .andExpect(jsonPath("$.snils", is("777777")))
-        .andExpect(jsonPath("$.passport", is("222 1234567")));
+        .andExpect(jsonPath("$.passport", is("222 1234567 2007-09-15")));
   }
 
   @Test
-  @DisplayName("Добавление паспорта студенту 10 лет, должен выбросить ошибку")
-  void addPassportStudent10Years() {
+  @DisplayName("Добавление паспорта студенту 10 лет, должен выбросить ошибку IllegalArgument")
+  void addPassportStudent10Years() throws Exception {
     String json = """
         {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
         "snils":{"numberView":"777777"},
-        "birthCertificate":{"serial":"99998", "number":"111"},
-        "passport":{"serial":"222", "number":"1234567"},
-        "birthday":"15.09.2010"
-        }
+        "birthCertificate":{"serial":"99998", "number":"111","birthday":"2012-09-15"},
+        "passport":{"serial":"222", "number":"1234567","birthday":"2012-09-15"}
+         }
         """;
-    assertThrows(NestedServletException.class, () -> mockMvc.perform(
-        put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(json)));
+    mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content(json))
+        .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.title", is("Illegal Argument Exception")));
   }
 
   @Test
@@ -140,10 +138,9 @@ class StudentControllerTest {
   void deleteStudent() throws Exception {
     List<StudentEntity> studentEntity = studentRepository.findAll();
     Assertions.assertEquals(1, studentEntity.size());
-    mockMvc.perform(delete("/student/{id}", studentEntity.get(0).getId())
-            .contentType(MediaType.APPLICATION_PROBLEM_JSON).accept(MediaType.APPLICATION_PROBLEM_JSON))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$", is("Ученик исключен из школы")));
+    mockMvc.perform(delete("/student/{id}", studentEntity.get(0).getId()).contentType(
+            MediaType.APPLICATION_PROBLEM_JSON).accept(MediaType.APPLICATION_PROBLEM_JSON))
+        .andExpect(status().isOk()).andExpect(jsonPath("$", is("Ученик исключен из школы")));
     Assertions.assertEquals(0, studentRepository.findAll().size());
   }
 }

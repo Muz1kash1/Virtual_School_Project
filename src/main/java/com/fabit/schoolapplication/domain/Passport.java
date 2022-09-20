@@ -10,14 +10,16 @@ public class Passport {
 
   String serial;
   String number;
+  LocalDate birthday;
 
-  private Passport(String serial, String number) {
+  private Passport(String serial, String number, LocalDate birthday) {
     this.serial = serial;
     this.number = number;
+    this.birthday = birthday;
   }
 
-  public static Passport of(String serial, String number) {
-    return new Passport(serial, number);
+  public static Passport of(String serial, String number, LocalDate birthday) {
+    return new Passport(serial, number, birthday);
   }
 
   public boolean isValidAge(LocalDate birthday) {
@@ -29,6 +31,6 @@ public class Passport {
 
   @Override
   public String toString() {
-    return serial + " " + number;
+    return serial + " " + number + " " + birthday;
   }
 }

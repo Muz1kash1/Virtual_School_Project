@@ -1,0 +1,28 @@
+asyncapi: '2.4.0'
+info:
+  title: Виртуальная школа RabbitMQ API
+  version: 'v1.r1'
+  description: Отправка данных из приложения "Виртуальная школа"
+defaultContentType: application/json
+channels:
+  virtual-school.mark-updated:
+    subscribe:
+      description: Успешное получение пакета данных на Федеральном портале от источника "Виртуальная школа"
+      operationId: schoolDataExtracted
+      message:
+        $ref: '#/components/messages/extract-data-ready'
+components:
+  messages:
+    extract-data-ready:
+      schemaFormat: application/schema+json;version=draft-07
+      examples:
+        - "payload": {
+          "eventType": "updated",
+          "studentId": "1",
+          "studentFullName": "Иванов Иван Иванович",
+          "subjectName": "Математика",
+          "subjectID": "10"
+        }
+      payload: {
+        $ref: 'school-data.json'
+      }
