@@ -3,9 +3,9 @@ package com.fabit.schoolapplication.domain.student;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
-import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -26,7 +26,7 @@ public class Student {
 
   protected void registerEvent(StudentDomainEvent event) {
     Assert.notNull(event, "Domain event must not be null");
-    this.domainEvents.add(event);
+    domainEvents.add(event);
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,

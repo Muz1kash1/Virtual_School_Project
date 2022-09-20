@@ -13,9 +13,9 @@ public class SchoolClassName {
   String litera;
 
   /**
-   * Геттер для получения полного названия (11Б, 8А, 7В)
+   * Геттер для получения полного названия (11Б, 8А, 7В).
    *
-   * @return String
+   * @return String полного имени
    */
   public String getFullName() {
     return parallel + "" + litera;
