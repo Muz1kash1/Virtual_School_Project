@@ -1,6 +1,5 @@
 package com.fabit.schoolapplication.domain.educatioprogress;
 
-import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import java.util.List;

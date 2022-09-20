@@ -1,6 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
-import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
+import com.fabit.schoolapplication.domain.educatioprogress.LessonId;
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,10 @@ public class DeleteHomeworkForClass {
   private final HomeworkForClassRepository homeworkForClassRepository;
 
   /**
-   * метод удаления урока
-   * @param lessonId айди урока
+   * метод удаления дз для класса
+   * @param homeworkForClassId айди дз
    */
-  public void execute(LessonId lessonId){
-    homeworkForClassRepository.deleteById(lessonId.getValue());
+  public void execute(HomeworkForClassId homeworkForClassId){
+    homeworkForClassRepository.deleteById(homeworkForClassId.getValue());
   }
 }

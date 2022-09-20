@@ -4,6 +4,7 @@ import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassTaskSetEvent;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassCreatedEvent;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassEvent;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,11 @@ import org.springframework.util.Assert;
 
 @Getter
 public class HomeworkForClass {
-
+  private HomeworkForClassId id;
   private Discipline discipline;
   private String task;
+
+  private SchoolClassId schoolClassId;
 
   private final LocalDate date;
 
@@ -32,8 +35,12 @@ public class HomeworkForClass {
     registerEvent(new HomeworkForClassCreatedEvent(this));
   }
 
-  public static HomeworkForClass of(Discipline discipline, LocalDate date) {
-    return new HomeworkForClass(discipline, date);
+  public static HomeworkForClass of(Discipline discipline, LocalDate date, SchoolClassId schoolClassId,
+      HomeworkForClassId id) {
+    HomeworkForClass homeworkForClass = new HomeworkForClass(discipline, date);
+    homeworkForClass.schoolClassId = schoolClassId;
+    homeworkForClass.id = id;
+    return homeworkForClass;
   }
 
   /**

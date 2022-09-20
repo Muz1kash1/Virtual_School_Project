@@ -1,8 +1,9 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
-import com.fabit.schoolapplication.domain.homeworkforclass.LessonId;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.lesson.HomeworkForClassEntity;
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
+import com.fabit.schoolapplication.infrastructure.controller.homeworkforclass.dto.HomeworkForClassDto;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.mapper.HomeworkForClassMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +17,16 @@ public class GetHomeworkForClass {
   private final HomeworkForClassMapper homeworkForClassMapper;
 
   /**
-   * метод возвращающий урок по айди
+   * метод возвращающий дз класса по айди
    *
-   * @param lessonId айди
-   * @return урок по этому айди
+   * @param homeworkForClassId айди
+   * @return дз по этому айди
    */
-  public HomeworkForClassEntity execute(LessonId lessonId) {
-    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassRepository.findById(lessonId.getValue()).get();
-    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToLesson(
+  public HomeworkForClassDto execute(long homeworkForClassId) {
+    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassRepository.findById(homeworkForClassId).get();
+    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToHomeworkForClass(
         homeworkForClassEntity);
 
-    return homeworkForClassMapper.mapLessonToEntity(homeworkForClass);
+    return homeworkForClassMapper.mapHomeworkForClassToDto(homeworkForClass);
   }
 }
