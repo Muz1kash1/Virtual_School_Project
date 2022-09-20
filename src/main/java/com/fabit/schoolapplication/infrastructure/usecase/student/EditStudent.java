@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.usecase.student;
 
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.infrastructure.controller.student.dto.StudentDto;
@@ -27,7 +27,7 @@ public class EditStudent {
    * @param studentDto the student dto
    */
   public StudentEntity addPassport(StudentDto studentDto) {
-    Passport passport = studentMapperService.mapToPassport(studentDto.getPassport());
+    RussianPassport passport = studentMapperService.mapToPassport(studentDto.getPassport());
     if (passport.isValidAge(studentDto.getBirthCertificate().getBirthday())) {
       StudentEntity studentEntity =
           studentRepository.findBySnils(studentDto.getSnils().getNumberView());

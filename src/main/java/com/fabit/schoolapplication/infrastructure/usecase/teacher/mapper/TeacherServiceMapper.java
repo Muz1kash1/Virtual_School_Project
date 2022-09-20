@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.usecase.teacher.mapper;
 
 import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
@@ -25,8 +25,9 @@ public class TeacherServiceMapper {
         teacherDto.isActive());
   }
 
-  private Passport mapDtoToDomain(PassportDto passportDto) {
-    return Passport.of(passportDto.getSerial(), passportDto.getNumber(), passportDto.getBirthday());
+
+  private RussianPassport mapDtoToDomain(PassportDto passportDto) {
+    return RussianPassport.of(passportDto.getSerial(), passportDto.getNumber(), passportDto.getBirthday());
   }
 
   private FullName mapDtoToDomain(FullNameDto fullNameDto) {
@@ -68,10 +69,10 @@ public class TeacherServiceMapper {
     return FullName.of(arr[0], arr[1], arr[2]);
   }
 
-  public Passport mapEntityPassportToDomain(String passport) {
+  public RussianPassport mapEntityPassportToDomain(String passport) {
     String[] arr = passport.split(" ");
     LocalDate birthday = LocalDate.parse(arr[2]);
-    return Passport.of(arr[0], arr[1], birthday);
+    return RussianPassport.of(arr[0], arr[1], birthday);
   }
 
   public Snils mapEntitySnilsToDomain(String snils) {

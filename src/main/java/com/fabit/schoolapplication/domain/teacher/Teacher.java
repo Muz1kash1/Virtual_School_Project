@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.domain.teacher;
 
 import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.teacher.event.TeacherActivatedEvent;
 import com.fabit.schoolapplication.domain.teacher.event.TeacherCreatedEvent;
@@ -30,7 +30,7 @@ public class Teacher {
   /** Ф.И.О учителя */
   private FullName fullName;
   /** паспорт */
-  private Passport passport;
+  private RussianPassport passport;
   /** снилс */
   private Snils snils;
   /** статус учителя (можно ли его поставить на занятия или нет) */
@@ -41,7 +41,7 @@ public class Teacher {
   private Teacher(
       TeacherId teacherId,
       FullName fullName,
-      Passport passport,
+      RussianPassport passport,
       Snils snils,
       int standingYears,
       boolean isActive) {
@@ -67,7 +67,7 @@ public class Teacher {
   public static Teacher of(
       TeacherId teacherId,
       FullName fullName,
-      Passport passport,
+      RussianPassport passport,
       Snils snils,
       int standingYears,
       boolean active) {

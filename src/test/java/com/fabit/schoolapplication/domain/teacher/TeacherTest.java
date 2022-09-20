@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.domain.teacher;
 
 import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Passport;
+import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
+            RussianPassport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -35,7 +35,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
+            RussianPassport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -54,7 +54,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
+            RussianPassport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -72,7 +72,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
+            RussianPassport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
@@ -88,7 +88,7 @@ class TeacherTest {
         Teacher.of(
             TeacherId.of(1L),
             FullName.of("Иванов", "Иван", "Иванович"),
-            Passport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
+            RussianPassport.of("1111", "222222",LocalDate.of(1980, 9, 15)),
             Snils.of("132-241-324-21"),
             10,
             true);
