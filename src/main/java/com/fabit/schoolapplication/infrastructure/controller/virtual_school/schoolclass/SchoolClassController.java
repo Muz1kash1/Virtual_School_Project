@@ -2,6 +2,7 @@ package com.fabit.schoolapplication.infrastructure.controller.virtual_school.sch
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.schoolclass.dto.SchoolClassDTO;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.AddStudentToSchoolClass;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.CreateSchoolClass;
@@ -99,8 +100,8 @@ public class SchoolClassController {
   /**
    * Добавление ученика в школьный класс.
    *
-   * @param id - идентификатор школьного класса
-   * @param studentId     - идентификатор ученика
+   * @param id        - идентификатор школьного класса
+   * @param studentId - идентификатор ученика
    * @return ResponseEntity
    */
   @PostMapping(value = "/school-class/{id}")
@@ -113,8 +114,8 @@ public class SchoolClassController {
   /**
    * Удаление ученика из указанного класса.
    *
-   * @param id - идентификатор школьного класса
-   * @param studentId     - идентификатор ученика
+   * @param id        - идентификатор школьного класса
+   * @param studentId - идентификатор ученика
    * @return ResponseEntity
    */
   @DeleteMapping("/school-class/{id}")

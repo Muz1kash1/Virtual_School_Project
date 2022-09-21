@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.controller.virtual_school.schoolclass;
+package com.fabit.schoolapplication.infrastructure.controller.virtual_school.schoolclass.dto;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
