@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.application.usecase.virtual_school.homework;
+package com.fabit.schoolapplication.application.usecase.virtual_school.loadedhomework;
 
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
@@ -7,7 +7,6 @@ import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.Stu
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
-import com.fabit.schoolapplication.application.usecase.virtual_school.loadedhomework.CompleteHomework;
 import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

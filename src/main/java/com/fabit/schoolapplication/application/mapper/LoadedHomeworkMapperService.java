@@ -50,7 +50,7 @@ public class LoadedHomeworkMapperService {
     loadedHomeworkEntity.setHomeworkForClassId(
         loadedHomework.getHomeworkForClassId().getValue());
 
-    loadedHomeworkEntity.setStudent(
+    loadedHomeworkEntity.setStudentId(
         loadedHomework.getStudentId().getValue());
     return loadedHomeworkEntity;
   }
@@ -63,7 +63,7 @@ public class LoadedHomeworkMapperService {
    */
   public LoadedHomework mapHomeworkEntityToHomework(LoadedHomeworkEntity loadedHomeworkEntity) {
     LoadedHomework loadedHomework = LoadedHomework.of(LoadedHomeworkId.of(loadedHomeworkEntity.getId()),
-        StudentId.of(loadedHomeworkEntity.getStudent()),
+        StudentId.of(loadedHomeworkEntity.getStudentId()),
         HomeworkForClassId.of(loadedHomeworkEntity.getHomeworkForClassId()));
     loadedHomework.uploadTaskCompletionResult(loadedHomeworkEntity.getTaskCompletionResult());
     return loadedHomework;

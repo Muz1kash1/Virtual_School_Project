@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.application.usecase.virtual_school.homework.mapper;
+package com.fabit.schoolapplication.application.usecase.virtual_school.loadedhomework.mapper;
 
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class LoadedLoadedHomeworkMapperServiceTest {
+public class LoadedHomeworkMapperServiceTest {
 
   @Autowired
   LoadedHomeworkMapperService loadedHomeworkMapperService;
@@ -44,7 +44,7 @@ public class LoadedLoadedHomeworkMapperServiceTest {
     Assertions.assertEquals(loadedHomeworkEntity.getHomeworkForClassId(),
         loadedHomeworkDto.getHomeworkForClassId());
     Assertions.assertEquals(
-        loadedHomeworkEntity.getStudent(), loadedHomework.getStudentId().getValue());
+        loadedHomeworkEntity.getStudentId(), loadedHomework.getStudentId().getValue());
     Assertions.assertEquals(loadedHomeworkEntity.getId(), loadedHomework.getLoadedHomeworkId().getValue());
 
   }

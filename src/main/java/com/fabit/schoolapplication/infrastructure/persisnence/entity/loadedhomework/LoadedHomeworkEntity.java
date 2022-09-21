@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.data.domain.DomainEvents;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -27,7 +29,7 @@ public class LoadedHomeworkEntity {
   @Column(name = "id")
   private Long id;
   @Column(name = "student_id")
-  private Long student;
+  private Long studentId;
   @Column(name = "homework_for_class_id")
   private Long homeworkForClassId;
   @Column(name = "task_completion_result")
