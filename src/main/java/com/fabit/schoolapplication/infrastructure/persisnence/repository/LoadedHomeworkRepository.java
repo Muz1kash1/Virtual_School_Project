@@ -8,6 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoadedHomeworkRepository extends JpaRepository<LoadedHomeworkEntity, Long> {
 
+  /**
+   * метод возвращающий следующий ид в таблице загруженного дз
+   *
+   * @return численное значение следующего ид
+   */
   @Query(value = "SELECT nextval('homework_completion_result_id_seq') from homework_completion_result_id_seq", nativeQuery = true)
   Long getNextId();
 }
