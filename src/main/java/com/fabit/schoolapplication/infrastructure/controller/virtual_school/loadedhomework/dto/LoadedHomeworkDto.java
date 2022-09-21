@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto;
+package com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;

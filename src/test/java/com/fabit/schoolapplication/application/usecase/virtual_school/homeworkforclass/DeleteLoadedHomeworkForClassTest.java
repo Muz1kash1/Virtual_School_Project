@@ -3,10 +3,8 @@ package com.fabit.schoolapplication.application.usecase.virtual_school.homeworkf
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.infrastructure.homeworkforclass.CreateHomeworkForClass;
-import com.fabit.schoolapplication.infrastructure.homeworkforclass.DeleteHomeworkForClass;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
-import com.fabit.schoolapplication.infrastructure.homeworkforclass.mapper.HomeworkForClassMapper;
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

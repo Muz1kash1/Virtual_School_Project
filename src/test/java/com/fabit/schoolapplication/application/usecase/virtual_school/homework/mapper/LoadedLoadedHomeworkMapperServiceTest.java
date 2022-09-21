@@ -1,13 +1,12 @@
 package com.fabit.schoolapplication.application.usecase.virtual_school.homework.mapper;
 
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
-import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
-import com.fabit.schoolapplication.infrastructure.usecase.homework.mapper.LoadedHomeworkMapperService;
+import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
-package com.fabit.schoolapplication.infrastructure.controller.loadedhomework;
+package com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework;
 
-import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
-import com.fabit.schoolapplication.infrastructure.usecase.homework.CompleteHomework;
-import com.fabit.schoolapplication.infrastructure.usecase.homework.GetLoadedHomework;
+import com.fabit.schoolapplication.application.usecase.virtual_school.loadedhomework.CompleteHomework;
+import com.fabit.schoolapplication.application.usecase.virtual_school.loadedhomework.GetLoadedHomework;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

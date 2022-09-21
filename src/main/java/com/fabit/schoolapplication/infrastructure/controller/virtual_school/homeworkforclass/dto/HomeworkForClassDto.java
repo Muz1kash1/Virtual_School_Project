@@ -1,8 +1,6 @@
-package com.fabit.schoolapplication.infrastructure.controller.homeworkforclass.dto;
+package com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass.dto;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
-import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
