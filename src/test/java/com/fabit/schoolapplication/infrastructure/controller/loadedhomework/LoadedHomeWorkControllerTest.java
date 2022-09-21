@@ -67,10 +67,5 @@ public class LoadedHomeWorkControllerTest {
         .andExpect(jsonPath("$.homeworkForClassId", is(2)));
 
   }
-//  @GetMapping(value = "/homework/{id}", produces = "application/json")
-//  public ResponseEntity<LoadedHomeworkDto> getCompletedHomework(
-//      @PathVariable long id) {
-//    return ResponseEntity.ok().body(getLoadedHomework.execute(id));
-//  }
 
 }
