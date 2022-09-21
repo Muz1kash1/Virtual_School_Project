@@ -7,7 +7,7 @@ import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LessonForScheduleTest {
+public class LoadedHomeworkForClassForScheduleTest {
 
   @Test
   @DisplayName("Создание не валидного, отрицательного, урока по расписанию")

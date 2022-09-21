@@ -23,23 +23,12 @@ CREATE TABLE school_class
     PRIMARY KEY (id)
 );
 
-CREATE TABLE lesson
-(
-    id BIGSERIAL NOT NULL ,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE education_progress
 (
     id BIGSERIAL NOT NULL ,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE homework_completion_result
-(
-    id BIGSERIAL NOT NULL ,
-    PRIMARY KEY (id)
-);
 
 CREATE TABLE schedule
 (
