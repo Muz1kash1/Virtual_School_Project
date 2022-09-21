@@ -1,7 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.student;
 
 import com.fabit.schoolapplication.domain.student.Student;
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -9,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import org.springframework.data.domain.AfterDomainEventPublication;

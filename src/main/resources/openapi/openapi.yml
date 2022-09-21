@@ -1,0 +1,862 @@
+openapi: 3.0.1
+info:
+  title: Сервис "Виртуальная школа"
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Сервер приложения Virtual-School
+paths:
+  /homework/{id}:
+    get:
+      tags:
+        - loaded-homework
+      operationId: getCompletedHomework
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadedHomeworkDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /homework-for-class/{id}:
+    get:
+      tags:
+        - homework-for-class
+      operationId: getHomeworkForClass
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeworkForClassDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /homework-for-class:
+    post:
+      tags:
+        - homework-for-class
+      operationId: addHomeworkForClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomeworkForClassDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /homework:
+    post:
+      tags:
+        - loaded-homework
+      operationId: sendCompletedHomework
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadedHomeworkDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /teacher:
+    get:
+      description: Получение учителя
+      tags:
+        - teacher
+      operationId: getAllTeachers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeacherEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+    post:
+      description: Создание учителя
+      tags:
+        - teacher
+      operationId: createTeacher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /teacher/{teacherId}/activate:
+    description: Изменение статуса учителя на "готов к работе"
+    put:
+      tags:
+        - teacher
+      operationId: activateTeacher
+      parameters:
+        - name: teacherId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /teacher/standing-years:
+    description: Изменение стажа работы учителя
+    put:
+      tags:
+        - teacher
+      operationId: changeStandingYears
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandingYearsDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /teacher/deactivate:
+    put:
+      description: Изменение статуса учителя на "не готов к работе"
+      tags:
+        - teacher
+      operationId: deactivateTeacher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /school-class:
+    get:
+      description: Получение списка всех школьных классов
+      tags:
+        - SchoolClass
+      operationId: getAllSchoolClasses
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SchoolClassEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+    post:
+      description: Создание нового класса
+      tags:
+        - SchoolClass
+      operationId: createSchoolClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchoolClassDTO'
+        required: true
+      responses:
+        201:
+          description: CREATED
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+    delete:
+      description: Удаление существующего класса
+      tags:
+        - SchoolClass
+      operationId: deleteSchoolClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmptySchoolClassDTO'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /school-class/{id}:
+    get:
+      description: Получить школьный класс по идентификатору
+      tags:
+        - SchoolClass
+      operationId: getSchoolClassById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolClassEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+    post:
+      description: Добавление ученика в школьный класс
+      tags:
+        - SchoolClass
+      operationId: addStudentToClass
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: studentId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+    delete:
+      description: Удаление ученика из школьного класса
+      tags:
+        - SchoolClass
+      operationId: removeStudentFromClass
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Id'
+        - name: studentId
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/StudentId'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /student/change-snils:
+    put:
+      description: Изменения данных СНИЛС
+      tags:
+        - student
+      operationId: changeSnilsStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /student/change-birthcertificate:
+    put:
+      description: Изменение данных свидетельства о рождении
+      tags:
+        - student
+      operationId: changeBirthCertificateStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+
+  /student/add-passport:
+    put:
+      description: добавление паспорта ученику достигшему возраста 14 лет
+      tags:
+        - student
+      operationId: addPassportStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /student:
+    description: Добавление нового ученика в список школы
+    post:
+      tags:
+        - student
+      operationId: addStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+  /student/{id}:
+    description: Удаление ученика по идентификатору
+    delete:
+      tags:
+        - student
+      operationId: deleteStudent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentEntity'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - orderAuth: [ ]
+components:
+  responses:
+    UnauthorizedError:
+      description: Аутентификация не пройдена
+      headers:
+        WWW_Authenticate:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    BadRequest:
+      description: Неверные входные данные
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    InternalServerError:
+      description: Ошибка сервера.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    NotFound:
+      description: Заказ не найден
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Conflict:
+      description: Ошибка изменения состояния.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    TeacherEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        standingYears:
+          type: integer
+          format: int32
+          example: 10
+        fullName:
+          type: string
+          example: Иванов Иван Иванович
+        passport:
+          type: string
+          example: 7809 542478
+        snils:
+          type: string
+          example: 0978 209684
+        active:
+          type: boolean
+          example: true
+    StandingYearsDto:
+      type: object
+      properties:
+        teacherId:
+          type: integer
+          format: int64
+          example: 1
+        standingYears:
+          type: integer
+          format: int32
+          example: 10
+    DeactivateDto:
+      type: object
+      properties:
+        teacherId:
+          type: integer
+          format: int64
+          example: 1
+        from:
+          type: string
+        to:
+          type: string
+    SchoolClassDTO:
+      type: object
+      description: ДТО школьного класса
+      properties:
+        schoolClassId:
+          $ref: '#/components/schemas/Id'
+        parallel:
+          $ref: '#/components/schemas/Parallel'
+        litera:
+          $ref: '#/components/schemas/Litera'
+        studentIds:
+          description: Список объектов идентификаторов студента
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentId'
+    EmptySchoolClassDTO:
+      type: object
+      description: ДТО школьного класса без учеников
+      properties:
+        schoolClassId:
+          $ref: '#/components/schemas/Id'
+        parallel:
+          $ref: '#/components/schemas/Parallel'
+        litera:
+          $ref: '#/components/schemas/Litera'
+    SchoolClassEntity:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+        parallel:
+          $ref: '#/components/schemas/Parallel'
+        litera:
+          $ref: '#/components/schemas/Litera'
+    StudentId:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+          example: 7
+    Id:
+      description: Идентификатор школьного класса
+      type: integer
+      format: int64
+      example: 15
+    Parallel:
+      description: Параллель (1-11)
+      type: integer
+      format: int32
+      example: 10
+    Litera:
+      description: Литера класса (А-Я за исключением "Ъ" и "Ь")
+      type: string
+      example: "Б"
+    BirthCertificateDto:
+      type: object
+      properties:
+        serial:
+          type: string
+          example: 1234
+        number:
+          type: string
+          example: 567890
+    PassportDto:
+      type: object
+      properties:
+        serial:
+          type: string
+          example: 1234
+        number:
+          type: string
+          example: 567890
+    SnilsDto:
+      type: object
+      properties:
+        numberView:
+          type: string
+          example: 1234567890
+    StudentDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Ivan
+        snils:
+          $ref: '#/components/schemas/SnilsDto'
+        birthCertificate:
+          $ref: '#/components/schemas/BirthCertificateDto'
+        passport:
+          $ref: '#/components/schemas/PassportDto'
+        birthday:
+          type: string
+          format: date
+    StudentEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Ivan
+        snils:
+          type: string
+          example: 1234567890
+        birthCertificate:
+          type: string
+        passport:
+          type: string
+          example: 1234
+        birthday:
+          type: string
+          format: date
+          example: 567890
+    LoadedHomeworkDto:
+      type: object
+      properties:
+        homeworkId:
+          type: integer
+          format: int64
+          example: 1
+        studentId:
+          type: integer
+          format: int64
+          example: 1
+        taskCompletionResult:
+          type: string
+          example: any text
+        homeworkForClassId:
+          type: integer
+          format: int64
+          example: 1
+    HomeworkForClassDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        discipline:
+          type: string
+          enum:
+            - RUSSIAN_LANGUAGE
+            - LITERATURE
+            - RUSSIAN_LANGUAGE_AND_LITERATURE
+            - ENGLISH
+            - DEUTSCH
+            - FRENCH
+            - MATHS
+            - ALGEBRA
+            - GEOMETRY
+            - COMPUTING
+            - PHYSICS
+            - CHEMISTRY
+            - BIOLOGY
+            - HISTORY
+            - SOCIAL_SCIENCE
+            - GEOGRAPHY
+            - PHYSICAL_EDUCATION
+            - MUSIC
+            - DRAWING
+            - TECHNOLOGY
+          example: MUSIC
+        task:
+          type: string
+          example: Do some task
+        schoolClassId:
+          type: integer
+          format: int64
+          example: 1
+        date:
+          type: string
+          format: date
+          example: 2022-09-15
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: |
+            A relative URI reference that uniquely identifies the problem type.
+          default: 'about:blank'
+          example: '/problem/internal-server-error'
+        title:
+          type: string
+          description: |
+            title of the problem
+          example: Internal server error
+        status:
+          type: integer
+          format: int32
+          description: |
+            The HTTP status of the problem.
+          minimum: 100
+          maximum: 599
+          example: 404
+        detail:
+          type: string
+          description: |
+            Detail of the problem
+          example: Save data error
