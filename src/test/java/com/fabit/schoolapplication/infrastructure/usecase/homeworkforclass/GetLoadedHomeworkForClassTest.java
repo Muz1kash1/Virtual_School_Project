@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
+import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.CreateSchoolClass;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.educatioprogress.LessonId;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
@@ -13,7 +14,6 @@ import com.fabit.schoolapplication.infrastructure.persisnence.repository.Homewor
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.mapper.HomeworkForClassMapper;
-import com.fabit.schoolapplication.infrastructure.usecase.schoolclass.CreateSchoolClass;
 import java.time.LocalDate;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;

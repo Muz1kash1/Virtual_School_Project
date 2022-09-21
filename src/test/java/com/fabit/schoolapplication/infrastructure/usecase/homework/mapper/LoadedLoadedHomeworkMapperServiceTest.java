@@ -3,7 +3,10 @@ package com.fabit.schoolapplication.infrastructure.usecase.homework.mapper;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,11 @@ public class LoadedLoadedHomeworkMapperServiceTest {
 
   @Autowired
   LoadedHomeworkMapperService loadedHomeworkMapperService;
+  @Autowired
+  LoadedHomeworkRepository loadedHomeworkRepository;
+  @Autowired
+  StudentRepository studentRepository;
+
 
   @DisplayName("Маппер работает корректно")
   @Test
@@ -24,7 +32,7 @@ public class LoadedLoadedHomeworkMapperServiceTest {
     Assertions.assertEquals(loadedHomeworkDto.getTaskCompletionResult(),
         loadedHomework.getTaskCompletionResult());
     Assertions.assertEquals(loadedHomeworkDto.getStudentId(), loadedHomework.getStudentId().getValue());
-    Assertions.assertEquals(loadedHomeworkDto.getHomeworkId(), loadedHomework.getLoadedHomeworkId().getValue());
+    Assertions.assertEquals(loadedHomeworkRepository.getNextId() - 1, loadedHomework.getLoadedHomeworkId().getValue());
     Assertions.assertEquals(loadedHomeworkDto.getHomeworkForClassId(),
         loadedHomework.getHomeworkForClassId().getValue());
 
@@ -37,7 +45,7 @@ public class LoadedLoadedHomeworkMapperServiceTest {
         loadedHomeworkDto.getHomeworkForClassId());
     Assertions.assertEquals(
         loadedHomeworkEntity.getStudent(), loadedHomework.getStudentId().getValue());
-    Assertions.assertEquals(loadedHomeworkEntity.getId(), loadedHomework.getHomeworkForClassId().getValue());
+    Assertions.assertEquals(loadedHomeworkEntity.getId(), loadedHomework.getLoadedHomeworkId().getValue());
 
   }
 }

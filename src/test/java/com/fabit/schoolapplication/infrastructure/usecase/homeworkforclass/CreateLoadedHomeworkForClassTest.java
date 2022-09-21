@@ -1,20 +1,15 @@
 package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
 
 
+import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.CreateSchoolClass;
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
-import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.CreateHomeworkForClass;
 import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.mapper.HomeworkForClassMapper;
-import com.fabit.schoolapplication.infrastructure.usecase.schoolclass.CreateSchoolClass;
 import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

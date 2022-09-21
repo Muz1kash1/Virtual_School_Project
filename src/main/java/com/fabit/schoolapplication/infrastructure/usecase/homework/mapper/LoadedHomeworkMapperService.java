@@ -6,10 +6,15 @@ import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class LoadedHomeworkMapperService {
+
+  final LoadedHomeworkRepository loadedHomeworkRepository;
 
   /**
    * Метод мапинга дто в доменный объект дз.
@@ -19,7 +24,7 @@ public class LoadedHomeworkMapperService {
    */
   public LoadedHomework mapDtoToHomework(LoadedHomeworkDto dto) {
     LoadedHomework loadedHomework = LoadedHomework.of(
-        LoadedHomeworkId.of(dto.getHomeworkId()),
+        LoadedHomeworkId.of(loadedHomeworkRepository.getNextId()),
         StudentId.of(dto.getStudentId()),
         HomeworkForClassId.of(dto.getHomeworkForClassId()));
     if (dto.getTaskCompletionResult() != null && !dto.getTaskCompletionResult().equals("")) {

@@ -3,15 +3,16 @@ package com.fabit.schoolapplication.infrastructure.usecase.homework;
 import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.homework.mapper.LoadedHomeworkMapperService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class GetLoadedHomework {
 
-  @Autowired
+
   LoadedHomeworkMapperService loadedHomeworkMapperService;
-  @Autowired
   LoadedHomeworkRepository loadedHomeworkRepository;
 
   /**

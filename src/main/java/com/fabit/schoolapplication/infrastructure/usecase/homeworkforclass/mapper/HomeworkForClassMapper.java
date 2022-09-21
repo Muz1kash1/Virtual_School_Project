@@ -5,15 +5,16 @@ import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.infrastructure.controller.homeworkforclass.dto.HomeworkForClassDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class HomeworkForClassMapper {
-
-  @Autowired
-  SchoolClassRepository schoolClassRepository;
+  final HomeworkForClassRepository homeworkForClassRepository;
 
   /**
    * Метод получения сущности бд из модели домена Дз для класса.
@@ -25,7 +26,7 @@ public class HomeworkForClassMapper {
     HomeworkForClassEntity homeworkForClassEntity = new HomeworkForClassEntity();
     homeworkForClassEntity.setDiscipline(homeworkForClass.getDiscipline());
     homeworkForClassEntity.setHomeworkTask(homeworkForClass.getTask());
-    homeworkForClassEntity.setId(homeworkForClass.getId().getValue());
+    homeworkForClassEntity.setId(homeworkForClassRepository.getNextId());
     homeworkForClassEntity.setDate(homeworkForClass.getDate());
     homeworkForClassEntity.setSchoolClassId(homeworkForClass.getSchoolClassId().getValue());
     return homeworkForClassEntity;

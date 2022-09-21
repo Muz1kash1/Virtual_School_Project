@@ -6,19 +6,19 @@ import com.fabit.schoolapplication.infrastructure.controller.loadedhomework.dto.
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.usecase.homework.mapper.LoadedHomeworkMapperService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class CompleteHomework {
 
-  @Autowired
-  LoadedHomeworkRepository repository;
-  @Autowired
-  LoadedHomeworkMapperService loadedHomeworkMapperService;
+  final LoadedHomeworkRepository repository;
+  final LoadedHomeworkMapperService loadedHomeworkMapperService;
 
   /**
    * Метод загрузки выполненного дз из дто.
