@@ -1,9 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.controller.homeworkforclass;
 
-import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.infrastructure.controller.homeworkforclass.dto.HomeworkForClassDto;
-import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.CreateHomeworkForClass;
-import com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass.GetHomeworkForClass;
+import com.fabit.schoolapplication.infrastructure.homeworkforclass.CreateHomeworkForClass;
+import com.fabit.schoolapplication.infrastructure.homeworkforclass.GetHomeworkForClass;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

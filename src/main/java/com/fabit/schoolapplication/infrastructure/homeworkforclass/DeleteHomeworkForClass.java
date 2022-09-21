@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.infrastructure.usecase.homeworkforclass;
+package com.fabit.schoolapplication.infrastructure.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
