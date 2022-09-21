@@ -24,7 +24,7 @@ public class EditStudentEndpoint {
    * @param student student
    * @return response entity
    */
-  @PutMapping("/changeBirthCertificate")
+  @PutMapping("/change-birthcertificate")
   public ResponseEntity<StudentEntity> changeBirthCertificateStudent(
       @RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
@@ -37,7 +37,7 @@ public class EditStudentEndpoint {
    * @param student the student
    * @return the response entity
    */
-  @PutMapping("/changeSnils")
+  @PutMapping("/change-snils")
   public ResponseEntity<StudentEntity> changeSnilsStudent(@RequestBody StudentDto student) {
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
     return ResponseEntity.ok().body(editStudent.changeSnils(student));
@@ -49,7 +49,7 @@ public class EditStudentEndpoint {
    * @param student student
    * @return response entity
    */
-  @PutMapping("/addPassport")
+  @PutMapping("/add-passport")
   public ResponseEntity<StudentEntity> addPassportStudent(@RequestBody StudentDto student) {
     log.info("trying to add RussianPassport: " + student.getPassport());
     return ResponseEntity.ok().body(editStudent.addPassport(student));

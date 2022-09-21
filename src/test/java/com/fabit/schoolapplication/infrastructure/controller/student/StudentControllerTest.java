@@ -69,7 +69,7 @@ class StudentControllerTest {
         "passport":{"serial":"2222", "number":"123456","birthday":"2007-09-15"}
         }
         """;
-    mockMvc.perform(put("/student/changeBirthCertificate").contentType(MediaType.APPLICATION_JSON)
+    mockMvc.perform(put("/student/change-birthcertificate").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
@@ -88,7 +88,7 @@ class StudentControllerTest {
           "passport":{"serial":"2222", "number":"123456","birthday":"2007-09-15"}
         }
         """;
-    mockMvc.perform(put("/student/changeSnils").contentType(MediaType.APPLICATION_JSON)
+    mockMvc.perform(put("/student/change-snils").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
@@ -106,7 +106,7 @@ class StudentControllerTest {
         "passport":{"serial":"2222", "number":"123456","birthday":"2007-09-15"}
          }
         """;
-    mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
+    mockMvc.perform(put("/student/add-passport").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON).content(json))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
@@ -125,7 +125,7 @@ class StudentControllerTest {
         "passport":{"serial":"2222", "number":"123456","birthday":"2012-09-15"}
          }
         """;
-    mockMvc.perform(put("/student/addPassport").contentType(MediaType.APPLICATION_JSON)
+    mockMvc.perform(put("/student/add-passport").contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
             .content(json))
         .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
