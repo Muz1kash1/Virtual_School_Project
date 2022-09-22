@@ -19,7 +19,7 @@ public class LoadedHomework {
   private String taskCompletionResult;
 
 
-  public static final transient List<LoadedHomeworkEvent> DOMAIN_EVENTS = new ArrayList<>();
+  public static final List<LoadedHomeworkEvent> DOMAIN_EVENTS = new ArrayList<>();
 
 
   /**
