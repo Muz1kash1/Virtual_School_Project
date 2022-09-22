@@ -26,11 +26,17 @@ import org.springframework.util.Assert;
 public class Teacher {
 
   public static final List<TeacherDomainEvent> domainEvents = new ArrayList<>();
+
   private TeacherId teacherId;
+
   private int standingYears;
+
   private FullName fullName;
+
   private RussianPassport passport;
+
   private Snils snils;
+
   private boolean isActive;
 
   private Teacher(
@@ -40,12 +46,14 @@ public class Teacher {
       Snils snils,
       int standingYears,
       boolean isActive) {
+
     this.standingYears = standingYears;
     this.teacherId = teacherId;
     this.fullName = fullName;
     this.passport = passport;
     this.snils = snils;
     this.isActive = isActive;
+
     registerEvent(new TeacherCreatedDomainEvent(getTeacherId()));
   }
 
@@ -66,12 +74,15 @@ public class Teacher {
       Snils snils,
       int standingYears,
       boolean active) {
+
     Teacher teacher = new Teacher(teacherId, fullName, passport, snils, standingYears, active);
     teacher.isActive = active;
+
     return teacher;
   }
 
   protected void registerEvent(TeacherDomainEvent event) {
+
     Assert.notNull(event, "Доменное событие не должно быть null");
     domainEvents.add(event);
   }
@@ -80,6 +91,7 @@ public class Teacher {
    * Изменить статус учителя на неактивный.
    */
   public void deactivate(LocalDate from, LocalDate to) {
+
     if (isActive && from.isBefore(to)) {
       domainEvents.clear();
       isActive = false;
@@ -87,12 +99,14 @@ public class Teacher {
     } else {
       throw new IllegalStateException("Учитель уже деактивирован.");
     }
+
   }
 
   /**
    * Изменить статус учителя на активный.
    */
   public void activate() {
+
     if (!(isActive)) {
       isActive = true;
       domainEvents.clear();
@@ -101,5 +115,6 @@ public class Teacher {
       throw new IllegalStateException(
           "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
     }
+
   }
 }

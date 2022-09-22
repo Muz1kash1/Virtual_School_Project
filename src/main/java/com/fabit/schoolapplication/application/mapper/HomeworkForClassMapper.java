@@ -21,12 +21,14 @@ public class HomeworkForClassMapper {
    * @return сущность бд
    */
   public HomeworkForClassEntity mapHomeworkForClassToEntity(HomeworkForClass homeworkForClass) {
+
     HomeworkForClassEntity homeworkForClassEntity = new HomeworkForClassEntity();
     homeworkForClassEntity.setDiscipline(homeworkForClass.getDiscipline());
     homeworkForClassEntity.setHomeworkTask(homeworkForClass.getTask());
     homeworkForClassEntity.setId(homeworkForClassRepository.getNextId());
     homeworkForClassEntity.setDate(homeworkForClass.getDate());
     homeworkForClassEntity.setSchoolClassId(homeworkForClass.getSchoolClassId().getValue());
+
     return homeworkForClassEntity;
   }
 
@@ -38,11 +40,16 @@ public class HomeworkForClassMapper {
    */
   public HomeworkForClass mapEntityToHomeworkForClass(
       HomeworkForClassEntity homeworkForClassEntity) {
-    HomeworkForClass homeworkForClass = HomeworkForClass.of(homeworkForClassEntity.getDiscipline(),
+
+    HomeworkForClass homeworkForClass = HomeworkForClass.of(
+        homeworkForClassEntity.getDiscipline(),
         homeworkForClassEntity.getDate(),
         SchoolClassId.of(homeworkForClassEntity.getId()),
-        HomeworkForClassId.of(homeworkForClassEntity.getId()));
+        HomeworkForClassId.of(homeworkForClassEntity.getId())
+    );
+
     homeworkForClass.setHomeworkText(homeworkForClassEntity.getHomeworkTask());
+
     return homeworkForClass;
   }
 
@@ -68,7 +75,8 @@ public class HomeworkForClassMapper {
    * @return дто
    */
   public HomeworkForClassDto mapHomeworkForClassToDto(HomeworkForClass homework) {
-    return new HomeworkForClassDto(homework.getId().getValue(),
+    return new HomeworkForClassDto(
+        homework.getId().getValue(),
         homework.getDiscipline(),
         homework.getTask(),
         homework.getSchoolClassId().getValue(),

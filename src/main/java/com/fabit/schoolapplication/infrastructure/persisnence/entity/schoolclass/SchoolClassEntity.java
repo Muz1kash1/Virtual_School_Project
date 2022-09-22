@@ -76,7 +76,8 @@ public class SchoolClassEntity {
   public static SchoolClassEntity of(SchoolClass schoolClass) {
     return new SchoolClassEntity(
         schoolClass.getSchoolClassName().getParallel(),
-        schoolClass.getSchoolClassName().getLitera());
+        schoolClass.getSchoolClassName().getLitera()
+    );
   }
 
   @Override

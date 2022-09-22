@@ -43,7 +43,8 @@ public class TeacherServiceMapper {
 
   private FullName mapDtoToDomain(FullNameDto fullNameDto) {
     return FullName.of(
-        fullNameDto.getName(), fullNameDto.getSurname(), fullNameDto.getPatronymic());
+        fullNameDto.getName(), fullNameDto.getSurname(), fullNameDto.getPatronymic()
+    );
   }
 
   private Snils mapDtoToDomain(SnilsDto snilsDto) {
@@ -67,7 +68,8 @@ public class TeacherServiceMapper {
     teacherEntity.setFullName(
         teacher.getFullName().getName()
             + " " + teacher.getFullName().getSurname()
-            + " " + teacher.getFullName().getPatronymic());
+            + " " + teacher.getFullName().getPatronymic()
+    );
 
     return teacherEntity;
   }

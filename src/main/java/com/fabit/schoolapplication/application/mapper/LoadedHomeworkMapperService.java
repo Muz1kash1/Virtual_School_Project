@@ -23,13 +23,17 @@ public class LoadedHomeworkMapperService {
    * @return доменный объект
    */
   public LoadedHomework mapDtoToHomework(LoadedHomeworkDto dto) {
+
     LoadedHomework loadedHomework = LoadedHomework.of(
         LoadedHomeworkId.of(loadedHomeworkRepository.getNextId()),
         StudentId.of(dto.getStudentId()),
-        HomeworkForClassId.of(dto.getHomeworkForClassId()));
+        HomeworkForClassId.of(dto.getHomeworkForClassId())
+    );
+
     if (dto.getTaskCompletionResult() != null && !dto.getTaskCompletionResult().equals("")) {
       loadedHomework.uploadTaskCompletionResult(dto.getTaskCompletionResult());
     }
+
     return loadedHomework;
   }
 
@@ -41,17 +45,17 @@ public class LoadedHomeworkMapperService {
    */
   public LoadedHomeworkEntity mapHomeworkToHomeworkCompletionResultEntity(
       LoadedHomework loadedHomework) {
+
     LoadedHomeworkEntity loadedHomeworkEntity = new LoadedHomeworkEntity();
     loadedHomeworkEntity.setId(loadedHomework.getLoadedHomeworkId().getValue());
 
     loadedHomeworkEntity.setTaskCompletionResult(
         loadedHomework.getTaskCompletionResult());
-
     loadedHomeworkEntity.setHomeworkForClassId(
         loadedHomework.getHomeworkForClassId().getValue());
-
     loadedHomeworkEntity.setStudentId(
         loadedHomework.getStudentId().getValue());
+
     return loadedHomeworkEntity;
   }
 

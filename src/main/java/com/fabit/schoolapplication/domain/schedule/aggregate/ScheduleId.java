@@ -17,8 +17,10 @@ public final class ScheduleId {
    * @return ScheduleId
    */
   public static ScheduleId of(Long id) {
+
     ScheduleId scheduleId1 = new ScheduleId();
     scheduleId1.setScheduleId(id);
+
     return scheduleId1;
   }
 

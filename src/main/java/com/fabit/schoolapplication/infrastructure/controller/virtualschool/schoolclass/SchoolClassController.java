@@ -41,7 +41,9 @@ public class SchoolClassController {
    */
   @GetMapping(value = "/school-class", produces = "application/json")
   public ResponseEntity<List<SchoolClassEntity>> getAllSchoolClasses() {
-    return ResponseEntity.ok().body(getSchoolClass.all());
+    return ResponseEntity
+        .ok()
+        .body(getSchoolClass.all());
   }
 
   /**
@@ -52,7 +54,9 @@ public class SchoolClassController {
    */
   @GetMapping(value = "/school-class/{id}", produces = "application/json")
   public ResponseEntity<SchoolClassEntity> getSchoolClassById(@PathVariable Long id) {
-    return ResponseEntity.ok().body(getSchoolClass.byId(id));
+    return ResponseEntity
+        .ok()
+        .body(getSchoolClass.byId(id));
   }
 
   /**
@@ -63,7 +67,9 @@ public class SchoolClassController {
    */
   @GetMapping(value = "/school-class", consumes = "application/json")
   public ResponseEntity<SchoolClassEntity> getSchoolClassByName(@RequestBody SchoolClassDto dto) {
-    return ResponseEntity.ok().body(getSchoolClass.byName(dto.getParallel(), dto.getLitera()));
+    return ResponseEntity
+        .ok()
+        .body(getSchoolClass.byName(dto.getParallel(), dto.getLitera()));
   }
 
   // -------

@@ -30,8 +30,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         .withStatus(BAD_REQUEST)
         .build();
 
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-        .contentType(MediaType.valueOf("application/problem+json")).body(problem);
+    return ResponseEntity
+        .status(HttpStatus.BAD_REQUEST)
+        .contentType(MediaType.valueOf("application/problem+json"))
+        .body(problem);
   }
 
   @ExceptionHandler(value = {NoSuchElementException.class, NotFoundException.class})
@@ -44,8 +46,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         .withStatus(NOT_FOUND)
         .build();
 
-    return ResponseEntity.status(HttpStatus.NOT_FOUND)
-        .contentType(MediaType.valueOf("application/problem+json")).body(problem);
+    return ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .contentType(MediaType.valueOf("application/problem+json"))
+        .body(problem);
   }
 
   @ExceptionHandler(value = IllegalStateException.class)
@@ -58,8 +62,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         .withStatus(CONFLICT)
         .build();
 
-    return ResponseEntity.status(HttpStatus.CONFLICT)
-        .contentType(MediaType.valueOf("application/problem+json")).body(problem);
+    return ResponseEntity
+        .status(HttpStatus.CONFLICT)
+        .contentType(MediaType.valueOf("application/problem+json"))
+        .body(problem);
   }
 
   @ExceptionHandler
@@ -72,7 +78,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         .withStatus(INTERNAL_SERVER_ERROR)
         .build();
 
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .contentType(MediaType.valueOf("application/problem+json")).body(problem);
+    return ResponseEntity
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .contentType(MediaType.valueOf("application/problem+json"))
+        .body(problem);
   }
 }

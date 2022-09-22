@@ -13,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 public final class SchoolDay {
 
   private DayOfWeek dayOfWeek;
+
   private TrainingShift trainingShift;
+
   private List<LessonForSchedule> lessonForScheduleList;
 
   /**
@@ -23,12 +25,16 @@ public final class SchoolDay {
    * @param trainingShift         - учебная смена занятий
    * @param lessonForScheduleList - список уроков на определенный день недели
    */
-  public static SchoolDay of(DayOfWeek dayOfWeek, TrainingShift trainingShift,
+  public static SchoolDay of(
+      DayOfWeek dayOfWeek,
+      TrainingShift trainingShift,
       List<LessonForSchedule> lessonForScheduleList) {
+
     SchoolDay schoolDay = new SchoolDay();
     schoolDay.setDayOfWeek(dayOfWeek);
     schoolDay.setTrainingShift(trainingShift);
     schoolDay.setLessonForScheduleList(lessonForScheduleList);
+
     return schoolDay;
   }
 

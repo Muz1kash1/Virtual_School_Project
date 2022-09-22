@@ -30,11 +30,13 @@ public class EditStudent {
 
     RussianPassport passport = studentMapperService.mapToPassport(studentDto.getPassport());
     if (RussianPassport.isValidAge(studentDto.getBirthCertificate().getBirthday())) {
+
       StudentEntity studentEntity =
           studentRepository.findBySnils(studentDto.getSnils().getNumberView());
       studentEntity.setPassport(passport.toString());
 
       studentRepository.save(studentEntity);
+
       return studentEntity;
     } else {
       throw new IllegalArgumentException("Не валидный возраст");

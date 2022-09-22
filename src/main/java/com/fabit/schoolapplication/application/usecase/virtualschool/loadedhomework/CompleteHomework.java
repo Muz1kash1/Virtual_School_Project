@@ -41,7 +41,9 @@ public class CompleteHomework {
    */
   @EventListener
   public void homeworkCompletionCreatedEvent(LoadedLoadedHomeworkCreatedEvent event) {
+
     LoadedHomework result = (LoadedHomework) event.getContent();
+
     log.info("HomeworkCompletionCreatedEvent...");
     log.info(
         "Выполнение студентом " + result.getStudentId()

@@ -10,7 +10,9 @@ import lombok.Value;
 public class BirthCertificate {
 
   String serial;
+
   String number;
+
   LocalDate birthday;
 
   private BirthCertificate(String serial, String number, LocalDate birthday) {
@@ -28,14 +30,17 @@ public class BirthCertificate {
    * @return BirthCertificate
    */
   public static BirthCertificate of(String serial, String number, LocalDate birthday) {
+
     if (isValidBirthCertificate(serial, number, birthday)) {
       return new BirthCertificate(serial, number, birthday);
     } else {
       throw new IllegalArgumentException();
     }
+
   }
 
   private static boolean isValidBirthCertificate(String serial, String number, LocalDate birthday) {
+
     return Pattern.matches("^[0-9]{6}$", number)
         && Pattern.matches("^[0-9]{4}$", serial)
         && isValidAge(birthday);

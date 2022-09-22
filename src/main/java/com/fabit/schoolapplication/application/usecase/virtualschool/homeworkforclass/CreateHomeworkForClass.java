@@ -28,11 +28,13 @@ public class CreateHomeworkForClass {
    * @param schoolClassId класс
    */
   public void execute(Discipline discipline, LocalDate date, SchoolClassId schoolClassId) {
+
     HomeworkForClass homeworkForClass = HomeworkForClass.of(
         discipline,
         date,
         schoolClassId,
         HomeworkForClassId.of(1L));
+
     homeworkForClassRepository.save(
         homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass));
   }

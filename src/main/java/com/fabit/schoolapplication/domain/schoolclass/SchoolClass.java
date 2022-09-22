@@ -31,16 +31,20 @@ public class SchoolClass {
   // ** Приватные конструкторы
 
   private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName, List<StudentId> students) {
+
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = students;
+
     registerEvent(new SchoolClassCreatedDomainEvent(this));
   }
 
   private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName) {
+
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = new ArrayList<>();
+
     registerEvent(new SchoolClassCreatedDomainEvent(this));
   }
 
@@ -91,7 +95,9 @@ public class SchoolClass {
    * @param student - ученик, которого нужно добавить
    */
   public void addStudent(StudentId student) {
+
     students.add(student);
+
     registerEvent(new SchoolClassAddedStudentDomainEvent(student));
   }
 
@@ -101,10 +107,12 @@ public class SchoolClass {
    * @param students - ученики
    */
   public void addStudent(StudentId... students) {
+
     for (StudentId student : students) {
       this.students.add(student);
       registerEvent(new SchoolClassAddedStudentDomainEvent(student));
     }
+
   }
 
   /**
@@ -113,7 +121,9 @@ public class SchoolClass {
    * @param student - идентификатор ученика
    */
   public void removeStudent(StudentId student) {
+
     students.remove(student);
+
     registerEvent(new SchoolClassRemovedStudentDomainEvent(student));
   }
 
@@ -123,10 +133,12 @@ public class SchoolClass {
    * @param students - идентификатор первого ученика
    */
   public void removeStudent(StudentId... students) {
+
     for (StudentId student : students) {
       this.students.remove(student);
       registerEvent(new SchoolClassRemovedStudentDomainEvent(student));
     }
+
   }
 
   // -------

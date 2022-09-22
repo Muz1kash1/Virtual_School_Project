@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 public final class LessonForSchedule {
 
   private int numberByAccount;
+
   private Discipline discipline;
+
   private TeacherId teacherId;
 
   private LessonForSchedule() {
@@ -25,12 +27,14 @@ public final class LessonForSchedule {
    * @param discipline      - дисциплина (урок)
    * @param teacherId       - уникальный идентификатор преподавателя
    */
-  public static LessonForSchedule of(int numberByAccount, Discipline discipline,
-      TeacherId teacherId) {
+  public static LessonForSchedule of(
+      int numberByAccount, Discipline discipline, TeacherId teacherId) {
+
     LessonForSchedule lessonForSchedule = new LessonForSchedule();
     lessonForSchedule.setNumberByAccount(numberByAccount);
     lessonForSchedule.setDiscipline(discipline);
     lessonForSchedule.setTeacherId(teacherId);
+
     return lessonForSchedule;
   }
 
@@ -38,10 +42,12 @@ public final class LessonForSchedule {
   //-Предохранители-
   //----------------
   private void setNumberByAccount(int numberByAccount) {
+
     // проверка допустимого диапазона
     if (!(numberByAccount >= 0 && numberByAccount < 10)) {
       throw new IllegalArgumentException("Номер урока должен быть в диапазоне от 1 до 10");
     }
+
     this.numberByAccount = numberByAccount;
   }
 

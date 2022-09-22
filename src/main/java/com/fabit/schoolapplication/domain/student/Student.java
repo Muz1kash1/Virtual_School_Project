@@ -18,31 +18,41 @@ import org.springframework.util.Assert;
 @NoArgsConstructor
 public class Student {
   private StudentId id;
+
   private FullName fullName;
+
   private Snils snils;
+
   private BirthCertificate birthCertificate;
+
   private RussianPassport passport;
+
   public static final List<StudentDomainEvent> domainEvents = new ArrayList<>();
 
   protected void registerEvent(StudentDomainEvent event) {
+
     Assert.notNull(event, "Domain event must not be null");
     domainEvents.add(event);
   }
 
-  private Student(StudentId studentId, FullName name, Snils snils,
-                  BirthCertificate birthCertificate) {
+  private Student(
+      StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate) {
+
     this.id = studentId;
     this.fullName = name;
     this.snils = snils;
     this.birthCertificate = birthCertificate;
+
     registerEvent(new StudentCreatedEvent(this));
   }
 
   private Student(StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
+
     this.id = studentId;
     this.fullName = name;
     this.snils = snils;
     this.passport = passport;
+
     registerEvent(new StudentCreatedEvent(this));
   }
 
@@ -55,8 +65,9 @@ public class Student {
    * @param birthCertificate свидетельство о рождении
    * @return the student
    */
-  public static Student of(StudentId studentId, FullName name, Snils snils,
-                           BirthCertificate birthCertificate) {
+  public static Student of(
+      StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate) {
+
     return new Student(studentId, name, snils, birthCertificate);
   }
 
@@ -81,7 +92,9 @@ public class Student {
    * @param snils СНИЛС
    */
   public void changeSnils(Snils snils) {
+
     this.snils = snils;
+
     registerEvent(new StudentChangedInfoEvent(this));
     log.info("СНИЛС изменен");
   }
@@ -92,7 +105,9 @@ public class Student {
    * @param birthCertificate день рождения
    */
   public void changeBirthCertificate(BirthCertificate birthCertificate) {
+
     this.birthCertificate = birthCertificate;
+
     registerEvent(new StudentChangedInfoEvent(this));
     log.info("Свидетельство о рождении успешно изменено");
   }
@@ -103,7 +118,9 @@ public class Student {
    * @param passport паспорт
    */
   public void addPassport(RussianPassport passport) {
+
     this.passport = passport;
+
     registerEvent(new StudentChangedInfoEvent(this));
     log.info("Паспорт успешно добавлен");
   }

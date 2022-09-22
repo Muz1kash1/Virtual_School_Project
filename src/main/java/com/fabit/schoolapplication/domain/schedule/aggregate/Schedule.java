@@ -25,10 +25,12 @@ public class Schedule {
    */
   public static Schedule of(ScheduleId id, SchoolClassId schoolClassId,
       List<SchoolDay> schoolDayList) {
+
     Schedule schedule = new Schedule();
     schedule.setScheduleId(id);
     schedule.setSchoolClassId(schoolClassId);
     schedule.setSchoolDayList(schoolDayList);
+
     return schedule;
   }
 
@@ -43,8 +45,7 @@ public class Schedule {
     this.schoolClassId = schoolClassId;
   }
 
-  private void setSchoolDayList(
-      List<SchoolDay> schoolDayList) {
+  private void setSchoolDayList(List<SchoolDay> schoolDayList) {
     this.schoolDayList = schoolDayList;
   }
 }

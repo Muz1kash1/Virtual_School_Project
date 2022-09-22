@@ -15,7 +15,9 @@ import org.springframework.util.Assert;
 public class HomeworkForClass {
 
   private HomeworkForClassId id;
+
   private Discipline discipline;
+
   private String task;
 
   private SchoolClassId schoolClassId;
@@ -61,7 +63,7 @@ public class HomeworkForClass {
    * @param homeworkTask - текст домашнего задания
    */
   public void setHomeworkText(String homeworkTask) {
-    this.task = homeworkTask;
+    task = homeworkTask;
     registerEvent(new HomeworkForClassTaskSetEvent(this));
   }
 

@@ -40,11 +40,13 @@ public class SchoolClassName {
    * @return Parallel
    */
   public static SchoolClassName of(int parallel, String litera) {
+
     if (SchoolClassName.isValid(parallel, litera)) {
       return new SchoolClassName(parallel, litera);
     } else {
       throw new IllegalArgumentException("Неверный формат данных для создания названия класса");
     }
+
   }
 
   // -------
@@ -59,6 +61,7 @@ public class SchoolClassName {
    * @return boolean
    */
   private static boolean isValid(int parallel, String litera) {
+
     Pattern patternMark = Pattern.compile("(?![ЬЪ])[А-Я]");
     Matcher literaMatcher = patternMark.matcher(litera);
 

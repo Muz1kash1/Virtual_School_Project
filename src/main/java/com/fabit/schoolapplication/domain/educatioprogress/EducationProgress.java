@@ -18,10 +18,15 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @NoArgsConstructor
 public class EducationProgress {
+
   private EducationProgressId educationProgressId;
+
   private StudentId studentId;
+
   private TeacherId teacherId;
+
   private LessonId lessonId;
+
   private LocalDateTime whenCreated;
 
   private List<Mark> marks = new ArrayList<>(2);
@@ -41,6 +46,7 @@ public class EducationProgress {
       TeacherId teacherId,
       LessonId lessonId,
       List<Mark> marks) {
+
     EducationProgress educationProgress = new EducationProgress();
     educationProgress.educationProgressId = educationProgressId;
     educationProgress.studentId = studentId;
@@ -48,6 +54,7 @@ public class EducationProgress {
     educationProgress.lessonId = lessonId;
     educationProgress.marks = marks;
     educationProgress.whenCreated = LocalDateTime.now();
+
     return educationProgress;
   }
 }

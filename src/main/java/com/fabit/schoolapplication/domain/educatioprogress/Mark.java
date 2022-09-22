@@ -17,6 +17,7 @@ public final class Mark {
   private MarkId markId;
 
   private EducationProgressId educationProgressId;
+
   private int value;
 
   private Mark() {
@@ -31,10 +32,12 @@ public final class Mark {
    * @return объект Mark
    */
   public static Mark of(MarkId markId, EducationProgressId educationProgressId, int value) {
+
     Mark mark = new Mark();
     mark.markId = markId;
     mark.educationProgressId = educationProgressId;
     mark.setValue(value);
+
     return mark;
   }
 
@@ -44,10 +47,12 @@ public final class Mark {
    * @param value - значение оценки
    */
   private void setValue(int value) {
+
     if (value >= 2 && value <= 5) {
       this.value = value;
     } else {
       throw new IllegalArgumentException("Неверный формат оценки");
     }
+
   }
 }
