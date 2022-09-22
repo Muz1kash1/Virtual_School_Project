@@ -2,7 +2,7 @@ package com.fabit.schoolapplication.application.usecase.virtualschool.loadedhome
 
 import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
-import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedLoadedHomeworkCreatedEvent;
+import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedHomeworkCreatedEvent;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
@@ -40,7 +40,7 @@ public class CompleteHomework {
    * @param event доменное событие
    */
   @EventListener
-  public void homeworkCompletionCreatedEvent(LoadedLoadedHomeworkCreatedEvent event) {
+  public void homeworkCompletionCreatedEvent(LoadedHomeworkCreatedEvent event) {
 
     LoadedHomework result = (LoadedHomework) event.getContent();
 

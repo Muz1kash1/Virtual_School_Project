@@ -2,11 +2,11 @@ package com.fabit.schoolapplication.domain.loadedhomework.event;
 
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 
-public class LoadedLoadedHomeworkCreatedEvent implements LoadedHomeworkEvent {
+public class LoadedHomeworkCreatedEvent implements LoadedHomeworkEvent {
 
   private final LoadedHomework loadedHomework;
 
-  public LoadedLoadedHomeworkCreatedEvent(LoadedHomework loadedHomework) {
+  public LoadedHomeworkCreatedEvent(LoadedHomework loadedHomework) {
     this.loadedHomework = loadedHomework;
   }
 
