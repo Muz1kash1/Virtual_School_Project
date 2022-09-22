@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.domain.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassTaskSetEvent;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassCreatedEvent;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassEvent;
+import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassTaskSetEvent;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +15,9 @@ import org.springframework.util.Assert;
 public class HomeworkForClass {
 
   private HomeworkForClassId id;
+
   private Discipline discipline;
+
   private String task;
 
   private SchoolClassId schoolClassId;
@@ -36,12 +38,22 @@ public class HomeworkForClass {
     registerEvent(new HomeworkForClassCreatedEvent(this));
   }
 
-  public static HomeworkForClass of(Discipline discipline, LocalDate date,
-      SchoolClassId schoolClassId,
-      HomeworkForClassId id) {
+  /**
+   * Factory method - Создание ДЗ для класса.
+   *
+   * @param discipline    - дисциплина
+   * @param date          - дата
+   * @param schoolClassId - идентификатор класса
+   * @param id            - идентификатор домашнего задания
+   * @return HomeworkForClass
+   */
+  public static HomeworkForClass of(
+      Discipline discipline, LocalDate date, SchoolClassId schoolClassId, HomeworkForClassId id) {
+
     HomeworkForClass homeworkForClass = new HomeworkForClass(discipline, date);
     homeworkForClass.schoolClassId = schoolClassId;
     homeworkForClass.id = id;
+
     return homeworkForClass;
   }
 
@@ -51,7 +63,7 @@ public class HomeworkForClass {
    * @param homeworkTask - текст домашнего задания
    */
   public void setHomeworkText(String homeworkTask) {
-    this.task = homeworkTask;
+    task = homeworkTask;
     registerEvent(new HomeworkForClassTaskSetEvent(this));
   }
 

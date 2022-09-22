@@ -13,11 +13,11 @@ import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.AddStudentToSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.CreateSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.DeleteSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.GetSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.RemoveStudentFromSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.AddStudentToSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.CreateSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.DeleteSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.GetSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.RemoveStudentFromSchoolClass;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
@@ -71,6 +71,7 @@ public class SchoolClassControllerTest {
   void getSchoolClassById() throws Exception {
     SchoolClassEntity mockClass = SchoolClassEntity.of(
         SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(2, "Б")));
+
     mockClass.setId(1L);
 
     when(getSchoolClass.byId(1L))

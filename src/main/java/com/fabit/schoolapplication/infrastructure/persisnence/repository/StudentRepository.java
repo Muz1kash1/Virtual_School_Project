@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
-  StudentEntity findBySnils(String Snils);
+  StudentEntity findBySnils(String snils);
 
   StudentEntity findByBirthCertificate(String toString);
+
   @Query(value = "SELECT nextval('student_id_seq') from student_id_seq", nativeQuery = true)
   Long getNextId();
 }

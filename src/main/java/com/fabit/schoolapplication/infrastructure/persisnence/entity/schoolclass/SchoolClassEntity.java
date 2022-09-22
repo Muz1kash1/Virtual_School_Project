@@ -54,7 +54,7 @@ public class SchoolClassEntity {
   // ** Приватный конструктор
 
   /**
-   * Приватный конструктор для фабричного метода
+   * Приватный конструктор для фабричного метода.
    *
    * @param parallel - параллель (1-11)
    * @param litera   - литера (А-Я без ЪЬ)
@@ -68,7 +68,7 @@ public class SchoolClassEntity {
   // ** Маппер
 
   /**
-   * Фабричный метод для создания Entity
+   * Factory method - Создание Entity.
    *
    * @param schoolClass - доменная модель школьного класса
    * @return SchoolClassEntity
@@ -76,7 +76,8 @@ public class SchoolClassEntity {
   public static SchoolClassEntity of(SchoolClass schoolClass) {
     return new SchoolClassEntity(
         schoolClass.getSchoolClassName().getParallel(),
-        schoolClass.getSchoolClassName().getLitera());
+        schoolClass.getSchoolClassName().getLitera()
+    );
   }
 
   @Override

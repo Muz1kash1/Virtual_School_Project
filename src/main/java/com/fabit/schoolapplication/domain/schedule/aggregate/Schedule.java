@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.domain.schedule.aggregate;
 
+import com.fabit.schoolapplication.domain.schedule.valueobject.SchoolDay;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.domain.schedule.value_object.SchoolDay;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,18 +17,20 @@ public class Schedule {
   private List<SchoolDay> schoolDayList;
 
   /**
-   * Создание расписания занятий для определенного класса
+   * Создание расписания занятий для определенного класса.
    *
-   * @param id            уникальный идентификатор расписания
-   * @param schoolClassId уникальный идентификатор класса
-   * @param schoolDayList список учебных дней с уроками
+   * @param id            - уникальный идентификатор расписания
+   * @param schoolClassId - уникальный идентификатор класса
+   * @param schoolDayList - список учебных дней с уроками
    */
   public static Schedule of(ScheduleId id, SchoolClassId schoolClassId,
       List<SchoolDay> schoolDayList) {
+
     Schedule schedule = new Schedule();
     schedule.setScheduleId(id);
     schedule.setSchoolClassId(schoolClassId);
     schedule.setSchoolDayList(schoolDayList);
+
     return schedule;
   }
 
@@ -43,8 +45,7 @@ public class Schedule {
     this.schoolClassId = schoolClassId;
   }
 
-  private void setSchoolDayList(
-      List<SchoolDay> schoolDayList) {
+  private void setSchoolDayList(List<SchoolDay> schoolDayList) {
     this.schoolDayList = schoolDayList;
   }
 }

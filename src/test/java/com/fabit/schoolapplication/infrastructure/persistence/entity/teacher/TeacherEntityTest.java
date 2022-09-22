@@ -21,9 +21,13 @@ public class TeacherEntityTest {
     Teacher teacherDomain = Teacher.of(
         TeacherId.of(1L),
         FullName.of("Name", "Surname", "Patronymic"),
-        RussianPassport.of("1234", "456789", LocalDate.of(1980, 9, 15)),
+        RussianPassport.of(
+            "1234", "456789",
+            LocalDate.of(1980, 9, 15)
+        ),
         Snils.of("987-654-321-11"),
-        10, true);
+        10,
+        true);
 
     TeacherServiceMapper teacherMapper = new TeacherServiceMapper();
     TeacherEntity teacherEntity = teacherMapper.mapDomainToEntity(teacherDomain);

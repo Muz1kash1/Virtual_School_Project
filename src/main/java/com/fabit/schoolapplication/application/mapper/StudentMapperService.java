@@ -6,11 +6,11 @@ import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.BirthCertificateDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.FullNameDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.PassportDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.SnilsDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.StudentDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.BirthCertificateDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.FullNameDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.PassportDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.SnilsDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,12 @@ import org.springframework.stereotype.Service;
 public class StudentMapperService {
   final StudentRepository studentRepository;
 
+  /**
+   * Маппинг доменного ученика в persistent сущность.
+   *
+   * @param student - доменный ученик
+   * @return StudentEntity
+   */
   public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
     studentEntity.setName(student.getFullName().toString());
@@ -29,12 +35,23 @@ public class StudentMapperService {
       studentEntity.setPassport(student.getPassport().toString());
     }
     studentEntity.setBirthCertificate(student.getBirthCertificate().toString());
+
     return studentEntity;
   }
 
+  /**
+   * Маппинг ДТО ученика в доменную модель.
+   *
+   * @param studentDto - ученик
+   * @return Student
+   */
   public Student mapToStudent(StudentDto studentDto) {
-    return Student.of(StudentId.of(studentRepository.getNextId()), mapToFullName(studentDto.getName()),
-        mapToSnils(studentDto.getSnils()), mapToBirthCertificate(studentDto.getBirthCertificate()));
+    return Student.of(
+        StudentId.of(studentRepository.getNextId()),
+        mapToFullName(studentDto.getName()),
+        mapToSnils(studentDto.getSnils()),
+        mapToBirthCertificate(studentDto.getBirthCertificate())
+    );
   }
 
   public Snils mapToSnils(SnilsDto value) {

@@ -12,6 +12,7 @@ public class EducationProgressTest {
   @Test
   @DisplayName("Создание успеваемости должно создавать корретный объект")
   public void educationProgressOfTest() {
+
     EducationProgress educationProgress = EducationProgress.of(
         EducationProgressId.of(1L),
         StudentId.of(357L),

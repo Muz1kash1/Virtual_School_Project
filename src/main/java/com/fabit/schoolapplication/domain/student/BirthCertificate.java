@@ -8,8 +8,11 @@ import lombok.Value;
 @Getter
 @Value
 public class BirthCertificate {
+
   String serial;
+
   String number;
+
   LocalDate birthday;
 
   private BirthCertificate(String serial, String number, LocalDate birthday) {
@@ -18,20 +21,29 @@ public class BirthCertificate {
     this.birthday = birthday;
   }
 
+  /**
+   * Factory method - создание BirthCertificate.
+   *
+   * @param serial   - серийния свидетельства о рождении
+   * @param number   - номер свидетельства о рождении
+   * @param birthday - день рождения
+   * @return BirthCertificate
+   */
   public static BirthCertificate of(String serial, String number, LocalDate birthday) {
-    if (isValidBirthCertificate(serial, number,birthday)) {
+
+    if (isValidBirthCertificate(serial, number, birthday)) {
       return new BirthCertificate(serial, number, birthday);
     } else {
       throw new IllegalArgumentException();
     }
+
   }
 
   private static boolean isValidBirthCertificate(String serial, String number, LocalDate birthday) {
-    if (!Pattern.matches("^[0-9]{6}$", number) || !Pattern.matches("^[0-9]{4}$", serial) ||
-        !isValidAge(birthday)) {
-      return false;
-    }
-    return true;
+
+    return Pattern.matches("^[0-9]{6}$", number)
+        && Pattern.matches("^[0-9]{4}$", serial)
+        && isValidAge(birthday);
   }
 
   private static boolean isValidAge(LocalDate birthday) {

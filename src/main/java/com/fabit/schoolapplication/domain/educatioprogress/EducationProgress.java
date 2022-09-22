@@ -2,33 +2,37 @@ package com.fabit.schoolapplication.domain.educatioprogress;
 
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
- * Агрегат отметки об успеваемости
+ * Агрегат отметки об успеваемости.
  *
  * @author SmirnovMA
  */
 @Getter
 @EqualsAndHashCode
+@NoArgsConstructor
 public class EducationProgress {
+
   private EducationProgressId educationProgressId;
+
   private StudentId studentId;
+
   private TeacherId teacherId;
+
   private LessonId lessonId;
+
   private LocalDateTime whenCreated;
 
   private List<Mark> marks = new ArrayList<>(2);
 
-  private EducationProgress() {}
-
   /**
-   * Статическая фабрика объекта успеваемости
+   * Статическая фабрика объекта успеваемости.
    *
    * @param educationProgressId id отметки
    * @param studentId id ученика
@@ -42,6 +46,7 @@ public class EducationProgress {
       TeacherId teacherId,
       LessonId lessonId,
       List<Mark> marks) {
+
     EducationProgress educationProgress = new EducationProgress();
     educationProgress.educationProgressId = educationProgressId;
     educationProgress.studentId = studentId;
@@ -49,6 +54,7 @@ public class EducationProgress {
     educationProgress.lessonId = lessonId;
     educationProgress.marks = marks;
     educationProgress.whenCreated = LocalDateTime.now();
+
     return educationProgress;
   }
 }

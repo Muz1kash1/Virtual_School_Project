@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.application.mapper;
 
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomeworkId;
-import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +23,17 @@ public class LoadedHomeworkMapperService {
    * @return доменный объект
    */
   public LoadedHomework mapDtoToHomework(LoadedHomeworkDto dto) {
+
     LoadedHomework loadedHomework = LoadedHomework.of(
         LoadedHomeworkId.of(loadedHomeworkRepository.getNextId()),
         StudentId.of(dto.getStudentId()),
-        HomeworkForClassId.of(dto.getHomeworkForClassId()));
+        HomeworkForClassId.of(dto.getHomeworkForClassId())
+    );
+
     if (dto.getTaskCompletionResult() != null && !dto.getTaskCompletionResult().equals("")) {
       loadedHomework.uploadTaskCompletionResult(dto.getTaskCompletionResult());
     }
+
     return loadedHomework;
   }
 
@@ -41,17 +45,17 @@ public class LoadedHomeworkMapperService {
    */
   public LoadedHomeworkEntity mapHomeworkToHomeworkCompletionResultEntity(
       LoadedHomework loadedHomework) {
+
     LoadedHomeworkEntity loadedHomeworkEntity = new LoadedHomeworkEntity();
     loadedHomeworkEntity.setId(loadedHomework.getLoadedHomeworkId().getValue());
 
     loadedHomeworkEntity.setTaskCompletionResult(
         loadedHomework.getTaskCompletionResult());
-
     loadedHomeworkEntity.setHomeworkForClassId(
         loadedHomework.getHomeworkForClassId().getValue());
-
     loadedHomeworkEntity.setStudentId(
         loadedHomework.getStudentId().getValue());
+
     return loadedHomeworkEntity;
   }
 
@@ -62,10 +66,15 @@ public class LoadedHomeworkMapperService {
    * @return объект доменной модели
    */
   public LoadedHomework mapHomeworkEntityToHomework(LoadedHomeworkEntity loadedHomeworkEntity) {
-    LoadedHomework loadedHomework = LoadedHomework.of(LoadedHomeworkId.of(loadedHomeworkEntity.getId()),
+
+    LoadedHomework loadedHomework = LoadedHomework.of(
+        LoadedHomeworkId.of(loadedHomeworkEntity.getId()),
         StudentId.of(loadedHomeworkEntity.getStudentId()),
-        HomeworkForClassId.of(loadedHomeworkEntity.getHomeworkForClassId()));
+        HomeworkForClassId.of(loadedHomeworkEntity.getHomeworkForClassId())
+    );
+
     loadedHomework.uploadTaskCompletionResult(loadedHomeworkEntity.getTaskCompletionResult());
+
     return loadedHomework;
   }
 

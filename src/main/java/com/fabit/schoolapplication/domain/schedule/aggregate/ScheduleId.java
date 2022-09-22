@@ -10,9 +10,17 @@ public final class ScheduleId {
   private ScheduleId() {
   }
 
-  public static ScheduleId of(Long scheduleId) {
+  /**
+   * Factory method - создание ScheduleId.
+   *
+   * @param id - идентификатор расписания
+   * @return ScheduleId
+   */
+  public static ScheduleId of(Long id) {
+
     ScheduleId scheduleId1 = new ScheduleId();
-    scheduleId1.setScheduleId(scheduleId);
+    scheduleId1.setScheduleId(id);
+
     return scheduleId1;
   }
 

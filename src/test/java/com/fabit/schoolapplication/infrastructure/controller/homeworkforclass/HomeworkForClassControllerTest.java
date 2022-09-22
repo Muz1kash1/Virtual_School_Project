@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass.GetHomeworkForClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.homeworkforclass.GetHomeworkForClass;
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass.dto.HomeworkForClassDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.homeworkforclass.dto.HomeworkForClassDto;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,6 +33,7 @@ public class HomeworkForClassControllerTest {
   @Test
   @DisplayName("Установка ДЗ для класса должно возвращать успешное назначение")
   void addHomeworkForClassTest() throws Exception {
+
     final String jsonOfHomework = """
         {
         "id": 1,
@@ -54,7 +55,11 @@ public class HomeworkForClassControllerTest {
   @DisplayName("Получение ДЗ класса должно возвращать соответствующее ДЗ")
   void getHomeworkForClassTest() throws Exception {
     HomeworkForClassDto homeworkForClassDto = new HomeworkForClassDto(
-        2L, Discipline.ENGLISH, "abc", 5L, LocalDate.now());
+        2L,
+        Discipline.ENGLISH,
+        "abc", 5L,
+        LocalDate.now()
+    );
 
     when(getHomeworkForClass.execute(2))
         .thenReturn(homeworkForClassDto);

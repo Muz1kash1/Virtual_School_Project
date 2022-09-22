@@ -3,7 +3,7 @@ package com.fabit.schoolapplication.domain.schedule.enums;
 import lombok.Getter;
 
 /**
- * Перечисление описывающее учебные дни недели
+ * Перечисление описывающее учебные дни недели.
  */
 @Getter
 public enum DayOfWeek {
