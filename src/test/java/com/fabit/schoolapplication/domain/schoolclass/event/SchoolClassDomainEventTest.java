@@ -13,7 +13,7 @@ public class SchoolClassDomainEventTest {
 
   @BeforeEach
   void init() {
-    SchoolClass.domainEvents.clear();
+    SchoolClass.DOMAIN_EVENTS.clear();
   }
 
   @Test
@@ -22,9 +22,9 @@ public class SchoolClassDomainEventTest {
     SchoolClass exceptedSchoolClass1
         = SchoolClass.of(SchoolClassId.of(17), SchoolClassName.of(9, "В"));
     SchoolClass schoolClassContent1
-        = (SchoolClass) SchoolClass.domainEvents.get(0).getContent();
+        = (SchoolClass) SchoolClass.DOMAIN_EVENTS.get(0).getContent();
 
-    Assertions.assertEquals(1, SchoolClass.domainEvents.size());
+    Assertions.assertEquals(1, SchoolClass.DOMAIN_EVENTS.size());
     Assertions.assertEquals(exceptedSchoolClass1, schoolClassContent1);
     Assertions.assertEquals(
         exceptedSchoolClass1.getSchoolClassName(), schoolClassContent1.getSchoolClassName());
@@ -32,10 +32,10 @@ public class SchoolClassDomainEventTest {
     SchoolClass exceptedSchoolClass2
         = SchoolClass.of(SchoolClassId.of(17), SchoolClassName.of(5, "Ы"));
     SchoolClass schoolClassContent2
-        = (SchoolClass) SchoolClass.domainEvents.get(0).getContent();
+        = (SchoolClass) SchoolClass.DOMAIN_EVENTS.get(0).getContent();
 
-    Assertions.assertEquals(2, SchoolClass.domainEvents.size());
-    Assertions.assertEquals(exceptedSchoolClass2, SchoolClass.domainEvents.get(1).getContent());
+    Assertions.assertEquals(2, SchoolClass.DOMAIN_EVENTS.size());
+    Assertions.assertEquals(exceptedSchoolClass2, SchoolClass.DOMAIN_EVENTS.get(1).getContent());
     Assertions.assertEquals(
         exceptedSchoolClass1.getSchoolClassName(), schoolClassContent2.getSchoolClassName());
   }
@@ -49,11 +49,11 @@ public class SchoolClassDomainEventTest {
     schoolClass.removeStudent(StudentId.of(77L));
 
     SchoolClass schoolClassContentIndex0
-        = (SchoolClass) SchoolClass.domainEvents.get(0).getContent();
+        = (SchoolClass) SchoolClass.DOMAIN_EVENTS.get(0).getContent();
     StudentId schoolClassContentIndex2
-        = (StudentId) SchoolClass.domainEvents.get(2).getContent();
+        = (StudentId) SchoolClass.DOMAIN_EVENTS.get(2).getContent();
 
-    Assertions.assertEquals(3, SchoolClass.domainEvents.size());
+    Assertions.assertEquals(3, SchoolClass.DOMAIN_EVENTS.size());
     Assertions.assertEquals(schoolClass, schoolClassContentIndex0);
     Assertions.assertEquals(StudentId.of(77L), schoolClassContentIndex2);
   }

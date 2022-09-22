@@ -14,7 +14,7 @@ public class LoadedHomeworkForClassEventTest {
 
   @BeforeEach
   void clearHomeworkForClassEvents() {
-    HomeworkForClass.domainEvents.clear();
+    HomeworkForClass.DOMAIN_EVENTS.clear();
   }
 
   @Test
@@ -28,9 +28,9 @@ public class LoadedHomeworkForClassEventTest {
     );
 
     HomeworkForClass homeworkForClassContent
-        = (HomeworkForClass) HomeworkForClass.domainEvents.get(0).getContent();
+        = (HomeworkForClass) HomeworkForClass.DOMAIN_EVENTS.get(0).getContent();
 
-    Assertions.assertEquals(1, HomeworkForClass.domainEvents.size());
+    Assertions.assertEquals(1, HomeworkForClass.DOMAIN_EVENTS.size());
     Assertions.assertEquals(homeworkForClassContent, homeworkForClass);
     Assertions.assertEquals(
         homeworkForClass.getDiscipline(),
@@ -55,9 +55,9 @@ public class LoadedHomeworkForClassEventTest {
     );
 
     HomeworkForClass homeworkForClassContent1
-        = (HomeworkForClass) HomeworkForClass.domainEvents.get(1).getContent();
+        = (HomeworkForClass) HomeworkForClass.DOMAIN_EVENTS.get(1).getContent();
 
-    Assertions.assertEquals(2, HomeworkForClass.domainEvents.size());
+    Assertions.assertEquals(2, HomeworkForClass.DOMAIN_EVENTS.size());
     Assertions.assertEquals(homeworkForClassContent1, homeworkForClass1);
     Assertions.assertEquals(
         homeworkForClass1.getDiscipline(), homeworkForClassContent1.getDiscipline()
@@ -82,11 +82,11 @@ public class LoadedHomeworkForClassEventTest {
     );
 
     HomeworkForClass homeworkForClassContent
-        = (HomeworkForClass) HomeworkForClass.domainEvents.get(0).getContent();
+        = (HomeworkForClass) HomeworkForClass.DOMAIN_EVENTS.get(0).getContent();
 
     homeworkForClass.setHomeworkText("Test");
 
-    Assertions.assertEquals(2, HomeworkForClass.domainEvents.size());
+    Assertions.assertEquals(2, HomeworkForClass.DOMAIN_EVENTS.size());
     Assertions.assertEquals("Test", homeworkForClassContent.getTask());
   }
 }

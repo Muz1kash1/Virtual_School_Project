@@ -21,13 +21,7 @@ public class LoadedHomework {
   private String taskCompletionResult;
 
 
-  private LoadedHomework(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
-                         HomeworkForClassId homeworkForClassId) {
-    this.studentId = studentId;
-    this.loadedHomeworkId = loadedHomeworkId;
-    this.homeworkForClassId = homeworkForClassId;
-    registerEvent(new LoadedLoadedHomeworkCreatedEvent(this));
-  }
+  public static final List<LoadedHomeworkEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   public static LoadedHomework of(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
                                   HomeworkForClassId homeworkForClassId) {
@@ -47,8 +41,8 @@ public class LoadedHomework {
   }
 
   protected LoadedHomeworkEvent registerEvent(LoadedHomeworkEvent event) {
-    notNull(event, "Доменный ивент не должен быть нуль");
-    domainEvents.add(event);
+    Assert.notNull(event, "Доменный ивент не должен быть нуль");
+    DOMAIN_EVENTS.add(event);
     return event;
   }
 

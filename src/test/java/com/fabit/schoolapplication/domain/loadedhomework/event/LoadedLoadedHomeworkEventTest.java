@@ -13,7 +13,7 @@ public class LoadedLoadedHomeworkEventTest {
 
   @BeforeEach
   void cleanEvents() {
-    LoadedHomework.domainEvents.clear();
+    LoadedHomework.DOMAIN_EVENTS.clear();
   }
 
   @Test
@@ -25,10 +25,10 @@ public class LoadedLoadedHomeworkEventTest {
         HomeworkForClassId.of(1L)
     );
 
-    Assertions.assertEquals(1, LoadedHomework.domainEvents.size());
+    Assertions.assertEquals(1, LoadedHomework.DOMAIN_EVENTS.size());
     Assertions.assertEquals(
         loadedHomework,
-        LoadedHomework.domainEvents.get(0).getContent()
+        LoadedHomework.DOMAIN_EVENTS.get(0).getContent()
     );
 
     LoadedHomework loadedHomework1 = LoadedHomework.of(
@@ -37,10 +37,10 @@ public class LoadedLoadedHomeworkEventTest {
         HomeworkForClassId.of(2L)
     );
 
-    Assertions.assertEquals(2, LoadedHomework.domainEvents.size());
+    Assertions.assertEquals(2, LoadedHomework.DOMAIN_EVENTS.size());
     Assertions.assertEquals(
         loadedHomework1,
-        LoadedHomework.domainEvents.get(1).getContent()
+        LoadedHomework.DOMAIN_EVENTS.get(1).getContent()
     );
   }
 
@@ -55,9 +55,9 @@ public class LoadedLoadedHomeworkEventTest {
 
     loadedHomework.uploadTaskCompletionResult("Test");
     LoadedHomework loadedHomeworkContent
-        = (LoadedHomework) LoadedHomework.domainEvents.get(0).getContent();
+        = (LoadedHomework) LoadedHomework.DOMAIN_EVENTS.get(0).getContent();
 
-    Assertions.assertEquals(2, LoadedHomework.domainEvents.size());
+    Assertions.assertEquals(2, LoadedHomework.DOMAIN_EVENTS.size());
     Assertions.assertEquals("Test", loadedHomeworkContent.getTaskCompletionResult());
   }
 }

@@ -2,8 +2,6 @@ package com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkfo
 
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
-import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,12 +39,12 @@ public class HomeworkForClassEntity {
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
-    HomeworkForClass.domainEvents.clear();
+    HomeworkForClass.DOMAIN_EVENTS.clear();
   }
 
   @DomainEvents
   protected Collection<Object> domainEvents() {
-    return Collections.unmodifiableList(HomeworkForClass.domainEvents);
+    return Collections.unmodifiableList(HomeworkForClass.DOMAIN_EVENTS);
   }
 
 
