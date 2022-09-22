@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
+import org.springframework.util.Assert;
 
 
-import static org.apache.commons.lang3.Validate.notNull;
 
 @Getter
 public class HomeworkForClass {
