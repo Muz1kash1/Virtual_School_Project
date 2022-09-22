@@ -17,8 +17,10 @@ public class LoadedHomeworkMapperServiceTest {
 
   @Autowired
   LoadedHomeworkMapperService loadedHomeworkMapperService;
+
   @Autowired
   LoadedHomeworkRepository loadedHomeworkRepository;
+
   @Autowired
   StudentRepository studentRepository;
 
@@ -26,27 +28,42 @@ public class LoadedHomeworkMapperServiceTest {
   @DisplayName("Маппер работает корректно")
   @Test
   void mapToHomeworkCompletionResultTest() {
-    LoadedHomeworkDto loadedHomeworkDto
-        = new LoadedHomeworkDto(1L, 1L, "test", 1L);
+
+    LoadedHomeworkDto loadedHomeworkDto = new LoadedHomeworkDto(
+        1L, 1L, "test", 1L
+    );
+
     LoadedHomework loadedHomework = loadedHomeworkMapperService.mapDtoToHomework(loadedHomeworkDto);
+
     Assertions.assertNotNull(loadedHomework);
-    Assertions.assertEquals(loadedHomeworkDto.getTaskCompletionResult(),
+    Assertions.assertEquals(
+        loadedHomeworkDto.getTaskCompletionResult(),
         loadedHomework.getTaskCompletionResult());
-    Assertions.assertEquals(loadedHomeworkDto.getStudentId(), loadedHomework.getStudentId().getValue());
-    Assertions.assertEquals(loadedHomeworkRepository.getNextId() - 1, loadedHomework.getLoadedHomeworkId().getValue());
-    Assertions.assertEquals(loadedHomeworkDto.getHomeworkForClassId(),
+    Assertions.assertEquals(
+        loadedHomeworkDto.getStudentId(),
+        loadedHomework.getStudentId().getValue());
+    Assertions.assertEquals(
+        loadedHomeworkRepository.getNextId() - 1,
+        loadedHomework.getLoadedHomeworkId().getValue());
+    Assertions.assertEquals(
+        loadedHomeworkDto.getHomeworkForClassId(),
         loadedHomework.getHomeworkForClassId().getValue());
 
-    LoadedHomeworkEntity loadedHomeworkEntity = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
-        loadedHomework);
+    LoadedHomeworkEntity loadedHomeworkEntity
+        = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(loadedHomework);
+
     Assertions.assertNotNull(loadedHomeworkEntity);
-    Assertions.assertEquals(loadedHomeworkEntity.getTaskCompletionResult(),
+    Assertions.assertEquals(
+        loadedHomeworkEntity.getTaskCompletionResult(),
         loadedHomework.getTaskCompletionResult());
-    Assertions.assertEquals(loadedHomeworkEntity.getHomeworkForClassId(),
+    Assertions.assertEquals(
+        loadedHomeworkEntity.getHomeworkForClassId(),
         loadedHomeworkDto.getHomeworkForClassId());
     Assertions.assertEquals(
-        loadedHomeworkEntity.getStudentId(), loadedHomework.getStudentId().getValue());
-    Assertions.assertEquals(loadedHomeworkEntity.getId(), loadedHomework.getLoadedHomeworkId().getValue());
-
+        loadedHomeworkEntity.getStudentId(),
+        loadedHomework.getStudentId().getValue());
+    Assertions.assertEquals(
+        loadedHomeworkEntity.getId(),
+        loadedHomework.getLoadedHomeworkId().getValue());
   }
 }

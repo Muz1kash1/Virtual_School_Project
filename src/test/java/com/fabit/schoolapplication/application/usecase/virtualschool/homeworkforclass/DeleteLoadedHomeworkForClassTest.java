@@ -42,13 +42,17 @@ public class DeleteLoadedHomeworkForClassTest {
   @DisplayName("Удаление урока работает корректно")
   void deleteHomeworkForClassTest() {
 
-    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
-        SchoolClassId.of(1L));
+    createHomeworkForClass.execute(
+        Discipline.COMPUTING,
+        LocalDate.of(2000, 2, 2),
+        SchoolClassId.of(1L)
+    );
 
     Assertions.assertEquals(1, homeworkForClassRepository.findAll().size());
 
     deleteHomeworkForClass.execute(
-        HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()));
+        HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId())
+    );
 
     Assertions.assertEquals(0, homeworkForClassRepository.findAll().size());
   }

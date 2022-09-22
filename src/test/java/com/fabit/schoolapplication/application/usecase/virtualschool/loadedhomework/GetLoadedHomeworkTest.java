@@ -18,12 +18,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class GetLoadedHomeworkTest {
+
   @Autowired
   GetLoadedHomework getLoadedHomework;
+
   @Autowired
   LoadedHomeworkRepository loadedHomeworkRepository;
+
   @Autowired
   StudentRepository studentRepository;
+
   @Autowired
   HomeworkForClassRepository homeworkForClassRepository;
 
@@ -44,6 +48,7 @@ public class GetLoadedHomeworkTest {
   @Test
   @DisplayName("Получение загруженной домашки работает корректно")
   void getHomeworkTest() {
+
     StudentEntity student = new StudentEntity();
     student.setName("test");
     studentRepository.save(student);

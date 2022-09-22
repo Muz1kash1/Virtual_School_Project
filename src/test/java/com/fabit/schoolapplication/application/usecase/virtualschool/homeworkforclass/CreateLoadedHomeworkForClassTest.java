@@ -50,20 +50,25 @@ public class CreateLoadedHomeworkForClassTest {
   @DisplayName("Юзкейс создания урока работает корректно")
   @Test
   void createHomeworkForClassTest() {
+
     createSchoolClass.execute(11, "А");
 
-    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
-        SchoolClassId.of(schoolClassRepository.findAll().get(0).getId()));
+    createHomeworkForClass.execute(
+        Discipline.COMPUTING,
+        LocalDate.of(2000, 2, 2),
+        SchoolClassId.of(schoolClassRepository.findAll().get(0).getId())
+    );
+
     Assertions.assertEquals(1, homeworkForClassRepository.findAll().size());
     Assertions.assertNotNull(homeworkForClassRepository.findAll().get(0));
-    Assertions.assertEquals(homeworkForClassRepository.findAll().get(0).getDiscipline(),
-        Discipline.COMPUTING);
-    Assertions.assertEquals(LocalDate.of(2000, 2, 2),
+    Assertions.assertEquals(
+        homeworkForClassRepository.findAll().get(0).getDiscipline(), Discipline.COMPUTING);
+    Assertions.assertEquals(
+        LocalDate.of(2000, 2, 2),
         homeworkForClassRepository.findAll().get(0).getDate());
-    Assertions.assertEquals(homeworkForClassRepository.findAll().get(0).getSchoolClassId(),
+    Assertions.assertEquals(
+        homeworkForClassRepository.findAll().get(0).getSchoolClassId(),
         schoolClassRepository.findAll().get(0).getId());
-
-
   }
 
 }

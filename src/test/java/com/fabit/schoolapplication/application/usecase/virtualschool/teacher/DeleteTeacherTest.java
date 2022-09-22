@@ -21,8 +21,10 @@ public class DeleteTeacherTest {
 
   @Autowired
   DeleteTeacher deleteTeacher;
+
   @Autowired
   CreateTeacher createTeacher;
+
   @Autowired
   TeacherRepository teacherRepository;
 
@@ -35,6 +37,7 @@ public class DeleteTeacherTest {
   @Transactional
   @DisplayName("Удаление учителя должно удалять учителя")
   void deleteTeacherTest() {
+
     TeacherDto teacherDto = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
@@ -42,11 +45,15 @@ public class DeleteTeacherTest {
         new SnilsDto("123-456-789-00"),
         true
     );
+
     createTeacher.execute(teacherDto);
+
     long createdTeacherId = teacherRepository.findAll().get(0).getId();
+
     Assertions.assertEquals(1, teacherRepository.findAll().size());
 
     deleteTeacher.execute(createdTeacherId);
+
     Assertions.assertEquals(0, teacherRepository.findAll().size());
   }
 

@@ -35,8 +35,10 @@ public class GetSchoolClassTest {
   @Test
   @DisplayName("Поиск школьных классов по пустой БД должен выбрасывать соответствующий exception")
   void getSchoolClassAllEmptyTest() {
+
     when(schoolClassRepository.findAll())
         .thenReturn(List.of());
+
     Assertions.assertThrows(
         NoSuchElementException.class,
         () -> getSchoolClass.all(),
@@ -48,6 +50,7 @@ public class GetSchoolClassTest {
   void getSchoolClassByIdEmptyTest() {
     when(schoolClassRepository.findById(any()))
         .thenReturn(Optional.empty());
+
     Assertions.assertThrows(
         NoSuchElementException.class,
         () -> getSchoolClass.byId(1),
@@ -57,8 +60,10 @@ public class GetSchoolClassTest {
   @Test
   @DisplayName("Поиск школьных классов по несуществующему name должен выбрасывать exception")
   void getSchoolClassByName() {
+
     when(schoolClassRepository.findByParallelAndLitera(1, "А"))
         .thenReturn(null);
+
     Assertions.assertNull(getSchoolClass.byName(1, "А"));
   }
 

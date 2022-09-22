@@ -24,16 +24,20 @@ public class EditTeacherTest {
 
   @Autowired
   EditTeacher editTeacher;
+
   @Autowired
   TeacherRepository teacherRepository;
+
   @Autowired
   CreateTeacher createTeacher;
 
   TeacherEntity temporaryTeacher;
+
   long temporaryTeacherId;
 
   @BeforeEach
   public void init() {
+
     TeacherDto teacherToCreate = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
@@ -41,6 +45,7 @@ public class EditTeacherTest {
         new SnilsDto("123-456-789-00"),
         true
     );
+
     temporaryTeacher = createTeacher.execute(teacherToCreate);
     temporaryTeacherId = temporaryTeacher.getId();
   }
@@ -53,20 +58,26 @@ public class EditTeacherTest {
   @Test
   @DisplayName("Изменение стажа учителя должно менять его стаж")
   void changeStandingYears() {
+
     Assertions.assertEquals(10, temporaryTeacher.getStandingYears());
+
     TeacherEntity resultedTeacher
         = editTeacher.changeStandingYears(new StandingYearsDto(temporaryTeacherId, 11));
+
     Assertions.assertEquals(11, resultedTeacher.getStandingYears());
   }
 
   @Test
   @DisplayName("Деактивация и активация учителя должна деактивировать и активировать учителя")
   void deactivateAndActivateTest() {
+
     TeacherEntity deactivatedTeacher = editTeacher.deactivate(
         new DeactivateDto(temporaryTeacherId, "2022-09-16", "2022-09-25"));
+
     Assertions.assertFalse(deactivatedTeacher.isActive());
 
     TeacherEntity activatedTeacher = editTeacher.activate(temporaryTeacherId);
+
     Assertions.assertTrue(activatedTeacher.isActive());
   }
 

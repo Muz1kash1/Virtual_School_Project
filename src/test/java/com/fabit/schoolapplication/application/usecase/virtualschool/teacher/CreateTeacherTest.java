@@ -26,12 +26,16 @@ public class CreateTeacherTest {
 
   @Autowired
   CreateTeacher createTeacher;
+
   @MockBean
   TeacherRepository teacherRepository;
 
   @Test
   @DisplayName("Создание учителя юзкейсом должно создавать корректного учителя")
   void createTeacherTest() {
+
+    TeacherServiceMapper teacherMapper = new TeacherServiceMapper();
+
     TeacherDto teacherDto = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
@@ -39,16 +43,17 @@ public class CreateTeacherTest {
         new SnilsDto("123-456-789-00"),
         true
     );
-    TeacherServiceMapper teacherMapper = new TeacherServiceMapper();
 
     Teacher teacherDomain = teacherMapper.mapDtoToDomain(teacherDto);
+
     when(teacherRepository.save(any()))
         .thenReturn(teacherMapper.mapDomainToEntity(teacherDomain));
 
     TeacherEntity teacherCreated = createTeacher.execute(teacherDto);
 
     Assertions.assertEquals(
-        teacherDto.getPassport().toString(), teacherCreated.getPassport());
+        teacherDto.getPassport().toString(), teacherCreated.getPassport()
+    );
     Assertions.assertEquals(teacherDto.getStandingYears(), teacherCreated.getStandingYears());
     Assertions.assertEquals(teacherDto.getSnils().getNumberView(), teacherCreated.getSnils());
     Assertions.assertTrue(teacherCreated.isActive());

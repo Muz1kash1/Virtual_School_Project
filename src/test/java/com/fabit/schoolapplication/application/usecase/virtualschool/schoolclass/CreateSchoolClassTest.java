@@ -24,12 +24,16 @@ public class CreateSchoolClassTest {
 
   @Autowired
   CreateSchoolClass createSchoolClass;
+
   @Autowired
   RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+
   @Autowired
   SchoolClassRepository schoolClassRepository;
+
   @Autowired
   StudentInClassRepository studentInClassRepository;
+
   @Autowired
   StudentRepository studentRepository;
 

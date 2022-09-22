@@ -23,6 +23,7 @@ public class GetLoadedHomeworkForClassTest {
 
   @Autowired
   HomeworkForClassRepository homeworkForClassRepository;
+
   @Autowired
   CreateHomeworkForClass createHomeworkForClass;
 
@@ -56,24 +57,32 @@ public class GetLoadedHomeworkForClassTest {
   @Test
   @DisplayName("Получение урока работает корректно")
   void getHomeworkForClassTest() {
+
     createSchoolClass.execute(11, "А");
 
     createHomeworkForClass.execute(
-        Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
-        SchoolClassId.of(schoolClassRepository.findAll().get(0).getId()));
+        Discipline.COMPUTING,
+        LocalDate.of(2000, 2, 2),
+        SchoolClassId.of(schoolClassRepository.findAll().get(0).getId())
+    );
 
-    Assertions.assertEquals(Discipline.COMPUTING,
+    Assertions.assertEquals(
+        Discipline.COMPUTING,
         getHomeworkForClass.execute(
-                homeworkForClassRepository.findAll().get(0).getId())
-            .getDiscipline());
+            homeworkForClassRepository.findAll().get(0).getId()).getDiscipline()
+    );
+
     Assertions.assertEquals(
         homeworkForClassRepository.findAll().get(0).getHomeworkTask(),
         getHomeworkForClass.execute(
             homeworkForClassRepository.findAll().get(0).getId()).getTask()
     );
-    Assertions.assertEquals(homeworkForClassRepository.findAll().get(0).getDate(),
+
+    Assertions.assertEquals(
+        homeworkForClassRepository.findAll().get(0).getDate(),
         getHomeworkForClass.execute(
             homeworkForClassRepository.findAll().get(0).getId()).getDate()
     );
   }
+
 }

@@ -23,12 +23,16 @@ public class AddStudentToClassTest {
 
   @Autowired
   AddStudentToSchoolClass addStudentToSchoolClass;
+
   @Autowired
   CreateSchoolClass createSchoolClass;
+
   @Autowired
   SchoolClassRepository schoolClassRepository;
+
   @Autowired
   StudentInClassRepository studentInClassRepository;
+
   @Autowired
   StudentRepository studentRepository;
 

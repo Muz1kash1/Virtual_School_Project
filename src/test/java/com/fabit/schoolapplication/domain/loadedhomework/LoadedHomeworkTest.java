@@ -13,18 +13,17 @@ public class LoadedHomeworkTest {
 
   static LoadedHomework loadedHomework;
 
-
   @BeforeAll
   static void initialize() {
     loadedHomework = LoadedHomework.of(LoadedHomeworkId.of(1L),
         StudentId.of(1L), HomeworkForClassId.of(1L));
     loadedHomework.uploadTaskCompletionResult("Test");
   }
+
   @DisplayName("Загрузка выполнения работает корректно")
   @Test
   void uploadCompletedResultTest() {
     Assertions.assertEquals("Test", loadedHomework.getTaskCompletionResult());
   }
-
 
 }

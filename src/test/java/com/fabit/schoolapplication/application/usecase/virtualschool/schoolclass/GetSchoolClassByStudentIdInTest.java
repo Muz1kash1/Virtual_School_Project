@@ -30,10 +30,13 @@ public class GetSchoolClassByStudentIdInTest {
 
   @Autowired
   MockMvc mockMvc;
+
   @Autowired
   GetSchoolClassByStudentIdIn getSchoolClassByStudentIdIn;
+
   @MockBean
   StudentInClassRepository studentInClassRepository;
+
   @MockBean
   SchoolClassRepository schoolClassRepository;
 
@@ -41,7 +44,8 @@ public class GetSchoolClassByStudentIdInTest {
   @DisplayName("Получение школьного класса ученика должно возвращать корректный класс")
   void getSchoolClassByStudentIdInTest() {
     Optional<SchoolClassEntity> mockClass = Optional.of(SchoolClassEntity.of(
-        SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(4, "А"))));
+        SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(4, "А")))
+    );
 
     when(studentInClassRepository.findByStudentId(any()))
         .thenReturn(StudentInClassEntity.of(1L, StudentId.of(5L).getValue()));
@@ -62,7 +66,8 @@ public class GetSchoolClassByStudentIdInTest {
         .thenReturn(Optional.empty());
 
     Assertions.assertThrows(NoSuchElementException.class,
-        () -> getSchoolClassByStudentIdIn.execute(StudentId.of(999L)));
+        () -> getSchoolClassByStudentIdIn.execute(StudentId.of(999L))
+    );
   }
 
 

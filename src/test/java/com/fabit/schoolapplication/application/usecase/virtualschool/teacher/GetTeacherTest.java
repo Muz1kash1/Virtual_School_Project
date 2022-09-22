@@ -23,16 +23,20 @@ public class GetTeacherTest {
 
   @Autowired
   GetTeacher getTeacher;
+
   @Autowired
   CreateTeacher createTeacher;
+
   @Autowired
   TeacherRepository teacherRepository;
 
   TeacherEntity temporaryTeacher1;
+
   TeacherEntity temporaryTeacher2;
 
   @BeforeEach
   public void init() {
+
     TeacherDto teacherToCreate1 = new TeacherDto(
         10,
         new FullNameDto("Name", "Surname", "Patronymic"),
@@ -40,6 +44,7 @@ public class GetTeacherTest {
         new SnilsDto("123-456-789-00"),
         true
     );
+
     TeacherDto teacherToCreate2 = new TeacherDto(
         18,
         new FullNameDto("SName", "SSurname", "SPatronymic"),
@@ -47,6 +52,7 @@ public class GetTeacherTest {
         new SnilsDto("246-078-233-00"),
         false
     );
+
     temporaryTeacher1 = createTeacher.execute(teacherToCreate1);
     temporaryTeacher2 = createTeacher.execute(teacherToCreate2);
   }
@@ -59,7 +65,9 @@ public class GetTeacherTest {
   @Test
   @DisplayName("Получение списка всех учителей должно возвращать актуальный список")
   void getAllTeachersTest() {
+
     List<TeacherEntity> teachers = getTeacher.all();
+
     Assertions.assertEquals(2, teachers.size());
     Assertions.assertTrue(temporaryTeacher1.isActive());
     Assertions.assertFalse(temporaryTeacher2.isActive());

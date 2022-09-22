@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.application.usecase.virtualschool.homeworkforclass;
 
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +22,7 @@ public class ChangeLoadedHomeworkTaskTest {
 
   @Autowired
   HomeworkForClassRepository homeworkForClassRepository;
+
   @Autowired
   ChangeHomeworkTask changeHomeworkTask;
 
@@ -42,14 +43,21 @@ public class ChangeLoadedHomeworkTaskTest {
   @DisplayName("Задание задания работает корректно")
   void changeHomeworkForClassTest() {
 
-    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
-        SchoolClassId.of(1L));
+    createHomeworkForClass.execute(
+        Discipline.COMPUTING,
+        LocalDate.of(2000, 2, 2),
+        SchoolClassId.of(1L)
+    );
 
     changeHomeworkTask.execute(
         HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()),
-        "test homework");
-    Assertions.assertEquals("test homework",
-        homeworkForClassRepository.findAll().get(0).getHomeworkTask());
+        "test homework"
+    );
+
+    Assertions.assertEquals(
+        "test homework",
+        homeworkForClassRepository.findAll().get(0).getHomeworkTask()
+    );
 
   }
 }

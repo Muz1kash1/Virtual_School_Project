@@ -1,13 +1,13 @@
 package com.fabit.schoolapplication.application.usecase.virtualschool.loadedhomework;
 
+import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
-import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +22,10 @@ public class CompleteLoadedHomeworkTest {
 
   @Autowired
   LoadedHomeworkMapperService loadedHomeworkMapperService;
+
   @Autowired
   CompleteHomework completeHomework;
+
   @Autowired
   LoadedHomeworkRepository loadedHomeworkRepository;
 
@@ -43,6 +45,7 @@ public class CompleteLoadedHomeworkTest {
   @DisplayName("тест обновления загруженного дз")
   @Test
   void uploadCompletedHomework() {
+
     StudentEntity student = new StudentEntity();
     student.setName("test");
     studentRepository.save(student);
@@ -54,12 +57,20 @@ public class CompleteLoadedHomeworkTest {
 
     LoadedHomeworkDto dto = new LoadedHomeworkDto(
         1L,
-        studentRepository.findAll().get(0).getId(), "Test",
-        homeworkForClassRepository.findAll().get(0).getId());
+        studentRepository.findAll().get(0).getId(),
+        "Test",
+        homeworkForClassRepository.findAll().get(0).getId()
+    );
+
     completeHomework.uploadCompletedHomework(dto);
+
+    String taskCompletionResult
+        = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
+            loadedHomeworkMapperService.mapDtoToHomework(dto)).getTaskCompletionResult();
+
     Assertions.assertNotNull(loadedHomeworkRepository.findAll().get(0));
-    Assertions.assertEquals(loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
-            loadedHomeworkMapperService.mapDtoToHomework(dto)).getTaskCompletionResult(),
+    Assertions.assertEquals(
+        taskCompletionResult,
         loadedHomeworkRepository.findAll().get(0).getTaskCompletionResult());
   }
 

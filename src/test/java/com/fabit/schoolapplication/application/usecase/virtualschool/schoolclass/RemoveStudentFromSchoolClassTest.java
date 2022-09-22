@@ -22,14 +22,19 @@ public class RemoveStudentFromSchoolClassTest {
 
   @Autowired
   StudentInClassRepository studentInClassRepository;
+
   @Autowired
   SchoolClassRepository schoolClassRepository;
+
   @Autowired
   StudentRepository studentRepository;
+
   @Autowired
   RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+
   @Autowired
   AddStudentToSchoolClass addStudentToSchoolClass;
+
   @Autowired
   CreateSchoolClass createSchoolClass;
 
@@ -50,8 +55,10 @@ public class RemoveStudentFromSchoolClassTest {
   @Test
   @DisplayName("Удаление ученика из класса должно разрывать между ними связь")
   void removeStudentFromSchoolClassTest() {
+
     SchoolClassEntity createdSchoolClass = createSchoolClass.execute(2, "Г");
     StudentEntity testStudent = studentRepository.findAll().get(0);
+
     addStudentToSchoolClass.execute(
         SchoolClassId.of(createdSchoolClass.getId()), StudentId.of(testStudent.getId()));
 

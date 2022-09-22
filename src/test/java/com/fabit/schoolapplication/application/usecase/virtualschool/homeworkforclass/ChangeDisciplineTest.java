@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.application.usecase.virtualschool.homeworkforclass;
 
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
@@ -22,11 +22,13 @@ public class ChangeDisciplineTest {
 
   @Autowired
   HomeworkForClassRepository homeworkForClassRepository;
+
   @Autowired
   ChangeDiscipline changeDiscipline;
 
   @Autowired
   HomeworkForClassMapper homeworkForClassMapper;
+
   @BeforeEach
   void cleanBefore() {
     homeworkForClassRepository.deleteAll();
@@ -41,16 +43,26 @@ public class ChangeDisciplineTest {
   @DisplayName("Замена предмета работает корректно")
   void changeDisciplineTest() {
 
-    createHomeworkForClass.execute(Discipline.COMPUTING, LocalDate.of(2000, 2, 2),
-        SchoolClassId.of(1L));
+    createHomeworkForClass.execute(
+        Discipline.COMPUTING,
+        LocalDate.of(2000, 2, 2),
+        SchoolClassId.of(1L)
+    );
 
-    Assertions.assertEquals(Discipline.COMPUTING,
-        homeworkForClassRepository.findAll().get(0).getDiscipline());
+    Assertions.assertEquals(
+        Discipline.COMPUTING,
+        homeworkForClassRepository.findAll().get(0).getDiscipline()
+    );
+
     changeDiscipline.execute(
         HomeworkForClassId.of(homeworkForClassRepository.findAll().get(0).getId()),
-        Discipline.BIOLOGY);
-    Assertions.assertEquals(Discipline.BIOLOGY,
-        homeworkForClassRepository.findAll().get(0).getDiscipline());
+        Discipline.BIOLOGY
+    );
+
+    Assertions.assertEquals(
+        Discipline.BIOLOGY,
+        homeworkForClassRepository.findAll().get(0).getDiscipline()
+    );
   }
 
 }

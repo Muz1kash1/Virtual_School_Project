@@ -27,14 +27,19 @@ public class DeleteSchoolClassTest {
 
   @Autowired
   CreateSchoolClass createSchoolClass;
+
   @Autowired
   RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+
   @Autowired
   SchoolClassRepository schoolClassRepository;
+
   @Autowired
   StudentInClassRepository studentInClassRepository;
+
   @Autowired
   DeleteSchoolClass deleteSchoolClass;
+
   @Autowired
   StudentRepository studentRepository;
 
@@ -45,10 +50,12 @@ public class DeleteSchoolClassTest {
     for (int i = 0; i < 10; i++) {
       studentRepository.save(new StudentEntity());
     }
+
     originStudentIds = new ArrayList<>();
     StudentId testStudentId1 = StudentId.of(studentRepository.findAll().get(0).getId());
     StudentId testStudentId2 = StudentId.of(studentRepository.findAll().get(1).getId());
     StudentId testStudentId3 = StudentId.of(studentRepository.findAll().get(2).getId());
+
     originStudentIds.add(testStudentId1.getValue());
     originStudentIds.add(testStudentId2.getValue());
     originStudentIds.add(testStudentId3.getValue());
