@@ -1,14 +1,14 @@
 package com.fabit.schoolapplication.domain.student;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
-import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StudentTest {
 
@@ -17,11 +17,12 @@ class StudentTest {
   void createStudent12Years() {
 
     Student student = Student.of(
-        StudentId.of(1),
-        FullName.of("Петя", "Губкин", "Васильевич"),
-        Snils.of("123-343-223-32"),
-        BirthCertificate.of("2222", "999999",
-            LocalDate.of(2010, 9, 15))
+      StudentId.of(1),
+      FullName.of("Петя", "Губкин", "Васильевич"),
+      Snils.of("123-343-223-32"),
+      BirthCertificate.of("2222", "999999",
+        LocalDate.of(2010, 9, 15)
+      )
     );
 
     assertEquals(1L, student.getId().getValue());
@@ -34,11 +35,15 @@ class StudentTest {
   void createStudent15Years() {
 
     Student student = Student.of(
-        StudentId.of(1),
-        FullName.of("Петя", "Губкин", "Васильевич"),
-        Snils.of("123-343-223-32"),
-        RussianPassport.of("1111", "888888",
-            LocalDate.of(2007, 9, 15))
+      StudentId.of(1),
+      FullName.of("Петя", "Губкин", "Васильевич"),
+      Snils.of("123-343-223-32"),
+      BirthCertificate.of("2222", "999999",
+        LocalDate.of(2007, 9, 15)
+      ),
+      RussianPassport.of("1111", "888888",
+        LocalDate.of(2007, 9, 15)
+      )
     );
 
     assertEquals(1L, student.getId().getValue());
@@ -49,80 +54,110 @@ class StudentTest {
   @Test
   @DisplayName("Создается объект ученика младше 14 лет c паспортом должен выкинуть ошибку")
   void createStudent12YearsWithPassportShouldThrowIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> Student.of(
-            StudentId.of(1),
-            FullName.of("Петя", "Губкин", "Васильевич"),
-            Snils.of("123-343-223-32"),
-            RussianPassport.of(
-                "1111", "888888",
-                LocalDate.of(2010, 9, 15)
-            )
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> Student.of(
+        StudentId.of(1),
+        FullName.of("Петя", "Губкин", "Васильевич"),
+        Snils.of("123-343-223-32"),
+        BirthCertificate.of("2222", "999999",
+          LocalDate.of(2010, 9, 15)
+        ),
+        RussianPassport.of(
+          "1111", "888888",
+          LocalDate.of(2010, 9, 15)
         )
+      )
     );
   }
 
   @Test
   @DisplayName("Создается объект ученика c невалидным паспортом должен выкинуть ошибку")
   void createStudentWithInvalidPassportShouldThrowIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> Student.of(
-            StudentId.of(1),
-            FullName.of("Петя", "Губкин", "Васильевич"),
-            Snils.of("123-343-223-32"),
-            RussianPassport.of(
-                "99", "89292",
-                LocalDate.of(2010, 9, 15)
-            )
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> Student.of(
+        StudentId.of(1),
+        FullName.of("Петя", "Губкин", "Васильевич"),
+        Snils.of("123-343-223-32"),
+        BirthCertificate.of("2222", "999999",
+          LocalDate.of(2010, 9, 15)
+        ),
+        RussianPassport.of(
+          "99", "89292",
+          LocalDate.of(2010, 9, 15)
         )
+      )
     );
   }
 
   @Test
   @DisplayName("Создается объект ученика c невалидным свидетельством о рождении должен выкинуть ошибку")
   void createStudentWithInvalidBirthCertificateShouldThrowIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> Student.of(
-            StudentId.of(1),
-            FullName.of("Петя", "Губкин", "Васильевич"),
-            Snils.of("123-343-223-32"),
-            BirthCertificate.of(
-                "99", "89292",
-                LocalDate.of(2010, 9, 15)
-            )
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> Student.of(
+        StudentId.of(1),
+        FullName.of("Петя", "Губкин", "Васильевич"),
+        Snils.of("123-343-223-32"),
+        BirthCertificate.of(
+          "99", "89292",
+          LocalDate.of(2010, 9, 15)
         )
+      )
     );
   }
 
   @Test
   @DisplayName("Создается объект ученика c невалидным СНИЛС  должен выкинуть ошибку")
   void createStudentWithInvalidSnilsShouldThrowIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> Student.of(
-            StudentId.of(1),
-            FullName.of("Петя", "Губкин", "Васильевич"),
-            Snils.of("123-343-2233-32"),
-            BirthCertificate.of(
-                "99", "89292",
-                LocalDate.of(2010, 9, 15)
-            )
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> Student.of(
+        StudentId.of(1),
+        FullName.of("Петя", "Губкин", "Васильевич"),
+        Snils.of("123-343-2233-32"),
+        BirthCertificate.of(
+          "99", "89292",
+          LocalDate.of(2010, 9, 15)
         )
+      )
     );
   }
 
   @Test
   @DisplayName("Создается объект ученика младше 5 лет должен выкинуть ошибку")
   void createStudent4YearsShouldThrowIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> Student.of(
-            StudentId.of(1),
-            FullName.of("Петя", "Губкин", "Васильевич"),
-            Snils.of("123-343-223-32"),
-            BirthCertificate.of(
-                "2222", "999999",
-                LocalDate.of(2018, 9, 15)
-            )
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> Student.of(
+        StudentId.of(1),
+        FullName.of("Петя", "Губкин", "Васильевич"),
+        Snils.of("123-343-223-32"),
+        BirthCertificate.of(
+          "2222", "999999",
+          LocalDate.of(2018, 9, 15)
         )
+      )
+    );
+  }
+
+  @Test
+  @DisplayName("Создается объект ученика с разной датой рождения в паспорте и св. о рожд. должен выкинуть ошибку")
+  void createStudentWithNotValidDataShouldThrowIllegalArgumentException() {
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> Student.of(
+        StudentId.of(1),
+        FullName.of("Петя", "Губкин", "Васильевич"),
+        Snils.of("123-343-223-32"),
+        BirthCertificate.of("2222", "999999",
+          LocalDate.of(2010, 9, 15)
+        ),
+        RussianPassport.of("1111", "888888",
+          LocalDate.of(2007, 9, 15)
+        )
+      )
     );
   }
 
@@ -131,13 +166,16 @@ class StudentTest {
   void changeSnils() {
 
     Student student = Student.of(
-        StudentId.of(1),
-        FullName.of("Петя", "Губкин", "Васильевич"),
-        Snils.of("123-343-223-32"),
-        RussianPassport.of(
-            "1111", "888888",
-            LocalDate.of(2007, 9, 15)
-        )
+      StudentId.of(1),
+      FullName.of("Петя", "Губкин", "Васильевич"),
+      Snils.of("123-343-223-32"),
+      BirthCertificate.of("2222", "999999",
+        LocalDate.of(2007, 9, 15)
+      ),
+      RussianPassport.of(
+        "1111", "888888",
+        LocalDate.of(2007, 9, 15)
+      )
     );
 
     student.changeSnils(Snils.of("777-777-777-77"));
@@ -150,18 +188,19 @@ class StudentTest {
   void changeBirthCertificate() {
 
     Student student = Student.of(
-        StudentId.of(1),
-        FullName.of("Петя", "Губкин", "Васильевич"),
-        Snils.of("123-343-223-32"),
-        BirthCertificate.of(
-            "2223", "788778",
-            LocalDate.of(2007, 9, 15)
-        )
+      StudentId.of(1),
+      FullName.of("Петя", "Губкин", "Васильевич"),
+      Snils.of("123-343-223-32"),
+      BirthCertificate.of(
+        "2223", "788778",
+        LocalDate.of(2007, 9, 15)
+      )
     );
 
     student.changeBirthCertificate(
-        BirthCertificate.of("2222", "999999",
-            LocalDate.of(2007, 9, 15))
+      BirthCertificate.of("2222", "999999",
+        LocalDate.of(2007, 9, 15)
+      )
     );
 
     assertEquals("999999", student.getBirthCertificate().getNumber());
@@ -173,18 +212,22 @@ class StudentTest {
   void addPassport() {
 
     Student student = Student.of(
-        StudentId.of(1),
-        FullName.of("Петя", "Губкин", "Васильевич"),
-        Snils.of("123-343-223-32"),
-        RussianPassport.of(
-            "2222", "999999",
-            LocalDate.of(2007, 9, 15)
-        )
+      StudentId.of(1),
+      FullName.of("Петя", "Губкин", "Васильевич"),
+      Snils.of("123-343-223-32"),
+      BirthCertificate.of("2222", "999999",
+        LocalDate.of(2007, 9, 15)
+      ),
+      RussianPassport.of(
+        "2222", "999999",
+        LocalDate.of(2007, 9, 15)
+      )
     );
 
     student.addPassport(
-        RussianPassport.of("1111", "555555",
-            LocalDate.of(2007, 9, 15))
+      RussianPassport.of("1111", "555555",
+        LocalDate.of(2007, 9, 15)
+      )
     );
 
     assertEquals("555555", student.getPassport().getNumber());

@@ -14,6 +14,7 @@ public class BirthCertificate {
   String number;
 
   LocalDate birthday;
+  private static final int MIN_AGE_FOR_STUDENT = 5;
 
   private BirthCertificate(String serial, String number, LocalDate birthday) {
     this.serial = serial;
@@ -47,7 +48,7 @@ public class BirthCertificate {
   }
 
   private static boolean isValidAge(LocalDate birthday) {
-    return (LocalDate.now().getYear() - birthday.getYear() >= 5);
+    return (LocalDate.now().getYear() - birthday.getYear() >= MIN_AGE_FOR_STUDENT);
   }
 
   @Override

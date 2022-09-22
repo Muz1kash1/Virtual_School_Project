@@ -28,11 +28,11 @@ public class StudentEntity {
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
-    Student.domainEvents.clear();
+    Student.DOMAIN_EVENTS.clear();
   }
 
   @DomainEvents
   protected Collection<Object> domainEvents() {
-    return Collections.unmodifiableList(Student.domainEvents);
+    return Collections.unmodifiableList(Student.DOMAIN_EVENTS);
   }
 }

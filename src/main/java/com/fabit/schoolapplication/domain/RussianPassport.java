@@ -12,6 +12,7 @@ public class RussianPassport {
   String serial;
   String number;
   LocalDate birthday;
+  private static final int MIN_AGE_FOR_PASSPORT = 14;
 
   private RussianPassport(String serial, String number, LocalDate birthday) {
     this.serial = serial;
@@ -39,7 +40,7 @@ public class RussianPassport {
 
   public static boolean isValidAge(LocalDate birthday) {
 
-    return (LocalDate.now().getYear() - birthday.getYear() >= 14);
+    return (LocalDate.now().getYear() - birthday.getYear() >= MIN_AGE_FOR_PASSPORT);
   }
 
   /**
@@ -53,8 +54,8 @@ public class RussianPassport {
   public static boolean isValidPassport(String serial, String number, LocalDate birthday) {
 
     return Pattern.matches("^[0-9]{6}$", number)
-        && Pattern.matches("^[0-9]{4}$", serial)
-        && isValidAge(birthday);
+      && Pattern.matches("^[0-9]{4}$", serial)
+      && isValidAge(birthday);
   }
 
   @Override
