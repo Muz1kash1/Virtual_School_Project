@@ -77,10 +77,13 @@ public class SchoolClassController {
    */
   @PostMapping("/school-class")
   public ResponseEntity<?> createSchoolClass(
-      @RequestBody SchoolClassDto schoolClassDto
-  ) {
+      @RequestBody SchoolClassDto schoolClassDto) {
+
     createSchoolClass.execute(schoolClassDto.toDomain());
-    return ResponseEntity.status(HttpStatus.CREATED).build();
+
+    return ResponseEntity
+        .status(HttpStatus.CREATED)
+        .build();
   }
 
   /**
@@ -92,8 +95,12 @@ public class SchoolClassController {
   @DeleteMapping("/school-class")
   public ResponseEntity<?> deleteSchoolClass(
       @RequestBody SchoolClassDto schoolClassDTO) {
+
     deleteSchoolClass.execute(schoolClassDTO.toDomain());
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    return ResponseEntity
+        .status(HttpStatus.NO_CONTENT)
+        .build();
   }
 
   /**
@@ -106,8 +113,12 @@ public class SchoolClassController {
   @PostMapping(value = "/school-class/{id}")
   public ResponseEntity<?> addStudentToClass(
       @PathVariable Long id, @RequestParam Long studentId) {
+
     addStudentToSchoolClass.execute(SchoolClassId.of(id), StudentId.of(studentId));
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    return ResponseEntity
+        .status(HttpStatus.NO_CONTENT)
+        .build();
   }
 
   /**
@@ -120,8 +131,12 @@ public class SchoolClassController {
   @DeleteMapping("/school-class/{id}")
   public ResponseEntity<?> removeStudentFromClass(
       @PathVariable Long id, @RequestParam Long studentId) {
+
     removeStudentFromSchoolClass.execute(SchoolClassId.of(id), StudentId.of(studentId));
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    return ResponseEntity
+        .status(HttpStatus.NO_CONTENT)
+        .build();
   }
 
 }

@@ -27,8 +27,12 @@ public class EditStudentEndpoint {
   @PutMapping("/change-birthcertificate")
   public ResponseEntity<StudentEntity> changeBirthCertificateStudent(
       @RequestBody StudentDto student) {
+
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    return ResponseEntity.ok().body(editStudent.changeBirthCertificate(student));
+
+    return ResponseEntity
+        .ok()
+        .body(editStudent.changeBirthCertificate(student));
   }
 
   /**
@@ -39,8 +43,12 @@ public class EditStudentEndpoint {
    */
   @PutMapping("/change-snils")
   public ResponseEntity<StudentEntity> changeSnilsStudent(@RequestBody StudentDto student) {
+
     log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
-    return ResponseEntity.ok().body(editStudent.changeSnils(student));
+
+    return ResponseEntity
+        .ok()
+        .body(editStudent.changeSnils(student));
   }
 
   /**
@@ -51,7 +59,11 @@ public class EditStudentEndpoint {
    */
   @PutMapping("/add-passport")
   public ResponseEntity<StudentEntity> addPassportStudent(@RequestBody StudentDto student) {
+
     log.info("trying to add RussianPassport: " + student.getPassport());
-    return ResponseEntity.ok().body(editStudent.addPassport(student));
+
+    return ResponseEntity
+        .ok()
+        .body(editStudent.addPassport(student));
   }
 }

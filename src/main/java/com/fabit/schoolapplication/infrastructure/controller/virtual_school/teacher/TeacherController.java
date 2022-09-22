@@ -32,7 +32,9 @@ public class TeacherController {
 
   @PostMapping
   public ResponseEntity<TeacherEntity> createTeacher(@RequestBody TeacherDto teacherDto) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(createTeacher.execute(teacherDto));
+    return ResponseEntity
+        .status(HttpStatus.CREATED)
+        .body(createTeacher.execute(teacherDto));
   }
 
   @PutMapping("/standing-years")
@@ -46,27 +48,39 @@ public class TeacherController {
 
   @PutMapping("/{teacherId}/activate")
   public ResponseEntity<TeacherEntity> activateTeacher(@PathVariable long teacherId) {
-    return ResponseEntity.status(HttpStatus.ACCEPTED).body(editTeacher.activate(teacherId));
+    return ResponseEntity
+        .status(HttpStatus.ACCEPTED)
+        .body(editTeacher.activate(teacherId));
   }
 
   @PutMapping("/deactivate")
   public ResponseEntity<TeacherEntity> deactivateTeacher(@RequestBody DeactivateDto deactivateDto) {
-    return ResponseEntity.status(HttpStatus.ACCEPTED).body(editTeacher.deactivate(deactivateDto));
+    return ResponseEntity
+        .status(HttpStatus.ACCEPTED)
+        .body(editTeacher.deactivate(deactivateDto));
   }
 
   @GetMapping("/{teacherId}")
   public ResponseEntity<TeacherEntity> getTeacher(@PathVariable long teacherId) {
-    return ResponseEntity.ok().body(getTeacher.byId(teacherId));
+    return ResponseEntity
+        .ok()
+        .body(getTeacher.byId(teacherId));
   }
 
   @GetMapping
   public ResponseEntity<List<TeacherEntity>> getAllTeachers() {
-    return ResponseEntity.ok().body(getTeacher.all());
+    return ResponseEntity
+        .ok()
+        .body(getTeacher.all());
   }
 
   @DeleteMapping("/{teacherId}")
   public ResponseEntity<?> deleteTeacher(@PathVariable long teacherId) {
+
     deleteTeacher.execute(teacherId);
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    return ResponseEntity
+        .status(HttpStatus.NO_CONTENT)
+        .build();
   }
 }

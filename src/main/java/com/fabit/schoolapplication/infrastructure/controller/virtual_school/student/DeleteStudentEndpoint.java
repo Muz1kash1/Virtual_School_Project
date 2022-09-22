@@ -24,8 +24,12 @@ public class DeleteStudentEndpoint {
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteStudent(@PathVariable long id) {
+
     log.info("trying to delete student with id: " + id);
     deleteStudent.execute(id);
-    return ResponseEntity.ok().body("Ученик исключен из школы");
+
+    return ResponseEntity
+        .ok()
+        .body("Ученик исключен из школы");
   }
 }

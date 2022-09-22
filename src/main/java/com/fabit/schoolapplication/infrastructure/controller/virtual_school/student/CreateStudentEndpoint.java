@@ -27,7 +27,11 @@ public class CreateStudentEndpoint {
    */
   @PostMapping
   public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentDto student) {
+
     log.info("trying to create: " + student.toString());
-    return ResponseEntity.status(HttpStatus.CREATED).body(createStudent.execute(student));
+
+    return ResponseEntity
+        .status(HttpStatus.CREATED)
+        .body(createStudent.execute(student));
   }
 }

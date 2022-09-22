@@ -30,9 +30,13 @@ public class LoadedHomeworkController {
   @PostMapping(value = "/homework", produces = "application/json")
   public ResponseEntity<String> sendCompletedHomework(
       @RequestBody LoadedHomeworkDto loadedHomeworkDto) {
+
     log.info("пытаемся загрузить выполненную домашку");
     completeHomework.uploadCompletedHomework(loadedHomeworkDto);
-    return ResponseEntity.status(HttpStatus.CREATED).body("Домашняя работа загружена");
+
+    return ResponseEntity
+        .status(HttpStatus.CREATED)
+        .body("Домашняя работа загружена");
   }
 
   /**
@@ -45,7 +49,10 @@ public class LoadedHomeworkController {
   @GetMapping(value = "/homework/{id}", produces = "application/json")
   public ResponseEntity<LoadedHomeworkDto> getCompletedHomework(
       @PathVariable long id) {
-    return ResponseEntity.ok().body(getLoadedHomework.execute(id));
+
+    return ResponseEntity
+        .ok()
+        .body(getLoadedHomework.execute(id));
   }
 
 }
