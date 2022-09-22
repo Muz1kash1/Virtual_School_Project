@@ -42,8 +42,7 @@ class StudentControllerTest {
         {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
         "snils":{"numberView":"123-343-223-32"},
-        "birthCertificate":{"serial":"1111", "number":"999988","birthday":"2007-09-15"},
-        "passport":{"serial":"2222", "number":"123456","birthday":"2007-09-15"}
+        "birthCertificate":{"serial":"1111", "number":"999988","birthday":"2007-09-15"}
          }
         """;
 

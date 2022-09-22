@@ -35,8 +35,8 @@ public class Student {
     domainEvents.add(event);
   }
 
-  private Student(
-      StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate) {
+  private Student(StudentId studentId, FullName name, Snils snils,
+                  BirthCertificate birthCertificate) {
 
     this.id = studentId;
     this.fullName = name;
@@ -46,11 +46,13 @@ public class Student {
     registerEvent(new StudentCreatedEvent(this));
   }
 
-  private Student(StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
+  private Student(StudentId studentId, FullName name, Snils snils,
+                  BirthCertificate birthCertificate, RussianPassport passport) {
 
     this.id = studentId;
     this.fullName = name;
     this.snils = snils;
+    this.birthCertificate = birthCertificate;
     this.passport = passport;
 
     registerEvent(new StudentCreatedEvent(this));
@@ -65,14 +67,14 @@ public class Student {
    * @param birthCertificate свидетельство о рождении
    * @return the student
    */
-  public static Student of(
-      StudentId studentId, FullName name, Snils snils, BirthCertificate birthCertificate) {
+  public static Student of(StudentId studentId, FullName name, Snils snils,
+                           BirthCertificate birthCertificate) {
 
     return new Student(studentId, name, snils, birthCertificate);
   }
 
   /**
-   * Создание ученика возрастом минимум 14 лет.
+   * Создание ученика старше 14 лет.
    *
    * @param studentId - id студента
    * @param name      - имя
@@ -80,14 +82,17 @@ public class Student {
    * @param passport  - паспорт
    * @return студент
    */
-  public static Student of(
-      StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
-
-    return new Student(studentId, name, snils, passport);
+  public static Student of(StudentId studentId, FullName name, Snils snils,
+                           BirthCertificate birthCertificate, RussianPassport passport) {
+    if (birthCertificate.getBirthday().isEqual(passport.getBirthday())) {
+      return new Student(studentId, name, snils, birthCertificate, passport);
+    }
+    throw new IllegalArgumentException(
+      "не совпадают даты рождения у паспорта и свидетельства о рождении");
   }
 
   /**
-   * замена СНИЛСа.
+   * замена СНИЛС.
    *
    * @param snils СНИЛС
    */
