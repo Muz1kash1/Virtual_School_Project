@@ -26,7 +26,7 @@ public class StudentDomainEventListener {
    * @param event - событие
    */
   @EventListener
-  public void StudentChangedInfoEvent(StudentChangedInfoEvent event) {
+  public void studentChangedInfoEvent(StudentChangedInfoEvent event) {
     log.info("StudentChangedInfoEvent...");
     log.info("Студент с именем " + event.getStudent().getFullName() + " был успешно изменен");
   }

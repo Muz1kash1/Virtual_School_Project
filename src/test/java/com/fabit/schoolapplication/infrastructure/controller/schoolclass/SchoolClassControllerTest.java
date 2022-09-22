@@ -8,11 +8,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.AddStudentToSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.CreateSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.DeleteSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.GetSchoolClass;
-import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.RemoveStudentFromSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.AddStudentToSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.CreateSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.DeleteSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.GetSchoolClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.RemoveStudentFromSchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;

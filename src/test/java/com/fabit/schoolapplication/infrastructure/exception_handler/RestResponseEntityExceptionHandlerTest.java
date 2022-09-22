@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.DeleteStudentEndpoint;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.DeleteStudentEndpoint;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

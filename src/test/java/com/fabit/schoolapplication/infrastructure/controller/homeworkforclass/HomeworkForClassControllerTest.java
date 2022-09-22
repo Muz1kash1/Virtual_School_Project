@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass.GetHomeworkForClass;
+import com.fabit.schoolapplication.application.usecase.virtualschool.homeworkforclass.GetHomeworkForClass;
 import com.fabit.schoolapplication.domain.Discipline;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass.dto.HomeworkForClassDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtualschool.homeworkforclass.dto.HomeworkForClassDto;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

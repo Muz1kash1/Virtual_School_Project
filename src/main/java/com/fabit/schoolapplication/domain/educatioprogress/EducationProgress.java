@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * Агрегат отметки об успеваемости
+ * Агрегат отметки об успеваемости.
  *
  * @author SmirnovMA
  */

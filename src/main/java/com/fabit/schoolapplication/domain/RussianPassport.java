@@ -20,7 +20,7 @@ public class RussianPassport {
   }
 
   /**
-   * Factory method - создание RussianPassport
+   * Factory method - создание RussianPassport.
    *
    * @param serial   - сериный номер паспорта
    * @param number   - номер паспорта
