@@ -46,11 +46,20 @@ public class StudentMapperService {
    * @return Student
    */
   public Student mapToStudent(StudentDto studentDto) {
-    return Student.of(
+    if (studentDto.getPassport() == null) {
+      return Student.of(
         StudentId.of(studentRepository.getNextId()),
         mapToFullName(studentDto.getName()),
         mapToSnils(studentDto.getSnils()),
         mapToBirthCertificate(studentDto.getBirthCertificate())
+      );
+    }
+    return Student.of(
+      StudentId.of(studentRepository.getNextId()),
+      mapToFullName(studentDto.getName()),
+      mapToSnils(studentDto.getSnils()),
+      mapToBirthCertificate(studentDto.getBirthCertificate()),
+      mapToPassport(studentDto.getPassport())
     );
   }
 

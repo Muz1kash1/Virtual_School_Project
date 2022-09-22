@@ -25,7 +25,7 @@ import org.springframework.util.Assert;
 @NoArgsConstructor
 public class Teacher {
 
-  public static final List<TeacherDomainEvent> domainEvents = new ArrayList<>();
+  public static final List<TeacherDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   private TeacherId teacherId;
 
@@ -84,7 +84,7 @@ public class Teacher {
   protected void registerEvent(TeacherDomainEvent event) {
 
     Assert.notNull(event, "Доменное событие не должно быть null");
-    domainEvents.add(event);
+    DOMAIN_EVENTS.add(event);
   }
 
   /**
@@ -93,7 +93,7 @@ public class Teacher {
   public void deactivate(LocalDate from, LocalDate to) {
 
     if (isActive && from.isBefore(to)) {
-      domainEvents.clear();
+      DOMAIN_EVENTS.clear();
       isActive = false;
       registerEvent(new TeacherDeactivatedDomainEvent(from, to, teacherId));
     } else {
@@ -109,7 +109,7 @@ public class Teacher {
 
     if (!(isActive)) {
       isActive = true;
-      domainEvents.clear();
+      DOMAIN_EVENTS.clear();
       registerEvent(new TeacherActivatedDomainEvent(teacherId));
     } else {
       throw new IllegalStateException(

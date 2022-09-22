@@ -26,11 +26,11 @@ public class HomeworkForClass {
 
   private final LocalDate date;
 
-  public static final List<HomeworkForClassEvent> domainEvents = new ArrayList<>();
+  public static final transient List<HomeworkForClassEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   protected HomeworkForClassEvent registerEvent(HomeworkForClassEvent event) {
-    notNull(event, "Доменный ивент не должен быть нуль");
-    domainEvents.add(event);
+    Assert.notNull(event, "Доменный ивент не должен быть нуль");
+    DOMAIN_EVENTS.add(event);
     return event;
   }
 

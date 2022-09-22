@@ -42,12 +42,12 @@ public class SchoolClassEntity {
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
-    SchoolClass.domainEvents.clear();
+    SchoolClass.DOMAIN_EVENTS.clear();
   }
 
   @DomainEvents
   protected Collection<Object> domainEvents() {
-    return Collections.unmodifiableList(SchoolClass.domainEvents);
+    return Collections.unmodifiableList(SchoolClass.DOMAIN_EVENTS);
   }
 
   // -------
