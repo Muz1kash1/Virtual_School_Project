@@ -19,10 +19,18 @@ public class RussianPassport {
     this.birthday = birthday;
   }
 
+  /**
+   * Factory method - создание RussianPassport
+   *
+   * @param serial   - сериный номер паспорта
+   * @param number   - номер паспорта
+   * @param birthday - день рождения
+   * @return RussianPassport
+   */
   public static RussianPassport of(String serial, String number, LocalDate birthday) {
-    if (isValidPassport(serial, number, birthday)){
+    if (isValidPassport(serial, number, birthday)) {
       return new RussianPassport(serial, number, birthday);
-    } else{
+    } else {
       throw new IllegalArgumentException();
     }
   }
@@ -31,12 +39,18 @@ public class RussianPassport {
     return (LocalDate.now().getYear() - birthday.getYear() >= 14);
   }
 
+  /**
+   * Метод, валидирующий паспорт и возвращающий boolean.
+   *
+   * @param serial   - серия паспорта
+   * @param number   - номер паспорта
+   * @param birthday - день рождения
+   * @return boolean
+   */
   public static boolean isValidPassport(String serial, String number, LocalDate birthday) {
-    if (!Pattern.matches("^[0-9]{6}$", number) || !Pattern.matches("^[0-9]{4}$", serial) ||
-        !isValidAge(birthday)) {
-      return false;
-    }
-    return true;
+    return Pattern.matches("^[0-9]{6}$", number)
+        && Pattern.matches("^[0-9]{4}$", serial)
+        && isValidAge(birthday);
   }
 
   @Override

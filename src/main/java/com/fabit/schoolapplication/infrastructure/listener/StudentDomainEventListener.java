@@ -7,6 +7,12 @@ import org.springframework.context.event.EventListener;
 
 @Slf4j
 public class StudentDomainEventListener {
+
+  /**
+   * Слушатель события создания студента.
+   *
+   * @param event - событие
+   */
   @EventListener
   public void studentCreatedEvent(StudentCreatedEvent event) {
     log.info("StudentCreatedEvent...");
@@ -14,6 +20,11 @@ public class StudentDomainEventListener {
         "Студент с именем " + event.getStudent().getFullName().getName() + " был успешно создан");
   }
 
+  /**
+   * Слушатель события изменения студента.
+   *
+   * @param event - событие
+   */
   @EventListener
   public void StudentChangedInfoEvent(StudentChangedInfoEvent event) {
     log.info("StudentChangedInfoEvent...");

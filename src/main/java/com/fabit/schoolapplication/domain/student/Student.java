@@ -3,9 +3,9 @@ package com.fabit.schoolapplication.domain.student;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
-import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
+import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -63,13 +63,15 @@ public class Student {
   /**
    * Создание ученика возрастом минимум 14 лет.
    *
-   * @param studentId id студента
-   * @param name      имя
-   * @param snils     СНИЛС
-   * @param passport  паспорт
+   * @param studentId - id студента
+   * @param name      - имя
+   * @param snils     - СНИЛС
+   * @param passport  - паспорт
    * @return студент
    */
-  public static Student of(StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
+  public static Student of(
+      StudentId studentId, FullName name, Snils snils, RussianPassport passport) {
+
     return new Student(studentId, name, snils, passport);
   }
 

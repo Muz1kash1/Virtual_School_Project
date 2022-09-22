@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass;
 
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass.dto.HomeworkForClassDto;
 import com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass.CreateHomeworkForClass;
 import com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass.GetHomeworkForClass;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass.dto.HomeworkForClassDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

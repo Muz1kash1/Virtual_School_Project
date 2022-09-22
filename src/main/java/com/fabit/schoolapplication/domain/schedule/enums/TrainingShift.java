@@ -3,7 +3,7 @@ package com.fabit.schoolapplication.domain.schedule.enums;
 import lombok.Getter;
 
 /**
- * Перечисление описывающее смену занятий уроков (I|II)
+ * Перечисление описывающее смену занятий уроков (I|II).
  */
 @Getter
 public enum TrainingShift {

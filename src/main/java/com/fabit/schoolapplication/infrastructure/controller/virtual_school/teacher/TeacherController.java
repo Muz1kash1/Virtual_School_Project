@@ -1,13 +1,13 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher;
 
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.DeactivateDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.StandingYearsDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.TeacherDto;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.application.usecase.virtual_school.teacher.CreateTeacher;
 import com.fabit.schoolapplication.application.usecase.virtual_school.teacher.DeleteTeacher;
 import com.fabit.schoolapplication.application.usecase.virtual_school.teacher.EditTeacher;
 import com.fabit.schoolapplication.application.usecase.virtual_school.teacher.GetTeacher;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.DeactivateDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.StandingYearsDto;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.TeacherDto;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,8 +36,11 @@ public class TeacherController {
   }
 
   @PutMapping("/standing-years")
-  public ResponseEntity<TeacherEntity> changeStandingYears(@RequestBody StandingYearsDto standingYearsDto) {
-    return ResponseEntity.status(HttpStatus.ACCEPTED)
+  public ResponseEntity<TeacherEntity> changeStandingYears(
+      @RequestBody StandingYearsDto standingYearsDto) {
+
+    return ResponseEntity
+        .status(HttpStatus.ACCEPTED)
         .body(editTeacher.changeStandingYears(standingYearsDto));
   }
 

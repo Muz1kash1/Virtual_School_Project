@@ -1,23 +1,23 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher;
 
 import com.fabit.schoolapplication.domain.teacher.Teacher;
-import lombok.Data;
-import org.springframework.data.domain.AfterDomainEventPublication;
-import org.springframework.data.domain.DomainEvents;
-
+import java.util.Collection;
+import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Collection;
-import java.util.Collections;
+import lombok.Data;
+import org.springframework.data.domain.AfterDomainEventPublication;
+import org.springframework.data.domain.DomainEvents;
 
 @Entity
 @Table(name = "teacher")
 @Data
 public class TeacherEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -46,4 +46,5 @@ public class TeacherEntity {
   protected Collection<Object> domainEvents() {
     return Collections.unmodifiableList(Teacher.domainEvents);
   }
+
 }

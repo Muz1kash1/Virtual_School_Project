@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeleteStudentEndpoint {
   final DeleteStudent deleteStudent;
 
+  /**
+   * Endpoint удаления ученика.
+   *
+   * @param id - идентификатор ученика
+   * @return ResponseEntity с OK и телом "Ученик исключен из школы"
+   */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteStudent(@PathVariable long id) {
     log.info("trying to delete student with id: " + id);

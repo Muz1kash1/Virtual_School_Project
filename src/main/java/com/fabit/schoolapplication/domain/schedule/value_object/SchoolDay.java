@@ -17,11 +17,11 @@ public final class SchoolDay {
   private List<LessonForSchedule> lessonForScheduleList;
 
   /**
-   * Строитель для создания школьного для по расписанию
+   * Строитель для создания школьного для по расписанию.
    *
-   * @param dayOfWeek             учебный день недели
-   * @param trainingShift         учебная смена занятий
-   * @param lessonForScheduleList список уроков на определенный день недели
+   * @param dayOfWeek             - учебный день недели
+   * @param trainingShift         - учебная смена занятий
+   * @param lessonForScheduleList - список уроков на определенный день недели
    */
   public static SchoolDay of(DayOfWeek dayOfWeek, TrainingShift trainingShift,
       List<LessonForSchedule> lessonForScheduleList) {

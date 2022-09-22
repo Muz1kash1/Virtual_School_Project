@@ -32,6 +32,12 @@ public class StudentMapperService {
     return studentEntity;
   }
 
+  /**
+   * Маппинг ДТО ученика в доменную модель.
+   *
+   * @param studentDto - ученик
+   * @return Student
+   */
   public Student mapToStudent(StudentDto studentDto) {
     return Student.of(StudentId.of(studentRepository.getNextId()), mapToFullName(studentDto.getName()),
         mapToSnils(studentDto.getSnils()), mapToBirthCertificate(studentDto.getBirthCertificate()));

@@ -15,7 +15,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class SchoolClassDTO implements Serializable {
+public class SchoolClassDto implements Serializable {
 
   private long schoolClassId;
   private int parallel;
@@ -23,7 +23,7 @@ public class SchoolClassDTO implements Serializable {
   private List<StudentId> studentIds;
 
   /**
-   * Получить доменную модель из this
+   * Получить доменную модель из this.
    *
    * @return SchoolClass
    */

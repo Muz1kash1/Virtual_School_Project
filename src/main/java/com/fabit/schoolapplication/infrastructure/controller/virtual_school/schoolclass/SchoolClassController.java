@@ -1,14 +1,14 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtual_school.schoolclass;
 
-import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.controller.virtual_school.schoolclass.dto.SchoolClassDTO;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.AddStudentToSchoolClass;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.CreateSchoolClass;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.DeleteSchoolClass;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.GetSchoolClass;
 import com.fabit.schoolapplication.application.usecase.virtual_school.schoolclass.RemoveStudentFromSchoolClass;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.student.StudentId;
+import com.fabit.schoolapplication.infrastructure.controller.virtual_school.schoolclass.dto.SchoolClassDto;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,7 +37,7 @@ public class SchoolClassController {
   /**
    * Получение списка всех школьных классов школы.
    *
-   * @return ResponseEntity<List < SchoolClassEntity>>
+   * @return ResponseEntity with SchoolClassEntity
    */
   @GetMapping(value = "/school-class", produces = "application/json")
   public ResponseEntity<List<SchoolClassEntity>> getAllSchoolClasses() {
@@ -48,7 +48,7 @@ public class SchoolClassController {
    * Получение школьного класса с указанным в path идентификатором.
    *
    * @param id - идентификатор
-   * @return ResponseEntity<SchoolClassEntity>
+   * @return ResponseEntity with SchoolClassEntity
    */
   @GetMapping(value = "/school-class/{id}", produces = "application/json")
   public ResponseEntity<SchoolClassEntity> getSchoolClassById(@PathVariable Long id) {
@@ -59,10 +59,10 @@ public class SchoolClassController {
    * Получение школьного класса с указанным именем (параллель + литера).
    *
    * @param dto - объект школьного класса json, содержащий параллель и литеру (DTO)
-   * @return ResponseEntity<SchoolClassEntity>
+   * @return ResponseEntity with SchoolClassEntity
    */
   @GetMapping(value = "/school-class", consumes = "application/json")
-  public ResponseEntity<SchoolClassEntity> getSchoolClassByName(@RequestBody SchoolClassDTO dto) {
+  public ResponseEntity<SchoolClassEntity> getSchoolClassByName(@RequestBody SchoolClassDto dto) {
     return ResponseEntity.ok().body(getSchoolClass.byName(dto.getParallel(), dto.getLitera()));
   }
 
@@ -72,14 +72,14 @@ public class SchoolClassController {
   /**
    * Создание нового школьного класса.
    *
-   * @param schoolClassDTO - DTO школьного класса
+   * @param schoolClassDto - DTO школьного класса
    * @return ResponseEntity
    */
   @PostMapping("/school-class")
   public ResponseEntity<?> createSchoolClass(
-      @RequestBody SchoolClassDTO schoolClassDTO
+      @RequestBody SchoolClassDto schoolClassDto
   ) {
-    createSchoolClass.execute(schoolClassDTO.toDomain());
+    createSchoolClass.execute(schoolClassDto.toDomain());
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
@@ -91,8 +91,7 @@ public class SchoolClassController {
    */
   @DeleteMapping("/school-class")
   public ResponseEntity<?> deleteSchoolClass(
-      @RequestBody SchoolClassDTO schoolClassDTO
-  ) {
+      @RequestBody SchoolClassDto schoolClassDTO) {
     deleteSchoolClass.execute(schoolClassDTO.toDomain());
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }

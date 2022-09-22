@@ -14,6 +14,12 @@ public class Snils {
     this.numberView = numberView;
   }
 
+  /**
+   * Factory method - Создание Snils.
+   *
+   * @param numberView - номер СНИЛС
+   * @return Snils
+   */
   public static Snils of(String numberView) {
     if (isValidNumberView(numberView)) {
       return new Snils(numberView);
@@ -23,10 +29,7 @@ public class Snils {
   }
 
   private static boolean isValidNumberView(String numberView) {
-    if (!Pattern.matches("^\\d{3}-\\d{3}-\\d{3}-\\d{2}$", numberView)) {
-      return false;
-    }
-    return true;
+    return Pattern.matches("^\\d{3}-\\d{3}-\\d{3}-\\d{2}$", numberView);
   }
 
   @Override

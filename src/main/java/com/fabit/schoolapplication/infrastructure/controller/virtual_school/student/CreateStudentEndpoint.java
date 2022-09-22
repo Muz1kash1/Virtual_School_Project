@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtual_school.student;
 
+import com.fabit.schoolapplication.application.usecase.virtual_school.student.CreateStudent;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import com.fabit.schoolapplication.application.usecase.virtual_school.student.CreateStudent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class CreateStudentEndpoint {
   final CreateStudent createStudent;
 
   /**
-   * Добавить студента
+   * Добавить студента.
    *
    * @param student студент
    * @return response entity

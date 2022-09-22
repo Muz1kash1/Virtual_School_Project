@@ -19,11 +19,11 @@ public final class LessonForSchedule {
   }
 
   /**
-   * Строитель для создания урока по расписанию
+   * Строитель для создания урока по расписанию.
    *
-   * @param numberByAccount порядковый номер урока
-   * @param discipline      дисциплина (урок)
-   * @param teacherId       уникальный идентификатор преподавателя
+   * @param numberByAccount - порядковый номер урока
+   * @param discipline      - дисциплина (урок)
+   * @param teacherId       - уникальный идентификатор преподавателя
    */
   public static LessonForSchedule of(int numberByAccount, Discipline discipline,
       TeacherId teacherId) {

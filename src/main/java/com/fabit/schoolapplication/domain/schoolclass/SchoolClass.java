@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.domain.schoolclass;
 
-import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassDomainEvent;
 import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassAddedStudentDomainEvent;
 import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassCreatedDomainEvent;
+import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassDomainEvent;
 import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassRemovedStudentDomainEvent;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class SchoolClass {
   }
 
   /**
-   * Добавление ученика в класс
+   * Добавление ученика в класс.
    *
    * @param student - ученик, которого нужно добавить
    */

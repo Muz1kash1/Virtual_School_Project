@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface HomeworkForClassRepository extends JpaRepository<HomeworkForClassEntity, Long> {
 
   /**
-   * Метод возвращающий следующий ид в таблице назначенного дз
+   * Метод возвращающий следующий ид в таблице назначенного дз.
    *
    * @return численное значение следующего ид
    */

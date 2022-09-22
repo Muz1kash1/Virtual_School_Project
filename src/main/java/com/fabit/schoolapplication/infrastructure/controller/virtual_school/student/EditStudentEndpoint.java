@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtual_school.student;
 
+import com.fabit.schoolapplication.application.usecase.virtual_school.student.EditStudent;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import com.fabit.schoolapplication.application.usecase.virtual_school.student.EditStudent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class EditStudentEndpoint {
   final EditStudent editStudent;
 
   /**
-   * Изменить свидетельство о рождении
+   * Изменить свидетельство о рождении.
    *
    * @param student student
    * @return response entity
@@ -32,7 +32,7 @@ public class EditStudentEndpoint {
   }
 
   /**
-   * Изменить СНИЛС у студента
+   * Изменить СНИЛС у студента.
    *
    * @param student the student
    * @return the response entity
@@ -44,7 +44,7 @@ public class EditStudentEndpoint {
   }
 
   /**
-   * Добавить паспорт студенту
+   * Добавить паспорт студенту.
    *
    * @param student student
    * @return response entity
