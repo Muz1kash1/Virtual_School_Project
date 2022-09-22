@@ -62,8 +62,10 @@ class TeacherControllerTest {
   @Test
   @DisplayName("Создание учителя должно вызывать соответствующий юзкейс.")
   void createTeacher() throws Exception {
-    mockMvc.perform(post("/teacher/").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(createTeacherJson))
+    mockMvc.perform(post("/teacher/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content(createTeacherJson))
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.fullName", is("Smirnov Michael Alexeevich")))
         .andExpect(jsonPath("$.snils", is("127-328-591-72")));
@@ -72,15 +74,20 @@ class TeacherControllerTest {
   @Test
   @DisplayName("Смена стажа у созданного учителя должна производиться верно.")
   void changeStandingYears() throws Exception {
-    mockMvc.perform(post("/teacher/").contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON).content(createTeacherJson));
+
+    mockMvc.perform(post("/teacher/")
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
 
     long teacherId = teacherRepository.findAll().get(0).getId();
     final String updateStandingYearsJson
         = "{ \"teacherId\": " + teacherId + ", \"standingYears\": 11 }";
 
-    mockMvc.perform(put("/teacher/standing-years/").contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON).content(updateStandingYearsJson))
+    mockMvc.perform(put("/teacher/standing-years/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content(updateStandingYearsJson))
         .andExpect(status().isAccepted())
         .andExpect(jsonPath("$.standingYears", is(11)));
   }
@@ -89,8 +96,12 @@ class TeacherControllerTest {
   @Test
   @DisplayName("Получение учителя по id должно возвращать соответствующего учителя.")
   void getTeacherTest() throws Exception {
-    mockMvc.perform(post("/teacher/").contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON).content(createTeacherJson));
+
+    mockMvc.perform(post("/teacher/")
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
+
     TeacherEntity teacherEntity = teacherRepository.findAll().get(0);
 
     mockMvc.perform(get("/teacher/" + teacherEntity.getId()))
@@ -101,8 +112,11 @@ class TeacherControllerTest {
 
   @Test
   void getAllTeachersTest() throws Exception {
-    mockMvc.perform(post("/teacher/").contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON).content(createTeacherJson));
+
+    mockMvc.perform(post("/teacher/")
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
 
     mockMvc.perform(get("/teacher"))
         .andExpect(status().isOk())
@@ -111,9 +125,14 @@ class TeacherControllerTest {
 
   @Test
   void deleteTeacherTest() throws Exception {
+
     long teacherCount;
-    mockMvc.perform(post("/teacher/").contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON).content(createTeacherJson));
+    mockMvc.perform(post("/teacher/")
+
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
+
     long teacherId = teacherRepository.findAll().get(0).getId();
 
     teacherCount = teacherRepository.findAll().size();

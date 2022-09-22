@@ -28,12 +28,14 @@ public class LoadedHomeWorkControllerTest {
 
   @MockBean
   CompleteHomework completeHomework;
+
   @MockBean
   GetLoadedHomework getLoadedHomework;
 
   @Test
   @DisplayName("Загрузка ДЗ учеником должно возвращать сообщение о загрузке")
   void LoadCompletedHomeworkTest() throws Exception {
+
     final String jsonOfCompletedHomework = """
         {
         "homeworkId": 1,
@@ -53,8 +55,13 @@ public class LoadedHomeWorkControllerTest {
   @Test
   @DisplayName("Получение ДЗ по id должно возвращать соответствующее ДЗ")
   void getCompletedHomeworkTest() throws Exception {
+
     LoadedHomeworkDto loadedHomeworkDto = new LoadedHomeworkDto(
-        1L, 5L, "complete", 2L);
+        1L,
+        5L,
+        "complete",
+        2L
+    );
 
     when(getLoadedHomework.execute(1L))
         .thenReturn(loadedHomeworkDto);

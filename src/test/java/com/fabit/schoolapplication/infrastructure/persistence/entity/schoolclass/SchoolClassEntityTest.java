@@ -13,6 +13,7 @@ public class SchoolClassEntityTest {
   @Test
   @DisplayName("Создание SchoolClassEntity должно работать корректно")
   void schoolClassFromDomainModelTest() {
+
     SchoolClass schoolClass
         = SchoolClass.of(SchoolClassId.of(125), SchoolClassName.of(10, "Б"));
     SchoolClassEntity schoolClassEntity

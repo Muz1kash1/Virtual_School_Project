@@ -38,21 +38,39 @@ public class SchoolClassControllerTest {
 
   @MockBean
   GetSchoolClass getSchoolClass;
+
   @MockBean
   CreateSchoolClass createSchoolClass;
+
   @MockBean
   DeleteSchoolClass deleteSchoolClass;
+
   @MockBean
   AddStudentToSchoolClass addStudentToSchoolClass;
+
   @MockBean
   RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
 
   private final SchoolClassEntity schoolClassEntity1 = SchoolClassEntity.of(
-      SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(1, "А"),
-          List.of(StudentId.of(1L), StudentId.of(2L))));
+      SchoolClass.of(
+          SchoolClassId.of(1L),
+          SchoolClassName.of(1, "А"),
+          List.of(
+              StudentId.of(1L),
+              StudentId.of(2L)
+          )
+      )
+  );
   private final SchoolClassEntity schoolClassEntity2 = SchoolClassEntity.of(
-      SchoolClass.of(SchoolClassId.of(2L), SchoolClassName.of(2, "А"),
-          List.of(StudentId.of(3L), StudentId.of(4L))));
+      SchoolClass.of(
+          SchoolClassId.of(2L),
+          SchoolClassName.of(2, "А"),
+          List.of(
+              StudentId.of(3L),
+              StudentId.of(4L)
+          )
+      )
+  );
 
   private final String jsonOfSchoolClass = """
       {
@@ -65,6 +83,7 @@ public class SchoolClassControllerTest {
   @Test
   @DisplayName("Получить все школьные классы должно возвращать 2 школьных класса")
   void getAllSchoolClassesTest() throws Exception {
+
     when(getSchoolClass.all())
         .thenReturn(List.of(schoolClassEntity1, schoolClassEntity2));
 
@@ -79,6 +98,7 @@ public class SchoolClassControllerTest {
   @Test
   @DisplayName("Получение класса с id 2 должно возвращать соответствующий класс")
   void getSchoolClassByIdTest() throws Exception {
+
     when(getSchoolClass.byId(2L))
         .thenReturn(schoolClassEntity2);
 
@@ -90,6 +110,7 @@ public class SchoolClassControllerTest {
   @Test
   @DisplayName("Получение класса по имени должно возвращать соответствующий класс")
   void getSchoolClassByNameTest() throws Exception {
+
     when(getSchoolClass.byName(1, "А"))
         .thenReturn(schoolClassEntity1);
 
@@ -104,6 +125,7 @@ public class SchoolClassControllerTest {
   @Test
   @DisplayName("Создание школьного класса должно создавать соответствующий класс")
   void createSchoolClassTest() throws Exception {
+
     when(createSchoolClass.execute(1, "А"))
         .thenReturn(schoolClassEntity1);
 
@@ -125,6 +147,7 @@ public class SchoolClassControllerTest {
   @Test
   @DisplayName("Добавление и удаление ученика в школьном классе должно вызывать соотв. юзкейсы")
   void addAndRemoveStudentToClassTest() throws Exception {
+
     when(addStudentToSchoolClass.execute(SchoolClassId.of(1), StudentId.of(2)))
         .thenReturn(StudentInClassEntity.of(1L, 2L));
 

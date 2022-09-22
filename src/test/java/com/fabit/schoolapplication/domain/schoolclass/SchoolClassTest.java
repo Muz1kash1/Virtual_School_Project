@@ -26,8 +26,12 @@ public class SchoolClassTest {
     studentIds.add(StudentId.of(55L));
     studentIds.add(StudentId.of(105L));
 
-    SchoolClass schoolClass
-        = SchoolClass.of(SchoolClassId.of(10L), SchoolClassName.of(11, "Б"), studentIds);
+    SchoolClass schoolClass = SchoolClass.of(
+        SchoolClassId.of(10L),
+        SchoolClassName.of(11, "Б"),
+        studentIds
+    );
+
     schoolClass.addStudent(StudentId.of(99L));
 
     Assertions.assertTrue(schoolClass.getStudents().contains(StudentId.of(55L)));

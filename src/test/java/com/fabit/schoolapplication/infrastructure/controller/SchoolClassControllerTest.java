@@ -71,6 +71,7 @@ public class SchoolClassControllerTest {
   void getSchoolClassById() throws Exception {
     SchoolClassEntity mockClass = SchoolClassEntity.of(
         SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(2, "Б")));
+
     mockClass.setId(1L);
 
     when(getSchoolClass.byId(1L))

@@ -33,6 +33,7 @@ public class HomeworkForClassControllerTest {
   @Test
   @DisplayName("Установка ДЗ для класса должно возвращать успешное назначение")
   void addHomeworkForClassTest() throws Exception {
+
     final String jsonOfHomework = """
         {
         "id": 1,
@@ -54,7 +55,11 @@ public class HomeworkForClassControllerTest {
   @DisplayName("Получение ДЗ класса должно возвращать соответствующее ДЗ")
   void getHomeworkForClassTest() throws Exception {
     HomeworkForClassDto homeworkForClassDto = new HomeworkForClassDto(
-        2L, Discipline.ENGLISH, "abc", 5L, LocalDate.now());
+        2L,
+        Discipline.ENGLISH,
+        "abc", 5L,
+        LocalDate.now()
+    );
 
     when(getHomeworkForClass.execute(2))
         .thenReturn(homeworkForClassDto);

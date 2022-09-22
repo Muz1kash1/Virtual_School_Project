@@ -15,8 +15,13 @@ public class LoadedHomeworkTest {
 
   @BeforeAll
   static void initialize() {
-    loadedHomework = LoadedHomework.of(LoadedHomeworkId.of(1L),
-        StudentId.of(1L), HomeworkForClassId.of(1L));
+
+    loadedHomework = LoadedHomework.of(
+        LoadedHomeworkId.of(1L),
+        StudentId.of(1L),
+        HomeworkForClassId.of(1L)
+    );
+
     loadedHomework.uploadTaskCompletionResult("Test");
   }
 
