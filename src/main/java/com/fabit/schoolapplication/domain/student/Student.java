@@ -6,12 +6,12 @@ import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Slf4j
