@@ -27,12 +27,12 @@ public class Student {
 
   private RussianPassport passport;
 
-  public static final List<StudentDomainEvent> domainEvents = new ArrayList<>();
+  public static final List<StudentDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   protected void registerEvent(StudentDomainEvent event) {
 
     Assert.notNull(event, "Domain event must not be null");
-    domainEvents.add(event);
+    DOMAIN_EVENTS.add(event);
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,

@@ -21,10 +21,10 @@ public class SchoolClass {
   // -------
   // ** Ивенты
 
-  public static final List<SchoolClassDomainEvent> domainEvents = new ArrayList<>();
+  public static final List<SchoolClassDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   void registerEvent(SchoolClassDomainEvent event) {
-    domainEvents.add(event);
+    DOMAIN_EVENTS.add(event);
   }
 
   // -------

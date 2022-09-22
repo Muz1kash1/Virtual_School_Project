@@ -19,7 +19,7 @@ public class LoadedHomework {
   private String taskCompletionResult;
 
 
-  public static final transient List<LoadedHomeworkEvent> domainEvents = new ArrayList<>();
+  public static final transient List<LoadedHomeworkEvent> DOMAIN_EVENTS = new ArrayList<>();
 
 
   /**
@@ -34,7 +34,7 @@ public class LoadedHomework {
 
   protected LoadedHomeworkEvent registerEvent(LoadedHomeworkEvent event) {
     Assert.notNull(event, "Доменный ивент не должен быть нуль");
-    domainEvents.add(event);
+    DOMAIN_EVENTS.add(event);
     return event;
   }
 

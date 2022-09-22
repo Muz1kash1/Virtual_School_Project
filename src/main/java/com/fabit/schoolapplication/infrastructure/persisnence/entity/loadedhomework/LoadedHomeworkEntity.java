@@ -37,12 +37,12 @@ public class LoadedHomeworkEntity {
 
   @AfterDomainEventPublication
   protected void clearDomainEvents() {
-    LoadedHomework.domainEvents.clear();
+    LoadedHomework.DOMAIN_EVENTS.clear();
   }
 
   @DomainEvents
   protected Collection<Object> domainEvents() {
-    return Collections.unmodifiableList(LoadedHomework.domainEvents);
+    return Collections.unmodifiableList(LoadedHomework.DOMAIN_EVENTS);
   }
 
 
