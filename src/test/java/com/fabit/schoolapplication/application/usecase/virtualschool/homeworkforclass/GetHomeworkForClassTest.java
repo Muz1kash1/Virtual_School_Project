@@ -1,13 +1,13 @@
 package com.fabit.schoolapplication.application.usecase.virtualschool.homeworkforclass;
 
-
 import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.CreateSchoolClass;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import java.time.LocalDate;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,12 +16,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
+@Slf4j
 @SpringBootTest
-public class CreateLoadedHomeworkForClassTest {
+public class GetHomeworkForClassTest {
+
 
   @Autowired
   HomeworkForClassRepository homeworkForClassRepository;
+
   @Autowired
   CreateHomeworkForClass createHomeworkForClass;
 
@@ -29,11 +31,16 @@ public class CreateLoadedHomeworkForClassTest {
   HomeworkForClassMapper homeworkForClassMapper;
 
   @Autowired
-  CreateSchoolClass createSchoolClass;
+  DeleteHomeworkForClass deleteHomeworkForClass;
+
+  @Autowired
+  GetHomeworkForClass getHomeworkForClass;
 
   @Autowired
   SchoolClassRepository schoolClassRepository;
 
+  @Autowired
+  CreateSchoolClass createSchoolClass;
 
   @BeforeEach
   void cleanBefore() {
@@ -47,9 +54,9 @@ public class CreateLoadedHomeworkForClassTest {
     schoolClassRepository.deleteAll();
   }
 
-  @DisplayName("Юзкейс создания урока работает корректно")
   @Test
-  void createHomeworkForClassTest() {
+  @DisplayName("Получение урока работает корректно")
+  void getHomeworkForClassTest() {
 
     createSchoolClass.execute(11, "А");
 
@@ -59,16 +66,23 @@ public class CreateLoadedHomeworkForClassTest {
         SchoolClassId.of(schoolClassRepository.findAll().get(0).getId())
     );
 
-    Assertions.assertEquals(1, homeworkForClassRepository.findAll().size());
-    Assertions.assertNotNull(homeworkForClassRepository.findAll().get(0));
     Assertions.assertEquals(
-        homeworkForClassRepository.findAll().get(0).getDiscipline(), Discipline.COMPUTING);
+        Discipline.COMPUTING,
+        getHomeworkForClass.execute(
+            homeworkForClassRepository.findAll().get(0).getId()).getDiscipline()
+    );
+
     Assertions.assertEquals(
-        LocalDate.of(2000, 2, 2),
-        homeworkForClassRepository.findAll().get(0).getDate());
+        homeworkForClassRepository.findAll().get(0).getHomeworkTask(),
+        getHomeworkForClass.execute(
+            homeworkForClassRepository.findAll().get(0).getId()).getTask()
+    );
+
     Assertions.assertEquals(
-        homeworkForClassRepository.findAll().get(0).getSchoolClassId(),
-        schoolClassRepository.findAll().get(0).getId());
+        homeworkForClassRepository.findAll().get(0).getDate(),
+        getHomeworkForClass.execute(
+            homeworkForClassRepository.findAll().get(0).getId()).getDate()
+    );
   }
 
 }
