@@ -9,7 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import org.springframework.util.Assert;
+
+
+import static org.apache.commons.lang3.Validate.notNull;
 
 @Getter
 public class HomeworkForClass {
@@ -24,10 +26,10 @@ public class HomeworkForClass {
 
   private final LocalDate date;
 
-  public static final transient List<HomeworkForClassEvent> domainEvents = new ArrayList<>();
+  public static final List<HomeworkForClassEvent> domainEvents = new ArrayList<>();
 
   protected HomeworkForClassEvent registerEvent(HomeworkForClassEvent event) {
-    Assert.notNull(event, "Доменный ивент не должен быть нуль");
+    notNull(event, "Доменный ивент не должен быть нуль");
     domainEvents.add(event);
     return event;
   }

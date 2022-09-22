@@ -5,22 +5,36 @@ import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedHomeworkEve
 import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedLoadedHomeworkCreatedEvent;
 import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedLoadedHomeworkUpdatedEvent;
 import com.fabit.schoolapplication.domain.student.StudentId;
+import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
-import org.springframework.util.Assert;
+
+import static org.apache.commons.lang3.Validate.notNull;
 
 @Getter
 public class LoadedHomework {
 
+  public static final List<LoadedHomeworkEvent> domainEvents = new ArrayList<>();
   private final LoadedHomeworkId loadedHomeworkId;
   private final HomeworkForClassId homeworkForClassId;
   private final StudentId studentId;
   private String taskCompletionResult;
 
 
-  public static final transient List<LoadedHomeworkEvent> domainEvents = new ArrayList<>();
+  private LoadedHomework(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
+                         HomeworkForClassId homeworkForClassId) {
+    this.studentId = studentId;
+    this.loadedHomeworkId = loadedHomeworkId;
+    this.homeworkForClassId = homeworkForClassId;
+    registerEvent(new LoadedLoadedHomeworkCreatedEvent(this));
+  }
 
+  public static LoadedHomework of(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
+                                  HomeworkForClassId homeworkForClassId) {
+    return new LoadedHomework(loadedHomeworkId, studentId,
+      homeworkForClassId
+    );
+  }
 
   /**
    * Загрузить выполнение домашки.
@@ -33,23 +47,9 @@ public class LoadedHomework {
   }
 
   protected LoadedHomeworkEvent registerEvent(LoadedHomeworkEvent event) {
-    Assert.notNull(event, "Доменный ивент не должен быть нуль");
+    notNull(event, "Доменный ивент не должен быть нуль");
     domainEvents.add(event);
     return event;
-  }
-
-  private LoadedHomework(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
-      HomeworkForClassId homeworkForClassId) {
-    this.studentId = studentId;
-    this.loadedHomeworkId = loadedHomeworkId;
-    this.homeworkForClassId = homeworkForClassId;
-    registerEvent(new LoadedLoadedHomeworkCreatedEvent(this));
-  }
-
-  public static LoadedHomework of(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
-      HomeworkForClassId homeworkForClassId) {
-    return new LoadedHomework(loadedHomeworkId, studentId,
-        homeworkForClassId);
   }
 
 }
