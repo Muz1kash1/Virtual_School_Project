@@ -24,10 +24,10 @@ public class GetHomeworkForClass {
   public HomeworkForClassDto execute(long homeworkForClassId) {
 
     HomeworkForClassEntity homeworkForClassEntity
-        = homeworkForClassRepository.findById(homeworkForClassId).get();
+      = homeworkForClassRepository.findById(homeworkForClassId).get();
 
     HomeworkForClass homeworkForClass
-        = homeworkForClassMapper.mapEntityToHomeworkForClass(homeworkForClassEntity);
+      = homeworkForClassMapper.mapEntityToHomeworkForClass(homeworkForClassEntity);
 
     return homeworkForClassMapper.mapHomeworkForClassToDto(homeworkForClass);
   }

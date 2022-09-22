@@ -14,20 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 
-@SpringBootTest
-public class HomeworkForClassMapperTest {
-  @Autowired
-  HomeworkForClassMapper homeworkForClassMapper;
+@SpringBootTest public class HomeworkForClassMapperTest {
+
+  @Autowired HomeworkForClassMapper homeworkForClassMapper;
 
   @DisplayName("Маппер Дз для класса работает корректно")
   @Test
   void homeworkForClassMapperTest() {
     HomeworkForClass homeworkForClass = HomeworkForClass.of(Discipline.COMPUTING, LocalDate.of(2012, 2, 2),
-      SchoolClassId.of(1L),
-      HomeworkForClassId.of(1L)
-    );
+      SchoolClassId.of(1L), HomeworkForClassId.of(1L));
     homeworkForClass.setHomeworkText("test");
-
 
     HomeworkForClassEntity homeworkForClassEntity = new HomeworkForClassEntity();
     homeworkForClassEntity.setSchoolClassId(1L);
@@ -37,9 +33,8 @@ public class HomeworkForClassMapperTest {
     homeworkForClassEntity.setHomeworkTask("test");
 
     HomeworkForClassDto homeworkForClassDto = new HomeworkForClassDto(1L, Discipline.COMPUTING, "test", 1L,
-      LocalDate.of(2012, 2, 2)
-    );
-    
+      LocalDate.of(2012, 2, 2));
+
     Assertions.assertEquals(
       homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass).getSchoolClassId(),
       homeworkForClassEntity.getSchoolClassId()
@@ -55,7 +50,6 @@ public class HomeworkForClassMapperTest {
       homeworkForClassMapper.mapDtoToHomeworkForClass(homeworkForClassDto).getDiscipline(),
       homeworkForClass.getDiscipline()
     );
-
 
     Assertions.assertEquals(
       homeworkForClassMapper.mapHomeworkForClassToDto(homeworkForClass).getSchoolClassId(),
@@ -76,6 +70,5 @@ public class HomeworkForClassMapperTest {
     );
 
   }
-
 
 }
