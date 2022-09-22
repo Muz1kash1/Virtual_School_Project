@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass;
 
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.homeworkforclass.dto.HomeworkForClassDto;
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import java.time.LocalDate;
@@ -21,7 +21,7 @@ public class CreateHomeworkForClass {
 
 
   /**
-   * Метод создающий дз для класса
+   * Метод создающий дз для класса.
    *
    * @param discipline    дисциплина
    * @param date          дата сдачи
@@ -43,10 +43,12 @@ public class CreateHomeworkForClass {
    * @param homeworkForClassDto дто
    */
   public void execute(HomeworkForClassDto homeworkForClassDto) {
-    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapDtoToHomeworkForClass(
-        homeworkForClassDto);
-    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(
-        homeworkForClass);
+
+    HomeworkForClass homeworkForClass
+        = homeworkForClassMapper.mapDtoToHomeworkForClass(homeworkForClassDto);
+    HomeworkForClassEntity homeworkForClassEntity
+        = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
+
     homeworkForClassRepository.save(homeworkForClassEntity);
   }
 }

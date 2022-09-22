@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass;
 
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import javax.transaction.Transactional;
@@ -26,10 +26,14 @@ public class ChangeHomeworkTask {
   public void execute(HomeworkForClassId homeworkForClassId, String task) {
     HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToHomeworkForClass(
         homeworkForClassRepository.getReferenceById(homeworkForClassId.getValue()));
+
     homeworkForClass.setHomeworkText(task);
-    HomeworkForClassEntity homeworkForClassEntity = homeworkForClassMapper.mapHomeworkForClassToEntity(
-        homeworkForClass);
+
+    HomeworkForClassEntity homeworkForClassEntity
+        = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
+
     homeworkForClassEntity.setId(homeworkForClassId.getValue());
+
     homeworkForClassRepository.save(homeworkForClassEntity);
   }
 

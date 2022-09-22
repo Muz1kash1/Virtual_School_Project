@@ -20,6 +20,12 @@ public class SecurityConfiguration {
   @Value("${admin.pass}")
   private String adminPass;
 
+  /**
+   * Конфигурация доступа к URI.
+   *
+   * @param http - autowired
+   * @return SecurityFilterChain
+   */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -32,6 +38,11 @@ public class SecurityConfiguration {
     return http.build();
   }
 
+  /**
+   * Создание юзера с ролью администратор.
+   *
+   * @return InMemoryUserDetailsManager
+   */
   @Bean
   public InMemoryUserDetailsManager userDetailsService() {
     UserDetails user = User

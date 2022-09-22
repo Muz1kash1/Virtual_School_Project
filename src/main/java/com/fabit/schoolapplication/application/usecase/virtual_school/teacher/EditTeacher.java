@@ -6,13 +6,12 @@ import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teac
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.teacher.dto.StandingYearsDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
+import java.time.LocalDate;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
 import org.webjars.NotFoundException;
 
 @Service
@@ -31,6 +30,7 @@ public class EditTeacher {
    */
   @Transactional
   public TeacherEntity changeStandingYears(StandingYearsDto standingYearsDto) {
+
     Optional<TeacherEntity> teacherOptional
         = teacherRepository.findById(standingYearsDto.getTeacherId());
 
@@ -40,7 +40,9 @@ public class EditTeacher {
 
     teacherOptional.get().setStandingYears(standingYearsDto.getStandingYears());
     teacherRepository.save(teacherOptional.get());
+
     log.info("Стаж учителя обновлён: " + teacherOptional);
+
     return teacherOptional.get();
   }
 
@@ -52,6 +54,7 @@ public class EditTeacher {
    */
   @Transactional
   public TeacherEntity activate(long teacherId) {
+
     Optional<TeacherEntity> teacherOptional = teacherRepository.findById(teacherId);
 
     if (teacherOptional.isEmpty()) {
@@ -68,13 +71,14 @@ public class EditTeacher {
   }
 
   /**
-   * Деактивировать учителя (более не может работать)
+   * Деактивировать учителя (более не может работать).
    *
    * @param deactivateDto - ДТО деактивации учителя
    * @return TeacherEntity
    */
   @Transactional
   public TeacherEntity deactivate(DeactivateDto deactivateDto) {
+
     Optional<TeacherEntity> teacherOptional
         = teacherRepository.findById(deactivateDto.getTeacherId());
 
@@ -83,10 +87,14 @@ public class EditTeacher {
     }
 
     Teacher teacher = teacherServiceMapper.mapEntityToDomain(teacherOptional.get());
+
     teacher.deactivate(
         LocalDate.parse(deactivateDto.getFrom()), LocalDate.parse(deactivateDto.getTo()));
+
     TeacherEntity result = teacherServiceMapper.mapDomainToEntity(teacher);
+
     result.setId(teacherOptional.get().getId());
+
     teacherRepository.save(result);
     log.info("Учитель деактивирован и не может работать: " + result);
     return result;

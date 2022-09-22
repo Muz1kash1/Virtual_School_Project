@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.application.usecase.virtual_school.homeworkforclass;
 
+import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import javax.transaction.Transactional;
@@ -25,13 +25,17 @@ public class ChangeDiscipline {
    */
   @Transactional
   public void execute(HomeworkForClassId homeworkForClassId, Discipline discipline) {
-    HomeworkForClass homeworkForClass
-        = homeworkForClassMapper.mapEntityToHomeworkForClass(
-        homeworkForClassRepository.getReferenceById(homeworkForClassId.getValue()));
+
+    HomeworkForClass homeworkForClass = homeworkForClassMapper.mapEntityToHomeworkForClass(
+            homeworkForClassRepository.getReferenceById(homeworkForClassId.getValue()));
+
     homeworkForClass.changeDiscipline(discipline);
+
     HomeworkForClassEntity homeworkForClassEntity
         = homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass);
+
     homeworkForClassEntity.setId(homeworkForClassId.getValue());
+
     homeworkForClassRepository.save(homeworkForClassEntity);
   }
 }

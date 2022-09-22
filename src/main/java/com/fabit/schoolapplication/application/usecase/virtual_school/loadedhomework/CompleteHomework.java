@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication.application.usecase.virtual_school.loadedhomework;
 
+import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedLoadedHomeworkCreatedEvent;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
-import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -20,14 +20,17 @@ public class CompleteHomework {
   final LoadedHomeworkMapperService loadedHomeworkMapperService;
 
   /**
-   * Метод загрузки выполненного дз из дто.
+   * Метод загрузки выполненного ДЗ из ДТО.
    *
    * @param dto дто
    */
   public void uploadCompletedHomework(LoadedHomeworkDto dto) {
+
     LoadedHomework loadedHomework = loadedHomeworkMapperService.mapDtoToHomework(dto);
-    LoadedHomeworkEntity loadedHomeworkEntity = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
-        loadedHomework);
+
+    LoadedHomeworkEntity loadedHomeworkEntity
+        = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(loadedHomework);
+
     repository.save(loadedHomeworkEntity);
   }
 

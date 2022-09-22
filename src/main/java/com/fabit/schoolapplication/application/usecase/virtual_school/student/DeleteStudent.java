@@ -17,13 +17,12 @@ public class DeleteStudent {
   private final ApplicationEventPublisher eventPublisher;
 
   /**
-   * Удалить ученика с идентификатором id
+   * Удалить ученика с идентификатором id.
    *
    * @param id - идентификатор ученика
    */
   public void execute(long id) {
     studentRepository.deleteById(id);
-    StudentDeletedEvent event = new StudentDeletedEvent(this, id);
-    eventPublisher.publishEvent(event);
+    eventPublisher.publishEvent(new StudentDeletedEvent(this, id));
   }
 }

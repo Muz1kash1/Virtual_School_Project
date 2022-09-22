@@ -21,6 +21,12 @@ import org.springframework.stereotype.Service;
 public class StudentMapperService {
   final StudentRepository studentRepository;
 
+  /**
+   * Маппинг доменного ученика в persistent сущность.
+   *
+   * @param student - доменный ученик
+   * @return StudentEntity
+   */
   public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
     studentEntity.setName(student.getFullName().toString());
@@ -29,6 +35,7 @@ public class StudentMapperService {
       studentEntity.setPassport(student.getPassport().toString());
     }
     studentEntity.setBirthCertificate(student.getBirthCertificate().toString());
+
     return studentEntity;
   }
 
@@ -39,8 +46,12 @@ public class StudentMapperService {
    * @return Student
    */
   public Student mapToStudent(StudentDto studentDto) {
-    return Student.of(StudentId.of(studentRepository.getNextId()), mapToFullName(studentDto.getName()),
-        mapToSnils(studentDto.getSnils()), mapToBirthCertificate(studentDto.getBirthCertificate()));
+    return Student.of(
+        StudentId.of(studentRepository.getNextId()),
+        mapToFullName(studentDto.getName()),
+        mapToSnils(studentDto.getSnils()),
+        mapToBirthCertificate(studentDto.getBirthCertificate())
+    );
   }
 
   public Snils mapToSnils(SnilsDto value) {

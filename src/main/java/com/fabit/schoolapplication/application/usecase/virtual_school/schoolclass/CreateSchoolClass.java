@@ -65,6 +65,11 @@ public class CreateSchoolClass {
     }
   }
 
+  /**
+   * Создание школьного класса.
+   *
+   * @param schoolClass - школьный класс
+   */
   @Transactional
   public void execute(SchoolClass schoolClass) {
 

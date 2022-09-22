@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.application.mapper;
 
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomeworkId;
-import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.controller.virtual_school.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;
@@ -62,10 +62,15 @@ public class LoadedHomeworkMapperService {
    * @return объект доменной модели
    */
   public LoadedHomework mapHomeworkEntityToHomework(LoadedHomeworkEntity loadedHomeworkEntity) {
-    LoadedHomework loadedHomework = LoadedHomework.of(LoadedHomeworkId.of(loadedHomeworkEntity.getId()),
+
+    LoadedHomework loadedHomework = LoadedHomework.of(
+        LoadedHomeworkId.of(loadedHomeworkEntity.getId()),
         StudentId.of(loadedHomeworkEntity.getStudentId()),
-        HomeworkForClassId.of(loadedHomeworkEntity.getHomeworkForClassId()));
+        HomeworkForClassId.of(loadedHomeworkEntity.getHomeworkForClassId())
+    );
+
     loadedHomework.uploadTaskCompletionResult(loadedHomeworkEntity.getTaskCompletionResult());
+
     return loadedHomework;
   }
 

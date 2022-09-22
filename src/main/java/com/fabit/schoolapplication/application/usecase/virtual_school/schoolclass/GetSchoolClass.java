@@ -17,7 +17,7 @@ public class GetSchoolClass {
   /**
    * Получить список всех школьных классов.
    *
-   * @return List<SchoolClassEntity>
+   * @return List of SchoolClassEntity
    */
   public List<SchoolClassEntity> all() {
     List<SchoolClassEntity> schoolClasses = schoolClassRepository.findAll();
