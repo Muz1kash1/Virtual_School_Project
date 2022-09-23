@@ -7,6 +7,7 @@ import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
+import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,10 +30,11 @@ public class EditStudent {
   public StudentEntity addPassport(StudentDto studentDto) {
 
     RussianPassport passport = studentMapperService.mapToPassport(studentDto.getPassport());
-    if (RussianPassport.isValidAge(studentDto.getBirthCertificate().getBirthday())) {
+    if (RussianPassport.isValidAge(studentDto.getBirthCertificate().getBirthday(),
+      Clock.systemUTC())) {
 
-      StudentEntity studentEntity =
-          studentRepository.findBySnils(studentDto.getSnils().getNumberView());
+      StudentEntity studentEntity
+        = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
       studentEntity.setPassport(passport.toString());
 
       studentRepository.save(studentEntity);
@@ -50,9 +52,9 @@ public class EditStudent {
    */
   public StudentEntity changeBirthCertificate(StudentDto studentDto) {
     BirthCertificate birthCertificate
-        = studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate());
+      = studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate());
     StudentEntity studentEntity
-        = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
+      = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
 
     studentEntity.setBirthCertificate(birthCertificate.toString());
 
@@ -67,9 +69,9 @@ public class EditStudent {
    */
   public StudentEntity changeSnils(StudentDto studentDto) {
     Snils snils
-        = studentMapperService.mapToSnils(studentDto.getSnils());
+      = studentMapperService.mapToSnils(studentDto.getSnils());
     StudentEntity studentEntity
-        = studentRepository.findByBirthCertificate(studentDto.getBirthCertificate().toString());
+      = studentRepository.findByBirthCertificate(studentDto.getBirthCertificate().toString());
 
     studentEntity.setSnils(snils.getNumberView());
 

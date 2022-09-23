@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.domain;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 import lombok.Getter;
@@ -26,21 +27,32 @@ public class RussianPassport {
    * @param serial   - сериный номер паспорта
    * @param number   - номер паспорта
    * @param birthday - день рождения
-   * @return RussianPassport
+   * @param clock    - дата и время в которое будет создавать паспорт
+   * @return RussianPassport russian passport
    */
-  public static RussianPassport of(String serial, String number, LocalDate birthday) {
+  public static RussianPassport of(String serial, String number, LocalDate birthday, Clock clock) {
 
-    if (isValidPassport(serial, number, birthday)) {
+    if (isValidPassport(serial, number, birthday, clock)) {
       return new RussianPassport(serial, number, birthday);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Невалидные данные паспорта");
     }
 
   }
 
-  public static boolean isValidAge(LocalDate birthday) {
+  /**
+   * Валидация возраста, нельзя добавлять паспорт студенту младше 14 лет.
+   *
+   * @param birthday дата рождения
+   * @param clock    дата и время в которое идет проверка
+   * @return boolean
+   */
+  public static boolean isValidAge(LocalDate birthday, Clock clock) {
 
-    return (LocalDate.now().getYear() - birthday.getYear() >= MIN_AGE_FOR_PASSPORT);
+    return (LocalDate.ofInstant(
+      clock.instant(),
+      clock.getZone()
+    ).getYear() - birthday.getYear() >= MIN_AGE_FOR_PASSPORT);
   }
 
   /**
@@ -51,11 +63,12 @@ public class RussianPassport {
    * @param birthday - день рождения
    * @return boolean
    */
-  public static boolean isValidPassport(String serial, String number, LocalDate birthday) {
+  public static boolean isValidPassport(String serial, String number,
+                                        LocalDate birthday, Clock clock) {
 
     return Pattern.matches("^[0-9]{6}$", number)
       && Pattern.matches("^[0-9]{4}$", serial)
-      && isValidAge(birthday);
+      && isValidAge(birthday, clock);
   }
 
   @Override

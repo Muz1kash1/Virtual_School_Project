@@ -15,7 +15,11 @@ import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.Stu
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.time.Clock;
 
+/**
+ * The type Student mapper service.
+ */
 @Service
 @RequiredArgsConstructor
 public class StudentMapperService {
@@ -63,19 +67,53 @@ public class StudentMapperService {
     );
   }
 
-  public Snils mapToSnils(SnilsDto value) {
-    return Snils.of(value.getNumberView());
+  /**
+   * Маппинг ДТО СНИЛС в доменную модель.
+   *
+   * @param snilsDto - СНИЛС
+   * @return snils
+   */
+  public Snils mapToSnils(SnilsDto snilsDto) {
+    return Snils.of(snilsDto.getNumberView());
   }
 
+  /**
+   * Маппинг ДТО ФИО в доменную модель.
+   *
+   * @param value - ФИО
+   * @return ФИО
+   */
   public FullName mapToFullName(FullNameDto value) {
     return FullName.of(value.getName(), value.getSurname(), value.getPatronymic());
   }
 
-  public BirthCertificate mapToBirthCertificate(BirthCertificateDto value) {
-    return BirthCertificate.of(value.getSerial(), value.getNumber(), value.getBirthday());
+  /**
+   * Маппинг ДТО Свид. о рожд. в доменную модель.
+   *
+   * @param birthCertificateDto - СВид. о рожд.
+   * @return свид. о рожд.
+   */
+  public BirthCertificate mapToBirthCertificate(BirthCertificateDto birthCertificateDto) {
+    return BirthCertificate.of(
+      birthCertificateDto.getSerial(),
+      birthCertificateDto.getNumber(),
+      birthCertificateDto.getBirthday(),
+      Clock.systemUTC()
+    );
   }
 
-  public RussianPassport mapToPassport(PassportDto value) {
-    return RussianPassport.of(value.getSerial(), value.getNumber(), value.getBirthday());
+  /**
+   * Маппинг ДТО паспорта в доменную модель.
+   *
+   * @param passportDto - паспорт
+   * @return русский паспорт
+   */
+  public RussianPassport mapToPassport(PassportDto passportDto) {
+    return RussianPassport.of(
+      passportDto.getSerial(),
+      passportDto.getNumber(),
+      passportDto.getBirthday(),
+      Clock.systemUTC()
+    );
   }
 }
