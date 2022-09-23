@@ -10,11 +10,13 @@ import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teach
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.TeacherDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import java.time.LocalDate;
 import org.springframework.stereotype.Service;
+import java.time.Clock;
+import java.time.LocalDate;
 
 @Service
 public class TeacherServiceMapper {
+  private final Clock clock = Clock.systemUTC();
 
   /**
    * Маппинг ДТО учителя в доменную модель.
@@ -24,26 +26,28 @@ public class TeacherServiceMapper {
    */
   public Teacher mapDtoToDomain(TeacherDto teacherDto) {
     return Teacher.of(
-        TeacherId.of(1L),
-        mapDtoToDomain(teacherDto.getFullName()),
-        mapDtoToDomain(teacherDto.getPassport()),
-        mapDtoToDomain(teacherDto.getSnils()),
-        teacherDto.getStandingYears(),
-        teacherDto.isActive());
+      TeacherId.of(1L),
+      mapDtoToDomain(teacherDto.getFullName()),
+      mapDtoToDomain(teacherDto.getPassport()),
+      mapDtoToDomain(teacherDto.getSnils()),
+      teacherDto.getStandingYears(),
+      teacherDto.isActive()
+    );
   }
 
 
   private RussianPassport mapDtoToDomain(PassportDto passportDto) {
     return RussianPassport.of(
-        passportDto.getSerial(),
-        passportDto.getNumber(),
-        passportDto.getBirthday()
+      passportDto.getSerial(),
+      passportDto.getNumber(),
+      passportDto.getBirthday(),
+      clock
     );
   }
 
   private FullName mapDtoToDomain(FullNameDto fullNameDto) {
     return FullName.of(
-        fullNameDto.getName(), fullNameDto.getSurname(), fullNameDto.getPatronymic()
+      fullNameDto.getName(), fullNameDto.getSurname(), fullNameDto.getPatronymic()
     );
   }
 
@@ -66,9 +70,9 @@ public class TeacherServiceMapper {
     teacherEntity.setActive(teacher.isActive());
     teacherEntity.setStandingYears(teacher.getStandingYears());
     teacherEntity.setFullName(
-        teacher.getFullName().getName()
-            + " " + teacher.getFullName().getSurname()
-            + " " + teacher.getFullName().getPatronymic()
+      teacher.getFullName().getName()
+        + " " + teacher.getFullName().getSurname()
+        + " " + teacher.getFullName().getPatronymic()
     );
 
     return teacherEntity;
@@ -82,12 +86,13 @@ public class TeacherServiceMapper {
    */
   public Teacher mapEntityToDomain(TeacherEntity teacherEntity) {
     return Teacher.of(
-        TeacherId.of(teacherEntity.getId()),
-        mapEntityFullNameToDomain(teacherEntity.getFullName()),
-        mapEntityPassportToDomain(teacherEntity.getPassport()),
-        mapEntitySnilsToDomain(teacherEntity.getSnils()),
-        teacherEntity.getStandingYears(),
-        teacherEntity.isActive());
+      TeacherId.of(teacherEntity.getId()),
+      mapEntityFullNameToDomain(teacherEntity.getFullName()),
+      mapEntityPassportToDomain(teacherEntity.getPassport()),
+      mapEntitySnilsToDomain(teacherEntity.getSnils()),
+      teacherEntity.getStandingYears(),
+      teacherEntity.isActive()
+    );
   }
 
   public FullName mapEntityFullNameToDomain(String fullName) {
@@ -104,7 +109,7 @@ public class TeacherServiceMapper {
   public RussianPassport mapEntityPassportToDomain(String passport) {
     String[] arr = passport.split(" ");
     LocalDate birthday = LocalDate.parse(arr[2]);
-    return RussianPassport.of(arr[0], arr[1], birthday);
+    return RussianPassport.of(arr[0], arr[1], birthday, clock);
   }
 
   public Snils mapEntitySnilsToDomain(String snils) {

@@ -5,12 +5,16 @@ import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StudentTest {
+  private final Clock clock = Clock.fixed(Instant.parse("2022-09-15T00:00:00Z"), ZoneOffset.UTC);
 
   @Test
   @DisplayName("Создается объект ученика младше 14 лет со свидетельством о рождении")
@@ -21,7 +25,7 @@ class StudentTest {
       FullName.of("Петя", "Губкин", "Васильевич"),
       Snils.of("123-343-223-32"),
       BirthCertificate.of("2222", "999999",
-        LocalDate.of(2010, 9, 15)
+        LocalDate.of(2010, 9, 15), clock
       )
     );
 
@@ -39,10 +43,10 @@ class StudentTest {
       FullName.of("Петя", "Губкин", "Васильевич"),
       Snils.of("123-343-223-32"),
       BirthCertificate.of("2222", "999999",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       ),
       RussianPassport.of("1111", "888888",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       )
     );
 
@@ -61,11 +65,11 @@ class StudentTest {
         FullName.of("Петя", "Губкин", "Васильевич"),
         Snils.of("123-343-223-32"),
         BirthCertificate.of("2222", "999999",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         ),
         RussianPassport.of(
           "1111", "888888",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         )
       )
     );
@@ -81,11 +85,11 @@ class StudentTest {
         FullName.of("Петя", "Губкин", "Васильевич"),
         Snils.of("123-343-223-32"),
         BirthCertificate.of("2222", "999999",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         ),
         RussianPassport.of(
           "99", "89292",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         )
       )
     );
@@ -102,7 +106,7 @@ class StudentTest {
         Snils.of("123-343-223-32"),
         BirthCertificate.of(
           "99", "89292",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         )
       )
     );
@@ -119,7 +123,7 @@ class StudentTest {
         Snils.of("123-343-2233-32"),
         BirthCertificate.of(
           "99", "89292",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         )
       )
     );
@@ -136,7 +140,7 @@ class StudentTest {
         Snils.of("123-343-223-32"),
         BirthCertificate.of(
           "2222", "999999",
-          LocalDate.of(2018, 9, 15)
+          LocalDate.of(2018, 9, 15), clock
         )
       )
     );
@@ -152,10 +156,10 @@ class StudentTest {
         FullName.of("Петя", "Губкин", "Васильевич"),
         Snils.of("123-343-223-32"),
         BirthCertificate.of("2222", "999999",
-          LocalDate.of(2010, 9, 15)
+          LocalDate.of(2010, 9, 15), clock
         ),
         RussianPassport.of("1111", "888888",
-          LocalDate.of(2007, 9, 15)
+          LocalDate.of(2007, 9, 15), clock
         )
       )
     );
@@ -170,11 +174,11 @@ class StudentTest {
       FullName.of("Петя", "Губкин", "Васильевич"),
       Snils.of("123-343-223-32"),
       BirthCertificate.of("2222", "999999",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       ),
       RussianPassport.of(
         "1111", "888888",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       )
     );
 
@@ -193,13 +197,13 @@ class StudentTest {
       Snils.of("123-343-223-32"),
       BirthCertificate.of(
         "2223", "788778",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       )
     );
 
     student.changeBirthCertificate(
       BirthCertificate.of("2222", "999999",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       )
     );
 
@@ -216,17 +220,17 @@ class StudentTest {
       FullName.of("Петя", "Губкин", "Васильевич"),
       Snils.of("123-343-223-32"),
       BirthCertificate.of("2222", "999999",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       ),
       RussianPassport.of(
         "2222", "999999",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       )
     );
 
     student.addPassport(
       RussianPassport.of("1111", "555555",
-        LocalDate.of(2007, 9, 15)
+        LocalDate.of(2007, 9, 15), clock
       )
     );
 

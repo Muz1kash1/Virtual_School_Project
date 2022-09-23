@@ -1,9 +1,10 @@
 package com.fabit.schoolapplication.domain.student;
 
-import java.time.LocalDate;
-import java.util.regex.Pattern;
 import lombok.Getter;
 import lombok.Value;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 @Getter
 @Value
@@ -28,27 +29,28 @@ public class BirthCertificate {
    * @param serial   - серийния свидетельства о рождении
    * @param number   - номер свидетельства о рождении
    * @param birthday - день рождения
-   * @return BirthCertificate
+   * @param clock    - дата и время в которое будет создавать свид. о рожд
+   * @return BirthCertificate birth certificate
    */
-  public static BirthCertificate of(String serial, String number, LocalDate birthday) {
-
-    if (isValidBirthCertificate(serial, number, birthday)) {
+  public static BirthCertificate of(String serial, String number, LocalDate birthday, Clock clock) {
+    if (isValidBirthCertificate(serial, number, birthday, clock)) {
       return new BirthCertificate(serial, number, birthday);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Невалидные данные свид. о рожд.");
     }
-
   }
 
-  private static boolean isValidBirthCertificate(String serial, String number, LocalDate birthday) {
+  private static boolean isValidBirthCertificate(String serial, String number,
+                                                 LocalDate birthday, Clock clock) {
 
     return Pattern.matches("^[0-9]{6}$", number)
-        && Pattern.matches("^[0-9]{4}$", serial)
-        && isValidAge(birthday);
+      && Pattern.matches("^[0-9]{4}$", serial)
+      && isValidAge(birthday, clock);
   }
 
-  private static boolean isValidAge(LocalDate birthday) {
-    return (LocalDate.now().getYear() - birthday.getYear() >= MIN_AGE_FOR_STUDENT);
+  private static boolean isValidAge(LocalDate birthday, Clock clock) {
+    return (LocalDate.ofInstant(
+      clock.instant(), clock.getZone()).getYear() - birthday.getYear() >= MIN_AGE_FOR_STUDENT);
   }
 
   @Override
