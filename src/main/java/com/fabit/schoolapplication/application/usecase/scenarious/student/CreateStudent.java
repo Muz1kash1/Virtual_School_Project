@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.student;
 
 import com.fabit.schoolapplication.application.mapper.StudentMapperService;
-import com.fabit.schoolapplication.application.usecase.acces.student.StudentService;
+import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
 import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.student.Student;
 import lombok.RequiredArgsConstructor;

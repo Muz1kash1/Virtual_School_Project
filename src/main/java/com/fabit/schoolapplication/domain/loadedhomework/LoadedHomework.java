@@ -5,10 +5,10 @@ import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedHomeworkCre
 import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedHomeworkEvent;
 import com.fabit.schoolapplication.domain.loadedhomework.event.LoadedHomeworkUpdatedEvent;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import lombok.Getter;
-import org.springframework.util.Assert;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import org.springframework.util.Assert;
 
 @Getter
 
@@ -20,7 +20,14 @@ public class LoadedHomework {
   private final StudentId studentId;
   private String taskCompletionResult;
 
-  public LoadedHomework(LoadedHomeworkId loadedHomeworkId,
+  /**
+   * Приватный конструктор для фабрики.
+   *
+   * @param loadedHomeworkId   - идентификатор загруженного ДЗ
+   * @param studentId          - идентификатор ученика
+   * @param homeworkForClassId - идентификатор ДЗ для школьного класса
+   */
+  private LoadedHomework(LoadedHomeworkId loadedHomeworkId,
                         StudentId studentId, HomeworkForClassId homeworkForClassId) {
     this.loadedHomeworkId = loadedHomeworkId;
     this.homeworkForClassId = homeworkForClassId;
@@ -29,6 +36,14 @@ public class LoadedHomework {
 
   }
 
+  /**
+   * Factory method.
+   *
+   * @param loadedHomeworkId   - идентификатор загруженного ДЗ
+   * @param studentId          - идентификатор ученика
+   * @param homeworkForClassId - идентификатор ДЗ для школьного класса
+   * @return LoadedHomework
+   */
   public static LoadedHomework of(LoadedHomeworkId loadedHomeworkId, StudentId studentId,
                                   HomeworkForClassId homeworkForClassId) {
     return new LoadedHomework(loadedHomeworkId, studentId,

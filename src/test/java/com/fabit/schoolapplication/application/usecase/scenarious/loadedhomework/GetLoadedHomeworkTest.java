@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.loadedhomework;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.loadedhomework.GetLoadedHomework;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.loadedhomework.LoadedHomeworkEntity;

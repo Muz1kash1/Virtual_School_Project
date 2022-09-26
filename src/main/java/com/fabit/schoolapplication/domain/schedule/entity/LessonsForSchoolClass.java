@@ -2,12 +2,12 @@ package com.fabit.schoolapplication.domain.schedule.entity;
 
 import com.fabit.schoolapplication.domain.schedule.valueobject.LessonInSchedule;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import java.util.List;
 
 /**
- * Класс описывающий школьный день для определенного класса
+ * Класс описывающий школьный день для определенного класса.
  */
 @Getter
 @EqualsAndHashCode

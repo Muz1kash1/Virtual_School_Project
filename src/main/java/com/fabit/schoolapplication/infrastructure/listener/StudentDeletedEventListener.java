@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication.infrastructure.listener;
 
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassByStudentIdIn;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromSchoolClass;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromClassUseCase;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.event.StudentDeletedEvent;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,8 +17,8 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @RequiredArgsConstructor
 public class StudentDeletedEventListener {
 
-  private final RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
-  private final GetSchoolClassByStudentIdIn getSchoolClassByStudentIdIn;
+  private final RemoveStudentFromClassUseCase removeStudentFromSchoolClassUseCase;
+  private final GetSchoolClassUseCase getSchoolClassUseCase;
 
   /**
    * Слушатель события удаления ученика.
@@ -30,11 +30,13 @@ public class StudentDeletedEventListener {
     log.info("Студент под номером " + event.getStudentId() + " был отчислен из школы");
 
     StudentId studentId = StudentId.of(event.getStudentId());
-    SchoolClassEntity schoolClassEntity = getSchoolClassByStudentIdIn.execute(studentId);
+    SchoolClass schoolClass
+        = getSchoolClassUseCase.getByStudentId(studentId.getValue());
 
-    removeStudentFromSchoolClass.execute(SchoolClassId.of(schoolClassEntity.getId()), studentId);
+    removeStudentFromSchoolClassUseCase
+        .execute(SchoolClassId.of(schoolClass.getSchoolClassId().getValue()), studentId);
 
     log.info("Студент под номером " + event.getStudentId()
-        + " автоматически отчислен из класса" + schoolClassEntity);
+        + " автоматически отчислен из класса" + schoolClass);
   }
 }

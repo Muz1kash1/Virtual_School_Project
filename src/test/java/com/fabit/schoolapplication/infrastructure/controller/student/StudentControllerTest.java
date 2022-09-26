@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.controller.student;
 
-import com.fabit.schoolapplication.application.usecase.acces.student.StudentService;
+import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;

@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.config.usecase;
 
 import com.fabit.schoolapplication.application.mapper.StudentMapperService;
-import com.fabit.schoolapplication.application.usecase.acces.student.StudentService;
+import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
 import com.fabit.schoolapplication.application.usecase.scenarious.student.CreateStudent;
 import com.fabit.schoolapplication.application.usecase.scenarious.student.DeleteStudent;
 import com.fabit.schoolapplication.application.usecase.scenarious.student.EditStudent;

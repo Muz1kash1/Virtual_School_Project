@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.application.usecase.acces.student;
+package com.fabit.schoolapplication.application.usecase.access.student;
 
 import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.RussianPassport;

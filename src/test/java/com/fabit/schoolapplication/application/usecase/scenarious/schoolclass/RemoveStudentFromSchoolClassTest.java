@@ -1,8 +1,11 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.schoolclass;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.AddStudentToClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromClassUseCase;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentInClassRepository;
@@ -30,13 +33,13 @@ public class RemoveStudentFromSchoolClassTest {
   StudentRepository studentRepository;
 
   @Autowired
-  RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+  RemoveStudentFromClassUseCase removeStudentFromSchoolClass;
 
   @Autowired
-  AddStudentToSchoolClass addStudentToSchoolClass;
+  AddStudentToClassUseCase addStudentToSchoolClass;
 
   @Autowired
-  CreateSchoolClass createSchoolClass;
+  CreateSchoolClassUseCase createSchoolClass;
 
   @BeforeEach
   public void init() {
@@ -52,21 +55,34 @@ public class RemoveStudentFromSchoolClassTest {
     studentRepository.deleteAll();
   }
 
+
+  // TODO
+  // TODO Починить удаление
   @Test
   @DisplayName("Удаление ученика из класса должно разрывать между ними связь")
   void removeStudentFromSchoolClassTest() {
+    SchoolClass schoolClass = createSchoolClass.execute(10, "В");
+    StudentEntity student = studentRepository.findAll().get(0);
 
-    SchoolClassEntity createdSchoolClass = createSchoolClass.execute(2, "Г");
-    StudentEntity testStudent = studentRepository.findAll().get(0);
+    Assertions.assertEquals(0, studentInClassRepository.findAll().size());
 
     addStudentToSchoolClass.execute(
-        SchoolClassId.of(createdSchoolClass.getId()), StudentId.of(testStudent.getId()));
+        SchoolClassId.of(schoolClass.getSchoolClassId().getValue()),
+        StudentId.of(student.getId())
+    );
 
     Assertions.assertEquals(1, studentInClassRepository.findAll().size());
+    Assertions.assertEquals(
+        schoolClass.getSchoolClassId().getValue(),
+        studentInClassRepository.findByStudentId(student.getId()).getSchoolClassId()
+    );
 
     removeStudentFromSchoolClass.execute(
-        SchoolClassId.of(createdSchoolClass.getId()), StudentId.of(testStudent.getId()));
+        SchoolClassId.of(schoolClass.getSchoolClassId().getValue()),
+        StudentId.of(student.getId())
+    );
 
     Assertions.assertEquals(0, studentInClassRepository.findAll().size());
   }
+
 }

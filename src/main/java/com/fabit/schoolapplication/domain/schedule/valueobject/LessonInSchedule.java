@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
- * Класс описывающий урок по расписанию
+ * Класс описывающий урок по расписанию.
  */
 @Getter
 @EqualsAndHashCode
@@ -22,7 +22,7 @@ public final class LessonInSchedule {
   }
 
   /**
-   * Статическая фабрика для создания урока по расписанию
+   * Статическая фабрика для создания урока по расписанию.
    *
    * @param lessonNumber порядковый номер урока
    * @param discipline   наименование дисциплины
@@ -37,7 +37,7 @@ public final class LessonInSchedule {
   }
 
   /**
-   * Метод описывающий выставление номера урока
+   * Метод описывающий выставление номера урока.
    *
    * @param lessonNumber порядковый номер урока
    */

@@ -1,8 +1,10 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.schoolclass;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.AddStudentToClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClassUseCase;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.StudentInClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
@@ -22,10 +24,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AddStudentToClassTest {
 
   @Autowired
-  AddStudentToSchoolClass addStudentToSchoolClass;
+  AddStudentToClassUseCase addStudentToSchoolClassUseCase;
 
   @Autowired
-  CreateSchoolClass createSchoolClass;
+  CreateSchoolClassUseCase createSchoolClassUseCase;
 
   @Autowired
   SchoolClassRepository schoolClassRepository;
@@ -53,21 +55,27 @@ public class AddStudentToClassTest {
   @Test
   @DisplayName("Добавление ученика в класс должно создавать корректную связь класс-ученик")
   void addStudentToClassTest() {
-    SchoolClassEntity createdClass = createSchoolClass.execute(6, "А");
+
+    SchoolClass createdClass = createSchoolClassUseCase.execute(6, "А");
     StudentId testStudentId = StudentId.of(studentRepository.findAll().get(0).getId());
 
-    StudentInClassEntity studentInClass
-        = addStudentToSchoolClass.execute(SchoolClassId.of(createdClass.getId()), testStudentId);
+    addStudentToSchoolClassUseCase
+        .execute(SchoolClassId.of(createdClass.getSchoolClassId().getValue()), testStudentId);
 
     Assertions.assertEquals(
-        createdClass.getParallel(),
+        createdClass.getSchoolClassName().getParallel(),
         schoolClassRepository.findByParallelAndLitera(6, "А").getParallel());
     Assertions.assertEquals(
-        createdClass.getLitera(),
+        createdClass.getSchoolClassName().getLitera(),
         schoolClassRepository.findByParallelAndLitera(6, "А").getLitera());
 
-    Assertions.assertEquals(createdClass.getId(), studentInClass.getSchoolClassId());
-    Assertions.assertEquals(testStudentId.getValue(), studentInClass.getStudentId());
+    StudentInClassEntity studentInClassEntity
+        = studentInClassRepository.findByStudentId(testStudentId.getValue());
+
+    Assertions.assertEquals(
+        createdClass.getSchoolClassId().getValue(),
+        studentInClassEntity.getSchoolClassId());
+
   }
 
 }
