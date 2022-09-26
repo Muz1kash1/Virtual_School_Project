@@ -3,16 +3,16 @@ package com.fabit.schoolapplication.application.usecase.virtualschool.teacher;
 import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.DeactivateDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.StandingYearsDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
-import java.time.LocalDate;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
+import java.time.LocalDate;
+import java.util.Optional;
+
 
 @Service
 @Slf4j
@@ -22,29 +22,6 @@ public class EditTeacher {
   private final TeacherRepository teacherRepository;
   private final TeacherServiceMapper teacherServiceMapper;
 
-  /**
-   * Изменить рабочий стаж учителя.
-   *
-   * @param standingYearsDto - ДТО с новым стажем
-   * @return TeacherEntity
-   */
-  @Transactional
-  public TeacherEntity changeStandingYears(StandingYearsDto standingYearsDto) {
-
-    Optional<TeacherEntity> teacherOptional
-        = teacherRepository.findById(standingYearsDto.getTeacherId());
-
-    if (teacherOptional.isEmpty()) {
-      throw new NotFoundException("Учителя с id " + standingYearsDto.getTeacherId() + " нет в БД");
-    }
-
-    teacherOptional.get().setStandingYears(standingYearsDto.getStandingYears());
-    teacherRepository.save(teacherOptional.get());
-
-    log.info("Стаж учителя обновлён: " + teacherOptional);
-
-    return teacherOptional.get();
-  }
 
   /**
    * Активировать учителя (вышел на работу).
@@ -80,7 +57,7 @@ public class EditTeacher {
   public TeacherEntity deactivate(DeactivateDto deactivateDto) {
 
     Optional<TeacherEntity> teacherOptional
-        = teacherRepository.findById(deactivateDto.getTeacherId());
+      = teacherRepository.findById(deactivateDto.getTeacherId());
 
     if (teacherOptional.isEmpty()) {
       throw new NotFoundException("Учителя с id " + deactivateDto.getTeacherId() + " нет в БД");
@@ -89,7 +66,7 @@ public class EditTeacher {
     Teacher teacher = teacherServiceMapper.mapEntityToDomain(teacherOptional.get());
 
     teacher.deactivate(
-        LocalDate.parse(deactivateDto.getFrom()), LocalDate.parse(deactivateDto.getTo()));
+      LocalDate.parse(deactivateDto.getFrom()), LocalDate.parse(deactivateDto.getTo()));
 
     TeacherEntity result = teacherServiceMapper.mapDomainToEntity(teacher);
 

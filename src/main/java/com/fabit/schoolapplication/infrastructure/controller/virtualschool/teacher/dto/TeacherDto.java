@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeacherDto {
-  private int standingYears;
   private FullNameDto fullName;
   private PassportDto passport;
   private SnilsDto snils;
-  private boolean isActive;
 }
