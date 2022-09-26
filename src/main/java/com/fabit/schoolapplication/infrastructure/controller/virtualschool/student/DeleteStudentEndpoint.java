@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtualschool.student;
 
-import com.fabit.schoolapplication.application.usecase.virtualschool.student.DeleteStudent;
+import com.fabit.schoolapplication.application.usecase.scenarious.student.DeleteStudent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

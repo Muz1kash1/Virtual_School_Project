@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtualschool.loadedhomework;
 
-import com.fabit.schoolapplication.application.usecase.virtualschool.loadedhomework.CompleteHomework;
-import com.fabit.schoolapplication.application.usecase.virtualschool.loadedhomework.GetLoadedHomework;
+import com.fabit.schoolapplication.application.usecase.scenarious.loadedhomework.CompleteHomework;
+import com.fabit.schoolapplication.application.usecase.scenarious.loadedhomework.GetLoadedHomework;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.loadedhomework.dto.LoadedHomeworkDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

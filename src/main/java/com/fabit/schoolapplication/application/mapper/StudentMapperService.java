@@ -1,26 +1,24 @@
 package com.fabit.schoolapplication.application.mapper;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.BirthCertificateDto;
+import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.FullNameDto;
+import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.PassportDto;
+import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.SnilsDto;
+import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.BirthCertificateDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.FullNameDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.PassportDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.SnilsDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.student.dto.StudentDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import java.time.Clock;
 
 /**
  * The type Student mapper service.
  */
-@Service
 @RequiredArgsConstructor
 public class StudentMapperService {
   final StudentRepository studentRepository;
@@ -33,6 +31,7 @@ public class StudentMapperService {
    */
   public StudentEntity mapToStudentEntity(Student student) {
     StudentEntity studentEntity = new StudentEntity();
+    studentEntity.setId(student.getId().getValue());
     studentEntity.setName(student.getFullName().toString());
     studentEntity.setSnils(student.getSnils().getNumberView());
     if (student.getPassport() != null) {
@@ -51,8 +50,9 @@ public class StudentMapperService {
    */
   public Student mapToStudent(StudentDto studentDto) {
     if (studentDto.getPassport() == null) {
+      Long id = studentRepository.getNextId();
       return Student.of(
-        StudentId.of(studentRepository.getNextId()),
+        StudentId.of(id),
         mapToFullName(studentDto.getName()),
         mapToSnils(studentDto.getSnils()),
         mapToBirthCertificate(studentDto.getBirthCertificate())

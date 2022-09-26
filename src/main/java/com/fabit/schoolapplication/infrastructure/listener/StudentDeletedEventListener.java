@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.listener;
 
-import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.GetSchoolClassByStudentIdIn;
-import com.fabit.schoolapplication.application.usecase.virtualschool.schoolclass.RemoveStudentFromSchoolClass;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassByStudentIdIn;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromSchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.event.StudentDeletedEvent;
