@@ -5,10 +5,8 @@ import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.Del
 import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.EditTeacher;
 import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.GetTeacher;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.DeactivateDto;
-import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.StandingYearsDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.TeacherDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 @RequestMapping("/teacher")
@@ -39,23 +38,8 @@ public class TeacherController {
   @PostMapping
   public ResponseEntity<TeacherEntity> createTeacher(@RequestBody TeacherDto teacherDto) {
     return ResponseEntity
-        .status(HttpStatus.CREATED)
-        .body(createTeacher.execute(teacherDto));
-  }
-
-  /**
-   * Endpoint смены стажа учителя.
-   *
-   * @param standingYearsDto - ДТО смены стажа учителя
-   * @return ResponseEntity with status ACCEPTED и учителем
-   */
-  @PutMapping("/standing-years")
-  public ResponseEntity<TeacherEntity> changeStandingYears(
-      @RequestBody StandingYearsDto standingYearsDto) {
-
-    return ResponseEntity
-        .status(HttpStatus.ACCEPTED)
-        .body(editTeacher.changeStandingYears(standingYearsDto));
+      .status(HttpStatus.CREATED)
+      .body(createTeacher.execute(teacherDto));
   }
 
   /**
@@ -67,8 +51,8 @@ public class TeacherController {
   @PutMapping("/{teacherId}/activate")
   public ResponseEntity<TeacherEntity> activateTeacher(@PathVariable long teacherId) {
     return ResponseEntity
-        .status(HttpStatus.ACCEPTED)
-        .body(editTeacher.activate(teacherId));
+      .status(HttpStatus.ACCEPTED)
+      .body(editTeacher.activate(teacherId));
   }
 
   /**
@@ -80,8 +64,8 @@ public class TeacherController {
   @PutMapping("/deactivate")
   public ResponseEntity<TeacherEntity> deactivateTeacher(@RequestBody DeactivateDto deactivateDto) {
     return ResponseEntity
-        .status(HttpStatus.ACCEPTED)
-        .body(editTeacher.deactivate(deactivateDto));
+      .status(HttpStatus.ACCEPTED)
+      .body(editTeacher.deactivate(deactivateDto));
   }
 
   /**
@@ -93,8 +77,8 @@ public class TeacherController {
   @GetMapping("/{teacherId}")
   public ResponseEntity<TeacherEntity> getTeacher(@PathVariable long teacherId) {
     return ResponseEntity
-        .ok()
-        .body(getTeacher.byId(teacherId));
+      .ok()
+      .body(getTeacher.byId(teacherId));
   }
 
   /**
@@ -105,8 +89,8 @@ public class TeacherController {
   @GetMapping
   public ResponseEntity<List<TeacherEntity>> getAllTeachers() {
     return ResponseEntity
-        .ok()
-        .body(getTeacher.all());
+      .ok()
+      .body(getTeacher.all());
   }
 
   /**
@@ -121,7 +105,7 @@ public class TeacherController {
     deleteTeacher.execute(teacherId);
 
     return ResponseEntity
-        .status(HttpStatus.NO_CONTENT)
-        .build();
+      .status(HttpStatus.NO_CONTENT)
+      .build();
   }
 }

@@ -7,114 +7,120 @@ import com.fabit.schoolapplication.domain.teacher.event.TeacherActivatedDomainEv
 import com.fabit.schoolapplication.domain.teacher.event.TeacherCreatedDomainEvent;
 import com.fabit.schoolapplication.domain.teacher.event.TeacherDeactivatedDomainEvent;
 import com.fabit.schoolapplication.domain.teacher.event.TeacherDomainEvent;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Assert;
 
 /**
- * Агрегат учителя.
+ * Агрегат учителя
  *
  * @author SmirnovMA
  */
 @Getter
 @Slf4j
-@NoArgsConstructor
 public class Teacher {
-
   public static final List<TeacherDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
-
-  private TeacherId teacherId;
-
-  private int standingYears;
-
+  private TeacherId id;
+  /**
+   * Ф.И.О учителя
+   */
   private FullName fullName;
-
+  /**
+   * паспорт
+   */
   private RussianPassport passport;
-
+  /**
+   * снилс
+   */
   private Snils snils;
-
+  /**
+   * статус учителя (можно ли его поставить на занятия или нет)
+   */
   private boolean isActive;
 
-  private Teacher(
-      TeacherId teacherId,
-      FullName fullName,
-      RussianPassport passport,
-      Snils snils,
-      int standingYears,
-      boolean isActive) {
+  private Teacher() {
+  }
 
-    this.standingYears = standingYears;
-    this.teacherId = teacherId;
+  private Teacher(
+    TeacherId id,
+    FullName fullName,
+    RussianPassport passport,
+    Snils snils) {
+    this.id = id;
     this.fullName = fullName;
     this.passport = passport;
     this.snils = snils;
-    this.isActive = isActive;
-
-    registerEvent(new TeacherCreatedDomainEvent(getTeacherId()));
+    this.isActive = true;
+    registerEvent(new TeacherCreatedDomainEvent(this.getId()));
   }
 
   /**
-   * Статическая фабрика по созданию объектов учителя.
+   * Статическая фабрика по созданию объектов учителя
    *
-   * @param teacherId     id учителя
-   * @param fullName      Ф.И.О
-   * @param passport      Паспорт
-   * @param snils         СНИЛС
-   * @param standingYears стаж работы
+   * @param teacherId id учителя
+   * @param fullName  Ф.И.О
+   * @param passport  Паспорт
+   * @param snils     СНИЛС
    * @return объект учителя
    */
   public static Teacher of(
-      TeacherId teacherId,
-      FullName fullName,
-      RussianPassport passport,
-      Snils snils,
-      int standingYears,
-      boolean active) {
+    TeacherId teacherId,
+    FullName fullName,
+    RussianPassport passport,
+    Snils snils) {
+    return new Teacher(teacherId, fullName, passport, snils);
+  }
 
-    Teacher teacher = new Teacher(teacherId, fullName, passport, snils, standingYears, active);
-    teacher.isActive = active;
-
+  public static Teacher copyOf(
+    TeacherId teacherId,
+    FullName fullName,
+    RussianPassport passport,
+    Snils snils,
+    boolean isActive) {
+    Teacher teacher = new Teacher();
+    teacher.id = teacherId;
+    teacher.fullName = fullName;
+    teacher.passport = passport;
+    teacher.snils = snils;
+    teacher.isActive = isActive;
     return teacher;
   }
 
   protected void registerEvent(TeacherDomainEvent event) {
-
-    Assert.notNull(event, "Доменное событие не должно быть null");
-    DOMAIN_EVENTS.add(event);
+    if (event != null) {
+      DOMAIN_EVENTS.add(event);
+    } else {
+      throw new NullPointerException("Ивент не должен быть пустым!");
+    }
   }
 
   /**
-   * Изменить статус учителя на неактивный.
+   * Изменить статус учителя на неактивный
    */
   public void deactivate(LocalDate from, LocalDate to) {
-
-    if (isActive && from.isBefore(to)) {
-      DOMAIN_EVENTS.clear();
-      isActive = false;
-      registerEvent(new TeacherDeactivatedDomainEvent(from, to, teacherId));
+    if (this.isActive && from.isBefore(to)) {
+      this.isActive = false;
+      registerEvent(new TeacherDeactivatedDomainEvent(from, to, id));
     } else {
-      throw new IllegalStateException("Учитель уже деактивирован.");
+      throw new IllegalStateException(
+        " Ошибка изменения статуса учителя, проверьте текущий статус учителя,"
+          + "если он уже активный то не следует его снова активировать."
+          + "Проверьте корректность введенных дат: первая дата должна быть раньше по времени чем вторая");
     }
-
   }
 
   /**
-   * Изменить статус учителя на активный.
+   * Изменить статус учителя на активный
    */
   public void activate() {
-
-    if (!(isActive)) {
-      isActive = true;
-      DOMAIN_EVENTS.clear();
-      registerEvent(new TeacherActivatedDomainEvent(teacherId));
+    if (!(this.isActive)) {
+      this.isActive = true;
+      registerEvent(new TeacherActivatedDomainEvent(this.id));
     } else {
       throw new IllegalStateException(
-          "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
+        "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
     }
-
   }
 }
