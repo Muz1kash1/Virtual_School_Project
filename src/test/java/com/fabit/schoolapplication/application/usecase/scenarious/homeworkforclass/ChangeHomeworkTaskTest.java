@@ -1,6 +1,8 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.homeworkforclass;
 
 import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
+import com.fabit.schoolapplication.application.usecase.scenarious.homeworkforclass.ChangeHomeworkTask;
+import com.fabit.schoolapplication.application.usecase.scenarious.homeworkforclass.CreateHomeworkForClass;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;

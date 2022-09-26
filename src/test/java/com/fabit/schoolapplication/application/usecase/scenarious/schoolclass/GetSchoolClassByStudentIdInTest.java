@@ -3,6 +3,7 @@ package com.fabit.schoolapplication.application.usecase.scenarious.schoolclass;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassUseCase;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
@@ -32,7 +33,7 @@ public class GetSchoolClassByStudentIdInTest {
   MockMvc mockMvc;
 
   @Autowired
-  GetSchoolClassByStudentIdIn getSchoolClassByStudentIdIn;
+  GetSchoolClassUseCase getSchoolClassUseCase;
 
   @MockBean
   StudentInClassRepository studentInClassRepository;
@@ -43,6 +44,7 @@ public class GetSchoolClassByStudentIdInTest {
   @Test
   @DisplayName("Получение школьного класса ученика должно возвращать корректный класс")
   void getSchoolClassByStudentIdInTest() {
+
     Optional<SchoolClassEntity> mockClass = Optional.of(SchoolClassEntity.of(
         SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(4, "А")))
     );
@@ -52,9 +54,14 @@ public class GetSchoolClassByStudentIdInTest {
     when(schoolClassRepository.findById(any()))
         .thenReturn(mockClass);
 
-    SchoolClassEntity resultedCLass = getSchoolClassByStudentIdIn.execute(StudentId.of(1L));
+    SchoolClass resultedClass = getSchoolClassUseCase.getByStudentId(1L);
 
-    Assertions.assertEquals("4А", resultedCLass.toString());
+    SchoolClassName schoolClassName = resultedClass.getSchoolClassName();
+
+    Assertions.assertEquals(
+        "4А",
+        schoolClassName.getParallel() + schoolClassName.getLitera()
+    );
   }
 
   @Test
@@ -66,10 +73,9 @@ public class GetSchoolClassByStudentIdInTest {
         .thenReturn(Optional.empty());
 
     Assertions.assertThrows(NoSuchElementException.class,
-        () -> getSchoolClassByStudentIdIn.execute(StudentId.of(999L))
+        () -> getSchoolClassUseCase.getByStudentId(999L)
     );
   }
-
 
 
 }

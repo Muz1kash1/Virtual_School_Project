@@ -3,8 +3,9 @@ package com.fabit.schoolapplication.application.usecase.scenarious.schoolclass;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassUseCase;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class GetSchoolClassTest {
   MockMvc mockMvc;
 
   @Autowired
-  GetSchoolClass getSchoolClass;
+  GetSchoolClassUseCase getSchoolClassUseCase;
 
   @MockBean
   SchoolClassRepository schoolClassRepository;
@@ -37,11 +38,11 @@ public class GetSchoolClassTest {
   void getSchoolClassAllEmptyTest() {
 
     when(schoolClassRepository.findAll())
-        .thenReturn(List.of());
+        .thenReturn(new ArrayList<>());
 
     Assertions.assertThrows(
         NoSuchElementException.class,
-        () -> getSchoolClass.all(),
+        () -> getSchoolClassUseCase.all(),
         "В БД нет школьных классов.");
   }
 
@@ -53,18 +54,8 @@ public class GetSchoolClassTest {
 
     Assertions.assertThrows(
         NoSuchElementException.class,
-        () -> getSchoolClass.byId(1),
+        () -> getSchoolClassUseCase.byId(1),
         "Класса с id 1 не существует.");
-  }
-
-  @Test
-  @DisplayName("Поиск школьных классов по несуществующему name должен выбрасывать exception")
-  void getSchoolClassByName() {
-
-    when(schoolClassRepository.findByParallelAndLitera(1, "А"))
-        .thenReturn(null);
-
-    Assertions.assertNull(getSchoolClass.byName(1, "А"));
   }
 
 }

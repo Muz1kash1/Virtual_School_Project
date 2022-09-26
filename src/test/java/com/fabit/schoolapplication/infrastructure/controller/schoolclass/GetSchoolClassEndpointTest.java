@@ -2,23 +2,17 @@ package com.fabit.schoolapplication.infrastructure.controller.schoolclass;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.AddStudentToSchoolClass;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClass;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.DeleteSchoolClass;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClass;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromSchoolClass;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassUseCase;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.StudentInClassEntity;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,25 +25,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SchoolClassControllerTest {
+public class GetSchoolClassEndpointTest {
 
   @Autowired
   MockMvc mockMvc;
 
   @MockBean
-  GetSchoolClass getSchoolClass;
-
-  @MockBean
-  CreateSchoolClass createSchoolClass;
-
-  @MockBean
-  DeleteSchoolClass deleteSchoolClass;
-
-  @MockBean
-  AddStudentToSchoolClass addStudentToSchoolClass;
-
-  @MockBean
-  RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+  GetSchoolClassUseCase getSchoolClassUseCase;
 
   private final SchoolClassEntity schoolClassEntity1 = SchoolClassEntity.of(
       SchoolClass.of(
@@ -61,6 +43,7 @@ public class SchoolClassControllerTest {
           )
       )
   );
+
   private final SchoolClassEntity schoolClassEntity2 = SchoolClassEntity.of(
       SchoolClass.of(
           SchoolClassId.of(2L),
@@ -72,20 +55,16 @@ public class SchoolClassControllerTest {
       )
   );
 
-  private final String jsonOfSchoolClass = """
-      {
-      "schoolClassId": 1,
-      "parallel": 1,
-      "litera": "А"
-      }
-      """;
-
   @Test
   @DisplayName("Получить все школьные классы должно возвращать 2 школьных класса")
   void getAllSchoolClassesTest() throws Exception {
 
-    when(getSchoolClass.all())
-        .thenReturn(List.of(schoolClassEntity1, schoolClassEntity2));
+    List<SchoolClass> schoolClasses = new ArrayList<>();
+    schoolClasses.add(schoolClassEntity1.toDomain());
+    schoolClasses.add(schoolClassEntity2.toDomain());
+
+    when(getSchoolClassUseCase.all())
+        .thenReturn(schoolClasses);
 
     mockMvc.perform(get("/school-class"))
         .andExpect(status().isOk())
@@ -99,8 +78,8 @@ public class SchoolClassControllerTest {
   @DisplayName("Получение класса с id 2 должно возвращать соответствующий класс")
   void getSchoolClassByIdTest() throws Exception {
 
-    when(getSchoolClass.byId(2L))
-        .thenReturn(schoolClassEntity2);
+    when(getSchoolClassUseCase.byId(2))
+        .thenReturn(schoolClassEntity2.toDomain());
 
     mockMvc.perform(get("/school-class/2"))
         .andExpect(status().isOk())
@@ -111,8 +90,16 @@ public class SchoolClassControllerTest {
   @DisplayName("Получение класса по имени должно возвращать соответствующий класс")
   void getSchoolClassByNameTest() throws Exception {
 
-    when(getSchoolClass.byName(1, "А"))
-        .thenReturn(schoolClassEntity1);
+    final String jsonOfSchoolClass = """
+        {
+        "schoolClassId": 1,
+        "parallel": 1,
+        "litera": "А"
+        }
+        """;
+
+    when(getSchoolClassUseCase.byName(1, "А"))
+        .thenReturn(schoolClassEntity1.toDomain());
 
     mockMvc.perform(get("/school-class")
             .contentType(MediaType.APPLICATION_JSON)
@@ -123,42 +110,16 @@ public class SchoolClassControllerTest {
   }
 
   @Test
-  @DisplayName("Создание школьного класса должно создавать соответствующий класс")
-  void createSchoolClassTest() throws Exception {
+  @DisplayName("Получение школьного класса по id студента должно возвращать верный класс")
+  void getSchoolClassByStudentIdTest() throws Exception {
 
-    when(createSchoolClass.execute(1, "А"))
-        .thenReturn(schoolClassEntity1);
+    when(getSchoolClassUseCase.getByStudentId(1))
+        .thenReturn(schoolClassEntity1.toDomain());
 
-    mockMvc.perform(post("/school-class")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(jsonOfSchoolClass))
-        .andExpect(status().isCreated());
+    mockMvc.perform(get("/school-class/student/1"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.parallel", is(1)))
+        .andExpect(jsonPath("$.schoolClassId", is(1)));
   }
 
-  @Test
-  @DisplayName("Удаление школьного класса должно удалять соответствующий класс")
-  void deleteSchoolClassTest() throws Exception {
-    mockMvc.perform(delete("/school-class")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(jsonOfSchoolClass))
-        .andExpect(status().isNoContent());
-  }
-
-  @Test
-  @DisplayName("Добавление и удаление ученика в школьном классе должно вызывать соотв. юзкейсы")
-  void addAndRemoveStudentToClassTest() throws Exception {
-
-    when(addStudentToSchoolClass.execute(SchoolClassId.of(1), StudentId.of(2)))
-        .thenReturn(StudentInClassEntity.of(1L, 2L));
-
-    mockMvc.perform(post("/school-class/1?studentId=2")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(jsonOfSchoolClass))
-        .andExpect(status().isNoContent());
-
-    mockMvc.perform(delete("/school-class/1?studentId=2")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(jsonOfSchoolClass))
-        .andExpect(status().isNoContent());
-  }
 }

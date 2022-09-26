@@ -1,7 +1,8 @@
-package com.fabit.schoolapplication.application.usecase.scenarious.homeworkforclass;
+package com.fabit.schoolapplication.application.usecase.virtualschool.homeworkforclass;
 
 
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClass;
+import com.fabit.schoolapplication.application.usecase.scenarious.homeworkforclass.CreateHomeworkForClass;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClassUseCase;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
@@ -28,7 +29,7 @@ public class CreateHomeworkForClassTest {
   HomeworkForClassMapper homeworkForClassMapper;
 
   @Autowired
-  CreateSchoolClass createSchoolClass;
+  CreateSchoolClassUseCase createSchoolClassUseCase;
 
   @Autowired
   SchoolClassRepository schoolClassRepository;
@@ -50,7 +51,7 @@ public class CreateHomeworkForClassTest {
   @Test
   void createHomeworkForClassTest() {
 
-    createSchoolClass.execute(11, "А");
+    createSchoolClassUseCase.execute(11, "А");
 
     createHomeworkForClass.execute(
         Discipline.COMPUTING,

@@ -1,5 +1,8 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.schoolclass;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.DeleteSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromClassUseCase;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
@@ -26,10 +29,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DeleteSchoolClassTest {
 
   @Autowired
-  CreateSchoolClass createSchoolClass;
+  CreateSchoolClassUseCase createSchoolClassUseCase;
 
   @Autowired
-  RemoveStudentFromSchoolClass removeStudentFromSchoolClass;
+  RemoveStudentFromClassUseCase removeStudentFromSchoolClassUseCase;
 
   @Autowired
   SchoolClassRepository schoolClassRepository;
@@ -38,7 +41,7 @@ public class DeleteSchoolClassTest {
   StudentInClassRepository studentInClassRepository;
 
   @Autowired
-  DeleteSchoolClass deleteSchoolClass;
+  DeleteSchoolClassUseCase deleteSchoolClassUseCase;
 
   @Autowired
   StudentRepository studentRepository;
@@ -69,22 +72,6 @@ public class DeleteSchoolClassTest {
   }
 
   @Test
-  @DisplayName("Удаление школьного класса должно удалять класс и отчислять учеников из него")
-  void deleteSchoolClassTest() {
-    createSchoolClass.execute(11, "А", originStudentIds);
-    SchoolClassEntity created = schoolClassRepository.findByParallelAndLitera(11, "А");
-    List<StudentInClassEntity> studentsInClass = studentInClassRepository.findAll();
-
-    Assertions.assertNotNull(created);
-    Assertions.assertNotNull(studentsInClass);
-
-    deleteSchoolClass.execute(11, "А");
-
-    Assertions.assertNull(schoolClassRepository.findByParallelAndLitera(11, "А"));
-    Assertions.assertEquals(0, studentInClassRepository.findAll().size());
-  }
-
-  @Test
   @DisplayName("Удаление школьного класса по агрегату должно удалять класс и отчислять учеников из него")
   void deleteSchoolClassTestWithDomainArg() {
     SchoolClass schoolClass = SchoolClass.of(
@@ -93,14 +80,14 @@ public class DeleteSchoolClassTest {
     schoolClass.addStudent(StudentId.of(originStudentIds.get(1)));
     schoolClass.addStudent(StudentId.of(originStudentIds.get(2)));
 
-    createSchoolClass.execute(schoolClass);
+    createSchoolClassUseCase.execute(schoolClass);
     SchoolClassEntity created = schoolClassRepository.findByParallelAndLitera(9, "Б");
     List<StudentInClassEntity> studentsInClass = studentInClassRepository.findAll();
 
     Assertions.assertNotNull(created);
     Assertions.assertNotNull(studentsInClass);
 
-    deleteSchoolClass.execute(schoolClass);
+    deleteSchoolClassUseCase.execute(schoolClass);
 
     Assertions.assertNull(schoolClassRepository.findByParallelAndLitera(9, "Б"));
     Assertions.assertEquals(0, studentInClassRepository.findAll().size());

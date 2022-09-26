@@ -1,6 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -64,6 +66,12 @@ public class SchoolClassEntity {
     this.litera = litera;
   }
 
+  private SchoolClassEntity(long id, int parallel, String litera) {
+    this.id = id;
+    this.parallel = parallel;
+    this.litera = litera;
+  }
+
   // -------
   // ** Маппер
 
@@ -75,9 +83,30 @@ public class SchoolClassEntity {
    */
   public static SchoolClassEntity of(SchoolClass schoolClass) {
     return new SchoolClassEntity(
+        schoolClass.getSchoolClassId().getValue(),
         schoolClass.getSchoolClassName().getParallel(),
         schoolClass.getSchoolClassName().getLitera()
     );
+  }
+
+  /**
+   * Factory method - создание entity на основе параллели и литеры.
+   *
+   * @param parallel - параллель
+   * @param litera   - литера
+   * @return SchoolClassEntity
+   */
+  public static SchoolClassEntity of(int parallel, String litera) {
+    return new SchoolClassEntity(parallel, litera);
+  }
+
+  /**
+   * Маппинг this в доменную модель.
+   *
+   * @return SchoolClass
+   */
+  public SchoolClass toDomain() {
+    return SchoolClass.of(SchoolClassId.of(id), SchoolClassName.of(parallel, litera));
   }
 
   @Override

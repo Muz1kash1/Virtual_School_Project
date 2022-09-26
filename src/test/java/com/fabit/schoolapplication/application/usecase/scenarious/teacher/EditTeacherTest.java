@@ -1,5 +1,7 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.teacher;
 
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.CreateTeacher;
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.EditTeacher;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.DeactivateDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.FullNameDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.PassportDto;

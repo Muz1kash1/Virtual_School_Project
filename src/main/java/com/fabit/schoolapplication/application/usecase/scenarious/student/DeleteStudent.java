@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.student;
 
-import com.fabit.schoolapplication.application.usecase.acces.student.StudentService;
+import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
 import lombok.RequiredArgsConstructor;
 
 /**

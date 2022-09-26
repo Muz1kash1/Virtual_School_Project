@@ -1,6 +1,7 @@
 package com.fabit.schoolapplication.application.usecase.scenarious.teacher;
 
 import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.CreateTeacher;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.FullNameDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.PassportDto;
