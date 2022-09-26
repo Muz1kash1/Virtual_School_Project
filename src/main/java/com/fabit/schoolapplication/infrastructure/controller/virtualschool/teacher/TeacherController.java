@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher;
 
-import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.CreateTeacher;
-import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.DeleteTeacher;
-import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.EditTeacher;
-import com.fabit.schoolapplication.application.usecase.virtualschool.teacher.GetTeacher;
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.CreateTeacher;
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.DeleteTeacher;
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.EditTeacher;
+import com.fabit.schoolapplication.application.usecase.scenarious.teacher.GetTeacher;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.DeactivateDto;
 import com.fabit.schoolapplication.infrastructure.controller.virtualschool.teacher.dto.TeacherDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;

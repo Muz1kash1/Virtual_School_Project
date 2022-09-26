@@ -11,6 +11,6 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
 
   StudentEntity findByBirthCertificate(String toString);
 
-  @Query(value = "SELECT nextval('student_id_seq') from student_id_seq", nativeQuery = true)
+  @Query(value = "SELECT last_value + 1 from student_id_seq", nativeQuery = true)
   Long getNextId();
 }
