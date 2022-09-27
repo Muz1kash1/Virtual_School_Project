@@ -47,7 +47,7 @@ public class RussianPassport {
    * @param clock    дата и время в которое идет проверка
    * @return boolean
    */
-  public static boolean isValidAge(LocalDate birthday, Clock clock) {
+  private static boolean isValidAge(LocalDate birthday, Clock clock) {
 
     return (LocalDate.ofInstant(
       clock.instant(),
@@ -63,7 +63,7 @@ public class RussianPassport {
    * @param birthday - день рождения
    * @return boolean
    */
-  public static boolean isValidPassport(String serial, String number,
+  private static boolean isValidPassport(String serial, String number,
                                         LocalDate birthday, Clock clock) {
 
     return Pattern.matches("^[0-9]{6}$", number)

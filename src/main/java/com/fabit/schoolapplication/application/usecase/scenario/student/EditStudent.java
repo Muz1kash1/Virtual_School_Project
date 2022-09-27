@@ -6,7 +6,6 @@ import com.fabit.schoolapplication.application.usecase.scenario.student.dto.Stud
 import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
-import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -26,16 +25,9 @@ public class EditStudent {
    */
   public RussianPassport addPassport(StudentDto studentDto) {
     RussianPassport passport = studentMapperService.mapToPassport(studentDto.getPassport());
-    if (RussianPassport.isValidAge(
-        studentDto.getBirthCertificate().getBirthday(),
-        Clock.systemUTC()
-    )) {
-      studentService.save(studentDto, passport);
+    studentService.save(studentDto, passport);
 
-      return passport;
-    } else {
-      throw new IllegalArgumentException("Не валидный возраст");
-    }
+    return passport;
   }
 
   /**
@@ -46,7 +38,7 @@ public class EditStudent {
    */
   public BirthCertificate changeBirthCertificate(StudentDto studentDto) {
     BirthCertificate birthCertificate
-        = studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate());
+      = studentMapperService.mapToBirthCertificate(studentDto.getBirthCertificate());
 
     studentService.save(studentDto, birthCertificate);
     return birthCertificate;
@@ -60,7 +52,7 @@ public class EditStudent {
    */
   public Snils changeSnils(StudentDto studentDto) {
     Snils snils
-        = studentMapperService.mapToSnils(studentDto.getSnils());
+      = studentMapperService.mapToSnils(studentDto.getSnils());
     studentService.save(studentDto, snils);
     return snils;
   }
