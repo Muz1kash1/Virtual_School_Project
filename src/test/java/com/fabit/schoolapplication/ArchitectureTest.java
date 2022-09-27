@@ -87,7 +87,7 @@
 //        "messages", "com.fabit.schoolapplication.infrastructure.event..",
 //              "com.fabit.schoolapplication.infrastructure.listener.."
 //      )
-//      .adapter("web", "com.fabit.schoolapplication.infrastructure.controller..")
+//      .adapter("web", "com.fabit.schoolapplication.infrastructure.ui.controller..")
 //      .check(APPLICATION_CLASSES);
 //  }
 //

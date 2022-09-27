@@ -8,7 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.GetHomeworkForClass;
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.infrastructure.ui.controller.homeworkforclass.dto.HomeworkForClassDto;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.mapper;
 
 import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;

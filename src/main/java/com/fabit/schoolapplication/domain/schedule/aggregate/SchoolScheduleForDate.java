@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.domain.schedule.aggregate;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.schedule.entity.LessonsForSchoolClass;
 import com.fabit.schoolapplication.domain.schedule.valueobject.LessonInSchedule;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;

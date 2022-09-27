@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain;
+package com.fabit.schoolapplication.domain.generalvalueobject.discipline;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

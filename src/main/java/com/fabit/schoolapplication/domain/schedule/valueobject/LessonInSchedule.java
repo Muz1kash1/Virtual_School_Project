@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.domain.schedule.valueobject;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

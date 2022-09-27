@@ -1,5 +1,6 @@
-package com.fabit.schoolapplication.domain;
+package com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl;
 
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
@@ -8,7 +9,7 @@ import lombok.Value;
 
 @Getter
 @Value
-public class RussianPassport {
+public class RussianPassport implements Passport {
 
   String serial;
   String number;
@@ -50,8 +51,8 @@ public class RussianPassport {
   private static boolean isValidAge(LocalDate birthday, Clock clock) {
 
     return (LocalDate.ofInstant(
-      clock.instant(),
-      clock.getZone()
+        clock.instant(),
+        clock.getZone()
     ).getYear() - birthday.getYear() >= MIN_AGE_FOR_PASSPORT);
   }
 
@@ -64,15 +65,16 @@ public class RussianPassport {
    * @return boolean
    */
   private static boolean isValidPassport(String serial, String number,
-                                        LocalDate birthday, Clock clock) {
+                                         LocalDate birthday, Clock clock) {
 
     return Pattern.matches("^[0-9]{6}$", number)
-      && Pattern.matches("^[0-9]{4}$", serial)
-      && isValidAge(birthday, clock);
+        && Pattern.matches("^[0-9]{4}$", serial)
+        && isValidAge(birthday, clock);
   }
 
   @Override
   public String toString() {
     return serial + " " + number + " " + birthday;
   }
+
 }

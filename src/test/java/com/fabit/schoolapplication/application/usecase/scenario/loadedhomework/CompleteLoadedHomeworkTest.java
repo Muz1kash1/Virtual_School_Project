@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.application.usecase.scenario.loadedhomework;
 
 import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.infrastructure.ui.controller.loadedhomework.dto.LoadedHomeworkDto;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;

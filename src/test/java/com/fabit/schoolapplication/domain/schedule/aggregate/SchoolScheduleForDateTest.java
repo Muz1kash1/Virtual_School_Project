@@ -1,18 +1,18 @@
 package com.fabit.schoolapplication.domain.schedule.aggregate;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.schedule.entity.LessonsForSchoolClass;
 import com.fabit.schoolapplication.domain.schedule.entity.LessonsForSchoolClassId;
 import com.fabit.schoolapplication.domain.schedule.valueobject.LessonInSchedule;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class SchoolScheduleForDateTest {
 

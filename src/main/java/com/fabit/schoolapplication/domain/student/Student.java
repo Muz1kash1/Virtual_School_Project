@@ -1,10 +1,11 @@
 package com.fabit.schoolapplication.domain.student;
 
-import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.RussianPassport;
-import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
 import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Student {
 
   private BirthCertificate birthCertificate;
 
-  private RussianPassport passport;
+  private Passport passport;
 
   public static final List<StudentDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
 
@@ -47,7 +48,7 @@ public class Student {
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,
-                  BirthCertificate birthCertificate, RussianPassport passport) {
+                  BirthCertificate birthCertificate, Passport passport) {
 
     this.id = studentId;
     this.fullName = name;
@@ -83,7 +84,7 @@ public class Student {
    * @return студент
    */
   public static Student of(StudentId studentId, FullName name, Snils snils,
-                           BirthCertificate birthCertificate, RussianPassport passport) {
+                           BirthCertificate birthCertificate, Passport passport) {
     if (birthCertificate.getBirthday().isEqual(passport.getBirthday())) {
       return new Student(studentId, name, snils, birthCertificate, passport);
     }

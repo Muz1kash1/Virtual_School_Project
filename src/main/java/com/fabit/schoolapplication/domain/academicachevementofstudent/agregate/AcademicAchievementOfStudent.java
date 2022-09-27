@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.domain.academicachevementofstudent.agregate;
 
-import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.entity.AcademicAchievementByDiscipline;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.id.AcademicAchievementByDisciplineId;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.id.AcademicAchievementOfStudentId;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.valueobject.Achievement;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import java.time.LocalDate;
 import java.util.ArrayList;

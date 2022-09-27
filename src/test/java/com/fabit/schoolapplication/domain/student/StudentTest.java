@@ -1,17 +1,18 @@
 package com.fabit.schoolapplication.domain.student;
 
-import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.RussianPassport;
-import com.fabit.schoolapplication.domain.Snils;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.UkrainePassport;
+import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class StudentTest {
   private final Clock clock = Clock.fixed(Instant.parse("2022-09-15T00:00:00Z"), ZoneOffset.UTC);
@@ -176,7 +177,7 @@ class StudentTest {
       BirthCertificate.of("2222", "999999",
         LocalDate.of(2007, 9, 15), clock
       ),
-      RussianPassport.of(
+      UkrainePassport.of(
         "1111", "888888",
         LocalDate.of(2007, 9, 15), clock
       )

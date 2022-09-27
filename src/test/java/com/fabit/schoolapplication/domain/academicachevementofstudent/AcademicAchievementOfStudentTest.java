@@ -1,6 +1,7 @@
-package com.fabit.schoolapplication.domain.academicachevementofstudent.agregate;
+package com.fabit.schoolapplication.domain.academicachevementofstudent;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
+import com.fabit.schoolapplication.domain.academicachevementofstudent.agregate.AcademicAchievementOfStudent;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.id.AcademicAchievementByDisciplineId;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.id.AcademicAchievementOfStudentId;
 import com.fabit.schoolapplication.domain.student.StudentId;
