@@ -47,6 +47,7 @@ class StudentControllerTest {
   @BeforeEach
   @DisplayName("Добавление студента перед каждым тестом")
   public void initializeStudent() {
+    studentRepository.deleteAll();
     Student student = Student.of(
       StudentId.of(1),
       FullName.of("Иванов", "Иван", "Иванович"),
@@ -58,15 +59,9 @@ class StudentControllerTest {
     studentRepository.save(student);
   }
 
-  @AfterEach
-  public void deleteStudentFromDb() {
-    studentRepository.deleteAll();
-  }
-
   @Test
   @DisplayName("Добавление студента и проверка на правильность данных")
   public void addStudent() throws Exception {
-    studentRepository.deleteAll();
 
     String json = """
       {
