@@ -5,7 +5,6 @@ import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.Tea
 import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import com.fabit.schoolapplication.infrastructure.ui.controller.mapper.TeacherControllerMapper;
-import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.DeactivateDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.FullNameDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.PassportDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.SnilsDto;
@@ -70,7 +69,7 @@ public class EditTeacherTest {
   void deactivateAndActivateTest() {
 
     Teacher deactivatedTeacher = editTeacher.deactivate(
-      new DeactivateDto(temporaryTeacherId, "2022-09-16", "2022-09-25"));
+      temporaryTeacherId, "2022-09-16", "2022-09-25");
 
     Assertions.assertFalse(deactivatedTeacher.isActive());
 

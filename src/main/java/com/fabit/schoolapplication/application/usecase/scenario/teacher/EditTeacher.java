@@ -1,7 +1,6 @@
 package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
 import com.fabit.schoolapplication.application.usecase.access.teacher.TeacherService;
-import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.DeactivateDto;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,16 +33,20 @@ public class EditTeacher {
   /**
    * Деактивировать учителя (более не может работать).
    *
-   * @param deactivateDto - ДТО деактивации учителя
+   * @param teacherId - id учителя
+   * @param from      - с (дата)
+   * @param to        - по (дата)
    * @return TeacherEntity
    */
-  public Teacher deactivate(DeactivateDto deactivateDto) {
+  public Teacher deactivate(long teacherId, String from, String to) {
 
     Teacher teacher
-      = teacherService.findById(deactivateDto.getTeacherId());
+      = teacherService.findById(teacherId);
 
     teacher.deactivate(
-      LocalDate.parse(deactivateDto.getFrom()), LocalDate.parse(deactivateDto.getTo()));
+      LocalDate.parse(from),
+      LocalDate.parse(to)
+    );
 
     teacherService.save(teacher);
 
