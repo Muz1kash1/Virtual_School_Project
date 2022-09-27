@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.domain.academicachevementofstudent.id;
 
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Value;
-import java.util.UUID;
 
 @Getter
 @Value

@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.listener;
 
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassUseCase;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.GetSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.RemoveStudentFromClassUseCase;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.student.StudentId;

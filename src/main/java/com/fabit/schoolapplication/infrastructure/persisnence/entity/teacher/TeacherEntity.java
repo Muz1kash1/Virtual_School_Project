@@ -1,15 +1,15 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher;
 
 import com.fabit.schoolapplication.domain.teacher.Teacher;
-import lombok.Data;
-import org.springframework.data.domain.AfterDomainEventPublication;
-import org.springframework.data.domain.DomainEvents;
+import java.util.Collection;
+import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Collection;
-import java.util.Collections;
+import lombok.Data;
+import org.springframework.data.domain.AfterDomainEventPublication;
+import org.springframework.data.domain.DomainEvents;
 
 @Entity
 @Table(name = "teacher")

@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.application.mapper;
 
-import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.BirthCertificateDto;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.FullNameDto;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.PassportDto;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.SnilsDto;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.dto.StudentDto;
+import com.fabit.schoolapplication.application.usecase.scenario.student.dto.BirthCertificateDto;
+import com.fabit.schoolapplication.application.usecase.scenario.student.dto.FullNameDto;
+import com.fabit.schoolapplication.application.usecase.scenario.student.dto.PassportDto;
+import com.fabit.schoolapplication.application.usecase.scenario.student.dto.SnilsDto;
+import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.FullName;
 import com.fabit.schoolapplication.domain.RussianPassport;
 import com.fabit.schoolapplication.domain.Snils;
@@ -13,8 +13,8 @@ import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
-import lombok.RequiredArgsConstructor;
 import java.time.Clock;
+import lombok.RequiredArgsConstructor;
 
 /**
  * The type Student mapper service.

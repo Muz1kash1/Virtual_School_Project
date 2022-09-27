@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.domain;
 
-import lombok.Getter;
-import lombok.Value;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
+import lombok.Getter;
+import lombok.Value;
 
 @Getter
 @Value
