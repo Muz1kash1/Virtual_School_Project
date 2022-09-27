@@ -3,46 +3,51 @@ package com.fabit.schoolapplication.application.usecase.scenario.schoolclass;
 import com.fabit.schoolapplication.application.usecase.access.schoolclass.SchoolClassService;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 @RequiredArgsConstructor
 public class CreateSchoolClassUseCase {
 
   final SchoolClassService schoolClassService;
 
-  public SchoolClass execute(int parallel, String litera) {
-    SchoolClassEntity schoolClassEntity = SchoolClassEntity.of(parallel, litera);
-    return schoolClassService.persistSchoolClass(schoolClassEntity);
+  public SchoolClass execute(SchoolClassName schoolClassName) {
+    return schoolClassService.persistSchoolClass(schoolClassName);
   }
 
   /**
    * Создать школьный класс со списком студентов.
    *
-   * @param parallel   - параллель
-   * @param litera     - литера
-   * @param studentIds - список идентификаторов студентов
+   * @param schoolClassName - название школьного класса параллель-литера (11А)
+   * @param studentIds      - список идентификаторов студентов
    * @return SchoolClass (созданный)
    */
-  public SchoolClass execute(int parallel, String litera, List<Long> studentIds)
-                             throws NotFoundException {
+  public SchoolClass execute(SchoolClassName schoolClassName, List<Long> studentIds)
+                             throws NoSuchElementException {
 
-    SchoolClassEntity schoolClassEntity = SchoolClassEntity.of(parallel, litera);
+    long schoolClassIdValue = schoolClassService
+        .persistSchoolClass(schoolClassName)
+        .getSchoolClassId()
+        .getValue();
 
-    long schoolClassId = schoolClassService
-        .persistSchoolClass(schoolClassEntity).getSchoolClassId().getValue();
+    studentIds.forEach(studentId ->
+        schoolClassService.addStudentToClass(
+            SchoolClassId.of(schoolClassIdValue), StudentId.of(studentId)
+        )
+    );
 
-    studentIds.forEach(stId -> schoolClassService.addStudentToClass(
-        SchoolClassId.of(schoolClassId), StudentId.of(stId)));
-
-    return schoolClassService.getById(schoolClassId);
+    return schoolClassService.getById(schoolClassIdValue);
   }
 
   public SchoolClass execute(SchoolClass schoolClass) {
-    return schoolClassService.persistSchoolClass(schoolClass);
+    return schoolClassService.persistSchoolClass(SchoolClassName.of(
+            schoolClass.getSchoolClassName().getParallel(),
+            schoolClass.getSchoolClassName().getLitera()
+        )
+    );
   }
 
 }

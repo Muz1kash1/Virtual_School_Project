@@ -8,13 +8,15 @@ import com.fabit.schoolapplication.domain.student.StudentId;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
 public class SchoolClass {
 
-  private final SchoolClassId schoolClassId;
+  @Setter
+  private SchoolClassId schoolClassId;
   private final SchoolClassName schoolClassName;
   private final List<StudentId> students;
 
@@ -30,26 +32,38 @@ public class SchoolClass {
   // -------
   // ** Приватные конструкторы
 
-  private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName, List<StudentId> students) {
+  private SchoolClass(SchoolClassName schoolClassName) {
+    this.schoolClassName = schoolClassName;
+    this.students = new ArrayList<>();
+    registerEvent(new SchoolClassCreatedDomainEvent(this));
+  }
 
+  private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName, List<StudentId> students) {
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = students;
-
     registerEvent(new SchoolClassCreatedDomainEvent(this));
   }
 
   private SchoolClass(SchoolClassId id, SchoolClassName schoolClassName) {
-
     this.schoolClassId = id;
     this.schoolClassName = schoolClassName;
     this.students = new ArrayList<>();
-
     registerEvent(new SchoolClassCreatedDomainEvent(this));
   }
 
   // -------
   // ** Фабричные методы
+
+  /**
+   * Создание экземпляра школьного класса без учеников и идентификатора.
+   *
+   * @param schoolClassName - параллель школьного класса
+   * @return SchoolClass
+   */
+  public static SchoolClass of(SchoolClassName schoolClassName) {
+    return new SchoolClass(schoolClassName);
+  }
 
   /**
    * Создание экземпляра школьного класса без учеников.

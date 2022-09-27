@@ -2,6 +2,7 @@ package com.fabit.schoolapplication.application.usecase.scenario.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.StudentInClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
@@ -54,7 +55,9 @@ public class AddStudentToClassTest {
   @DisplayName("Добавление ученика в класс должно создавать корректную связь класс-ученик")
   void addStudentToClassTest() {
 
-    SchoolClass createdClass = createSchoolClassUseCase.execute(6, "А");
+    SchoolClass createdClass
+        = createSchoolClassUseCase.execute(SchoolClassName.of(6, "А"));
+
     StudentId testStudentId = StudentId.of(studentRepository.findAll().get(0).getId());
 
     addStudentToSchoolClassUseCase

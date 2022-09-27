@@ -2,6 +2,7 @@ package com.fabit.schoolapplication.application.usecase.scenario.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
@@ -58,7 +59,7 @@ public class RemoveStudentFromSchoolClassTest {
   @Test
   @DisplayName("Удаление ученика из класса должно разрывать между ними связь")
   void removeStudentFromSchoolClassTest() {
-    SchoolClass schoolClass = createSchoolClass.execute(10, "В");
+    SchoolClass schoolClass = createSchoolClass.execute(SchoolClassName.of(10, "В"));
     StudentEntity student = studentRepository.findAll().get(0);
 
     Assertions.assertEquals(0, studentInClassRepository.findAll().size());

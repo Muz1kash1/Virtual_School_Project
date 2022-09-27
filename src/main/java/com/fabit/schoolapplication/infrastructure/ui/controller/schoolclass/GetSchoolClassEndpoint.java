@@ -2,6 +2,7 @@ package com.fabit.schoolapplication.infrastructure.ui.controller.schoolclass;
 
 import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.GetSchoolClassUseCase;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.infrastructure.ui.controller.schoolclass.dto.SchoolClassDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,12 @@ public class GetSchoolClassEndpoint {
   public ResponseEntity<SchoolClassDto> getSchoolClassByName(@RequestBody SchoolClassDto dto) {
     return ResponseEntity
         .ok()
-        .body(SchoolClassDto.of(getSchoolClassUseCase.byName(dto.getParallel(), dto.getLitera())));
+        .body(SchoolClassDto.of(
+                getSchoolClassUseCase.byName(
+                    SchoolClassName.of(dto.getParallel(), dto.getLitera())
+                )
+            )
+        );
   }
 
   /**

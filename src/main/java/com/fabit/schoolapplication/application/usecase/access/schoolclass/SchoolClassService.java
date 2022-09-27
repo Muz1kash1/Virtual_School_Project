@@ -2,10 +2,10 @@ package com.fabit.schoolapplication.application.usecase.access.schoolclass;
 
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.student.StudentId;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import java.util.List;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import java.util.NoSuchElementException;
 
 public interface SchoolClassService {
 
@@ -22,16 +22,15 @@ public interface SchoolClassService {
    * @param id - идентификатор школьного класса
    * @return SchoolClass
    */
-  SchoolClass getById(long id) throws NotFoundException;
+  SchoolClass getById(long id) throws NoSuchElementException;
 
   /**
    * Получить школьный класс по названию.
    *
-   * @param parallel - параллель (1-11)
-   * @param litera   - литера школьного класса (А-Я без ЪЬ)
+   * @param schoolClassName - название класса параллель-литера (11А)
    * @return SchoolClass
    */
-  SchoolClass getByName(int parallel, String litera);
+  SchoolClass getByName(SchoolClassName schoolClassName);
 
   /**
    * Метод, определяющий и выдающий школьный класс по идентификатору ученика.
@@ -39,31 +38,21 @@ public interface SchoolClassService {
    * @param studentId - идентификатор ученика
    * @return SchoolClass
    */
-  SchoolClass getByStudentId(StudentId studentId) throws NotFoundException;
+  SchoolClass getByStudentId(StudentId studentId) throws NoSuchElementException;
 
   /**
-   * Создать школьный класс по сущности.
+   * Создать школьный класс.
    *
-   * @param schoolClassEntity - сущность школьного класса
-   * @return SchoolClass
+   * @param schoolClassName - название класса параллель-литера (11А)
    */
-  SchoolClass persistSchoolClass(SchoolClassEntity schoolClassEntity);
+  SchoolClass persistSchoolClass(SchoolClassName schoolClassName);
 
   /**
-   * Создать школьный класс по домену.
+   * Удалить школьный класс.
    *
-   * @param schoolClass - школьный класс
-   * @return SchoolClass
+   * @param schoolClassName - название класса параллель-литера (11А)
    */
-  SchoolClass persistSchoolClass(SchoolClass schoolClass);
-
-  /**
-   * Удалить школьный класс по параллели и литере.
-   *
-   * @param parallel - параллель
-   * @param litera   - литера
-   */
-  void deleteSchoolClass(int parallel, String litera);
+  void deleteSchoolClass(SchoolClassName schoolClassName);
 
   /**
    * Удалить школьный класс по доменному объекту.

@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication;
 
+import static java.util.Arrays.asList;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
-import com.tngtech.archunit.library.Architectures;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,9 +14,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Gordeev_Artem
