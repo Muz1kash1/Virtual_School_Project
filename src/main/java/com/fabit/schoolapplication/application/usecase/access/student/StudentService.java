@@ -1,22 +1,20 @@
 package com.fabit.schoolapplication.application.usecase.access.student;
 
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
-import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import java.util.List;
 
 public interface StudentService {
 
-  void save(StudentDto studentDto);
+  void save(Student studentDto);
 
-  void save(Student student);
+  void save(Student student, BirthCertificate birthCertificate);
 
-  void save(final StudentDto studentDto, RussianPassport passport);
+  void save(Student studentDto, Passport passport);
 
-  void save(StudentDto studentDto, Snils snils);
+  void save(Student studentDto, Snils snils);
 
   void save(StudentDto studentDto, BirthCertificate birthCertificate);
 
@@ -25,6 +23,4 @@ public interface StudentService {
   boolean findBySnils(String toString);
 
   void deleteAll();
-
-  List<StudentEntity> findAll();
 }
