@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.domain.schedule.valueobject;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class LessonInScheduleTest {
 

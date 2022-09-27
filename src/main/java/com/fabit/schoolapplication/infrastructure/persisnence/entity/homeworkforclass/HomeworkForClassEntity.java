@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import java.time.LocalDate;
 import java.util.Collection;

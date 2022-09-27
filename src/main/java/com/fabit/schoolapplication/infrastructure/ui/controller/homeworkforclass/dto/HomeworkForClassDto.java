@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.homeworkforclass.dto;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

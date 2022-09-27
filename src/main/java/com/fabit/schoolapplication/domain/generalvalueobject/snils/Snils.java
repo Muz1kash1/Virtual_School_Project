@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.domain;
+package com.fabit.schoolapplication.domain.generalvalueobject.snils;
 
 import java.util.regex.Pattern;
 import lombok.Getter;

@@ -3,8 +3,8 @@ package com.fabit.schoolapplication.application.usecase.scenario.student;
 import com.fabit.schoolapplication.application.mapper.StudentMapperService;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
 import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
-import com.fabit.schoolapplication.domain.RussianPassport;
-import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import lombok.RequiredArgsConstructor;
 

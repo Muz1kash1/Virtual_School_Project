@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.domain.academicachevementofstudent.entity;
 
-import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.id.AcademicAchievementByDisciplineId;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.valueobject.Achievement;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

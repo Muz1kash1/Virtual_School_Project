@@ -1,8 +1,8 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.student;
 
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
-import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
+import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;

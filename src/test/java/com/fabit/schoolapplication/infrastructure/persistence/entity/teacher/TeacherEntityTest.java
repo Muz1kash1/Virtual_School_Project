@@ -1,9 +1,9 @@
 package com.fabit.schoolapplication.infrastructure.persistence.entity.teacher;
 
 import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
-import com.fabit.schoolapplication.domain.FullName;
-import com.fabit.schoolapplication.domain.RussianPassport;
-import com.fabit.schoolapplication.domain.Snils;
+import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;

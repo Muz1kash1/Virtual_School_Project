@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.domain.homeworkforclass.event;
 
-import com.fabit.schoolapplication.domain.Discipline;
+import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
