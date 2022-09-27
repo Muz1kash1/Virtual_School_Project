@@ -63,7 +63,6 @@ public class LoadedHomework {
   }
 
   protected LoadedHomeworkEvent registerEvent(LoadedHomeworkEvent event) {
-    Assert.notNull(event, "Доменный ивент не должен быть нуль");
     DOMAIN_EVENTS.add(event);
     return event;
   }

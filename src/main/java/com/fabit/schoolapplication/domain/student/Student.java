@@ -31,8 +31,6 @@ public class Student {
   public static final List<StudentDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   protected void registerEvent(StudentDomainEvent event) {
-
-    Assert.notNull(event, "Domain event must not be null");
     DOMAIN_EVENTS.add(event);
   }
 
