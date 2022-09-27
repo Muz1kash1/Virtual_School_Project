@@ -4,6 +4,7 @@ import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.CreateSchoolClassUseCase;
 import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
 import java.time.LocalDate;
@@ -57,7 +58,7 @@ public class GetHomeworkForClassTest {
   @DisplayName("Получение урока работает корректно")
   void getHomeworkForClassTest() {
 
-    createSchoolClassUseCase.execute(11, "А");
+    createSchoolClassUseCase.execute(SchoolClassName.of(11, "А"));
 
     createHomeworkForClass.execute(
       Discipline.COMPUTING,

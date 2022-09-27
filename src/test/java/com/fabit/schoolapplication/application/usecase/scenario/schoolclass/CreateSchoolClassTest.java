@@ -1,5 +1,6 @@
 package com.fabit.schoolapplication.application.usecase.scenario.schoolclass;
 
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
@@ -51,7 +52,7 @@ public class CreateSchoolClassTest {
   @Test
   @DisplayName("Создание пустого школьного класса должно сохранять корректно в БД")
   void createEmptySchoolClassTest() {
-    createSchoolClass.execute(1, "А");
+    createSchoolClass.execute(SchoolClassName.of(1, "А"));
     SchoolClassEntity created = schoolClassRepository.findByParallelAndLitera(1, "А");
 
     Assertions.assertEquals(1, created.getParallel());

@@ -98,7 +98,7 @@ public class GetSchoolClassEndpointTest {
         }
         """;
 
-    when(getSchoolClassUseCase.byName(1, "А"))
+    when(getSchoolClassUseCase.byName(SchoolClassName.of(1, "А")))
         .thenReturn(schoolClassEntity1.toDomain());
 
     mockMvc.perform(get("/school-class")

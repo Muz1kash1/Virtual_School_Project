@@ -3,6 +3,7 @@ package com.fabit.schoolapplication.infrastructure.persisnence.impl;
 import com.fabit.schoolapplication.application.usecase.access.schoolclass.SchoolClassService;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.StudentInClassEntity;
@@ -60,14 +61,13 @@ public class SchoolClassServiceImpl implements SchoolClassService {
   /**
    * Получить школьный класс по названию.
    *
-   * @param parallel - параллель (1-11)
-   * @param litera   - литера школьного класса (А-Я без ЪЬ)
+   * @param schoolClassName - название класса параллель-литера (11А)
    * @return SchoolClass
    */
   @Override
-  public SchoolClass getByName(int parallel, String litera) {
+  public SchoolClass getByName(SchoolClassName schoolClassName) {
     return schoolClassRepository
-        .findByParallelAndLitera(parallel, litera)
+        .findByParallelAndLitera(schoolClassName.getParallel(), schoolClassName.getLitera())
         .toDomain();
   }
 
@@ -88,41 +88,38 @@ public class SchoolClassServiceImpl implements SchoolClassService {
   }
 
   /**
-   * Создать школьный класс по сущности.
-   *
-   * @param schoolClassEntity - сущность школьного класса
-   * @return SchoolClass
-   */
-  @Override
-  public SchoolClass persistSchoolClass(SchoolClassEntity schoolClassEntity) {
-    return schoolClassRepository.save(schoolClassEntity).toDomain();
-  }
-
-  /**
    * Создать школьный класс по домену.
    *
-   * @param schoolClass - школьный класс
    * @return SchoolClass
    */
   @Override
-  public SchoolClass persistSchoolClass(SchoolClass schoolClass) {
+  public SchoolClass persistSchoolClass(SchoolClassName schoolClassName) {
+
+    SchoolClass schoolClass = SchoolClass.of(
+        SchoolClassId.of(schoolClassRepository.getNextId()),
+        SchoolClassName.of(schoolClassName.getParallel(), schoolClassName.getLitera())
+    );
 
     SchoolClassEntity savedEntity = schoolClassRepository.save(SchoolClassEntity.of(schoolClass));
 
-    return savedEntity.toDomain();
+    return SchoolClass.of(
+        SchoolClassId.of(savedEntity.getId()),
+        SchoolClassName.of(savedEntity.getParallel(), savedEntity.getLitera())
+    );
   }
 
   /**
    * Удалить школьный класс по параллели и литере.
    *
-   * @param parallel - параллель
-   * @param litera   - литера
+   * @param schoolClassName - название класса параллель-литера (11А)
    */
   @Override
-  public void deleteSchoolClass(int parallel, String litera) {
+  public void deleteSchoolClass(SchoolClassName schoolClassName) {
 
-    SchoolClassEntity schoolClassEntity
-        = schoolClassRepository.findByParallelAndLitera(parallel, litera);
+    SchoolClassEntity schoolClassEntity = schoolClassRepository.findByParallelAndLitera(
+        schoolClassName.getParallel(),
+        schoolClassName.getLitera()
+    );
 
     schoolClassRepository.delete(schoolClassEntity);
   }
