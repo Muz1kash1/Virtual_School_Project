@@ -1,11 +1,11 @@
 package com.fabit.schoolapplication.config.usecase;
 
 import com.fabit.schoolapplication.application.usecase.access.schoolclass.SchoolClassService;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.AddStudentToClassUseCase;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.CreateSchoolClassUseCase;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.DeleteSchoolClassUseCase;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.GetSchoolClassUseCase;
-import com.fabit.schoolapplication.application.usecase.scenarious.schoolclass.RemoveStudentFromClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.AddStudentToClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.CreateSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.DeleteSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.GetSchoolClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.RemoveStudentFromClassUseCase;
 import com.fabit.schoolapplication.infrastructure.persisnence.impl.SchoolClassServiceImpl;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.SchoolClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentInClassRepository;

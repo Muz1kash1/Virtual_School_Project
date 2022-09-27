@@ -2,9 +2,9 @@ package com.fabit.schoolapplication.config.usecase;
 
 import com.fabit.schoolapplication.application.mapper.StudentMapperService;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.CreateStudent;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.DeleteStudent;
-import com.fabit.schoolapplication.application.usecase.scenarious.student.EditStudent;
+import com.fabit.schoolapplication.application.usecase.scenario.student.CreateStudent;
+import com.fabit.schoolapplication.application.usecase.scenario.student.DeleteStudent;
+import com.fabit.schoolapplication.application.usecase.scenario.student.EditStudent;
 import com.fabit.schoolapplication.infrastructure.persisnence.impl.StudentServiceImpl;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class StudentUseCaseConfiguration {
+
   @Bean
   public StudentMapperService studentMapperService(StudentRepository studentRepository) {
     return new StudentMapperService(studentRepository);

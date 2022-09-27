@@ -7,47 +7,50 @@ import com.fabit.schoolapplication.domain.teacher.event.TeacherActivatedDomainEv
 import com.fabit.schoolapplication.domain.teacher.event.TeacherCreatedDomainEvent;
 import com.fabit.schoolapplication.domain.teacher.event.TeacherDeactivatedDomainEvent;
 import com.fabit.schoolapplication.domain.teacher.event.TeacherDomainEvent;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Агрегат учителя
+ * Агрегат учителя.
  *
  * @author SmirnovMA
  */
 @Getter
 @Slf4j
 public class Teacher {
+
   public static final List<TeacherDomainEvent> DOMAIN_EVENTS = new ArrayList<>();
+
   private TeacherId id;
+
   /**
-   * Ф.И.О учителя
+   * Ф.И.О учителя.
    */
   private FullName fullName;
+
   /**
-   * паспорт
+   * Паспорт.
    */
   private RussianPassport passport;
+
   /**
-   * снилс
+   * Снилс.
    */
   private Snils snils;
+
   /**
-   * статус учителя (можно ли его поставить на занятия или нет)
+   * Статус учителя (можно ли его поставить на занятия или нет).
    */
   private boolean isActive;
 
   private Teacher() {
   }
 
-  private Teacher(
-    TeacherId id,
-    FullName fullName,
-    RussianPassport passport,
-    Snils snils) {
+  private Teacher(TeacherId id, FullName fullName,
+                  RussianPassport passport, Snils snils) {
     this.id = id;
     this.fullName = fullName;
     this.passport = passport;
@@ -57,7 +60,7 @@ public class Teacher {
   }
 
   /**
-   * Статическая фабрика по созданию объектов учителя
+   * Статическая фабрика по созданию объектов учителя.
    *
    * @param teacherId id учителя
    * @param fullName  Ф.И.О
@@ -65,20 +68,14 @@ public class Teacher {
    * @param snils     СНИЛС
    * @return объект учителя
    */
-  public static Teacher of(
-    TeacherId teacherId,
-    FullName fullName,
-    RussianPassport passport,
-    Snils snils) {
+  public static Teacher of(TeacherId teacherId, FullName fullName,
+                           RussianPassport passport, Snils snils) {
     return new Teacher(teacherId, fullName, passport, snils);
   }
 
-  public static Teacher copyOf(
-    TeacherId teacherId,
-    FullName fullName,
-    RussianPassport passport,
-    Snils snils,
-    boolean isActive) {
+  public static Teacher copyOf(TeacherId teacherId, FullName fullName, RussianPassport passport,
+                               Snils snils, boolean isActive) {
+
     Teacher teacher = new Teacher();
     teacher.id = teacherId;
     teacher.fullName = fullName;
@@ -97,7 +94,7 @@ public class Teacher {
   }
 
   /**
-   * Изменить статус учителя на неактивный
+   * Изменить статус учителя на неактивный.
    */
   public void deactivate(LocalDate from, LocalDate to) {
     if (this.isActive && from.isBefore(to)) {
@@ -105,14 +102,15 @@ public class Teacher {
       registerEvent(new TeacherDeactivatedDomainEvent(from, to, id));
     } else {
       throw new IllegalStateException(
-        " Ошибка изменения статуса учителя, проверьте текущий статус учителя,"
-          + "если он уже активный то не следует его снова активировать."
-          + "Проверьте корректность введенных дат: первая дата должна быть раньше по времени чем вторая");
+          " Ошибка изменения статуса учителя, проверьте текущий статус учителя,"
+              + "если он уже активный то не следует его снова активировать."
+              + "Проверьте корректность введенных дат: "
+              + "первая дата должна быть раньше по времени чем вторая");
     }
   }
 
   /**
-   * Изменить статус учителя на активный
+   * Изменить статус учителя на активный.
    */
   public void activate() {
     if (!(this.isActive)) {
@@ -120,7 +118,7 @@ public class Teacher {
       registerEvent(new TeacherActivatedDomainEvent(this.id));
     } else {
       throw new IllegalStateException(
-        "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
+          "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
     }
   }
 }

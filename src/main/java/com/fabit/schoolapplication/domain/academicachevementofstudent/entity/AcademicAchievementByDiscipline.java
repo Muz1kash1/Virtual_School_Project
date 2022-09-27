@@ -3,16 +3,16 @@ package com.fabit.schoolapplication.domain.academicachevementofstudent.entity;
 import com.fabit.schoolapplication.domain.Discipline;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.id.AcademicAchievementByDisciplineId;
 import com.fabit.schoolapplication.domain.academicachevementofstudent.valueobject.Achievement;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import org.webjars.NotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import org.webjars.NotFoundException;
 
 /**
- * Сущность успеваемости ученика по конкретной дисциплине
+ * Сущность успеваемости ученика по конкретной дисциплине.
  *
  * @author SmirnovMA
  */
@@ -28,41 +28,45 @@ public class AcademicAchievementByDiscipline {
   private AcademicAchievementByDiscipline() {
   }
 
-  private AcademicAchievementByDiscipline(
-    AcademicAchievementByDisciplineId id,
-    Discipline discipline) {
+  private AcademicAchievementByDiscipline(AcademicAchievementByDisciplineId id,
+                                          Discipline discipline) {
     this.id = id;
     this.discipline = discipline;
     this.achievements = new ArrayList<>();
   }
 
   /**
-   * Статическая фабрика
+   * Статическая фабрика.
    *
-   * @param id         id объекта журнала академической успеваемости студента по конкретной дисциплине.
+   * @param id         id объекта журнала академической успеваемости студента по конкретной
+   *                   дисциплине.
    * @param discipline дисциплина
    * @return объект журнала академической успеваемости студента по конкретной дисциплине
    */
   public static AcademicAchievementByDiscipline of(
-    AcademicAchievementByDisciplineId id,
-    Discipline discipline) {
+      AcademicAchievementByDisciplineId id,
+      Discipline discipline) {
+
     return new AcademicAchievementByDiscipline(id, discipline);
   }
 
   /**
-   * Метод получения копии объекта журнала академической успеваемости студента по конкретной дисциплине.
+   * Метод получения копии объекта журнала академической успеваемости студента по конкретной
+   * дисциплине.
    *
-   * @param id           id объекта журнала академической успеваемости студента по конкретной дисциплине
+   * @param id           id объекта журнала академической успеваемости студента по конкретной
+   *                     дисциплине
    * @param discipline   дисциплина
    * @param achievements список отметок
    * @return объект журнала академической успеваемости студента по конкретной дисциплине
    */
   public static AcademicAchievementByDiscipline copyOf(
-    AcademicAchievementByDisciplineId id,
-    Discipline discipline,
-    List<Achievement> achievements) {
+      AcademicAchievementByDisciplineId id,
+      Discipline discipline,
+      List<Achievement> achievements) {
+
     AcademicAchievementByDiscipline academicAchievementByDiscipline =
-      new AcademicAchievementByDiscipline();
+        new AcademicAchievementByDiscipline();
     academicAchievementByDiscipline.id = id;
     academicAchievementByDiscipline.discipline = discipline;
     academicAchievementByDiscipline.achievements = achievements;
@@ -101,12 +105,14 @@ public class AcademicAchievementByDiscipline {
    */
   public Achievement getAchievementByDateOfLesson(LocalDate dateOfLesson) {
     Optional<Achievement> achievement = this.achievements.stream()
-      .filter(item -> item.getDateOfLesson().equals(dateOfLesson))
-      .findFirst();
+        .filter(item -> item.getDateOfLesson().equals(dateOfLesson))
+        .findFirst();
     if (achievement.isPresent()) {
       return achievement.get();
     } else {
-      throw new NotFoundException("Оценки на данную дату урока по данной дисциплине у ученика нет!");
+      throw new NotFoundException(
+          "Оценки на данную дату урока по данной дисциплине у ученика нет!"
+      );
     }
   }
 }
