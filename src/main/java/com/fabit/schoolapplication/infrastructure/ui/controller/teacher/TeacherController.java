@@ -4,10 +4,10 @@ import com.fabit.schoolapplication.application.usecase.scenario.teacher.CreateTe
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.DeleteTeacher;
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.EditTeacher;
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.GetTeacher;
+import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.infrastructure.ui.controller.mapper.TeacherControllerMapper;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.DeactivateDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
-import com.fabit.schoolapplication.domain.teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,7 +68,10 @@ public class TeacherController {
   public ResponseEntity<Teacher> deactivateTeacher(@RequestBody DeactivateDto deactivateDto) {
     return ResponseEntity
       .status(HttpStatus.ACCEPTED)
-      .body(editTeacher.deactivate(deactivateDto));
+      .body(editTeacher.deactivate(deactivateDto.getTeacherId(),
+        deactivateDto.getFrom(),
+        deactivateDto.getTo())
+      );
   }
 
   /**
