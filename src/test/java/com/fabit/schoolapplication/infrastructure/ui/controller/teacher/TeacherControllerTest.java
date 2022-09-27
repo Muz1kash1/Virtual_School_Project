@@ -30,8 +30,8 @@ class TeacherControllerTest {
   private final String createTeacherJson = """
     {
         "fullName": {
-            "name": "Smirnov",
-            "surname": "Michael",
+            "name": "Michael",
+            "surname": "Smirnov",
             "patronymic": "Alexeevich"
         },
         "passport": {
@@ -62,8 +62,8 @@ class TeacherControllerTest {
         .accept(MediaType.APPLICATION_JSON)
         .content(createTeacherJson))
       .andExpect(status().isCreated())
-      .andExpect(jsonPath("$.fullName", is("Smirnov Michael Alexeevich")))
-      .andExpect(jsonPath("$.snils", is("127-328-591-72")));
+      .andExpect(jsonPath("$.fullName.name", is("Michael")))
+      .andExpect(jsonPath("$.snils.numberView", is("127-328-591-72")));
   }
 
 
@@ -80,8 +80,8 @@ class TeacherControllerTest {
 
     mockMvc.perform(get("/teacher/" + teacherEntity.getId()))
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.fullName", is("Smirnov Michael Alexeevich")))
-      .andExpect(jsonPath("$.snils", is("127-328-591-72")));
+      .andExpect(jsonPath("$.fullName.name", is("Michael")))
+      .andExpect(jsonPath("$.snils.numberView", is("127-328-591-72")));
   }
 
   @Test
@@ -94,7 +94,7 @@ class TeacherControllerTest {
 
     mockMvc.perform(get("/teacher"))
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.[0].snils", is("127-328-591-72")));
+      .andExpect(jsonPath("$.[0].snils.numberView", is("127-328-591-72")));
   }
 
   @Test

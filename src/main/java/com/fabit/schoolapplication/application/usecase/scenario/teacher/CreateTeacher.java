@@ -1,32 +1,21 @@
 package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
-import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
+import com.fabit.schoolapplication.application.usecase.access.teacher.TeacherService;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
-import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @RequiredArgsConstructor
 public class CreateTeacher {
-  private final TeacherRepository teacherRepository;
-  private final TeacherServiceMapper teacherServiceMapper;
+  private final TeacherService teacherService;
 
   /**
    * Создать учителя из пришедшего DTO.
    *
-   * @param teacherDto - DTO учителя
+   * @param teacher - DTO учителя
    * @return TeacherEntity
    */
-  @Transactional
-  public TeacherEntity execute(TeacherDto teacherDto) {
-    Teacher teacher = teacherServiceMapper.mapDtoToDomain(teacherDto);
-    TeacherEntity teacherEntity = teacherServiceMapper.mapDomainToEntity(teacher);
-
-    teacherRepository.save(teacherEntity);
-    return teacherEntity;
+  public Teacher execute(Teacher teacher) {
+    teacherService.save(teacher);
+    return teacher;
   }
 }

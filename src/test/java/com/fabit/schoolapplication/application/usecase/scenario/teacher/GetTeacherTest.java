@@ -1,11 +1,14 @@
 package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
+import com.fabit.schoolapplication.domain.teacher.Teacher;
+import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
+import com.fabit.schoolapplication.infrastructure.ui.controller.mapper.TeacherControllerMapper;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.FullNameDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.PassportDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +23,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @SpringBootTest
 public class GetTeacherTest {
+
+  @Autowired
+  TeacherControllerMapper teacherControllerMapper;
+
+  @Autowired
+  TeacherPersistenceMapper teacherPersistenceMapper;
 
   @Autowired
   GetTeacher getTeacher;
@@ -39,18 +48,25 @@ public class GetTeacherTest {
 
     TeacherDto teacherToCreate1 = new TeacherDto(
       new FullNameDto("Name", "Surname", "Patronymic"),
-      new PassportDto("1234", "567845", LocalDate.of(1980, 9, 15)),
+      new PassportDto("1234", "567845", LocalDate.parse("1980-09-15")),
       new SnilsDto("123-456-789-00")
     );
 
     TeacherDto teacherToCreate2 = new TeacherDto(
       new FullNameDto("SName", "SSurname", "SPatronymic"),
-      new PassportDto("4231", "152345", LocalDate.of(1980, 10, 15)),
+      new PassportDto("4231", "152345", LocalDate.parse("1980-10-15")),
       new SnilsDto("246-078-233-00")
     );
 
-    temporaryTeacher1 = createTeacher.execute(teacherToCreate1);
-    temporaryTeacher2 = createTeacher.execute(teacherToCreate2);
+    temporaryTeacher1 = teacherPersistenceMapper.mapDomainToEntity(createTeacher.execute(
+        teacherControllerMapper.mapDtoToDomain(teacherToCreate1)
+      )
+    );
+    temporaryTeacher2 = teacherPersistenceMapper.mapDomainToEntity(createTeacher.execute(
+        teacherControllerMapper.mapDtoToDomain(
+          teacherToCreate2)
+      )
+    );
   }
 
   @AfterEach
@@ -62,7 +78,7 @@ public class GetTeacherTest {
   @DisplayName("Получение списка всех учителей должно возвращать актуальный список")
   void getAllTeachersTest() {
 
-    List<TeacherEntity> teachers = getTeacher.all();
+    List<Teacher> teachers = getTeacher.all();
 
     Assertions.assertEquals(2, teachers.size());
     Assertions.assertTrue(temporaryTeacher1.isActive());
@@ -73,7 +89,10 @@ public class GetTeacherTest {
   @Test
   @DisplayName("Получение учителя по id должно возвращать соответствующего учителя")
   void getTeacherByIdTest() {
-    TeacherEntity resultedTeacher = getTeacher.byId(temporaryTeacher1.getId());
-    Assertions.assertEquals(temporaryTeacher1, resultedTeacher);
+    Teacher resultedTeacher = getTeacher.byId(temporaryTeacher1.getId());
+    Assertions.assertEquals(
+      teacherPersistenceMapper.mapEntityToDomain(temporaryTeacher1).getId(),
+      resultedTeacher.getId()
+    );
   }
 }

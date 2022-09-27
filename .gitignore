@@ -36,3 +36,5 @@ build/
 rabbitmq/
 ### Postgres ###
 postgres/
+
+.DS_Store

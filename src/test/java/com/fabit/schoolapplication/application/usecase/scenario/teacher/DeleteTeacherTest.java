@@ -1,9 +1,11 @@
 package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
+import com.fabit.schoolapplication.infrastructure.ui.controller.mapper.TeacherControllerMapper;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.FullNameDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.PassportDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.AfterEach;
@@ -18,6 +20,10 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @SpringBootTest
 public class DeleteTeacherTest {
+  @Autowired
+  TeacherControllerMapper teacherControllerMapper;
+  @Autowired
+  TeacherPersistenceMapper teacherPersistenceMapper;
 
   @Autowired
   DeleteTeacher deleteTeacher;
@@ -40,11 +46,11 @@ public class DeleteTeacherTest {
 
     TeacherDto teacherDto = new TeacherDto(
       new FullNameDto("Name", "Surname", "Patronymic"),
-      new PassportDto("1234", "567845", LocalDate.of(1980, 9, 15)),
+      new PassportDto("1234", "567845", LocalDate.parse("1980-09-15")),
       new SnilsDto("123-456-789-00")
     );
 
-    createTeacher.execute(teacherDto);
+    createTeacher.execute(teacherControllerMapper.mapDtoToDomain(teacherDto));
 
     long createdTeacherId = teacherRepository.findAll().get(0).getId();
 
