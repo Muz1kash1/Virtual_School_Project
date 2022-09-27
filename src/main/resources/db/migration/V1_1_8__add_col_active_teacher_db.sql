@@ -1,1 +1,0 @@
-ALTER TABLE teacher ADD COLUMN is_active BOOLEAN;
