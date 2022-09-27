@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.webjars.NotFoundException;
 
 /**
  * Сущность успеваемости ученика по конкретной дисциплине.
@@ -110,7 +109,7 @@ public class AcademicAchievementByDiscipline {
     if (achievement.isPresent()) {
       return achievement.get();
     } else {
-      throw new NotFoundException(
+      throw new IllegalArgumentException(
           "Оценки на данную дату урока по данной дисциплине у ученика нет!"
       );
     }

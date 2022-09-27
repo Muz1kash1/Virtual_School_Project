@@ -29,7 +29,6 @@ public class HomeworkForClass {
   public static final transient List<HomeworkForClassEvent> DOMAIN_EVENTS = new ArrayList<>();
 
   protected HomeworkForClassEvent registerEvent(HomeworkForClassEvent event) {
-    Assert.notNull(event, "Доменный ивент не должен быть нуль");
     DOMAIN_EVENTS.add(event);
     return event;
   }

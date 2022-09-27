@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.Getter;
-import org.webjars.NotFoundException;
 
 /**
  * Агрегат общей успеваемости ученика по всем дисциплинам.
@@ -159,7 +158,7 @@ public final class AcademicAchievementOfStudent {
     if (academicAchievementByDiscipline.isPresent()) {
       return academicAchievementByDiscipline.get();
     } else {
-      throw new NotFoundException(
+      throw new IllegalArgumentException(
           "Журнала успеваемости ученика по данной дисциплине у ученика нет!"
       );
     }
