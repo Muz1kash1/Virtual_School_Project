@@ -1,10 +1,10 @@
-package com.fabit.schoolapplication.application.mapper;
+package com.fabit.schoolapplication.infrastructure.mapper;
 
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.BirthCertificateDto;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.FullNameDto;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.PassportDto;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.SnilsDto;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.BirthCertificateDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.FullNameDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.PassportDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.SnilsDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
 import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
  * The type Student mapper service.
  */
 @RequiredArgsConstructor
-public class StudentMapperService {
+public class StudentMapperServiceImpl {
   final StudentRepository studentRepository;
 
   /**

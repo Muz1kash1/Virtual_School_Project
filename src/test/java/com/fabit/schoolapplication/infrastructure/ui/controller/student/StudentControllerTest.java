@@ -7,7 +7,7 @@ import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
-import org.junit.jupiter.api.AfterEach;
+import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,13 +41,16 @@ class StudentControllerTest {
   private MockMvc mockMvc;
 
   @Autowired
-  private StudentService studentRepository;
+  private StudentService studentService;
+
+  @Autowired
+  private StudentRepository studentRepository;
   private final Clock clock = Clock.fixed(Instant.parse("2022-09-15T00:00:00Z"), ZoneOffset.UTC);
 
   @BeforeEach
   @DisplayName("Добавление студента перед каждым тестом")
   public void initializeStudent() {
-    studentRepository.deleteAll();
+    studentService.deleteAll();
     Student student = Student.of(
       StudentId.of(1),
       FullName.of("Иванов", "Иван", "Иванович"),
@@ -56,7 +59,7 @@ class StudentControllerTest {
         LocalDate.of(2010, 9, 15), clock
       )
     );
-    studentRepository.save(student);
+    studentService.save(student);
   }
 
   @Test
@@ -66,7 +69,7 @@ class StudentControllerTest {
     String json = """
       {
       "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
-      "snils":{"numberView":"123-343-223-32"},
+      "snils":{"numberView":"123-344-223-32"},
       "birthCertificate":{"serial":"1111", "number":"999988","birthday":"2007-09-15"}
        }
       """;
@@ -77,8 +80,8 @@ class StudentControllerTest {
           .content(json))
       .andExpect(status().isCreated())
       .andExpect(jsonPath("$.name", is("Иванов Иван Иванович")))
-      .andExpect(jsonPath("$.snils", is("123-343-223-32")))
-      .andExpect(jsonPath("$.birthCertificate", is("1111 999988")));
+      .andExpect(jsonPath("$.snils", is("123-344-223-32")))
+      .andExpect(jsonPath("$.birthCertificate", is("1111 999988 2007-09-15")));
   }
 
   @Test
@@ -111,8 +114,7 @@ class StudentControllerTest {
       {
         "name":{"name":"Иванов","surname":"Иван","patronymic":"Иванович"},
         "snils":{"numberView":"443-343-223-32"},
-        "birthCertificate":{"serial":"1111", "number":"999988","birthday":"2007-09-15"},
-        "passport":{"serial":"2222", "number":"123456","birthday":"2007-09-15"}
+        "birthCertificate":{"serial":"1111", "number":"999988","birthday":"2010-09-15"}
       }
       """;
 

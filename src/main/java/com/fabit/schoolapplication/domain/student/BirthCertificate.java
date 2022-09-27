@@ -55,6 +55,6 @@ public class BirthCertificate {
 
   @Override
   public String toString() {
-    return serial + " " + number;
+    return serial + " " + number + " " + birthday;
   }
 }

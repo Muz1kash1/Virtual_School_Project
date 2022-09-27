@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.application.usecase.scenario.student.dto;
+package com.fabit.schoolapplication.infrastructure.ui.controller.student.dto;
 
 import lombok.Data;
 

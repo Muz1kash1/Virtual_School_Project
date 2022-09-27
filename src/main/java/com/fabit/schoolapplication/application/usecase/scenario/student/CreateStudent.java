@@ -1,8 +1,7 @@
 package com.fabit.schoolapplication.application.usecase.scenario.student;
 
-import com.fabit.schoolapplication.application.mapper.StudentMapperService;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
+import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import lombok.RequiredArgsConstructor;
 
@@ -13,20 +12,17 @@ import lombok.RequiredArgsConstructor;
 public class CreateStudent {
 
   private final StudentService studentService;
-  private final StudentMapperService studentMapperService;
 
   /**
-   * Создать ученика из StudentDTO.
+   * Создать ученика.
    *
-   * @param studentDto - studentDto
+   * @param student - студент
    * @return студент
    */
-  public Student execute(StudentDto studentDto) {
-
-    Student student = studentMapperService.mapToStudent(studentDto);
-
-    if (!studentService.findBySnils(studentDto.getSnils().toString())) {
-      studentService.save(student);
+  public Student execute(Student student) {
+    BirthCertificate birthCertificate = student.getBirthCertificate();
+    if (!studentService.findBySnils(student.getSnils().getNumberView())) {
+      studentService.save(student, birthCertificate);
     } else {
       throw new IllegalArgumentException("студент уже существует");
     }

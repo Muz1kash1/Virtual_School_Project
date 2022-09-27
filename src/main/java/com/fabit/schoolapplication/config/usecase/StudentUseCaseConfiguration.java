@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.config.usecase;
 
-import com.fabit.schoolapplication.application.mapper.StudentMapperService;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
 import com.fabit.schoolapplication.application.usecase.scenario.student.CreateStudent;
 import com.fabit.schoolapplication.application.usecase.scenario.student.DeleteStudent;
 import com.fabit.schoolapplication.application.usecase.scenario.student.EditStudent;
+import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.infrastructure.persisnence.impl.StudentServiceImpl;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -15,13 +15,13 @@ import org.springframework.context.annotation.Configuration;
 public class StudentUseCaseConfiguration {
 
   @Bean
-  public StudentMapperService studentMapperService(StudentRepository studentRepository) {
-    return new StudentMapperService(studentRepository);
+  public StudentMapperServiceImpl studentMapperServiceImpl(StudentRepository studentRepository) {
+    return new StudentMapperServiceImpl(studentRepository);
   }
 
   @Bean
   public StudentService studentService(StudentRepository studentRepository,
-                                       StudentMapperService studentMapperService,
+                                       StudentMapperServiceImpl studentMapperService,
                                        ApplicationEventPublisher applicationEventPublisher) {
     return new StudentServiceImpl(
       studentRepository,
@@ -31,9 +31,8 @@ public class StudentUseCaseConfiguration {
   }
 
   @Bean
-  public CreateStudent createStudent(StudentService studentService,
-                                     StudentMapperService studentMapperService) {
-    return new CreateStudent(studentService, studentMapperService);
+  public CreateStudent createStudent(StudentService studentService) {
+    return new CreateStudent(studentService);
   }
 
   @Bean
@@ -42,8 +41,7 @@ public class StudentUseCaseConfiguration {
   }
 
   @Bean
-  public EditStudent editStudent(StudentService studentService,
-                                 StudentMapperService studentMapperService) {
-    return new EditStudent(studentService, studentMapperService);
+  public EditStudent editStudent(StudentService studentService) {
+    return new EditStudent(studentService);
   }
 }

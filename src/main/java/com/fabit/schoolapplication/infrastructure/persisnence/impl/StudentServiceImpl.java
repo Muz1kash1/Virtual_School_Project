@@ -1,16 +1,15 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.impl;
 
-import com.fabit.schoolapplication.application.mapper.StudentMapperService;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
+import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
-import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.infrastructure.event.StudentDeletedEvent;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -18,7 +17,7 @@ import org.springframework.context.ApplicationEventPublisher;
 public class StudentServiceImpl implements StudentService {
 
   private final StudentRepository studentRepository;
-  private final StudentMapperService studentMapperService;
+  private final StudentMapperServiceImpl studentMapperService;
   private final ApplicationEventPublisher eventPublisher;
 
 
@@ -44,11 +43,6 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public List<StudentEntity> findAll() {
-    return studentRepository.findAll();
-  }
-
-  @Override
   public void save(StudentDto studentDto, BirthCertificate birthCertificate) {
     StudentEntity studentEntity
         = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
@@ -57,8 +51,8 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public void save(StudentDto studentDto) {
-
+  public void save(Student student) {
+     studentRepository.save(studentMapperService.mapToStudentEntity(student));
   }
 
   /**
@@ -67,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
    * @param studentDto - StudentDTO
    */
   @Override
-  public void save(StudentDto studentDto, RussianPassport passport) {
+  public void save(Student studentDto, Passport passport) {
     StudentEntity studentEntity
         = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
     studentEntity.setPassport(passport.toString());
@@ -76,15 +70,15 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public void save(StudentDto studentDto, Snils snils) {
+  public void save(Student student, Snils snils) {
     StudentEntity studentEntity
-        = studentRepository.findByBirthCertificate(studentDto.getBirthCertificate().toString());
+        = studentRepository.findByBirthCertificate(student.getBirthCertificate().toString());
 
     studentEntity.setSnils(snils.getNumberView());
   }
 
   @Override
-  public void save(Student student) {
+  public void save(Student student, BirthCertificate birthCertificate) {
     StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
     studentRepository.save(studentEntity);
   }

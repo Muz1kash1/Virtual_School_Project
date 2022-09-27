@@ -1,9 +1,10 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.student;
 
-import com.fabit.schoolapplication.application.mapper.StudentMapperService;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
+import com.fabit.schoolapplication.domain.student.Student;
+import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.application.usecase.scenario.student.EditStudent;
-import com.fabit.schoolapplication.application.usecase.scenario.student.dto.StudentDto;
-import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import lombok.RequiredArgsConstructor;
@@ -21,20 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class EditStudentEndpoint {
 
   final EditStudent editStudent;
-  final StudentMapperService mapperService;
+  final StudentMapperServiceImpl mapperService;
 
   /**
    * Изменить свидетельство о рождении.
    *
-   * @param student student
+   * @param studentDto student
    * @return response entity
    */
   @PutMapping("/change-birthcertificate")
   public ResponseEntity<BirthCertificate> changeBirthCertificateStudent(
-      @RequestBody StudentDto student) {
+      @RequestBody StudentDto studentDto) {
 
-    log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
+    log.info("trying to change BirthCertificate: " + studentDto.getBirthCertificate());
 
+    Student student = mapperService.mapToStudent(studentDto);
     return ResponseEntity
         .ok()
         .body(editStudent.changeBirthCertificate(student));
@@ -43,14 +45,15 @@ public class EditStudentEndpoint {
   /**
    * Изменить СНИЛС у студента.
    *
-   * @param student the student
+   * @param studentDto the student
    * @return the response entity
    */
   @PutMapping("/change-snils")
-  public ResponseEntity<Snils> changeSnilsStudent(@RequestBody StudentDto student) {
+  public ResponseEntity<Snils> changeSnilsStudent(@RequestBody StudentDto studentDto) {
 
-    log.info("trying to change BirthCertificate: " + student.getBirthCertificate());
+    log.info("trying to change BirthCertificate: " + studentDto.getBirthCertificate());
 
+    Student student = mapperService.mapToStudent(studentDto);
     return ResponseEntity
         .ok()
         .body(editStudent.changeSnils(student));
@@ -59,13 +62,14 @@ public class EditStudentEndpoint {
   /**
    * Добавить паспорт студенту.
    *
-   * @param student student
+   * @param studentDto student
    * @return response entity
    */
   @PutMapping("/add-passport")
-  public ResponseEntity<RussianPassport> addPassportStudent(@RequestBody StudentDto student) {
+  public ResponseEntity<Passport> addPassportStudent(@RequestBody StudentDto studentDto) {
 
-    log.info("trying to add RussianPassport: " + student.getPassport());
+    log.info("trying to add RussianPassport: " + studentDto.getPassport());
+    Student student = mapperService.mapToStudent(studentDto);
 
     return ResponseEntity
         .ok()
