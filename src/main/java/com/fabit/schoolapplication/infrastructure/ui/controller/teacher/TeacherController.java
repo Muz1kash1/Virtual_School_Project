@@ -4,10 +4,10 @@ import com.fabit.schoolapplication.application.usecase.scenario.teacher.CreateTe
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.DeleteTeacher;
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.EditTeacher;
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.GetTeacher;
-import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
+import com.fabit.schoolapplication.infrastructure.ui.controller.mapper.TeacherControllerMapper;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.DeactivateDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
-import java.util.List;
+import com.fabit.schoolapplication.domain.teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 @RequestMapping("/teacher")
@@ -29,6 +30,8 @@ public class TeacherController {
   private final GetTeacher getTeacher;
   private final DeleteTeacher deleteTeacher;
 
+  private final TeacherControllerMapper teacherControllerMapper;
+
   /**
    * Endpoint создания учителя и добавления его в базу данных.
    *
@@ -36,10 +39,10 @@ public class TeacherController {
    * @return ResponseEntity with status CREATED и созданным учителем
    */
   @PostMapping
-  public ResponseEntity<TeacherEntity> createTeacher(@RequestBody TeacherDto teacherDto) {
+  public ResponseEntity<Teacher> createTeacher(@RequestBody TeacherDto teacherDto) {
     return ResponseEntity
       .status(HttpStatus.CREATED)
-      .body(createTeacher.execute(teacherDto));
+      .body(createTeacher.execute(teacherControllerMapper.mapDtoToDomain(teacherDto)));
   }
 
   /**
@@ -49,7 +52,7 @@ public class TeacherController {
    * @return ResponseEntity with status ACCEPTED и учителем
    */
   @PutMapping("/{teacherId}/activate")
-  public ResponseEntity<TeacherEntity> activateTeacher(@PathVariable long teacherId) {
+  public ResponseEntity<Teacher> activateTeacher(@PathVariable long teacherId) {
     return ResponseEntity
       .status(HttpStatus.ACCEPTED)
       .body(editTeacher.activate(teacherId));
@@ -62,7 +65,7 @@ public class TeacherController {
    * @return ResponseEntity with status ACCEPTED и учителем
    */
   @PutMapping("/deactivate")
-  public ResponseEntity<TeacherEntity> deactivateTeacher(@RequestBody DeactivateDto deactivateDto) {
+  public ResponseEntity<Teacher> deactivateTeacher(@RequestBody DeactivateDto deactivateDto) {
     return ResponseEntity
       .status(HttpStatus.ACCEPTED)
       .body(editTeacher.deactivate(deactivateDto));
@@ -75,7 +78,7 @@ public class TeacherController {
    * @return ResponseEntity with status OK и учителем
    */
   @GetMapping("/{teacherId}")
-  public ResponseEntity<TeacherEntity> getTeacher(@PathVariable long teacherId) {
+  public ResponseEntity<Teacher> getTeacher(@PathVariable long teacherId) {
     return ResponseEntity
       .ok()
       .body(getTeacher.byId(teacherId));
@@ -87,7 +90,7 @@ public class TeacherController {
    * @return ResponseEntity with status OK и списком учителей
    */
   @GetMapping
-  public ResponseEntity<List<TeacherEntity>> getAllTeachers() {
+  public ResponseEntity<List<Teacher>> getAllTeachers() {
     return ResponseEntity
       .ok()
       .body(getTeacher.all());

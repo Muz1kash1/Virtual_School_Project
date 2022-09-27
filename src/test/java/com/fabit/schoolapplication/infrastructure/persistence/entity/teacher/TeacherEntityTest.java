@@ -1,11 +1,12 @@
 package com.fabit.schoolapplication.infrastructure.persistence.entity.teacher;
 
-import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
+
 import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
 import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ import java.time.ZoneOffset;
 public class TeacherEntityTest {
   private final Clock clock = Clock.fixed(Instant.parse("2022-09-15T00:00:00Z"), ZoneOffset.UTC);
   @Autowired
-  TeacherServiceMapper teacherMapper;
+  TeacherPersistenceMapper teacherMapper;
 
   @Test
   @DisplayName("Создание TeacherEntity из домена должно работать корректно")
@@ -31,7 +32,7 @@ public class TeacherEntityTest {
       Teacher.of(
         TeacherId.of(1L),
         FullName.of("Name", "Surname", "Patronymic"),
-        RussianPassport.of("1234", "456789", LocalDate.of(1980, 9, 15), clock),
+        RussianPassport.of("1234", "456789", LocalDate.parse("1980-09-15"), clock),
         Snils.of("987-654-321-11"));
 
     TeacherEntity teacherEntity = teacherMapper.mapDomainToEntity(teacherDomain);

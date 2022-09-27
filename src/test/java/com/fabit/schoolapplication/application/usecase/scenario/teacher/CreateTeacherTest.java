@@ -1,11 +1,12 @@
 package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
-import com.fabit.schoolapplication.application.mapper.TeacherServiceMapper;
-import com.fabit.schoolapplication.domain.teacher.Teacher;
+import com.fabit.schoolapplication.infrastructure.ui.controller.mapper.TeacherControllerMapper;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.FullNameDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.PassportDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
+import com.fabit.schoolapplication.domain.teacher.Teacher;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import java.time.LocalDate;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +26,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class CreateTeacherTest {
   @Autowired
-  TeacherServiceMapper teacherMapper;
+  TeacherControllerMapper teacherControllerMapper;
+  @Autowired
+  TeacherPersistenceMapper teacherPersistenceMapper;
 
   @Autowired
   CreateTeacher createTeacher;
@@ -44,16 +48,19 @@ public class CreateTeacherTest {
 
     TeacherDto teacherDto = new TeacherDto(
       new FullNameDto("Name", "Surname", "Patronymic"),
-      new PassportDto("1234", "567845", LocalDate.of(1980, 9, 15)),
+      new PassportDto("1234", "567845", LocalDate.parse("1980-09-15")),
       new SnilsDto("123-456-789-00")
     );
 
-    Teacher teacherDomain = teacherMapper.mapDtoToDomain(teacherDto);
+    Teacher teacherDomain = teacherControllerMapper.mapDtoToDomain(teacherDto);
 
     when(teacherRepository.save(any()))
-      .thenReturn(teacherMapper.mapDomainToEntity(teacherDomain));
+      .thenReturn(teacherPersistenceMapper.mapDomainToEntity(teacherDomain));
 
-    TeacherEntity teacherCreated = createTeacher.execute(teacherDto);
+    TeacherEntity teacherCreated = teacherPersistenceMapper.mapDomainToEntity(createTeacher.execute(
+        teacherControllerMapper.mapDtoToDomain(teacherDto)
+      )
+    );
 
     Assertions.assertEquals(
       teacherDto.getPassport().toString(), teacherCreated.getPassport()
