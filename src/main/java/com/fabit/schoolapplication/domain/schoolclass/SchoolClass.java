@@ -7,15 +7,15 @@ import com.fabit.schoolapplication.domain.schoolclass.event.SchoolClassRemovedSt
 import com.fabit.schoolapplication.domain.student.StudentId;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@EqualsAndHashCode
 public class SchoolClass {
 
-  @Setter
   private SchoolClassId schoolClassId;
   private final SchoolClassName schoolClassName;
   private final List<StudentId> students;
@@ -92,16 +92,6 @@ public class SchoolClass {
 
   // -------
   // ** Добавление и удаление учеников в класс
-
-  /**
-   * Роспуск школьного класса и отчисление из него всех учеников. Отчисление происходит через
-   * внутренние методы для корректного выброса ивентов
-   */
-  public void disband() {
-    for (StudentId student : students) {
-      removeStudent(student);
-    }
-  }
 
   /**
    * Добавление ученика в класс.

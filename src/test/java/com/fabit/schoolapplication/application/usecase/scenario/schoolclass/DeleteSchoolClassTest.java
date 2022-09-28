@@ -90,4 +90,26 @@ public class DeleteSchoolClassTest {
     Assertions.assertEquals(0, studentInClassRepository.findAll().size());
   }
 
+  @Test
+  @DisplayName("Удаление школьного класса по имени должно удалять класс и отчислять учеников из него")
+  void deleteSchoolClassTestWithName() {
+    SchoolClass schoolClass = SchoolClass.of(
+        SchoolClassId.of(1L), SchoolClassName.of(10, "Р"));
+    schoolClass.addStudent(StudentId.of(originStudentIds.get(0)));
+    schoolClass.addStudent(StudentId.of(originStudentIds.get(1)));
+    schoolClass.addStudent(StudentId.of(originStudentIds.get(2)));
+
+    createSchoolClassUseCase.execute(schoolClass);
+    SchoolClassEntity created = schoolClassRepository.findByParallelAndLitera(10, "Р");
+    List<StudentInClassEntity> studentsInClass = studentInClassRepository.findAll();
+
+    Assertions.assertNotNull(created);
+    Assertions.assertNotNull(studentsInClass);
+
+    deleteSchoolClassUseCase.execute(schoolClass.getSchoolClassName());
+
+    Assertions.assertNull(schoolClassRepository.findByParallelAndLitera(10, "Р"));
+    Assertions.assertEquals(0, studentInClassRepository.findAll().size());
+  }
+
 }
