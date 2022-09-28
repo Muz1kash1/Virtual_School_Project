@@ -10,6 +10,32 @@ import org.junit.jupiter.api.Test;
 public class SchoolClassTest {
 
   @Test
+  @DisplayName("Одинаковые школьные классы должны быть равны себе, при различиях id - нет")
+  void sameSchoolClassTest() {
+    SchoolClass schoolClass1
+        = SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(1, "А"));
+    SchoolClass schoolClass2
+        = SchoolClass.of(SchoolClassId.of(1L), SchoolClassName.of(1, "А"));
+    Assertions.assertEquals(schoolClass1, schoolClass2);
+
+    SchoolClass schoolClass3
+        = SchoolClass.of(SchoolClassId.of(2L), SchoolClassName.of(1, "А"));
+    SchoolClass schoolClass4
+        = SchoolClass.of(SchoolClassId.of(3L), SchoolClassName.of(1, "А"));
+    Assertions.assertNotEquals(schoolClass3, schoolClass4);
+  }
+
+  @Test
+  @DisplayName("Создание школьного класса только по имени должно создавать корректный класс.")
+  void schoolClassOfNameTest() {
+    SchoolClass schoolClassByName = SchoolClass.of(SchoolClassName.of(5, "Д"));
+
+    Assertions.assertEquals(5, schoolClassByName.getSchoolClassName().getParallel());
+    Assertions.assertEquals("Д", schoolClassByName.getSchoolClassName().getLitera());
+    Assertions.assertNull(schoolClassByName.getSchoolClassId());
+  }
+
+  @Test
   @DisplayName("Создание школьного класса должно создавать корретный школьный класс")
   void createSchoolClassTest() {
     SchoolClass schoolClass
