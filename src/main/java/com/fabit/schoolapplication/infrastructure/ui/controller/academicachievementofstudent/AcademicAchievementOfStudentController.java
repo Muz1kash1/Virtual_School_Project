@@ -22,79 +22,131 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/academic-achievement-of-student")
 @RequiredArgsConstructor
 public class AcademicAchievementOfStudentController {
-  //Создать новый журнал общей академической успеваемости ученика
+
+  /**
+   * Создать новый журнал общей академической успеваемости ученика.
+   *
+   * @param studentId - идентификатор ученика
+   * @return ResponseEntity with status CREATED
+   */
   @PostMapping("{studentId}/")
-  public ResponseEntity<?> createNewJournalForStudent(
-    @PathVariable long studentId) {
+  public ResponseEntity<?> createNewJournalForStudent(@PathVariable long studentId) {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  //Удалить журнал общей академической успеваемости ученика
+  /**
+   * Удалить журнал общей академической успеваемости ученика.
+   *
+   * @param studentId - идентификатор ученика
+   * @return ResponseEntity with status NO_CONTENT
+   */
   @DeleteMapping("{studentId}/")
-  public ResponseEntity<?> deleteJournalForStudent(
-    @PathVariable String studentId) {
+  public ResponseEntity<?> deleteJournalForStudent(@PathVariable String studentId) {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
-  //Добавить в журнал общей академической успеваемости ученика
-  // журнал академической по конкретной дисциплине
+  /**
+   * Добавить в журнал общей академической успеваемости ученика.
+   *
+   * @param requestDto - AddJournalByDisciplineForStudentRequestDto
+   * @return ResponseENtity with status CREATED
+   */
   @PostMapping("discipline/")
   public ResponseEntity<?> addJournalForStudentByDiscipline(
-    @RequestBody AddJournalByDisciplineForStudentRequestDto addJournalByDisciplineForStudentRequestDto) {
+      @RequestBody AddJournalByDisciplineForStudentRequestDto requestDto) {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  //Удалить из журнала общей академической успеваемости ученика
-  // журнал академической по конкретной дисциплине
+  /**
+   * Удалить из журнала общей академической успеваемости ученика.
+   *
+   * @param studentId  - идентификатор ученика
+   * @param discipline - дисциплина
+   * @return ResponseEntity with status NO_CONTENT
+   */
   @DeleteMapping("discipline/{studentId}/{discipline}/")
   public ResponseEntity<?> deleteJournalForStudentByDiscipline(
-    @PathVariable long studentId, @PathVariable String discipline) {
+      @PathVariable long studentId, @PathVariable String discipline) {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
-  //Получить все доступные ученику дисциплины
+  /**
+   * Получить все доступные ученику дисциплины.
+   *
+   * @param studentId - идентификатор ученика
+   * @return ResponseEntity with AllDIsciplinesOfStudentsResponseDto
+   */
   @GetMapping("discipline/{studentId}/")
   public ResponseEntity<AllDisciplinesOfStudentResponseDto> getAllJournalsForStudentByDiscipline(
-    @PathVariable long studentId) {
+      @PathVariable long studentId) {
     return ResponseEntity.status(HttpStatus.OK).body(new AllDisciplinesOfStudentResponseDto());
   }
 
-  // Получить все отметки об успеваемости ученика по данной дисциплине
+  /**
+   * Получить все отметки об успеваемости ученика по данной дисциплине.
+   *
+   * @param studentId  - идентификатор ученика
+   * @param discipline - дисциплина
+   * @return ResponseEntity with AllAchievementsOfStudentByDisciplineResponseDto
+   */
   @GetMapping("discipline/achievement/{studentId}/")
   public ResponseEntity<AllAchievementsOfStudentByDisciplineResponseDto> getJournalForStudentByDiscipline(
-    @PathVariable long studentId, @RequestParam String discipline) {
+      @PathVariable long studentId, @RequestParam String discipline) {
     return ResponseEntity.status(HttpStatus.OK).body(
-      new AllAchievementsOfStudentByDisciplineResponseDto()
+        new AllAchievementsOfStudentByDisciplineResponseDto()
     );
   }
 
-  // Получить отметку об успеваемости ученика по данной дисциплине по дате урока
+  /**
+   * Получить отметку об успеваемости ученика по данной дисциплине и дате урока.
+   *
+   * @param studentId    - идентификатор ученика
+   * @param dateOfLesson - дата урока
+   * @param discipline   - дисциплина урока
+   * @return ResponseEntity with AchievementOfStudentResponseDto
+   */
   @GetMapping("discipline/achievement/{studentId}/{dateOfLesson}/")
   public ResponseEntity<AchievementOfStudentResponseDto> getJournalForStudentByDiscipline(
-    @PathVariable long studentId, @PathVariable String dateOfLesson, @RequestParam String discipline) {
+      @PathVariable long studentId, @PathVariable String dateOfLesson,
+      @RequestParam String discipline) {
     return ResponseEntity.status(HttpStatus.OK).body(
-      new AchievementOfStudentResponseDto()
+        new AchievementOfStudentResponseDto()
     );
   }
 
-  //Добавить отметку об успеваемости ученику
+  /**
+   * Добавить отметку об успеваемости ученику.
+   *
+   * @param achievement - отметка об успеваемости
+   * @return Response Entity with status CREATED
+   */
   @PostMapping("discipline/achievement/")
   public ResponseEntity<?> addAchievementForStudent(
-    @RequestBody AchievementForStudentDtoRequest achievement) {
+      @RequestBody AchievementForStudentDtoRequest achievement) {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  //Изменить отметку об успеваемости ученику
+  /**
+   * Изменить отметку об успеваемости ученику.
+   *
+   * @param achievement - отметка об успеваемости
+   * @return ResponseEntity with status ACCEPTED.
+   */
   @PutMapping("discipline/achievement/")
   public ResponseEntity<?> changeAchievementForStudent(
-    @RequestBody AchievementForStudentDtoRequest achievement) {
+      @RequestBody AchievementForStudentDtoRequest achievement) {
     return ResponseEntity.status(HttpStatus.ACCEPTED).build();
   }
 
-  //Удалить отметку об успеваемости ученику
+  /**
+   * Удалить отметку об успеваемости ученику.
+   *
+   * @param achievement - отметка об успеваемости
+   * @return ResponseEntity with status NO_CONTENT
+   */
   @DeleteMapping("discipline/achievement/")
   public ResponseEntity<?> deleteAchievementForStudent(
-    @RequestBody AchievementForStudentDtoRequest achievement) {
+      @RequestBody AchievementForStudentDtoRequest achievement) {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 }

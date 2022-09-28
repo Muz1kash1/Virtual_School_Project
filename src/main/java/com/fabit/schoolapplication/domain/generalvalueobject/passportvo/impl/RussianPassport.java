@@ -49,7 +49,6 @@ public class RussianPassport implements Passport {
    * @return boolean
    */
   private static boolean isValidAge(LocalDate birthday, Clock clock) {
-
     return (LocalDate.ofInstant(
         clock.instant(),
         clock.getZone()
@@ -66,7 +65,6 @@ public class RussianPassport implements Passport {
    */
   private static boolean isValidPassport(String serial, String number,
                                          LocalDate birthday, Clock clock) {
-
     return Pattern.matches("^[0-9]{6}$", number)
         && Pattern.matches("^[0-9]{4}$", serial)
         && isValidAge(birthday, clock);

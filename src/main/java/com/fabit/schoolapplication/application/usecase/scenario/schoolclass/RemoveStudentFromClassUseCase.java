@@ -10,6 +10,12 @@ public class RemoveStudentFromClassUseCase {
 
   final SchoolClassService schoolClassService;
 
+  /**
+   * Отчислить студента из школьного класса.
+   *
+   * @param schoolClassId - идентификатор школьного класса
+   * @param studentId     - идентификатор студента
+   */
   public void execute(SchoolClassId schoolClassId, StudentId studentId) {
     schoolClassService.removeStudentFromClass(schoolClassId, studentId);
   }

@@ -5,8 +5,8 @@ import com.fabit.schoolapplication.application.usecase.scenario.teacher.CreateTe
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.DeleteTeacher;
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.EditTeacher;
 import com.fabit.schoolapplication.application.usecase.scenario.teacher.GetTeacher;
-import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.impl.TeacherServiceImpl;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.TeacherPersistenceMapper;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +22,7 @@ public class TeacherUseCaseConfiguration {
   @Bean
   public TeacherService teacherService(TeacherPersistenceMapper teacherPersistenceMapper,
                                        TeacherRepository teacherRepository,
-                                       ApplicationEventPublisher eventPublisher
-  ) {
+                                       ApplicationEventPublisher eventPublisher) {
     return new TeacherServiceImpl(
       teacherPersistenceMapper,
       teacherRepository,

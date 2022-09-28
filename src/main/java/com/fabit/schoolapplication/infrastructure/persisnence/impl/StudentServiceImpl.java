@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.infrastructure.persisnence.impl;
 
-import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
-import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.infrastructure.event.StudentDeletedEvent;
+import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +50,12 @@ public class StudentServiceImpl implements StudentService {
     studentRepository.save(studentEntity);
   }
 
+  @Override
+  public void save(Student student) {
+    StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
+    studentRepository.save(studentEntity);
+  }
+
   /**
    * Добавление паспорта уже существующему ученику.
    *
@@ -70,11 +76,5 @@ public class StudentServiceImpl implements StudentService {
         = studentRepository.findByBirthCertificate(student.getBirthCertificate().toString());
 
     studentEntity.setSnils(snils.getNumberView());
-  }
-
-  @Override
-  public void save(Student student) {
-    StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
-    studentRepository.save(studentEntity);
   }
 }

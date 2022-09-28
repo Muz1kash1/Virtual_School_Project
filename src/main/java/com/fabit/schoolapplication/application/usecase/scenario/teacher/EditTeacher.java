@@ -2,9 +2,9 @@ package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
 import com.fabit.schoolapplication.application.usecase.access.teacher.TeacherService;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import java.time.LocalDate;
 
 
 @Slf4j
@@ -40,12 +40,11 @@ public class EditTeacher {
    */
   public Teacher deactivate(long teacherId, String from, String to) {
 
-    Teacher teacher
-      = teacherService.findById(teacherId);
+    Teacher teacher = teacherService.findById(teacherId);
 
     teacher.deactivate(
-      LocalDate.parse(from),
-      LocalDate.parse(to)
+        LocalDate.parse(from),
+        LocalDate.parse(to)
     );
 
     teacherService.save(teacher);

@@ -2,17 +2,16 @@ package com.fabit.schoolapplication.domain.student;
 
 import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
 import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
-import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
-import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
 import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
+import com.fabit.schoolapplication.domain.student.event.StudentChangedInfoEvent;
+import com.fabit.schoolapplication.domain.student.event.StudentCreatedEvent;
 import com.fabit.schoolapplication.domain.student.event.StudentDomainEvent;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Assert;
 
 @Getter
 @Slf4j

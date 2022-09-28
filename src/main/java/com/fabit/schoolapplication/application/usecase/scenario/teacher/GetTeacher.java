@@ -2,9 +2,9 @@ package com.fabit.schoolapplication.application.usecase.scenario.teacher;
 
 import com.fabit.schoolapplication.application.usecase.access.teacher.TeacherService;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor

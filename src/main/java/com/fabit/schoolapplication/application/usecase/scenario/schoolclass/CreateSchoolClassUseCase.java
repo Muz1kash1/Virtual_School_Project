@@ -26,7 +26,7 @@ public class CreateSchoolClassUseCase {
    * @return SchoolClass (созданный)
    */
   public SchoolClass execute(SchoolClassName schoolClassName, List<Long> studentIds)
-                             throws NoSuchElementException {
+      throws NoSuchElementException {
 
     long schoolClassIdValue = schoolClassService
         .persistSchoolClass(schoolClassName)
@@ -42,6 +42,12 @@ public class CreateSchoolClassUseCase {
     return schoolClassService.getById(schoolClassIdValue);
   }
 
+  /**
+   * Создать школьный класс.
+   *
+   * @param schoolClass - доменная модель школьного класса
+   * @return SchoolClass (созданный)
+   */
   public SchoolClass execute(SchoolClass schoolClass) {
     return schoolClassService.persistSchoolClass(SchoolClassName.of(
             schoolClass.getSchoolClassName().getParallel(),

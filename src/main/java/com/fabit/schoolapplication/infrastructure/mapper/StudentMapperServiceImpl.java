@@ -1,10 +1,5 @@
 package com.fabit.schoolapplication.infrastructure.mapper;
 
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.BirthCertificateDto;
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.FullNameDto;
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.PassportDto;
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.SnilsDto;
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.generalvalueobject.fullname.FullName;
 import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.impl.RussianPassport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
@@ -13,6 +8,11 @@ import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.BirthCertificateDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.FullNameDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.PassportDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.SnilsDto;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 

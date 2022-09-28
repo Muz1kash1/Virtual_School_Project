@@ -84,9 +84,8 @@ public class SchoolClass {
    * @param students        - множество идентификаторов учеников
    * @return SchoolClass
    */
-  public static SchoolClass of(
-      SchoolClassId id, SchoolClassName schoolClassName, List<StudentId> students) {
-
+  public static SchoolClass of(SchoolClassId id, SchoolClassName schoolClassName,
+                               List<StudentId> students) {
     return new SchoolClass(id, schoolClassName, students);
   }
 

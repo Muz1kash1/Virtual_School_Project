@@ -6,12 +6,13 @@ import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.teacher.Teacher;
 import com.fabit.schoolapplication.domain.teacher.TeacherId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
-import lombok.RequiredArgsConstructor;
 import java.time.Clock;
 import java.time.LocalDate;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class TeacherPersistenceMapper {
+
   /**
    * Маппинг доменной модели учителя в persistent сущность.
    *
@@ -26,11 +27,12 @@ public class TeacherPersistenceMapper {
     teacherEntity.setSnils(teacher.getSnils().toString());
     teacherEntity.setActive(teacher.isActive());
     teacherEntity.setFullName(
-      teacher.getFullName().getName()
-        + " "
-        + teacher.getFullName().getSurname()
-        + " "
-        + teacher.getFullName().getPatronymic());
+        teacher.getFullName().getName()
+            + " "
+            + teacher.getFullName().getSurname()
+            + " "
+            + teacher.getFullName().getPatronymic()
+    );
 
     return teacherEntity;
   }
@@ -43,11 +45,12 @@ public class TeacherPersistenceMapper {
    */
   public Teacher mapEntityToDomain(TeacherEntity teacherEntity) {
     return Teacher.copyOf(
-      TeacherId.of(teacherEntity.getId()),
-      mapEntityFullNameToDomain(teacherEntity.getFullName()),
-      mapEntityPassportToDomain(teacherEntity.getPassport()),
-      mapEntitySnilsToDomain(teacherEntity.getSnils()),
-      teacherEntity.isActive());
+        TeacherId.of(teacherEntity.getId()),
+        mapEntityFullNameToDomain(teacherEntity.getFullName()),
+        mapEntityPassportToDomain(teacherEntity.getPassport()),
+        mapEntitySnilsToDomain(teacherEntity.getSnils()),
+        teacherEntity.isActive()
+    );
   }
 
   public FullName mapEntityFullNameToDomain(String fullName) {
@@ -64,7 +67,12 @@ public class TeacherPersistenceMapper {
   public RussianPassport mapEntityPassportToDomain(String passport) {
     String[] passportItems = passport.split(" ");
     LocalDate birthday = LocalDate.parse(passportItems[2]);
-    return RussianPassport.of(passportItems[0], passportItems[1], birthday, Clock.systemUTC());
+    return RussianPassport.of(
+        passportItems[0],
+        passportItems[1],
+        birthday,
+        Clock.systemUTC()
+    );
   }
 
   public Snils mapEntitySnilsToDomain(String snils) {

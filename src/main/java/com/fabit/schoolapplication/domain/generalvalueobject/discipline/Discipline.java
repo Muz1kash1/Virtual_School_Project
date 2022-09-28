@@ -33,7 +33,12 @@ public enum Discipline {
    */
   private final String textView;
 
-
+  /**
+   * Парсинг имени дисциплины в объект Discipline.
+   *
+   * @param disciplineTextView - текстовое представление дисциплины
+   * @return Discipline
+   */
   public static Discipline parse(String disciplineTextView) {
     for (Discipline discipline : Discipline.values()) {
       if (discipline.textView.equalsIgnoreCase(disciplineTextView)) {
@@ -42,4 +47,5 @@ public enum Discipline {
     }
     throw new IllegalArgumentException("Дисциплины с названием " + disciplineTextView + " нет");
   }
+
 }

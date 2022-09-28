@@ -1,10 +1,10 @@
 package com.fabit.schoolapplication.application.usecase.scenario.student;
 
-import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
-import com.fabit.schoolapplication.domain.student.Student;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
+import com.fabit.schoolapplication.domain.student.Student;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -35,9 +35,7 @@ public class EditStudent {
    * @return свид. о рождении
    */
   public BirthCertificate changeBirthCertificate(Student student) {
-    BirthCertificate birthCertificate
-      = student.getBirthCertificate();
-
+    BirthCertificate birthCertificate = student.getBirthCertificate();
     studentService.saveBirthCertificate(student, birthCertificate);
     return birthCertificate;
   }
@@ -53,4 +51,5 @@ public class EditStudent {
     studentService.saveSnils(student, snils);
     return snils;
   }
+
 }
