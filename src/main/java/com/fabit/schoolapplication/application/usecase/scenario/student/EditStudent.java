@@ -38,7 +38,7 @@ public class EditStudent {
     BirthCertificate birthCertificate
       = student.getBirthCertificate();
 
-    studentService.save(student, birthCertificate);
+    studentService.saveBirthCertificate(student, birthCertificate);
     return birthCertificate;
   }
 
@@ -50,7 +50,7 @@ public class EditStudent {
    */
   public Snils changeSnils(Student student) {
     Snils snils = student.getSnils();
-    studentService.save(student, snils);
+    studentService.saveSnils(student, snils);
     return snils;
   }
 }
