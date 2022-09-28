@@ -50,11 +50,6 @@ public class StudentServiceImpl implements StudentService {
     studentRepository.save(studentEntity);
   }
 
-  @Override
-  public void save(Student student) {
-     studentRepository.save(studentMapperService.mapToStudentEntity(student));
-  }
-
   /**
    * Добавление паспорта уже существующему ученику.
    *
@@ -78,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public void save(Student student, BirthCertificate birthCertificate) {
+  public void save(Student student) {
     StudentEntity studentEntity = studentMapperService.mapToStudentEntity(student);
     studentRepository.save(studentEntity);
   }
