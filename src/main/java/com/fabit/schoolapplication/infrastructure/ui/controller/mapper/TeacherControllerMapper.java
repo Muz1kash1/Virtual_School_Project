@@ -10,13 +10,14 @@ import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.Full
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.PassportDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
+import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.time.Clock;
 
 @Service
 @RequiredArgsConstructor
 public class TeacherControllerMapper {
+
   private final TeacherRepository teacherRepository;
 
   /**
@@ -27,25 +28,24 @@ public class TeacherControllerMapper {
    */
   public Teacher mapDtoToDomain(TeacherDto teacherDto) {
     return Teacher.of(
-      TeacherId.of(
-        teacherRepository.getNextId()
-      ),
-      mapDtoToDomain(teacherDto.getFullName()),
-      mapDtoToDomain(teacherDto.getPassport()),
-      mapDtoToDomain(teacherDto.getSnils())
+        TeacherId.of(teacherRepository.getNextId()),
+        mapDtoToDomain(teacherDto.getFullName()),
+        mapDtoToDomain(teacherDto.getPassport()),
+        mapDtoToDomain(teacherDto.getSnils())
     );
   }
 
   private RussianPassport mapDtoToDomain(PassportDto passportDto) {
     return RussianPassport.of(
-      passportDto.getSerial(), passportDto.getNumber(), passportDto.getBirthday(),
-      Clock.systemUTC()
+        passportDto.getSerial(), passportDto.getNumber(), passportDto.getBirthday(),
+        Clock.systemUTC()
     );
   }
 
   private FullName mapDtoToDomain(FullNameDto fullNameDto) {
     return FullName.of(
-      fullNameDto.getName(), fullNameDto.getSurname(), fullNameDto.getPatronymic());
+        fullNameDto.getName(), fullNameDto.getSurname(), fullNameDto.getPatronymic()
+    );
   }
 
   private Snils mapDtoToDomain(SnilsDto snilsDto) {

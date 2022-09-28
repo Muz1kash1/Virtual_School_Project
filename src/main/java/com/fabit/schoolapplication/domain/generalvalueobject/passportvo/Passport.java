@@ -5,7 +5,9 @@ import java.time.LocalDate;
 public interface Passport {
 
   LocalDate getBirthday();
+
   String getNumber();
+
   String getSerial();
 
 }

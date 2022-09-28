@@ -1,15 +1,14 @@
 package com.fabit.schoolapplication.domain.homeworkforclass;
 
 import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
-import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassTaskSetEvent;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassCreatedEvent;
 import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassEvent;
+import com.fabit.schoolapplication.domain.homeworkforclass.event.HomeworkForClassTaskSetEvent;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import org.springframework.util.Assert;
 
 
 

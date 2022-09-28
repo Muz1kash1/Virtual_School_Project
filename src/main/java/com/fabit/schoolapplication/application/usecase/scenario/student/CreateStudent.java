@@ -1,7 +1,6 @@
 package com.fabit.schoolapplication.application.usecase.scenario.student;
 
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
-import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
 import lombok.RequiredArgsConstructor;
 
@@ -28,4 +27,5 @@ public class CreateStudent {
 
     return student;
   }
+
 }

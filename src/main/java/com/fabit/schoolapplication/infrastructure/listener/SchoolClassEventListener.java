@@ -13,19 +13,16 @@ public class SchoolClassEventListener {
 
   @EventListener
   public void schoolClassCreated(SchoolClassCreatedDomainEvent event) {
-    // todo если потребуется
     log.info("Школьный класс из ивента создан. " + event);
   }
 
   @EventListener
   public void addedStudentToClass(SchoolClassAddedStudentDomainEvent event) {
-    // todo если потребуется
     log.info("Ученик " + event.getContent() + " добавлен в класс.");
   }
 
   @EventListener
   public void removedStudentToClass(SchoolClassRemovedStudentDomainEvent event) {
-    // todo если потребуется
     log.info("Ученик " + event.getContent() + " удалён из класса.");
   }
 

@@ -21,13 +21,11 @@ public class Snils {
    * @return Snils
    */
   public static Snils of(String numberView) {
-
     if (isValidNumberView(numberView)) {
       return new Snils(numberView);
     } else {
       throw new IllegalArgumentException();
     }
-
   }
 
   private static boolean isValidNumberView(String numberView) {

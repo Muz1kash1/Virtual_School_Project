@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.student;
 
-import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
-import com.fabit.schoolapplication.domain.student.Student;
-import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.application.usecase.scenario.student.EditStudent;
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
+import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
+import com.fabit.schoolapplication.domain.student.Student;
+import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
+import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
