@@ -9,8 +9,6 @@ public interface StudentService {
 
   void save(Student student);
 
-  void save(Student student, BirthCertificate birthCertificate);
-
   void save(Student student, Passport passport);
 
   void saveBirthCertificate(Student student, BirthCertificate birthCertificate);

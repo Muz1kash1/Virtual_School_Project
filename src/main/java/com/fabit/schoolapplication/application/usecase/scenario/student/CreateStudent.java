@@ -20,9 +20,8 @@ public class CreateStudent {
    * @return студент
    */
   public Student execute(Student student) {
-    BirthCertificate birthCertificate = student.getBirthCertificate();
     if (!studentService.findBySnils(student.getSnils().getNumberView())) {
-      studentService.save(student, birthCertificate);
+      studentService.save(student);
     } else {
       throw new IllegalArgumentException("студент уже существует");
     }
