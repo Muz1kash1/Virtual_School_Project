@@ -3,7 +3,6 @@ package com.fabit.schoolapplication.infrastructure.persisnence.impl;
 import com.fabit.schoolapplication.domain.generalvalueobject.passportvo.Passport;
 import com.fabit.schoolapplication.infrastructure.mapper.StudentMapperServiceImpl;
 import com.fabit.schoolapplication.application.usecase.access.student.StudentService;
-import com.fabit.schoolapplication.infrastructure.ui.controller.student.dto.StudentDto;
 import com.fabit.schoolapplication.domain.generalvalueobject.snils.Snils;
 import com.fabit.schoolapplication.domain.student.BirthCertificate;
 import com.fabit.schoolapplication.domain.student.Student;
@@ -43,11 +42,12 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public void save(StudentDto studentDto, BirthCertificate birthCertificate) {
+  public void saveBirthCertificate(Student student, BirthCertificate birthCertificate) {
     StudentEntity studentEntity
-        = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
+        = studentRepository.findBySnils(student.getSnils().getNumberView());
 
     studentEntity.setBirthCertificate(birthCertificate.toString());
+    studentRepository.save(studentEntity);
   }
 
   @Override
@@ -58,19 +58,19 @@ public class StudentServiceImpl implements StudentService {
   /**
    * Добавление паспорта уже существующему ученику.
    *
-   * @param studentDto - StudentDTO
+   * @param student - Student
    */
   @Override
-  public void save(Student studentDto, Passport passport) {
+  public void save(Student student, Passport passport) {
     StudentEntity studentEntity
-        = studentRepository.findBySnils(studentDto.getSnils().getNumberView());
+        = studentRepository.findBySnils(student.getSnils().getNumberView());
     studentEntity.setPassport(passport.toString());
 
     studentRepository.save(studentEntity);
   }
 
   @Override
-  public void save(Student student, Snils snils) {
+  public void saveSnils(Student student, Snils snils) {
     StudentEntity studentEntity
         = studentRepository.findByBirthCertificate(student.getBirthCertificate().toString());
 
