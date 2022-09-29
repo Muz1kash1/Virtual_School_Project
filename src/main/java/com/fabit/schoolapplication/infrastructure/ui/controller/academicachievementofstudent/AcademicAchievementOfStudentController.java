@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/academic-achievement-of-student")
+@RequestMapping("/journal-of-student")
 @RequiredArgsConstructor
 public class AcademicAchievementOfStudentController {
 
