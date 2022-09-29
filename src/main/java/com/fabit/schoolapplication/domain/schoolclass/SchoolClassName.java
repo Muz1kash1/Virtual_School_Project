@@ -8,7 +8,7 @@ import lombok.Value;
 @Getter
 @Value
 public class SchoolClassName {
-
+  private static final int MAX_PARALLEL = 11;
   int parallel;
   String litera;
 
@@ -65,7 +65,7 @@ public class SchoolClassName {
     Pattern patternMark = Pattern.compile("(?![ЬЪ])[А-Я]");
     Matcher literaMatcher = patternMark.matcher(litera);
 
-    boolean isGradeValid = (parallel <= 11 && parallel >= 1);
+    boolean isGradeValid = (parallel <= MAX_PARALLEL && parallel >= 1);
     boolean isLiteraValid = literaMatcher.find();
 
     return (isGradeValid && isLiteraValid);

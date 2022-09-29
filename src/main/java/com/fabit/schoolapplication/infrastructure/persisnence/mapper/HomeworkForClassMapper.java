@@ -1,4 +1,4 @@
-package com.fabit.schoolapplication.application.mapper;
+package com.fabit.schoolapplication.infrastructure.persisnence.mapper;
 
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;

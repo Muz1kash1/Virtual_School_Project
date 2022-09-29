@@ -1,15 +1,13 @@
 package com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass;
 
+import com.fabit.schoolapplication.application.usecase.access.homeworkforclass.HomeworkForClassService;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
-import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
-public class DeleteHomeworkForClass {
+public class DeleteHomeworkForClassUseCase {
 
-  private final HomeworkForClassRepository homeworkForClassRepository;
+  private final HomeworkForClassService homeworkForClassService;
 
   /**
    * Метод удаления дз для класса.
@@ -17,6 +15,6 @@ public class DeleteHomeworkForClass {
    * @param homeworkForClassId айди дз
    */
   public void execute(HomeworkForClassId homeworkForClassId) {
-    homeworkForClassRepository.deleteById(homeworkForClassId.getValue());
+    homeworkForClassService.deleteById(homeworkForClassId);
   }
 }

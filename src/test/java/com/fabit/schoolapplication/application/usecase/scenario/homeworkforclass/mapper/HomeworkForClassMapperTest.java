@@ -1,6 +1,6 @@
 package com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.mapper;
 
-import com.fabit.schoolapplication.application.mapper.HomeworkForClassMapper;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
@@ -16,7 +16,8 @@ import java.time.LocalDate;
 
 @SpringBootTest public class HomeworkForClassMapperTest {
 
-  @Autowired HomeworkForClassMapper homeworkForClassMapper;
+  @Autowired
+  HomeworkForClassMapper homeworkForClassMapper;
 
   @DisplayName("Маппер Дз для класса работает корректно")
   @Test

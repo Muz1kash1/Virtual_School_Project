@@ -4,8 +4,6 @@ import com.fabit.schoolapplication.application.usecase.scenario.schoolclass.GetS
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.infrastructure.ui.controller.schoolclass.dto.SchoolClassDto;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.webjars.NotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,12 +32,12 @@ public class GetSchoolClassEndpoint {
     List<SchoolClassDto> listOfDtoClasses = new ArrayList<>(listOfDomainClasses.size());
 
     listOfDomainClasses.forEach(
-        domainClass -> listOfDtoClasses.add(SchoolClassDto.of(domainClass))
+      domainClass -> listOfDtoClasses.add(SchoolClassDto.of(domainClass))
     );
 
     return ResponseEntity
-        .ok()
-        .body(listOfDtoClasses);
+      .ok()
+      .body(listOfDtoClasses);
   }
 
   /**
@@ -52,13 +52,14 @@ public class GetSchoolClassEndpoint {
     SchoolClass domainClass;
     try {
       domainClass = getSchoolClassUseCase.byId(id);
-    } catch (Exception e) {
+    } catch (NotFoundException e) {
       throw new NotFoundException("Школьный класс  (id" + id + ") не найден.");
     }
 
     return ResponseEntity
-        .ok()
-        .body(SchoolClassDto.of(domainClass));
+      .ok()
+      .body(SchoolClassDto
+        .of(domainClass));
   }
 
   /**
@@ -69,14 +70,11 @@ public class GetSchoolClassEndpoint {
    */
   @GetMapping(value = "/school-class", consumes = "application/json")
   public ResponseEntity<SchoolClassDto> getSchoolClassByName(@RequestBody SchoolClassDto dto) {
-    return ResponseEntity
-        .ok()
-        .body(SchoolClassDto.of(
-                getSchoolClassUseCase.byName(
-                    SchoolClassName.of(dto.getParallel(), dto.getLitera())
-                )
-            )
-        );
+    return ResponseEntity.ok()
+      .body(
+        SchoolClassDto.of(
+          getSchoolClassUseCase.byName(
+            SchoolClassName.of(dto.getParallel(), dto.getLitera()))));
   }
 
   /**
@@ -88,8 +86,8 @@ public class GetSchoolClassEndpoint {
   @GetMapping("/school-class/student/{studentId}")
   public ResponseEntity<SchoolClassDto> getSchoolClassByStudentId(@PathVariable long studentId) {
     return ResponseEntity
-        .ok()
-        .body(SchoolClassDto.of(getSchoolClassUseCase.getByStudentId(studentId)));
+      .ok()
+      .body(SchoolClassDto
+        .of(getSchoolClassUseCase.getByStudentId(studentId)));
   }
-
 }

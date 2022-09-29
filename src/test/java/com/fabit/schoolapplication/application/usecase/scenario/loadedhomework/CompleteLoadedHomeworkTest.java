@@ -1,10 +1,13 @@
 package com.fabit.schoolapplication.application.usecase.scenario.loadedhomework;
 
-import com.fabit.schoolapplication.application.mapper.LoadedHomeworkMapperService;
 import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipline;
-import com.fabit.schoolapplication.infrastructure.ui.controller.loadedhomework.dto.LoadedHomeworkDto;
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
+import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
+import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomeworkId;
+import com.fabit.schoolapplication.domain.student.StudentId;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.homeworkforclass.HomeworkForClassEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.StudentEntity;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.LoadedHomeworkMapperService;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
@@ -20,20 +23,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class CompleteLoadedHomeworkTest {
 
-  @Autowired
-  LoadedHomeworkMapperService loadedHomeworkMapperService;
+  @Autowired LoadedHomeworkMapperService loadedHomeworkMapperService;
 
-  @Autowired
-  CompleteHomework completeHomework;
+  @Autowired CompleteHomeworkUseCase completeHomeworkUseCase;
 
-  @Autowired
-  LoadedHomeworkRepository loadedHomeworkRepository;
+  @Autowired LoadedHomeworkRepository loadedHomeworkRepository;
 
-  @Autowired
-  HomeworkForClassRepository homeworkForClassRepository;
-  @Autowired
-  StudentRepository studentRepository;
-
+  @Autowired HomeworkForClassRepository homeworkForClassRepository;
+  @Autowired StudentRepository studentRepository;
 
   @AfterEach
   void cleanAfter() {
@@ -55,23 +52,18 @@ public class CompleteLoadedHomeworkTest {
     homeworkForClass.setDiscipline(Discipline.COMPUTING);
     homeworkForClassRepository.save(homeworkForClass);
 
-    LoadedHomeworkDto dto = new LoadedHomeworkDto(
-        1L,
-        studentRepository.findAll().get(0).getId(),
-        "Test",
-        homeworkForClassRepository.findAll().get(0).getId()
-    );
+    LoadedHomework loadedHomework =
+      LoadedHomework.of(LoadedHomeworkId.of(1L), StudentId.of(1L), HomeworkForClassId.of(1L));
 
-    completeHomework.uploadCompletedHomework(dto);
+    completeHomeworkUseCase.uploadCompletedHomework(loadedHomework);
 
-    String taskCompletionResult
-        = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(
-            loadedHomeworkMapperService.mapDtoToHomework(dto)).getTaskCompletionResult();
+    String taskCompletionResult =
+      loadedHomeworkMapperService
+        .mapHomeworkToHomeworkCompletionResultEntity(loadedHomework)
+        .getTaskCompletionResult();
 
     Assertions.assertNotNull(loadedHomeworkRepository.findAll().get(0));
     Assertions.assertEquals(
-        taskCompletionResult,
-        loadedHomeworkRepository.findAll().get(0).getTaskCompletionResult());
+      taskCompletionResult, loadedHomeworkRepository.findAll().get(0).getTaskCompletionResult());
   }
-
 }
