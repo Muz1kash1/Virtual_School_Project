@@ -48,6 +48,13 @@ public interface SchoolClassService {
   SchoolClass persistSchoolClass(SchoolClassName schoolClassName);
 
   /**
+   * Создать школьный класс.
+   *
+   * @param schoolClassName - название класса параллель-литера (11А)
+   */
+  SchoolClass persistSchoolClass(SchoolClassName schoolClassName, List<StudentId> studentIds);
+
+  /**
    * Удалить школьный класс.
    *
    * @param schoolClassName - название класса параллель-литера (11А)
