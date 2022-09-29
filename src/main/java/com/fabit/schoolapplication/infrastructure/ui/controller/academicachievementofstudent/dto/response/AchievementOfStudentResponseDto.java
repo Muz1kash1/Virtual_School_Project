@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AchievementOfStudentResponseDto {
+
   private String dateOfLesson;
   private String achievement;
 }

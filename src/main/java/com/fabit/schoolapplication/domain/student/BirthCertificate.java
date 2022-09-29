@@ -33,24 +33,27 @@ public class BirthCertificate {
    * @return BirthCertificate birth certificate
    */
   public static BirthCertificate of(String serial, String number, LocalDate birthday, Clock clock) {
+
     if (isValidBirthCertificate(serial, number, birthday, clock)) {
       return new BirthCertificate(serial, number, birthday);
     } else {
       throw new IllegalArgumentException("Невалидные данные свид. о рожд.");
     }
+
   }
 
   private static boolean isValidBirthCertificate(String serial, String number,
                                                  LocalDate birthday, Clock clock) {
 
     return Pattern.matches("^[0-9]{6}$", number)
-      && Pattern.matches("^[0-9]{4}$", serial)
-      && isValidAge(birthday, clock);
+        && Pattern.matches("^[0-9]{4}$", serial)
+        && isValidAge(birthday, clock);
   }
 
   private static boolean isValidAge(LocalDate birthday, Clock clock) {
     return (LocalDate.ofInstant(
-      clock.instant(), clock.getZone()).getYear() - birthday.getYear() >= MIN_AGE_FOR_STUDENT);
+        clock.instant(), clock.getZone()).getYear() - birthday.getYear() >= MIN_AGE_FOR_STUDENT
+    );
   }
 
   @Override

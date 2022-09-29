@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class LoadedHomeworkUseCaseConfiguration {
+
   @Bean
   LoadedHomeworkServiceImpl loadedHomeworkServiceImpl(
       LoadedHomeworkRepository loadedHomeworkRepository,
@@ -27,4 +28,5 @@ public class LoadedHomeworkUseCaseConfiguration {
   CompleteHomeworkUseCase completeHomework(LoadedHomeworkService loadedHomeworkService) {
     return new CompleteHomeworkUseCase(loadedHomeworkService);
   }
+
 }

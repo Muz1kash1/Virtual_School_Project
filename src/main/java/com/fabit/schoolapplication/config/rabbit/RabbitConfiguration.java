@@ -43,4 +43,5 @@ public class RabbitConfiguration {
   public Binding binding() {
     return BindingBuilder.bind(updateMarkQueue()).to(markExchange());
   }
+
 }

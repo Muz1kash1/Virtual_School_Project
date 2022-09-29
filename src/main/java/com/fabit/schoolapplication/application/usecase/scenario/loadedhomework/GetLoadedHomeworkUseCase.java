@@ -3,8 +3,8 @@ package com.fabit.schoolapplication.application.usecase.scenario.loadedhomework;
 import com.fabit.schoolapplication.application.usecase.access.loadedhomework.LoadedHomeworkService;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomework;
 import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomeworkId;
-import lombok.RequiredArgsConstructor;
 import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class GetLoadedHomeworkUseCase {
@@ -14,12 +14,12 @@ public class GetLoadedHomeworkUseCase {
   /**
    * Метод возвращающий домашнюю работу с данным id.
    *
-   * @param id - id домашней работы
+   * @param id идентификатор домашней работы
    * @return доменный обоъект домашней работы
    */
   @Transactional
   public LoadedHomework execute(LoadedHomeworkId id) {
-
     return loadedHomeworkService.getReferenceById(id);
   }
+
 }

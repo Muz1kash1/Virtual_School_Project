@@ -85,7 +85,7 @@ public class SchoolClass {
    * @return SchoolClass
    */
   public static SchoolClass of(SchoolClassId id, SchoolClassName schoolClassName,
-                               List<StudentId> students) {
+      List<StudentId> students) {
     return new SchoolClass(id, schoolClassName, students);
   }
 

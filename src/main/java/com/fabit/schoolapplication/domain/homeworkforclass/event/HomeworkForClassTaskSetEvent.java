@@ -14,4 +14,5 @@ public class HomeworkForClassTaskSetEvent implements HomeworkForClassEvent {
   public Object getContent() {
     return this.homeworkForClass;
   }
+
 }

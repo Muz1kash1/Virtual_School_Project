@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/student")
 public class DeleteStudentEndpoint {
+
   final DeleteStudent deleteStudent;
 
   /**

@@ -29,9 +29,11 @@ public class HomeworkForClassController {
    * @return строка с подтверждением успешного создания
    */
   @PostMapping(value = "/homework-for-class", produces = "application/json")
-  public ResponseEntity<String> addHomeworkForClass(@RequestBody HomeworkForClassDto homeworkForClassDto) {
+  public ResponseEntity<String> addHomeworkForClass(
+      @RequestBody HomeworkForClassDto homeworkForClassDto) {
 
-    createHomeworkForClassUseCase.execute(homeworkForClassMapper.mapDtoToHomeworkForClass(homeworkForClassDto));
+    createHomeworkForClassUseCase.execute(
+        homeworkForClassMapper.mapDtoToHomeworkForClass(homeworkForClassDto));
 
     return ResponseEntity.status(HttpStatus.CREATED).body("Домашнее задание задано");
   }
@@ -46,8 +48,10 @@ public class HomeworkForClassController {
   public ResponseEntity<HomeworkForClassDto> getHomeworkForClass(@PathVariable long id) {
 
     return ResponseEntity
-      .ok()
-      .body(
-        homeworkForClassMapper.mapHomeworkForClassToDto(getHomeworkForClassUseCase.execute(HomeworkForClassId.of(id))));
+        .ok()
+        .body(homeworkForClassMapper.mapHomeworkForClassToDto(
+                getHomeworkForClassUseCase.execute(HomeworkForClassId.of(id))
+            )
+        );
   }
 }

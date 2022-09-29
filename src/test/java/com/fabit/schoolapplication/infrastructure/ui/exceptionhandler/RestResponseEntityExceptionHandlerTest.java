@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 @WithMockUser
 class RestResponseEntityExceptionHandlerTest {
+
   @Autowired
   private MockMvc mockMvc;
 

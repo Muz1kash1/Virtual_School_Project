@@ -6,6 +6,7 @@ import lombok.Value;
 @Getter
 @Value
 public class StudentId {
+
   long value;
 
   private StudentId(long value) {

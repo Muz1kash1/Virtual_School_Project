@@ -24,4 +24,5 @@ public class SchoolClassRemovedStudentDomainEvent implements SchoolClassDomainEv
   public Object getContent() {
     return studentId;
   }
+
 }

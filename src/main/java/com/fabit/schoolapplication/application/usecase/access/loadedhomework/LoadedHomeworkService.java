@@ -10,4 +10,5 @@ public interface LoadedHomeworkService {
   LoadedHomework getReferenceById(LoadedHomeworkId id);
 
   void deleteAll();
+
 }

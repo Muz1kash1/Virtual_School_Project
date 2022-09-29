@@ -26,19 +26,10 @@ public class Teacher {
 
   private TeacherId id;
 
-  /**
-   * Ф.И.О учителя.
-   */
   private FullName fullName;
 
-  /**
-   * Паспорт.
-   */
   private RussianPassport passport;
 
-  /**
-   * Снилс.
-   */
   private Snils snils;
 
   /**
@@ -49,8 +40,7 @@ public class Teacher {
   private Teacher() {
   }
 
-  private Teacher(TeacherId id, FullName fullName,
-                  RussianPassport passport, Snils snils) {
+  private Teacher(TeacherId id, FullName fullName, RussianPassport passport, Snils snils) {
     this.id = id;
     this.fullName = fullName;
     this.passport = passport;
@@ -70,6 +60,7 @@ public class Teacher {
    */
   public static Teacher of(TeacherId teacherId, FullName fullName,
                            RussianPassport passport, Snils snils) {
+
     return new Teacher(teacherId, fullName, passport, snils);
   }
 
@@ -82,21 +73,25 @@ public class Teacher {
     teacher.passport = passport;
     teacher.snils = snils;
     teacher.isActive = isActive;
+
     return teacher;
   }
 
   protected void registerEvent(TeacherDomainEvent event) {
+
     if (event != null) {
       DOMAIN_EVENTS.add(event);
     } else {
       throw new NullPointerException("Ивент не должен быть пустым!");
     }
+
   }
 
   /**
    * Изменить статус учителя на неактивный.
    */
   public void deactivate(LocalDate from, LocalDate to) {
+
     if (this.isActive && from.isBefore(to)) {
       this.isActive = false;
       registerEvent(new TeacherDeactivatedDomainEvent(from, to, id));
@@ -107,12 +102,14 @@ public class Teacher {
               + "Проверьте корректность введенных дат: "
               + "первая дата должна быть раньше по времени чем вторая");
     }
+
   }
 
   /**
    * Изменить статус учителя на активный.
    */
   public void activate() {
+
     if (!(this.isActive)) {
       this.isActive = true;
       registerEvent(new TeacherActivatedDomainEvent(this.id));
@@ -120,5 +117,7 @@ public class Teacher {
       throw new IllegalStateException(
           "Нельзя изменить статус учителя на АКТИВНЫЙ  так как он и так АКТИВНЫЙ");
     }
+
   }
+
 }

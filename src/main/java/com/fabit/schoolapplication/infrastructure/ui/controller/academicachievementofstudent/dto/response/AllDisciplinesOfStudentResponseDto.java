@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AllDisciplinesOfStudentResponseDto {
+
   private List<String> disciplinesOfStudent;
 }

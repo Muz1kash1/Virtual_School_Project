@@ -17,6 +17,7 @@ import org.springframework.data.domain.DomainEvents;
 @Data
 @Table(name = "student")
 public class StudentEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -35,4 +36,5 @@ public class StudentEntity {
   protected Collection<Object> domainEvents() {
     return Collections.unmodifiableList(Student.DOMAIN_EVENTS);
   }
+
 }

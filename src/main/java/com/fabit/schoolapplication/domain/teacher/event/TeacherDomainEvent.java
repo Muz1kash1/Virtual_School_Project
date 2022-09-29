@@ -1,3 +1,5 @@
 package com.fabit.schoolapplication.domain.teacher.event;
 
-public interface TeacherDomainEvent {}
+public interface TeacherDomainEvent {
+
+}

@@ -1,7 +1,7 @@
 package com.fabit.schoolapplication.infrastructure.persistence.entity.schoolclass;
 
-import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClass;
+import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassName;
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.schoolclass.SchoolClassEntity;
 import org.junit.jupiter.api.Assertions;

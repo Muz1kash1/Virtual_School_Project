@@ -14,4 +14,5 @@ public class HomeworkForClassCreatedEvent implements HomeworkForClassEvent {
   public Object getContent() {
     return this.homeworkForClass;
   }
+
 }

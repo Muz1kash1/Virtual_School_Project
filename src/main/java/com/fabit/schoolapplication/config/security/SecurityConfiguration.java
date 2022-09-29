@@ -50,6 +50,7 @@ public class SecurityConfiguration {
         .password(passwordEncoder().encode(adminPass))
         .roles("ADMIN")
         .build();
+
     return new InMemoryUserDetailsManager(user);
   }
 

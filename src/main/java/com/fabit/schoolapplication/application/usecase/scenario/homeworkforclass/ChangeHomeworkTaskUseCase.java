@@ -12,10 +12,11 @@ public class ChangeHomeworkTaskUseCase {
   /**
    * Метод меняющий домашнее задание.
    *
-   * @param id айди дз где оно меняется
+   * @param id   айди дз где оно меняется
    * @param task новое задание
    */
   public void execute(HomeworkForClassId id, String task) {
     homeworkForClassService.changeHomework(id, task);
   }
+
 }

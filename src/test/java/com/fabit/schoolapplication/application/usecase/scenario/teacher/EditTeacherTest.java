@@ -9,6 +9,7 @@ import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.Full
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.PassportDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.SnilsDto;
 import com.fabit.schoolapplication.infrastructure.ui.controller.teacher.dto.TeacherDto;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @SpringBootTest
@@ -46,14 +46,14 @@ public class EditTeacherTest {
   public void init() {
 
     TeacherDto teacherToCreate = new TeacherDto(
-      new FullNameDto("Name", "Surname", "Patronymic"),
-      new PassportDto("1234", "567845", LocalDate.parse("1980-09-15")),
-      new SnilsDto("123-456-789-00")
+        new FullNameDto("Name", "Surname", "Patronymic"),
+        new PassportDto("1234", "567845", LocalDate.parse("1980-09-15")),
+        new SnilsDto("123-456-789-00")
     );
 
     temporaryTeacher = teacherPersistenceMapper.mapDomainToEntity(createTeacher.execute(
-        teacherControllerMapper.mapDtoToDomain(teacherToCreate)
-      )
+            teacherControllerMapper.mapDtoToDomain(teacherToCreate)
+        )
     );
     temporaryTeacherId = temporaryTeacher.getId();
   }
@@ -69,7 +69,7 @@ public class EditTeacherTest {
   void deactivateAndActivateTest() {
 
     Teacher deactivatedTeacher = editTeacher.deactivate(
-      temporaryTeacherId, "2022-09-16", "2022-09-25");
+        temporaryTeacherId, "2022-09-16", "2022-09-25");
 
     Assertions.assertFalse(deactivatedTeacher.isActive());
 

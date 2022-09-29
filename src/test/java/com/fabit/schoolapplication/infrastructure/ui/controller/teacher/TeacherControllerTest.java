@@ -1,5 +1,12 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.teacher;
 
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fabit.schoolapplication.infrastructure.persisnence.entity.teacher.TeacherEntity;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
@@ -28,22 +28,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class TeacherControllerTest {
 
   private final String createTeacherJson = """
-    {
-        "fullName": {
-            "name": "Michael",
-            "surname": "Smirnov",
-            "patronymic": "Alexeevich"
-        },
-        "passport": {
-            "serial": 2008,
-            "number": 200931,
-            "birthday": "1980-09-15"
-        },
-        "snils": {
-            "numberView": "127-328-591-72"
-        }
-    }
-    """;
+      {
+          "fullName": {
+              "name": "Michael",
+              "surname": "Smirnov",
+              "patronymic": "Alexeevich"
+          },
+          "passport": {
+              "serial": 2008,
+              "number": 200931,
+              "birthday": "1980-09-15"
+          },
+          "snils": {
+              "numberView": "127-328-591-72"
+          }
+      }
+      """;
   @Autowired
   TeacherRepository teacherRepository;
   @Autowired
@@ -58,12 +58,12 @@ class TeacherControllerTest {
   @DisplayName("Создание учителя должно вызывать соответствующий юзкейс.")
   void createTeacher() throws Exception {
     mockMvc.perform(post("/teacher/")
-        .contentType(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON)
-        .content(createTeacherJson))
-      .andExpect(status().isCreated())
-      .andExpect(jsonPath("$.fullName.name", is("Michael")))
-      .andExpect(jsonPath("$.snils.numberView", is("127-328-591-72")));
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content(createTeacherJson))
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath("$.fullName.name", is("Michael")))
+        .andExpect(jsonPath("$.snils.numberView", is("127-328-591-72")));
   }
 
 
@@ -72,29 +72,29 @@ class TeacherControllerTest {
   void getTeacherTest() throws Exception {
 
     mockMvc.perform(post("/teacher/")
-      .contentType(MediaType.APPLICATION_JSON)
-      .accept(MediaType.APPLICATION_JSON)
-      .content(createTeacherJson));
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
 
     TeacherEntity teacherEntity = teacherRepository.findAll().get(0);
 
     mockMvc.perform(get("/teacher/" + teacherEntity.getId()))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.fullName.name", is("Michael")))
-      .andExpect(jsonPath("$.snils.numberView", is("127-328-591-72")));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.fullName.name", is("Michael")))
+        .andExpect(jsonPath("$.snils.numberView", is("127-328-591-72")));
   }
 
   @Test
   void getAllTeachersTest() throws Exception {
 
     mockMvc.perform(post("/teacher/")
-      .contentType(MediaType.APPLICATION_JSON)
-      .accept(MediaType.APPLICATION_JSON)
-      .content(createTeacherJson));
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
 
     mockMvc.perform(get("/teacher"))
-      .andExpect(status().isOk())
-      .andExpect(jsonPath("$.[0].snils.numberView", is("127-328-591-72")));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.[0].snils.numberView", is("127-328-591-72")));
   }
 
   @Test
@@ -103,9 +103,9 @@ class TeacherControllerTest {
     long teacherCount;
     mockMvc.perform(post("/teacher/")
 
-      .contentType(MediaType.APPLICATION_JSON)
-      .accept(MediaType.APPLICATION_JSON)
-      .content(createTeacherJson));
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(createTeacherJson));
 
     long teacherId = teacherRepository.findAll().get(0).getId();
 

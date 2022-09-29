@@ -12,4 +12,5 @@ public interface TeacherService {
   Teacher findById(long teacherId);
 
   List<Teacher> findAll();
+
 }

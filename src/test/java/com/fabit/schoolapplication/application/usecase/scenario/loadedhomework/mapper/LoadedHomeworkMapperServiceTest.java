@@ -30,48 +30,48 @@ public class LoadedHomeworkMapperServiceTest {
   void mapToHomeworkCompletionResultTest() {
 
     LoadedHomeworkDto loadedHomeworkDto = new LoadedHomeworkDto(
-      1L, 1L, "test", 1L
+        1L, 1L, "test", 1L
     );
 
     LoadedHomework loadedHomework = loadedHomeworkMapperService.mapDtoToHomework(loadedHomeworkDto);
 
     Assertions.assertNotNull(loadedHomework);
     Assertions.assertEquals(
-      loadedHomeworkDto.getTaskCompletionResult(),
-      loadedHomework.getTaskCompletionResult()
+        loadedHomeworkDto.getTaskCompletionResult(),
+        loadedHomework.getTaskCompletionResult()
     );
     Assertions.assertEquals(
-      loadedHomeworkDto.getStudentId(),
-      loadedHomework.getStudentId().getValue()
+        loadedHomeworkDto.getStudentId(),
+        loadedHomework.getStudentId().getValue()
     );
     Assertions.assertEquals(
-      loadedHomeworkRepository.getNextId() - 1,
-      loadedHomework.getLoadedHomeworkId().getValue()
+        loadedHomeworkRepository.getNextId() - 1,
+        loadedHomework.getLoadedHomeworkId().getValue()
     );
     Assertions.assertEquals(
-      loadedHomeworkDto.getHomeworkForClassId(),
-      loadedHomework.getHomeworkForClassId().getValue()
+        loadedHomeworkDto.getHomeworkForClassId(),
+        loadedHomework.getHomeworkForClassId().getValue()
     );
 
     LoadedHomeworkEntity loadedHomeworkEntity
-      = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(loadedHomework);
+        = loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(loadedHomework);
 
     Assertions.assertNotNull(loadedHomeworkEntity);
     Assertions.assertEquals(
-      loadedHomeworkEntity.getTaskCompletionResult(),
-      loadedHomework.getTaskCompletionResult()
+        loadedHomeworkEntity.getTaskCompletionResult(),
+        loadedHomework.getTaskCompletionResult()
     );
     Assertions.assertEquals(
-      loadedHomeworkEntity.getHomeworkForClassId(),
-      loadedHomeworkDto.getHomeworkForClassId()
+        loadedHomeworkEntity.getHomeworkForClassId(),
+        loadedHomeworkDto.getHomeworkForClassId()
     );
     Assertions.assertEquals(
-      loadedHomeworkEntity.getStudentId(),
-      loadedHomework.getStudentId().getValue()
+        loadedHomeworkEntity.getStudentId(),
+        loadedHomework.getStudentId().getValue()
     );
     Assertions.assertEquals(
-      loadedHomeworkEntity.getId(),
-      loadedHomework.getLoadedHomeworkId().getValue()
+        loadedHomeworkEntity.getId(),
+        loadedHomework.getLoadedHomeworkId().getValue()
     );
   }
 }

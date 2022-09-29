@@ -25,4 +25,5 @@ public class FullName {
   public String toString() {
     return name + " " + surname + " " + patronymic;
   }
+
 }

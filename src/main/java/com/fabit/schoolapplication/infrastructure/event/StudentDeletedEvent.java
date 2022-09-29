@@ -18,4 +18,5 @@ public class StudentDeletedEvent extends ApplicationEvent {
     super(source);
     this.studentId = studentId;
   }
+
 }

@@ -20,7 +20,6 @@ import lombok.Getter;
 public class AcademicAchievementByDiscipline {
 
   private AcademicAchievementByDisciplineId id;
-
   private Discipline discipline;
   private List<Achievement> achievements;
 
@@ -29,6 +28,7 @@ public class AcademicAchievementByDiscipline {
 
   private AcademicAchievementByDiscipline(AcademicAchievementByDisciplineId id,
                                           Discipline discipline) {
+
     this.id = id;
     this.discipline = discipline;
     this.achievements = new ArrayList<>();
@@ -42,9 +42,8 @@ public class AcademicAchievementByDiscipline {
    * @param discipline дисциплина
    * @return объект журнала академической успеваемости студента по конкретной дисциплине
    */
-  public static AcademicAchievementByDiscipline of(
-      AcademicAchievementByDisciplineId id,
-      Discipline discipline) {
+  public static AcademicAchievementByDiscipline of(AcademicAchievementByDisciplineId id,
+                                                   Discipline discipline) {
 
     return new AcademicAchievementByDiscipline(id, discipline);
   }
@@ -59,16 +58,17 @@ public class AcademicAchievementByDiscipline {
    * @param achievements список отметок
    * @return объект журнала академической успеваемости студента по конкретной дисциплине
    */
-  public static AcademicAchievementByDiscipline copyOf(
-      AcademicAchievementByDisciplineId id,
-      Discipline discipline,
-      List<Achievement> achievements) {
+  public static AcademicAchievementByDiscipline copyOf(AcademicAchievementByDisciplineId id,
+                                                       Discipline discipline,
+                                                       List<Achievement> achievements) {
 
-    AcademicAchievementByDiscipline academicAchievementByDiscipline =
-        new AcademicAchievementByDiscipline();
+    AcademicAchievementByDiscipline academicAchievementByDiscipline
+        = new AcademicAchievementByDiscipline();
+
     academicAchievementByDiscipline.id = id;
     academicAchievementByDiscipline.discipline = discipline;
     academicAchievementByDiscipline.achievements = achievements;
+
     return academicAchievementByDiscipline;
   }
 
@@ -90,6 +90,7 @@ public class AcademicAchievementByDiscipline {
    */
   public void changeAchievement(String value, LocalDate dateOfLesson) {
     Achievement achievement = getAchievementByDateOfLesson(dateOfLesson);
+
     if (achievement.getDateOfLesson().equals(dateOfLesson)) {
       this.achievements.remove(achievement);
       this.achievements.add(new Achievement(dateOfLesson, value));
@@ -103,9 +104,11 @@ public class AcademicAchievementByDiscipline {
    * @return объект отметки об успеваемости
    */
   public Achievement getAchievementByDateOfLesson(LocalDate dateOfLesson) {
+
     Optional<Achievement> achievement = this.achievements.stream()
         .filter(item -> item.getDateOfLesson().equals(dateOfLesson))
         .findFirst();
+
     if (achievement.isPresent()) {
       return achievement.get();
     } else {

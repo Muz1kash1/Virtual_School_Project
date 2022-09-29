@@ -13,14 +13,12 @@ public class EditTeacher {
 
   private final TeacherService teacherService;
 
-
   /**
    * Активировать учителя (вышел на работу).
    *
    * @param teacherId - идентификатор учителя
    * @return TeacherEntity
    */
-
   public Teacher activate(long teacherId) {
 
     Teacher teacher = teacherService.findById(teacherId);
@@ -48,8 +46,9 @@ public class EditTeacher {
     );
 
     teacherService.save(teacher);
-
     log.info("Учитель деактивирован и не может работать: " + teacher);
+
     return teacher;
   }
+
 }

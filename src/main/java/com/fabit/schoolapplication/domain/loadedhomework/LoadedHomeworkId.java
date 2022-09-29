@@ -14,4 +14,5 @@ public class LoadedHomeworkId {
   public static LoadedHomeworkId of(long value) {
     return new LoadedHomeworkId(value);
   }
+
 }

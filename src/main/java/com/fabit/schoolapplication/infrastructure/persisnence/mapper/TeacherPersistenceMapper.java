@@ -78,4 +78,5 @@ public class TeacherPersistenceMapper {
   public Snils mapEntitySnilsToDomain(String snils) {
     return Snils.of(snils);
   }
+
 }

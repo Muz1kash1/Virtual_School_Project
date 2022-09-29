@@ -8,6 +8,7 @@ import com.fabit.schoolapplication.infrastructure.persisnence.entity.student.Stu
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.HomeworkForClassRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.LoadedHomeworkRepository;
 import com.fabit.schoolapplication.infrastructure.persisnence.repository.StudentRepository;
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,18 +16,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.time.LocalDate;
 
 @SpringBootTest
 public class GetLoadedHomeworkUseCaseTest {
 
-  @Autowired GetLoadedHomeworkUseCase getLoadedHomeworkUseCase;
+  @Autowired
+  GetLoadedHomeworkUseCase getLoadedHomeworkUseCase;
 
-  @Autowired LoadedHomeworkRepository loadedHomeworkRepository;
+  @Autowired
+  LoadedHomeworkRepository loadedHomeworkRepository;
 
-  @Autowired StudentRepository studentRepository;
+  @Autowired
+  StudentRepository studentRepository;
 
-  @Autowired HomeworkForClassRepository homeworkForClassRepository;
+  @Autowired
+  HomeworkForClassRepository homeworkForClassRepository;
 
   @BeforeEach
   void cleanBefore() {

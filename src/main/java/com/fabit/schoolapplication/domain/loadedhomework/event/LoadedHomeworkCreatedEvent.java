@@ -14,4 +14,5 @@ public class LoadedHomeworkCreatedEvent implements LoadedHomeworkEvent {
   public Object getContent() {
     return this.loadedHomework;
   }
+
 }

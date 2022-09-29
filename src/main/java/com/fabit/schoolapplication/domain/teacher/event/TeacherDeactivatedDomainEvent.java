@@ -23,4 +23,5 @@ public class TeacherDeactivatedDomainEvent implements TeacherDomainEvent {
     this.to = to;
     this.teacherId = teacherId;
   }
+
 }

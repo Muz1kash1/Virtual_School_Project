@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class GetTeacher {
+
   private final TeacherService teacherService;
 
   /**
@@ -24,4 +25,5 @@ public class GetTeacher {
   public List<Teacher> all() {
     return teacherService.findAll();
   }
+
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class StudentDto implements Serializable {
+
   private Long id;
   private FullNameDto name;
   private SnilsDto snils;
