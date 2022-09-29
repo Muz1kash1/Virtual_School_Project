@@ -5,16 +5,17 @@ admin:
   pass: admin
 
 spring:
-  datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5434/postgres
-    driverClassName: org.postgresql.Driver
-    password: postgres
   jpa:
-    database: POSTGRESQL
+    show-sql: true
     hibernate:
       ddl-auto: none
-    show-sql: 'true'
-  sql:
-    init:
-      platform: postgres
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5434/postgres
+    driverClassName: org.postgresql.Driver
+    hikari:
+      idle-timeout: 100000
+      max-lifetime: 600000
+      minimum-idle: 1
+      maximum-pool-size: 25
