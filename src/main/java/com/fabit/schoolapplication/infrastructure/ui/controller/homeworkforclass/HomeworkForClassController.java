@@ -1,7 +1,9 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.homeworkforclass;
 
-import com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.CreateHomeworkForClass;
-import com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.GetHomeworkForClass;
+import com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.CreateHomeworkForClassUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.homeworkforclass.GetHomeworkForClassUseCase;
+import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.HomeworkForClassMapper;
 import com.fabit.schoolapplication.infrastructure.ui.controller.homeworkforclass.dto.HomeworkForClassDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeworkForClassController {
 
-  final CreateHomeworkForClass createHomeworkForClass;
-  final GetHomeworkForClass getHomeworkForClass;
+  final CreateHomeworkForClassUseCase createHomeworkForClassUseCase;
+  final GetHomeworkForClassUseCase getHomeworkForClassUseCase;
+  final HomeworkForClassMapper homeworkForClassMapper;
 
   /**
    * Метод создающий ДЗ для класса на дисциплину на дату.
@@ -26,14 +29,11 @@ public class HomeworkForClassController {
    * @return строка с подтверждением успешного создания
    */
   @PostMapping(value = "/homework-for-class", produces = "application/json")
-  public ResponseEntity<String> addHomeworkForClass(
-      @RequestBody HomeworkForClassDto homeworkForClassDto) {
+  public ResponseEntity<String> addHomeworkForClass(@RequestBody HomeworkForClassDto homeworkForClassDto) {
 
-    createHomeworkForClass.execute(homeworkForClassDto);
+    createHomeworkForClassUseCase.execute(homeworkForClassMapper.mapDtoToHomeworkForClass(homeworkForClassDto));
 
-    return ResponseEntity
-        .status(HttpStatus.CREATED)
-        .body("Домашнее задание задано");
+    return ResponseEntity.status(HttpStatus.CREATED).body("Домашнее задание задано");
   }
 
   /**
@@ -46,8 +46,8 @@ public class HomeworkForClassController {
   public ResponseEntity<HomeworkForClassDto> getHomeworkForClass(@PathVariable long id) {
 
     return ResponseEntity
-        .ok()
-        .body(getHomeworkForClass.execute(id));
+      .ok()
+      .body(
+        homeworkForClassMapper.mapHomeworkForClassToDto(getHomeworkForClassUseCase.execute(HomeworkForClassId.of(id))));
   }
-
 }

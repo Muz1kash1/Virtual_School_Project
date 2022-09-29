@@ -1,7 +1,9 @@
 package com.fabit.schoolapplication.infrastructure.ui.controller.loadedhomework;
 
-import com.fabit.schoolapplication.application.usecase.scenario.loadedhomework.CompleteHomework;
-import com.fabit.schoolapplication.application.usecase.scenario.loadedhomework.GetLoadedHomework;
+import com.fabit.schoolapplication.application.usecase.scenario.loadedhomework.CompleteHomeworkUseCase;
+import com.fabit.schoolapplication.application.usecase.scenario.loadedhomework.GetLoadedHomeworkUseCase;
+import com.fabit.schoolapplication.domain.loadedhomework.LoadedHomeworkId;
+import com.fabit.schoolapplication.infrastructure.persisnence.mapper.LoadedHomeworkMapperService;
 import com.fabit.schoolapplication.infrastructure.ui.controller.loadedhomework.dto.LoadedHomeworkDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class LoadedHomeworkController {
 
-  final CompleteHomework completeHomework;
-  final GetLoadedHomework getLoadedHomework;
+  final CompleteHomeworkUseCase completeHomeworkUseCase;
+  final GetLoadedHomeworkUseCase getLoadedHomeworkUseCase;
+  final LoadedHomeworkMapperService loadedHomeworkMapperService;
 
   /**
    * Загружает выполненное дз.
@@ -29,14 +32,14 @@ public class LoadedHomeworkController {
    */
   @PostMapping(value = "/homework", produces = "application/json")
   public ResponseEntity<String> sendCompletedHomework(
-      @RequestBody LoadedHomeworkDto loadedHomeworkDto) {
+    @RequestBody LoadedHomeworkDto loadedHomeworkDto) {
 
     log.info("пытаемся загрузить выполненную домашку");
-    completeHomework.uploadCompletedHomework(loadedHomeworkDto);
+    completeHomeworkUseCase.uploadCompletedHomework(loadedHomeworkMapperService.mapDtoToHomework(loadedHomeworkDto));
 
     return ResponseEntity
-        .status(HttpStatus.CREATED)
-        .body("Домашняя работа загружена");
+      .status(HttpStatus.CREATED)
+      .body("Домашняя работа загружена");
   }
 
   /**
@@ -48,11 +51,12 @@ public class LoadedHomeworkController {
 
   @GetMapping(value = "/homework/{id}", produces = "application/json")
   public ResponseEntity<LoadedHomeworkDto> getCompletedHomework(
-      @PathVariable long id) {
+    @PathVariable long id) {
 
     return ResponseEntity
-        .ok()
-        .body(getLoadedHomework.execute(id));
+      .ok()
+      .body(loadedHomeworkMapperService.mapHomeworkToHomeworkDto(
+        getLoadedHomeworkUseCase.execute(LoadedHomeworkId.of(id))));
   }
 
 }

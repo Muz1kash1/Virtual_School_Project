@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
+import com.tngtech.archunit.library.Architectures;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -46,29 +47,27 @@ public class ArchitectureTest {
     contextBusinessRule("com.fabit.schoolapplication.domain..", APPLICATION_CLASSES);
   }
 
-//  @DisplayName("usecase package should depends on domain and approved packages")
-//  @Test
-//  public void useCaseDependencyArchTest() {
-//
-//    if (APPLICATION_CLASSES.isEmpty()) {
-//      fail("Classes of school application module were not found");
-//    }
-//
-//    ArchRuleDefinition
-//      .classes()
-//      .that()
-//      .resideInAnyPackage("com.fabit.schoolapplication.application.usecase..")
-//      .should()
-//      .onlyDependOnClassesThat()
-//      .resideInAnyPackage(
-//        withAllowedPackages(
-//          "com.fabit.schoolapplication.application.usecase..", "com.fabit.schoolapplication.domain..",
-//          "org.springframework.stereotype.Service"
-//        )
-//      )
-//      .check(APPLICATION_CLASSES);
-//  }
-//
+  @DisplayName("usecase package should depends on domain and approved packages")
+  @Test
+  public void useCaseDependencyArchTest() {
+
+    if (APPLICATION_CLASSES.isEmpty()) {
+      fail("Classes of school application module were not found");
+    }
+
+    ArchRuleDefinition.classes()
+        .that()
+        .resideInAnyPackage("com.fabit.schoolapplication.application.usecase..")
+        .should()
+        .onlyDependOnClassesThat()
+        .resideInAnyPackage(
+            withAllowedPackages(
+                "com.fabit.schoolapplication.application.usecase..",
+                "com.fabit.schoolapplication.domain..",
+                "org.springframework.stereotype.Service"))
+        .check(APPLICATION_CLASSES);
+  }
+
 //  @DisplayName("onion architecture should be followed for school application")
 //  @Test
 //  public void vehicleSearchArchTest() {
@@ -76,18 +75,17 @@ public class ArchitectureTest {
 //      fail("Classes of school application module were not found");
 //    }
 //
-//    Architectures
-//      .onionArchitecture()
-//      .domainModels("com.fabit.schoolapplication.domain..")
-//      .domainServices("com.fabit.schoolapplication.domain..")
-//      .applicationServices("com.fabit.schoolapplication.application..")
-//      .adapter("persistence", "com.fabit.schoolapplication.infrastructure.persistence..")
-//      .adapter(
-//        "messages", "com.fabit.schoolapplication.infrastructure.event..",
-//              "com.fabit.schoolapplication.infrastructure.listener.."
-//      )
-//      .adapter("web", "com.fabit.schoolapplication.infrastructure.ui.controller..")
-//      .check(APPLICATION_CLASSES);
+//    Architectures.onionArchitecture()
+//        .domainModels("com.fabit.schoolapplication.domain..")
+//        .domainServices("com.fabit.schoolapplication.domain..")
+//        .applicationServices("com.fabit.schoolapplication.application..")
+//        .adapter("persistence", "com.fabit.schoolapplication.infrastructure.persistence..")
+//        .adapter(
+//            "messages",
+//            "com.fabit.schoolapplication.infrastructure.event..",
+//            "com.fabit.schoolapplication.infrastructure.listener..")
+//        .adapter("web", "com.fabit.schoolapplication.infrastructure.ui.controller..")
+//        .check(APPLICATION_CLASSES);
 //  }
 
   private String[] withAllowedPackages(final String... packages) {
