@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class BirthCertificateDto {
+
   private String serial;
   private String number;
   private LocalDate birthday;
@@ -13,4 +14,5 @@ public class BirthCertificateDto {
   public String toString() {
     return serial + " " + number;
   }
+
 }

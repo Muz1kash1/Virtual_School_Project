@@ -9,13 +9,15 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class LoadedHomeworkServiceImpl implements LoadedHomeworkService {
+
   final LoadedHomeworkRepository loadedHomeworkRepository;
   final LoadedHomeworkMapperService loadedHomeworkMapperService;
 
   @Override
   public void save(LoadedHomework loadedHomework) {
     loadedHomeworkRepository.save(
-      loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(loadedHomework));
+        loadedHomeworkMapperService.mapHomeworkToHomeworkCompletionResultEntity(loadedHomework)
+    );
   }
 
   /**
@@ -27,7 +29,8 @@ public class LoadedHomeworkServiceImpl implements LoadedHomeworkService {
   @Override
   public LoadedHomework getReferenceById(LoadedHomeworkId id) {
     return loadedHomeworkMapperService.mapHomeworkEntityToHomework(
-      loadedHomeworkRepository.getReferenceById(id.getValue()));
+        loadedHomeworkRepository.getReferenceById(id.getValue())
+    );
   }
 
   /**

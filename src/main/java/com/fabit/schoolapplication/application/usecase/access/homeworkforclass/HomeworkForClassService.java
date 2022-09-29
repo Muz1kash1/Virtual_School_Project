@@ -14,4 +14,5 @@ public interface HomeworkForClassService {
   void deleteAll();
 
   void changeHomework(HomeworkForClassId id, String task);
+
 }

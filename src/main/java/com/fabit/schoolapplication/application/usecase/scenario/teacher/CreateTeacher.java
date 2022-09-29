@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CreateTeacher {
+
   private final TeacherService teacherService;
 
   /**
@@ -18,4 +19,5 @@ public class CreateTeacher {
     teacherService.save(teacher);
     return teacher;
   }
+
 }

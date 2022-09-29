@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class PassportDto {
+
   private String serial;
   private String number;
   private LocalDate birthday;

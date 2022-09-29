@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class StudentMapperServiceImpl {
+
   final StudentRepository studentRepository;
 
   /**
@@ -30,13 +31,16 @@ public class StudentMapperServiceImpl {
    * @return StudentEntity
    */
   public StudentEntity mapToStudentEntity(Student student) {
+
     StudentEntity studentEntity = new StudentEntity();
     studentEntity.setId(student.getId().getValue());
     studentEntity.setName(student.getFullName().toString());
     studentEntity.setSnils(student.getSnils().getNumberView());
+
     if (student.getPassport() != null) {
       studentEntity.setPassport(student.getPassport().toString());
     }
+
     studentEntity.setBirthCertificate(student.getBirthCertificate().toString());
 
     return studentEntity;
@@ -49,21 +53,23 @@ public class StudentMapperServiceImpl {
    * @return Student
    */
   public Student mapToStudent(StudentDto studentDto) {
+
     if (studentDto.getPassport() == null) {
       Long id = studentRepository.getNextId();
       return Student.of(
-        StudentId.of(id),
-        mapToFullName(studentDto.getName()),
-        mapToSnils(studentDto.getSnils()),
-        mapToBirthCertificate(studentDto.getBirthCertificate())
+          StudentId.of(id),
+          mapToFullName(studentDto.getName()),
+          mapToSnils(studentDto.getSnils()),
+          mapToBirthCertificate(studentDto.getBirthCertificate())
       );
     }
+
     return Student.of(
-      StudentId.of(studentRepository.getNextId()),
-      mapToFullName(studentDto.getName()),
-      mapToSnils(studentDto.getSnils()),
-      mapToBirthCertificate(studentDto.getBirthCertificate()),
-      mapToPassport(studentDto.getPassport())
+        StudentId.of(studentRepository.getNextId()),
+        mapToFullName(studentDto.getName()),
+        mapToSnils(studentDto.getSnils()),
+        mapToBirthCertificate(studentDto.getBirthCertificate()),
+        mapToPassport(studentDto.getPassport())
     );
   }
 
@@ -95,10 +101,10 @@ public class StudentMapperServiceImpl {
    */
   public BirthCertificate mapToBirthCertificate(BirthCertificateDto birthCertificateDto) {
     return BirthCertificate.of(
-      birthCertificateDto.getSerial(),
-      birthCertificateDto.getNumber(),
-      birthCertificateDto.getBirthday(),
-      Clock.systemUTC()
+        birthCertificateDto.getSerial(),
+        birthCertificateDto.getNumber(),
+        birthCertificateDto.getBirthday(),
+        Clock.systemUTC()
     );
   }
 
@@ -110,10 +116,11 @@ public class StudentMapperServiceImpl {
    */
   public RussianPassport mapToPassport(PassportDto passportDto) {
     return RussianPassport.of(
-      passportDto.getSerial(),
-      passportDto.getNumber(),
-      passportDto.getBirthday(),
-      Clock.systemUTC()
+        passportDto.getSerial(),
+        passportDto.getNumber(),
+        passportDto.getBirthday(),
+        Clock.systemUTC()
     );
   }
+
 }

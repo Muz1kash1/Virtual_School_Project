@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @NoArgsConstructor
 public class Student {
+
   private StudentId id;
 
   private FullName fullName;
@@ -34,7 +35,7 @@ public class Student {
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,
-                  BirthCertificate birthCertificate) {
+      BirthCertificate birthCertificate) {
 
     this.id = studentId;
     this.fullName = name;
@@ -45,7 +46,7 @@ public class Student {
   }
 
   private Student(StudentId studentId, FullName name, Snils snils,
-                  BirthCertificate birthCertificate, Passport passport) {
+      BirthCertificate birthCertificate, Passport passport) {
 
     this.id = studentId;
     this.fullName = name;
@@ -82,15 +83,17 @@ public class Student {
    */
   public static Student of(StudentId studentId, FullName name, Snils snils,
                            BirthCertificate birthCertificate, Passport passport) {
+
     if (birthCertificate.getBirthday().isEqual(passport.getBirthday())) {
       return new Student(studentId, name, snils, birthCertificate, passport);
     }
     throw new IllegalArgumentException(
-      "не совпадают даты рождения у паспорта и свидетельства о рождении");
+        "не совпадают даты рождения у паспорта и свидетельства о рождении"
+    );
   }
 
   /**
-   * замена СНИЛС.
+   * Замена СНИЛС.
    *
    * @param snils СНИЛС
    */

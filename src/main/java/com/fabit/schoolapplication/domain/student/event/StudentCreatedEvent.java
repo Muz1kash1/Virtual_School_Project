@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class StudentCreatedEvent implements StudentDomainEvent {
+
   private final Student student;
 
   public StudentCreatedEvent(Student student) {

@@ -23,6 +23,7 @@ public class StudentUseCaseConfiguration {
   public StudentService studentService(StudentRepository studentRepository,
                                        StudentMapperServiceImpl studentMapperService,
                                        ApplicationEventPublisher applicationEventPublisher) {
+
     return new StudentServiceImpl(
       studentRepository,
       studentMapperService,

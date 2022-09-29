@@ -47,5 +47,4 @@ public class HomeworkForClassEntity {
     return Collections.unmodifiableList(HomeworkForClass.DOMAIN_EVENTS);
   }
 
-
 }

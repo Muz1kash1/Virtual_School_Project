@@ -13,10 +13,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class HomeworkForClassUseCaseConfiguration {
+
   @Bean
   HomeworkForClassServiceImpl homeworkForClassService(
       HomeworkForClassRepository homeworkForClassRepository,
       HomeworkForClassMapper homeworkForClassMapper) {
+
     return new HomeworkForClassServiceImpl(homeworkForClassMapper, homeworkForClassRepository);
   }
 
@@ -26,12 +28,16 @@ public class HomeworkForClassUseCaseConfiguration {
   }
 
   @Bean
-  CreateHomeworkForClassUseCase createHomeworkForClass(HomeworkForClassService homeworkForClassService) {
+  CreateHomeworkForClassUseCase createHomeworkForClass(
+      HomeworkForClassService homeworkForClassService) {
+
     return new CreateHomeworkForClassUseCase(homeworkForClassService);
   }
 
   @Bean
-  DeleteHomeworkForClassUseCase deleteHomeworkForClass(HomeworkForClassService homeworkForClassService) {
+  DeleteHomeworkForClassUseCase deleteHomeworkForClass(
+      HomeworkForClassService homeworkForClassService) {
+
     return new DeleteHomeworkForClassUseCase(homeworkForClassService);
   }
 
@@ -39,4 +45,5 @@ public class HomeworkForClassUseCaseConfiguration {
   GetHomeworkForClassUseCase getHomeworkForClass(HomeworkForClassService homeworkForClassService) {
     return new GetHomeworkForClassUseCase(homeworkForClassService);
   }
+
 }

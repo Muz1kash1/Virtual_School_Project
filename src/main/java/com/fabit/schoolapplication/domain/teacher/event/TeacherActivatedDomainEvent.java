@@ -5,9 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class TeacherActivatedDomainEvent implements TeacherDomainEvent {
+
   private final TeacherId teacherId;
 
   public TeacherActivatedDomainEvent(TeacherId teacherId) {
     this.teacherId = teacherId;
   }
+
 }

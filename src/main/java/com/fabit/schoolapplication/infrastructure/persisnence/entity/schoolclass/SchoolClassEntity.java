@@ -113,4 +113,5 @@ public class SchoolClassEntity {
   public String toString() {
     return parallel + "" + litera;
   }
+
 }

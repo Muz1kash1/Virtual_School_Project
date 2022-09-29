@@ -32,14 +32,16 @@ public class LoadedHomeworkController {
    */
   @PostMapping(value = "/homework", produces = "application/json")
   public ResponseEntity<String> sendCompletedHomework(
-    @RequestBody LoadedHomeworkDto loadedHomeworkDto) {
+      @RequestBody LoadedHomeworkDto loadedHomeworkDto) {
 
     log.info("пытаемся загрузить выполненную домашку");
-    completeHomeworkUseCase.uploadCompletedHomework(loadedHomeworkMapperService.mapDtoToHomework(loadedHomeworkDto));
+    completeHomeworkUseCase.uploadCompletedHomework(
+        loadedHomeworkMapperService.mapDtoToHomework(loadedHomeworkDto)
+    );
 
     return ResponseEntity
-      .status(HttpStatus.CREATED)
-      .body("Домашняя работа загружена");
+        .status(HttpStatus.CREATED)
+        .body("Домашняя работа загружена");
   }
 
   /**
@@ -50,13 +52,14 @@ public class LoadedHomeworkController {
    */
 
   @GetMapping(value = "/homework/{id}", produces = "application/json")
-  public ResponseEntity<LoadedHomeworkDto> getCompletedHomework(
-    @PathVariable long id) {
+  public ResponseEntity<LoadedHomeworkDto> getCompletedHomework(@PathVariable long id) {
 
     return ResponseEntity
-      .ok()
-      .body(loadedHomeworkMapperService.mapHomeworkToHomeworkDto(
-        getLoadedHomeworkUseCase.execute(LoadedHomeworkId.of(id))));
+        .ok()
+        .body(loadedHomeworkMapperService.mapHomeworkToHomeworkDto(
+                getLoadedHomeworkUseCase.execute(LoadedHomeworkId.of(id))
+            )
+        );
   }
 
 }

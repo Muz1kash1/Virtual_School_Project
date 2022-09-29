@@ -1,12 +1,12 @@
 package com.fabit.schoolapplication.domain.academicachevementofstudent.valueobject;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import static java.util.regex.Pattern.compile;
+
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.util.regex.Pattern.compile;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 /**
  * Отметка успеваемости ученика.
@@ -18,7 +18,7 @@ import static java.util.regex.Pattern.compile;
 public final class Achievement {
 
   private static final Pattern PATTERN_VALUE =
-    compile("^(^[2-5]{1}/[2-5]{1}$|^([2-5]{1})$|^НН/УВ$|^НН$)$");
+      compile("^(^[2-5]{1}/[2-5]{1}$|^([2-5]{1})$|^НН/УВ$|^НН$)$");
   private final LocalDate dateOfLesson;
   private String value;
 
@@ -33,11 +33,14 @@ public final class Achievement {
    * @param value значение оценки
    */
   private void setValue(String value) {
+
     Matcher matcherValue = PATTERN_VALUE.matcher(value);
+
     if (matcherValue.find()) {
       this.value = value;
     } else {
       throw new IllegalArgumentException("Неверный формат отметки");
     }
   }
+
 }

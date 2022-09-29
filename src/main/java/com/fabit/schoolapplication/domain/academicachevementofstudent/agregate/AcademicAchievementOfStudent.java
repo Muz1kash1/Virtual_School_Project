@@ -22,11 +22,9 @@ public final class AcademicAchievementOfStudent {
 
   private final AcademicAchievementOfStudentId id;
   private final StudentId studentId;
-  private List<AcademicAchievementByDiscipline>
-      academicAchievementByDisciplineList;
+  private List<AcademicAchievementByDiscipline> academicAchievementByDisciplineList;
 
-  private AcademicAchievementOfStudent(AcademicAchievementOfStudentId id,
-                                       StudentId studentId) {
+  private AcademicAchievementOfStudent(AcademicAchievementOfStudentId id, StudentId studentId) {
     this.id = id;
     this.studentId = studentId;
     this.academicAchievementByDisciplineList = new ArrayList<>();
@@ -39,11 +37,10 @@ public final class AcademicAchievementOfStudent {
    * @param studentId id студента
    * @return объект общей академической успеваемости
    */
-  public static AcademicAchievementOfStudent of(
-      AcademicAchievementOfStudentId id,
-      StudentId studentId) {
-    return new AcademicAchievementOfStudent(
-        id, studentId);
+  public static AcademicAchievementOfStudent of(AcademicAchievementOfStudentId id,
+                                                StudentId studentId) {
+
+    return new AcademicAchievementOfStudent(id, studentId);
   }
 
   /**
@@ -59,9 +56,12 @@ public final class AcademicAchievementOfStudent {
       AcademicAchievementOfStudentId id,
       StudentId studentId,
       List<AcademicAchievementByDiscipline> academicAchievementByDisciplineList) {
-    AcademicAchievementOfStudent achievementOfStudent =
-        new AcademicAchievementOfStudent(id, studentId);
+
+    AcademicAchievementOfStudent achievementOfStudent
+        = new AcademicAchievementOfStudent(id, studentId);
+
     achievementOfStudent.academicAchievementByDisciplineList = academicAchievementByDisciplineList;
+
     return achievementOfStudent;
   }
 
@@ -76,6 +76,7 @@ public final class AcademicAchievementOfStudent {
   public void addAcademicAchievementByDiscipline(
       AcademicAchievementByDisciplineId academicAchievementByDisciplineId,
       Discipline discipline) {
+
     if (this.academicAchievementByDisciplineList.stream()
         .noneMatch(item -> item.getDiscipline() == discipline)) {
       this.academicAchievementByDisciplineList.add(
@@ -83,7 +84,8 @@ public final class AcademicAchievementOfStudent {
               academicAchievementByDisciplineId, discipline));
     } else {
       throw new IllegalArgumentException(
-          "Такой объект успеваемости ученика по конкретной дисциплине уже есть в списке");
+          "Такой объект успеваемости ученика по конкретной дисциплине уже есть в списке"
+      );
     }
   }
 
@@ -94,11 +96,12 @@ public final class AcademicAchievementOfStudent {
    * @param achievement  строковое представление оценки
    * @param dateOfLesson дата урока
    */
-  public void addAchievementForStudentByDiscipline(Discipline discipline,
-                                                   String achievement,
+  public void addAchievementForStudentByDiscipline(Discipline discipline, String achievement,
                                                    LocalDate dateOfLesson) {
-    AcademicAchievementByDiscipline academicAchievementByDiscipline =
-        getAcademicAchievementOfStudentByDiscipline(discipline);
+
+    AcademicAchievementByDiscipline academicAchievementByDiscipline
+        = getAcademicAchievementOfStudentByDiscipline(discipline);
+
     academicAchievementByDiscipline.addAchievement(achievement, dateOfLesson);
   }
 
@@ -109,11 +112,12 @@ public final class AcademicAchievementOfStudent {
    * @param achievement  строковое представление оценки
    * @param dateOfLesson дата урока
    */
-  public void changeAchievementByDisciplineAndDateOfLesson(Discipline discipline,
-                                                           String achievement,
+  public void changeAchievementByDisciplineAndDateOfLesson(Discipline discipline, String achievement,
                                                            LocalDate dateOfLesson) {
-    AcademicAchievementByDiscipline academicAchievementByDiscipline =
-        getAcademicAchievementOfStudentByDiscipline(discipline);
+
+    AcademicAchievementByDiscipline academicAchievementByDiscipline
+        = getAcademicAchievementOfStudentByDiscipline(discipline);
+
     academicAchievementByDiscipline.changeAchievement(achievement, dateOfLesson);
   }
 
@@ -124,8 +128,9 @@ public final class AcademicAchievementOfStudent {
    * @return список отметок
    */
   public List<Achievement> getAllAchievementsByDiscipline(Discipline discipline) {
-    AcademicAchievementByDiscipline academicAchievementByDiscipline =
-        getAcademicAchievementOfStudentByDiscipline(discipline);
+    AcademicAchievementByDiscipline academicAchievementByDiscipline
+        = getAcademicAchievementOfStudentByDiscipline(discipline);
+
     return academicAchievementByDiscipline.getAchievements();
   }
 
@@ -138,8 +143,10 @@ public final class AcademicAchievementOfStudent {
    */
   public Achievement getAchievementByDisciplineAndLocalDate(Discipline discipline,
                                                             LocalDate dateOfLesson) {
-    AcademicAchievementByDiscipline academicAchievementByDiscipline =
-        getAcademicAchievementOfStudentByDiscipline(discipline);
+
+    AcademicAchievementByDiscipline academicAchievementByDiscipline
+        = getAcademicAchievementOfStudentByDiscipline(discipline);
+
     return academicAchievementByDiscipline.getAchievementByDateOfLesson(dateOfLesson);
   }
 
@@ -150,11 +157,13 @@ public final class AcademicAchievementOfStudent {
    * @return объект журнала академической успеваемости студента по конкретной дисциплине
    */
   public AcademicAchievementByDiscipline getAcademicAchievementOfStudentByDiscipline(
-      Discipline discipline) {
-    Optional<AcademicAchievementByDiscipline> academicAchievementByDiscipline =
-        this.academicAchievementByDisciplineList.stream()
+                                                               Discipline discipline) {
+
+    Optional<AcademicAchievementByDiscipline> academicAchievementByDiscipline
+        = this.academicAchievementByDisciplineList.stream()
             .filter(item -> item.getDiscipline().equals(discipline))
             .findFirst();
+
     if (academicAchievementByDiscipline.isPresent()) {
       return academicAchievementByDiscipline.get();
     } else {

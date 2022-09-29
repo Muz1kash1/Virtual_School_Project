@@ -20,4 +20,5 @@ public interface StudentService {
   boolean findBySnils(String toString);
 
   void deleteAll();
+
 }

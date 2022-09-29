@@ -24,4 +24,5 @@ public class MarkEntity {
   private EducationProgressEntity educationProgress;
 
   private Integer value;
+
 }

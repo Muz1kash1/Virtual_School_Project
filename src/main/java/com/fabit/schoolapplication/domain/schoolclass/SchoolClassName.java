@@ -8,6 +8,7 @@ import lombok.Value;
 @Getter
 @Value
 public class SchoolClassName {
+
   private static final int MAX_PARALLEL = 11;
   int parallel;
   String litera;
@@ -53,8 +54,8 @@ public class SchoolClassName {
   // ** Валидация
 
   /**
-   * Валидация Parallel.
-   * Возвращает true, если данные для создания названия школьного класса валидны.
+   * Валидация Parallel. Возвращает true, если данные для создания названия школьного класса
+   * валидны.
    *
    * @param parallel - год обучения (1-11)
    * @param litera   - литера (А-Я без Ъ и Ь)

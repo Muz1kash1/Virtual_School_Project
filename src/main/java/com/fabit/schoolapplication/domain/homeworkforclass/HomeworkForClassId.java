@@ -16,4 +16,5 @@ public class HomeworkForClassId {
   public static HomeworkForClassId of(long value) {
     return new HomeworkForClassId(value);
   }
+
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/student")
 public class CreateStudentEndpoint {
+
   final CreateStudent createStudent;
   final StudentMapperServiceImpl mapperService;
 
@@ -33,7 +34,7 @@ public class CreateStudentEndpoint {
     log.info("trying to create: " + studentDto.toString());
     Student student = mapperService.mapToStudent(studentDto);
     return ResponseEntity
-      .status(HttpStatus.CREATED)
-      .body(mapperService.mapToStudentEntity(createStudent.execute(student)));
+        .status(HttpStatus.CREATED)
+        .body(mapperService.mapToStudentEntity(createStudent.execute(student)));
   }
 }

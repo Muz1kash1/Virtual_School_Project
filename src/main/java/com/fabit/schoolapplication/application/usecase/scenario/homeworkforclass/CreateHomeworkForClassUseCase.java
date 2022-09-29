@@ -5,8 +5,8 @@ import com.fabit.schoolapplication.domain.generalvalueobject.discipline.Discipli
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClass;
 import com.fabit.schoolapplication.domain.homeworkforclass.HomeworkForClassId;
 import com.fabit.schoolapplication.domain.schoolclass.SchoolClassId;
-import lombok.RequiredArgsConstructor;
 import java.time.LocalDate;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CreateHomeworkForClassUseCase {
@@ -16,14 +16,16 @@ public class CreateHomeworkForClassUseCase {
   /**
    * Метод создающий дз для класса.
    *
-   * @param discipline дисциплина
-   * @param date дата сдачи
+   * @param discipline    дисциплина
+   * @param date          дата сдачи
    * @param schoolClassId класс
    */
   public void execute(Discipline discipline, LocalDate date, SchoolClassId schoolClassId) {
 
-    HomeworkForClass homeworkForClass =
-        HomeworkForClass.of(discipline, date, schoolClassId, HomeworkForClassId.of(1L));
+    HomeworkForClass homeworkForClass = HomeworkForClass.of(
+        discipline, date, schoolClassId,
+        HomeworkForClassId.of(1L)
+    );
 
     homeworkForClassService.save(homeworkForClass);
   }
@@ -34,7 +36,7 @@ public class CreateHomeworkForClassUseCase {
    * @param homeworkForClass дто
    */
   public void execute(HomeworkForClass homeworkForClass) {
-
     homeworkForClassService.save(homeworkForClass);
   }
+
 }

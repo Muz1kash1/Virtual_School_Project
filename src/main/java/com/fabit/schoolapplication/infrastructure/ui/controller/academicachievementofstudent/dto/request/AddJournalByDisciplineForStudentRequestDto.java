@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddJournalByDisciplineForStudentRequestDto {
+
   private long studentId;
   private String discipline;
 }

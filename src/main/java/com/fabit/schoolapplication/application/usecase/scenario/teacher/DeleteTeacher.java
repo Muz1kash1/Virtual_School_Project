@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class DeleteTeacher {
-  private final TeacherService teacherService;
 
+  private final TeacherService teacherService;
 
   /**
    * Удалить учителя по идентификатору.
@@ -19,4 +19,5 @@ public class DeleteTeacher {
     teacherService.deleteById(teacherId);
     log.info("Учитель (id" + teacherId + ") удалён из БД.");
   }
+
 }

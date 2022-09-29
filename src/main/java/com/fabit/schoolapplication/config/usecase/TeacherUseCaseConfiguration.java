@@ -23,6 +23,7 @@ public class TeacherUseCaseConfiguration {
   public TeacherService teacherService(TeacherPersistenceMapper teacherPersistenceMapper,
                                        TeacherRepository teacherRepository,
                                        ApplicationEventPublisher eventPublisher) {
+
     return new TeacherServiceImpl(
       teacherPersistenceMapper,
       teacherRepository,
@@ -49,4 +50,5 @@ public class TeacherUseCaseConfiguration {
   public GetTeacher getTeacher(TeacherService teacherService) {
     return new GetTeacher(teacherService);
   }
+
 }

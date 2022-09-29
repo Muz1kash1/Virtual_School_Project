@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class HomeworkForClassServiceImpl implements HomeworkForClassService {
+
   final HomeworkForClassMapper homeworkForClassMapper;
   final HomeworkForClassRepository homeworkForClassRepository;
 
@@ -20,7 +21,8 @@ public class HomeworkForClassServiceImpl implements HomeworkForClassService {
   @Override
   public void save(HomeworkForClass homeworkForClass) {
     homeworkForClassRepository.save(
-      homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass));
+        homeworkForClassMapper.mapHomeworkForClassToEntity(homeworkForClass)
+    );
   }
 
   /**
@@ -42,7 +44,8 @@ public class HomeworkForClassServiceImpl implements HomeworkForClassService {
   @Override
   public HomeworkForClass findById(HomeworkForClassId id) {
     return homeworkForClassMapper.mapEntityToHomeworkForClass(
-      homeworkForClassRepository.getReferenceById(id.getValue()));
+        homeworkForClassRepository.getReferenceById(id.getValue())
+    );
   }
 
   /**

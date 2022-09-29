@@ -23,14 +23,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class CompleteLoadedHomeworkTest {
 
-  @Autowired LoadedHomeworkMapperService loadedHomeworkMapperService;
+  @Autowired
+  LoadedHomeworkMapperService loadedHomeworkMapperService;
 
-  @Autowired CompleteHomeworkUseCase completeHomeworkUseCase;
+  @Autowired
+  CompleteHomeworkUseCase completeHomeworkUseCase;
 
-  @Autowired LoadedHomeworkRepository loadedHomeworkRepository;
+  @Autowired
+  LoadedHomeworkRepository loadedHomeworkRepository;
 
-  @Autowired HomeworkForClassRepository homeworkForClassRepository;
-  @Autowired StudentRepository studentRepository;
+  @Autowired
+  HomeworkForClassRepository homeworkForClassRepository;
+  @Autowired
+  StudentRepository studentRepository;
 
   @AfterEach
   void cleanAfter() {
@@ -52,18 +57,22 @@ public class CompleteLoadedHomeworkTest {
     homeworkForClass.setDiscipline(Discipline.COMPUTING);
     homeworkForClassRepository.save(homeworkForClass);
 
-    LoadedHomework loadedHomework =
-      LoadedHomework.of(LoadedHomeworkId.of(1L), StudentId.of(1L), HomeworkForClassId.of(1L));
+    LoadedHomework loadedHomework = LoadedHomework.of(
+        LoadedHomeworkId.of(1L),
+        StudentId.of(1L),
+        HomeworkForClassId.of(1L)
+    );
 
     completeHomeworkUseCase.uploadCompletedHomework(loadedHomework);
 
     String taskCompletionResult =
-      loadedHomeworkMapperService
-        .mapHomeworkToHomeworkCompletionResultEntity(loadedHomework)
-        .getTaskCompletionResult();
+        loadedHomeworkMapperService
+            .mapHomeworkToHomeworkCompletionResultEntity(loadedHomework)
+            .getTaskCompletionResult();
 
     Assertions.assertNotNull(loadedHomeworkRepository.findAll().get(0));
     Assertions.assertEquals(
-      taskCompletionResult, loadedHomeworkRepository.findAll().get(0).getTaskCompletionResult());
+        taskCompletionResult, loadedHomeworkRepository.findAll().get(0).getTaskCompletionResult()
+    );
   }
 }
