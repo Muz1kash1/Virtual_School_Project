@@ -11,7 +11,9 @@ https://jira.fabit.ru/projects/INTERNSHIP/issues/INTERNSHIP-76?filter=allopeniss
 
 ---
 
-### Перед запуском выполнить:
+### Перед запуском:
+
+#### Докер образы
 
 ```
 docker compose up
@@ -19,18 +21,14 @@ docker compose up
 
 ---
 
-### OpenAPI:
-
-#### Ссылка на спецификацию
-
+### Профили и БД:
+1. #### default
 ```
-http://localhost:8080/swagger-ui/index.html
+jdbc:postgresql://localhost:5433/postgres
 ```
-
-#### Ссылка на JSon API
-
+2. #### test
 ```
-http://localhost:8080/v3/api-docs/
+jdbc:postgresql://localhost:5434/postgres
 ```
 
 ---
