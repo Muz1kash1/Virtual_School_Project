@@ -102,10 +102,31 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 
     SchoolClassEntity savedEntity = schoolClassRepository.save(SchoolClassEntity.of(schoolClass));
 
-    return SchoolClass.of(
-        SchoolClassId.of(savedEntity.getId()),
-        SchoolClassName.of(savedEntity.getParallel(), savedEntity.getLitera())
+    return savedEntity.toDomain();
+  }
+
+  /**
+   * Создать школьный класс со студентами.
+   *
+   * @param schoolClassName - название класса параллель-литера (11А)
+   * @param studentIds      - список идентификаторов ученика
+   * @return SchoolClass
+   */
+  @Override
+  public SchoolClass persistSchoolClass(SchoolClassName schoolClassName,
+                                        List<StudentId> studentIds) {
+
+    SchoolClass schoolClass = SchoolClass.of(
+        SchoolClassId.of(schoolClassRepository.getNextId()),
+        SchoolClassName.of(schoolClassName.getParallel(), schoolClassName.getLitera())
     );
+
+    studentIds.forEach(schoolClass::addStudent);
+
+    SchoolClassEntity schoolClassEntity
+        = schoolClassRepository.save(SchoolClassEntity.of(schoolClass));
+
+    return schoolClassEntity.toDomain();
   }
 
   /**
