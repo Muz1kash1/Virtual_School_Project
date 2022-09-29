@@ -6,124 +6,6 @@ servers:
   - url: http://localhost:8080
     description: Сервер приложения Virtual-School
 paths:
-  /homework/{id}:
-    get:
-      tags:
-        - loaded-homework
-      operationId: getCompletedHomework
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: id домашнего задания
-          example: 1
-          schema:
-            type: integer
-            format: int64
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LoadedHomeworkDto'
-        400:
-          $ref: '#/components/responses/BadRequest'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-      security:
-        - orderAuth: [ ]
-  /homework-for-class/{id}:
-    get:
-      tags:
-        - homework-for-class
-      operationId: getHomeworkForClass
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: id домашнего задания для класса
-          example: 1
-          schema:
-            type: integer
-            format: int64
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HomeworkForClassDto'
-        400:
-          $ref: '#/components/responses/BadRequest'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-      security:
-        - orderAuth: [ ]
-  /homework-for-class:
-    post:
-      tags:
-        - homework-for-class
-      operationId: addHomeworkForClass
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/HomeworkForClassDto'
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          $ref: '#/components/responses/BadRequest'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-      security:
-        - orderAuth: [ ]
-  /homework:
-    post:
-      tags:
-        - loaded-homework
-      operationId: sendCompletedHomework
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoadedHomeworkDto'
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: string
-        400:
-          $ref: '#/components/responses/BadRequest'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
-      security:
-        - orderAuth: [ ]
   /teacher:
     get:
       description: Получение учителя
@@ -141,12 +23,12 @@ paths:
                   $ref: '#/components/schemas/TeacherEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
     post:
@@ -169,12 +51,12 @@ paths:
                 $ref: '#/components/schemas/TeacherEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /teacher/{teacherId}/activate:
@@ -184,14 +66,7 @@ paths:
         - teacher
       operationId: activateTeacher
       parameters:
-        - name: teacherId
-          in: path
-          required: true
-          description: id учителя
-          example: 1
-          schema:
-            type: integer
-            format: int64
+        - $ref: '#/components/parameters/teacherId'
       responses:
         200:
           description: OK
@@ -201,12 +76,12 @@ paths:
                 $ref: '#/components/schemas/TeacherEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /teacher/deactivate:
@@ -230,12 +105,12 @@ paths:
                 $ref: '#/components/schemas/TeacherEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /school-class:
@@ -255,12 +130,12 @@ paths:
                   $ref: '#/components/schemas/SchoolClassEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
     post:
@@ -279,12 +154,12 @@ paths:
           description: CREATED
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
     delete:
@@ -297,12 +172,12 @@ paths:
           description: OK
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /school-class/{id}:
@@ -312,11 +187,7 @@ paths:
         - SchoolClass
       operationId: getSchoolClassById
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
+        - $ref: '#/components/parameters/schoolClassId'
       responses:
         200:
           description: OK
@@ -326,12 +197,12 @@ paths:
                 $ref: '#/components/schemas/SchoolClassEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
     post:
@@ -340,17 +211,8 @@ paths:
         - SchoolClass
       operationId: addStudentToClass
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-        - name: studentId
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
+        - $ref: '#/components/parameters/schoolClassId'
+        - $ref: '#/components/parameters/Id'
       responses:
         200:
           description: OK
@@ -360,12 +222,12 @@ paths:
                 type: object
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
     delete:
@@ -374,27 +236,19 @@ paths:
         - SchoolClass
       operationId: removeStudentFromClass
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-        - name: studentId
-          in: query
-          required: true
-          schema:
-            $ref: '#/components/schemas/StudentId'
+        - $ref: '#/components/parameters/schoolClassId'
+        - $ref: '#/components/parameters/Id'
       responses:
         200:
           description: OK
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /student/change-snils:
@@ -418,12 +272,12 @@ paths:
                 $ref: '#/components/schemas/StudentEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /student/change-birthcertificate:
@@ -447,12 +301,12 @@ paths:
                 $ref: '#/components/schemas/StudentEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
 
@@ -477,19 +331,19 @@ paths:
                 type: string
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
   /student:
-    description: Добавление нового ученика в список школы
     post:
       tags:
         - student
+      description: Добавление нового ученика в список школы
       operationId: addStudent
       requestBody:
         content:
@@ -506,29 +360,22 @@ paths:
                 $ref: '#/components/schemas/StudentEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
-        401:
-          $ref: '#/components/responses/UnauthorizedError'
       security:
         - orderAuth: [ ]
-  /student/{id}:
-    description: Удаление ученика по идентификатору
+  /student/{studentId}:
     delete:
       tags:
         - student
+      description: Удаление ученика по идентификатору
       operationId: deleteStudent
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: id ученика
-          example: 1
-          schema:
-            type: integer
-            format: int64
+        - $ref: '#/components/parameters/studentId'
       responses:
         200:
           description: OK
@@ -538,12 +385,403 @@ paths:
                 $ref: '#/components/schemas/StudentEntity'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
         404:
           $ref: '#/components/responses/NotFound'
         500:
           $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/discipline/{studentId}/:
+    get:
+      tags:
+        - journal-of-student
+      description: |
+        Добавить в общий журнал успеваемости ученика
+        журнал успеваемости по конкретной дисциплине
+      operationId: getAllJournalsForStudentByDiscipline
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllDisciplinesOfStudentResponseDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/discipline/achievement/{studentId}/{dateOfLesson}/:
+    get:
+      tags:
+        - journal-of-student
+      description: Получить отметку об успеваемости ученика по данной дисциплине по дате урока
+      operationId: getJournalForStudentByDiscipline
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+        - name: dateOfLesson
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Discipline'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AchievementOfStudentResponseDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/discipline/achievement/{studentId}/:
+    get:
+      tags:
+        - journal-of-student
+      description: Получить все отметки об успеваемости ученика по данной дисциплине
+      operationId: getJournalForStudentByDiscipline_1
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+        - $ref: '#/components/parameters/Discipline'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllAchievementsOfStudentByDisciplineResponseDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/discipline/{studentId}:
+    delete:
+      tags:
+        - journal-of-student
+      description: |
+        Удалить из журнала общей успеваемости ученика
+        журнал успеваемости по конкретной дисциплине
+      operationId: deleteJournalForStudentByDiscipline
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+        - $ref: '#/components/parameters/Discipline'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/{studentId}/:
+    post:
+      tags:
+        - journal-of-student
+      description: Создать новый журнал общей успеваемости ученика
+      operationId: createNewJournalForStudent
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+    delete:
+      tags:
+        - journal-of-student
+      description: Удалить журнал общей успеваемости
+      operationId: deleteJournalForStudent
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/discipline/:
+    post:
+      tags:
+        - journal-of-student
+      description: |
+        Добавить в журнал общей успеваемости ученика
+        журнал успеваемости по конкретной дисциплине
+      operationId: addJournalForStudentByDiscipline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddJournalByDisciplineForStudentRequestDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /journal/discipline/achievement/{studentId}:
+    put:
+      tags:
+        - journal-of-student
+      description: Изменить отметку об успеваемости ученика
+      operationId: changeAchievementForStudent
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AchievementForStudentDtoRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+    post:
+      tags:
+        - journal-of-student
+      description: Выставить отметку студенту
+      operationId: addAchievementForStudent
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AchievementForStudentDtoRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+    patch:
+      tags:
+        - journal-of-student
+      description: Удалить отметку студента
+      operationId: deleteAchievementForStudent
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AchievementForStudentDtoRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /homework/{id}:
+    get:
+      tags:
+        - loaded-homework
+      description: Получить выполненное домашнее задание для проверки
+      operationId: getCompletedHomework
+      parameters:
+        - $ref: '#/components/parameters/HomeWorkId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadedHomeworkDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /homework-for-class/{id}:
+    get:
+      tags:
+        - homework-for-class
+      description: узнать(получить) домашнее задание
+      operationId: getHomeworkForClass
+      parameters:
+        - $ref: '#/components/parameters/HomeWorkId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeworkForClassDto'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /homework-for-class:
+    post:
+      tags:
+        - homework-for-class
+      description: Задать домашнее задание для всего класса
+      operationId: addHomeworkForClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomeworkForClassDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /homework:
+    post:
+      tags:
+        - loaded-homework
+      description: Отправить сделанное домашнее задание
+      operationId: sendCompletedHomework
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadedHomeworkDto'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
       security:
         - orderAuth: [ ]
 components:
@@ -583,14 +821,72 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+  parameters:
+    teacherId:
+      name: teacherId
+      in: path
+      required: true
+      description: id учителя
+      example: 1
+      schema:
+        type: integer
+        format: int64
+    schoolClassId:
+      name: id
+      in: path
+      required: true
+      schema:
+        description: Идентификатор школьного класса
+        type: integer
+        format: int64
+        example: 15
+    studentId:
+      name: studentId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+        description: Идентификатор ученика
+        example: 1
+    Id:
+      name: studentId
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int64
+        description: Идентификатор ученика
+        example: 1
+    Discipline:
+      name: discipline
+      in: query
+      required: true
+      description: название предмета
+      example: Русский язык
+      schema:
+        type: string
+    HomeWorkId:
+      name: id
+      in: path
+      required: true
+      description: id домашнего задания для класса
+      example: 1
+      schema:
+        type: integer
+        format: int64
   schemas:
+    Id:
+      type: integer
+      description: идентификатор
+      format: int64
+      example: 1
     TeacherEntity:
       type: object
+      description: сущность преподавателя
       properties:
         id:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         standingYears:
           type: integer
           format: int32
@@ -609,11 +905,10 @@ components:
           example: true
     DeactivateDto:
       type: object
+      description: ДТО деактивации учителя
       properties:
         teacherId:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         from:
           type: string
         to:
@@ -635,6 +930,7 @@ components:
             $ref: '#/components/schemas/StudentId'
     SchoolClassEntity:
       type: object
+      description: сущность школьного класса
       properties:
         id:
           $ref: '#/components/schemas/Id'
@@ -644,16 +940,12 @@ components:
           $ref: '#/components/schemas/Litera'
     StudentId:
       type: object
+      description: идентификатор студета
       properties:
         value:
           type: integer
           format: int64
           example: 7
-    Id:
-      description: Идентификатор школьного класса
-      type: integer
-      format: int64
-      example: 15
     Parallel:
       description: Параллель (1-11)
       type: integer
@@ -708,9 +1000,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         name:
           type: string
           example: Ivan
@@ -728,17 +1018,16 @@ components:
       description: сущность студента, которая будет сохраняться в базу
       properties:
         id:
-          type: integer
-          format: int64
-          example: 1
-        name:
+          $ref: '#/components/schemas/Id'
+        fullName:
           type: string
-          example: Ivan
+          example: Иванов Иван Иванович
         snils:
           type: string
           example: 1234567890
         birthCertificate:
           type: string
+          example: 123-345-765-98
         passport:
           type: string
           example: 1234
@@ -751,20 +1040,29 @@ components:
       description: ДТО решенного учеником домашнего задания
       properties:
         homeworkId:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         studentId:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         taskCompletionResult:
           type: string
           example: any text
         homeworkForClassId:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
+    AchievementForStudentDtoRequest:
+      type: object
+      description: ДТО отметки ученика
+      properties:
+        studentId:
+          $ref: '#/components/schemas/Id'
+        discipline:
+          type: string
+          example: Английский язык
+        achievement:
+          type: string
+          example: 5
+        dateOfLesson:
+          type: string
+          example: 2022-09-18
     TeacherDto:
       type: object
       description: ДТО учителя
@@ -781,14 +1079,47 @@ components:
           $ref: '#/components/schemas/SnilsDto'
         active:
           type: boolean
+    AddJournalByDisciplineForStudentRequestDto:
+      type: object
+      description: ДТО журнала ученика по конкретному предмету
+      properties:
+        studentId:
+          $ref: '#/components/schemas/Id'
+        discipline:
+          type: string
+    AllDisciplinesOfStudentResponseDto:
+      type: object
+      description: ДТО всех дисциплин
+      properties:
+        disciplinesOfStudent:
+          type: array
+          items:
+            type: string
+            example: Русский язык
+    AchievementOfStudentResponseDto:
+      type: object
+      description: ДТО отметки за урок
+      properties:
+        dateOfLesson:
+          type: string
+          example: 2020-15-19
+        achievement:
+          type: string
+          example: 5
+    AllAchievementsOfStudentByDisciplineResponseDto:
+      type: object
+      description: ДТО общей успеваемости ученика
+      properties:
+        achievements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchievementOfStudentResponseDto'
     HomeworkForClassDto:
       type: object
       description: ДТО домашнего задания для класса
       properties:
         id:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         discipline:
           type: string
           enum:
@@ -817,9 +1148,7 @@ components:
           type: string
           example: Do some task
         schoolClassId:
-          type: integer
-          format: int64
-          example: 1
+          $ref: '#/components/schemas/Id'
         date:
           type: string
           format: date
