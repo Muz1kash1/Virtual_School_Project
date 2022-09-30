@@ -1393,18 +1393,6 @@ components:
           $ref: '#/components/schemas/Discipline'
         teacherId:
           $ref: '#/components/schemas/Id'
-    CancelLessonForClassDTO:
-      type: object
-      description: ДТО для отмены занятия
-      properties:
-        schoolClassId:
-          $ref: '#/components/schemas/Id'
-        schoolDate:
-          $ref: '#/components/schemas/Date'
-        lessonNumber:
-          type: integer
-          format: int32
-          example: 2
     StandingYears:
       type: integer
       format: int32
