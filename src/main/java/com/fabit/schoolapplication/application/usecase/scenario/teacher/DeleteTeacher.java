@@ -19,5 +19,4 @@ public class DeleteTeacher {
     teacherService.deleteById(teacherId);
     log.info("Учитель (id" + teacherId + ") удалён из БД.");
   }
-
 }
