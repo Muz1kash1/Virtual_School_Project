@@ -74,9 +74,29 @@ CREATE TABLE loaded_homework
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Mark
+CREATE TABLE journal_of_student
 (
     id                    BIGSERIAL,
-    value                 INTEGER,
-    PRIMARY KEY (id)
+    student_id            BIGINT REFERENCES student(id),
+    PRIMARY KEY (id),
+    UNIQUE (student_id)
+);
+
+CREATE TABLE journal_by_discipline
+(
+    id                           BIGSERIAL,
+    journal_of_student           BIGINT REFERENCES journal_of_student(id),
+    discipline                   VARCHAR(255),
+    PRIMARY KEY (id),
+    UNIQUE (journal_of_student, discipline)
+);
+
+CREATE TABLE achievement
+(
+    id                           BIGSERIAL,
+    journal_by_discipline        BIGINT REFERENCES journal_by_discipline(id),
+    achievement_value            VARCHAR(255),
+    date_of_lesson               DATE,
+    PRIMARY KEY (id),
+    UNIQUE (achievement_value, date_of_lesson)
 );
