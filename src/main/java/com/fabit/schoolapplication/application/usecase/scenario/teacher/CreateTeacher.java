@@ -10,9 +10,9 @@ public class CreateTeacher {
   private final TeacherService teacherService;
 
   /**
-   * Создать учителя из пришедшего DTO.
+   * Создать учителя.
    *
-   * @param teacher - DTO учителя
+   * @param teacher - доменная модель учителя
    * @return TeacherEntity
    */
   public Teacher execute(Teacher teacher) {

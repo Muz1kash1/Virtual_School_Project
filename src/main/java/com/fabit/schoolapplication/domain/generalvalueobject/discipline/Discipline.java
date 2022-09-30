@@ -49,5 +49,4 @@ public enum Discipline {
 
     throw new IllegalArgumentException("Дисциплины с названием " + disciplineTextView + " нет");
   }
-
 }

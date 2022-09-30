@@ -13,4 +13,6 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
 
   @Query(value = "SELECT last_value + 1 from student_id_seq", nativeQuery = true)
   Long getNextId();
+
+  boolean existsById(Long id);
 }
