@@ -6,6 +6,186 @@ servers:
   - url: http://localhost:8080
     description: Сервер приложения Virtual-School
 paths:
+  /schedule/lesson/cancel:
+    post:
+      tags:
+        - schedule
+      description: Отмена урока
+      operationId: cancelLessonInSchoolClass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelLessonForClassDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /schedule/lesson/cancel/{date}:
+    post:
+      tags:
+        - schedule
+      description: Отмена уроков во всех классах на заданную дату.
+      operationId: cancelAllLessonsForDate
+      parameters:
+        - $ref: '#/components/parameters/Date'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /schedule:
+    get:
+      tags:
+        - schedule
+      description: Получить расписание для всех классов за определенный период
+      operationId: getSchoolScheduleForSelectedPeriod
+      parameters:
+        - name: dateStart
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Date'
+        - name: dateEnd
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Date'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScheduleForDateDTO'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /schedule/{id}/{date}:
+    get:
+      tags:
+        - schedule
+      description: Получить расписание уроков на заданную дату для заданного класса
+      operationId: getLessonsInScheduleForSchoolClass
+      parameters:
+        - $ref: '#/components/parameters/schoolClassId'
+        - $ref: '#/components/parameters/Date'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolDayForClassDTO'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /schedule/{date}:
+    get:
+      tags:
+        - schedule
+      description: Получить расписание уроков на заданную дату для всех классов
+      operationId: getSchoolScheduleForDate
+      parameters:
+        - $ref: '#/components/parameters/Date'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleForDateDTO'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
+  /schedule/check-status:
+    get:
+      tags:
+        - schedule
+      description: Получить статус проведения урока
+      operationId: getLessonStatus
+      parameters:
+        - name: date
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Date'
+        - name: schoolClassId
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Id'
+        - name: discipline
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Discipline'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+      security:
+        - orderAuth: [ ]
   /teacher:
     get:
       description: Получение учителя
@@ -432,7 +612,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Date'
         - $ref: '#/components/parameters/Discipline'
       responses:
         200:
@@ -789,7 +969,6 @@ components:
     orderAuth:
       type: http
       scheme: basic
-
   responses:
     UnauthorizedError:
       description: Аутентификация не пройдена
@@ -822,6 +1001,12 @@ components:
           schema:
             $ref: '#/components/schemas/Problem'
   parameters:
+    Date:
+      name: date
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Date'
     teacherId:
       name: teacherId
       in: path
@@ -888,9 +1073,7 @@ components:
         id:
           $ref: '#/components/schemas/Id'
         standingYears:
-          type: integer
-          format: int32
-          example: 10
+          $ref: '#/components/schemas/StandingYears'
         fullName:
           type: string
           example: Иванов Иван Иванович
@@ -910,9 +1093,9 @@ components:
         teacherId:
           $ref: '#/components/schemas/Id'
         from:
-          type: string
+          $ref: '#/components/schemas/Date'
         to:
-          type: string
+          $ref: '#/components/schemas/Date'
     SchoolClassDTO:
       type: object
       description: ДТО школьного класса
@@ -943,9 +1126,7 @@ components:
       description: идентификатор студета
       properties:
         value:
-          type: integer
-          format: int64
-          example: 7
+          $ref: '#/components/schemas/Id'
     Parallel:
       description: Параллель (1-11)
       type: integer
@@ -973,21 +1154,23 @@ components:
       description: ДТО свидетельства о рождении
       properties:
         serial:
-          type: string
-          example: 1234
+          $ref: '#/components/schemas/serial'
         number:
-          type: string
-          example: 567890
+          $ref: '#/components/schemas/number'
+    serial:
+      type: string
+      example: 1234
+    number:
+      type: string
+      example: 567890
     PassportDto:
       type: object
       description: ДТО паспотра
       properties:
         serial:
-          type: string
-          example: 1234
+          $ref: '#/components/schemas/serial'
         number:
-          type: string
-          example: 567890
+          $ref: '#/components/schemas/number'
     SnilsDto:
       type: object
       description: ДТО СНИЛСа
@@ -1011,8 +1194,7 @@ components:
         passport:
           $ref: '#/components/schemas/PassportDto'
         birthday:
-          type: string
-          format: date
+          $ref: '#/components/schemas/Date'
     StudentEntity:
       type: object
       description: сущность студента, которая будет сохраняться в базу
@@ -1032,9 +1214,7 @@ components:
           type: string
           example: 1234
         birthday:
-          type: string
-          format: date
-          example: 567890
+          $ref: '#/components/schemas/Date'
     LoadedHomeworkDto:
       type: object
       description: ДТО решенного учеником домашнего задания
@@ -1055,22 +1235,18 @@ components:
         studentId:
           $ref: '#/components/schemas/Id'
         discipline:
-          type: string
-          example: Английский язык
+          $ref: '#/components/schemas/Discipline'
         achievement:
           type: string
           example: 5
         dateOfLesson:
-          type: string
-          example: 2022-09-18
+          $ref: '#/components/schemas/Date'
     TeacherDto:
       type: object
       description: ДТО учителя
       properties:
         standingYears:
-          type: integer
-          format: int32
-          example: 10
+          $ref: '#/components/schemas/StandingYears'
         fullName:
           $ref: '#/components/schemas/FullNameDto'
         passport:
@@ -1086,23 +1262,25 @@ components:
         studentId:
           $ref: '#/components/schemas/Id'
         discipline:
-          type: string
+          $ref: '#/components/schemas/Discipline'
     AllDisciplinesOfStudentResponseDto:
       type: object
       description: ДТО всех дисциплин
       properties:
         disciplinesOfStudent:
           type: array
+          description: список дисциплин
           items:
-            type: string
-            example: Русский язык
+            $ref: '#/components/schemas/Id'
+    Discipline:
+      type: string
+      example: Английский язык
     AchievementOfStudentResponseDto:
       type: object
       description: ДТО отметки за урок
       properties:
         dateOfLesson:
-          type: string
-          example: 2020-15-19
+          $ref: '#/components/schemas/Date'
         achievement:
           type: string
           example: 5
@@ -1114,6 +1292,58 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AchievementOfStudentResponseDto'
+    ScheduleForDateDTO:
+      type: object
+      description: ДТО расписания всех классов на день
+      properties:
+        schoolDayForClassDTOList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchoolDayForClassDTO'
+    SchoolDayForClassDTO:
+      type: object
+      description: Расписание уроков для класса на день
+      properties:
+        localDate:
+          $ref: '#/components/schemas/Date'
+        schoolClassId:
+          $ref: '#/components/schemas/Id'
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/LessonInScheduleDTO'
+    LessonInScheduleDTO:
+      type: object
+      description: ДТО урока в расписании
+      properties:
+        lessonNumber:
+          type: integer
+          format: int32
+          example: 3
+        discipline:
+          $ref: '#/components/schemas/Discipline'
+        teacherId:
+          $ref: '#/components/schemas/Id'
+    CancelLessonForClassDTO:
+      type: object
+      description: ДТО для отмены занятия
+      properties:
+        schoolClassId:
+          $ref: '#/components/schemas/Id'
+        schoolDate:
+          $ref: '#/components/schemas/Date'
+        lessonNumber:
+          type: integer
+          format: int32
+          example: 2
+    StandingYears:
+      type: integer
+      format: int32
+      example: 10
+    Date:
+      type: string
+      format: date
+      example: 2022-09-15
     HomeworkForClassDto:
       type: object
       description: ДТО домашнего задания для класса
@@ -1150,9 +1380,7 @@ components:
         schoolClassId:
           $ref: '#/components/schemas/Id'
         date:
-          type: string
-          format: date
-          example: 2022-09-15
+          $ref: '#/components/schemas/Date'
     Problem:
       type: object
       properties:
